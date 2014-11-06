@@ -39,9 +39,10 @@ if env['parallelization'] not in ['cuda', 'mpi_with_cuda']:
     sourceFiles = ['blocks/SWE_WavePropagationBlockSIMD.cpp']
   elif env['solver'] == 'augriefun' or env['solver'] == 'fwavevec':
     sourceFiles = ['blocks/SWE_WaveAccumulationBlock.cpp']
-  else:
+  elif env['dimenSplit'] == False:
     sourceFiles = ['blocks/SWE_WavePropagationBlock.cpp']
-
+  else:
+    sourceFiles = []
 # Code with CUDA
 else:
   sourceFiles = [ 'blocks/cuda/SWE_BlockCUDA.cu',
@@ -92,7 +93,10 @@ if env['xmlRuntime'] == True:
 if env['parallelization'] in ['none', 'cuda']:
   if env['solver'] != 'rusanov':
     if env['openGL'] == False:
-      sourceFiles.append( ['examples/swe_simple.cpp'] )
+      if env['dimenSplit'] == True:
+	sourceFiles.append( ['examples/swe_dimensionalsplitting.cpp'] )
+      else:
+        sourceFiles.append( ['examples/swe_simple.cpp'] )
     else:
       sourceFiles.append( ['examples/swe_opengl.cpp'] )
   else:

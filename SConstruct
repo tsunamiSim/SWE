@@ -85,6 +85,8 @@ vars.AddVariables(
                                 'sm_20', 'sm_21', 'sm_22', 'sm_23',
                                 'sm_30', 'sm_35' )
               ),
+  
+  BoolVariable( 'dimenSplit', 'compile with dimensional splitting', True),
 
   BoolVariable( 'openGL', 'compile with OpenGL visualization', False),
 

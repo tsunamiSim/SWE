@@ -27,7 +27,6 @@
 
 #ifndef __SWE_SCENARIO_H
 #define __SWE_SCENARIO_H
-
 /**
  * enum type: available types of boundary conditions
  */
