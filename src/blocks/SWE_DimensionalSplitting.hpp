@@ -56,7 +56,7 @@ private :
 	}
 public :
 	SWE_DimensionalSplitting(int l_nx, int l_ny, float l_dx, float l_dy) :
-		SWE_BLock(l_nx, l_ny, l_dx, l_dy),
+		SWE_Block(l_nx, l_ny, l_dx, l_dy),
 		hNetUpdatesLeft (l_nx + 1, l_ny),
 		hNetUpdatesRight (l_nx + 1, l_ny),
 		huNetUpdatesLeft (l_nx + 1, l_ny),
@@ -87,11 +87,11 @@ public :
 
 		setZero(hNetUpdatesBelow, nx, ny + 1);
 		setZero(hNetUpdatesAbove, nx, ny + 1);
-		setZero(huNetUpdatesAbove, nx, ny + 1);
-		setZero(huNetUpdatesBelow, nx, ny + 1);
+		setZero(hvNetUpdatesAbove, nx, ny + 1);
+		setZero(hvNetUpdatesBelow, nx, ny + 1);
 		
 		maxWaveSpeed = 0.4 * dx / maxWaveSpeed;
-		updateUnknwons(maxWaveSpeed);
+		updateUnknowns(maxWaveSpeed);
 	
 
 		for(unsigned int y = 0; y < ny+1; y++)
@@ -101,7 +101,7 @@ public :
 				float maxEdgeSpeed;
 				solver.computeNetUpdates(h[x][y], h[x][y+1], hv[x][y], hv[x][y+1], b[x][y], b[x][y+1],
 								hNetUpdatesBelow[x][y], hNetUpdatesAbove[x][y+1],
-								huNetUpdatesBelow[x][y], huNetUpdatesAbove[x][y+1],
+								hvNetUpdatesBelow[x][y], hvNetUpdatesAbove[x][y+1],
 								maxEdgeSpeed
 							);
 				//TODO DEBUG
@@ -113,20 +113,20 @@ public :
 		setZero(huNetUpdatesLeft, nx + 1, ny);
 		setZero(huNetUpdatesRight, nx + 1, ny);
 
-		updateUnknwons(maxWaveSpeed);
+		updateUnknowns(maxWaveSpeed);
 			
 	}
 
-	void updateUnknowns(float timestep)
+	void updateUnknowns(float dt)
 	{
 		for(unsigned int y = 1; y < ny+1; y++)
 		{
 			for(unsigned int x = 1; x < nx+1; x++)
 			{
-				h[i][j] -= dt / dx * (hNetUpdatesRight[x - 1][y - 1] + hNetUpdatesLeft[x][y - 1]) + 
+				h[x][y] -= dt / dx * (hNetUpdatesRight[x - 1][y - 1] + hNetUpdatesLeft[x][y - 1]) + 
 						dt / dy * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
-				hu[i][j] -= dt / dx * (huNetUpdatesRight[x - 1][y - 1] + huNetUpdatesLeft[x][y - 1]);
-				hv[i][j] -= dt / dy * (hvNetUpdatesAbove[x - 1][y - 1] + hvNetUpdatesBelow[x - 1][y]);
+				hu[x][y] -= dt / dx * (huNetUpdatesRight[x - 1][y - 1] + huNetUpdatesLeft[x][y - 1]);
+				hv[x][y] -= dt / dy * (hvNetUpdatesAbove[x - 1][y - 1] + hvNetUpdatesBelow[x - 1][y]);
 			}
 		}
 	}
