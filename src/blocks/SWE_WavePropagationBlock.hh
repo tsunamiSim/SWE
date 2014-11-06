@@ -44,7 +44,7 @@
 #elif WAVE_PROPAGATION_SOLVER==1
 #include "solvers/FWave.hpp"
 #elif WAVE_PROPAGATION_SOLVER==2
-#include "solvers/AugRie.hpp"
+//#include "solvers/AugRie.hpp"
 #else
 #warning SWE_WavePropagationBlock should only be used with Riemann solvers 0, 1, and 2 (FWave, AugRie or Hybrid)
 #endif

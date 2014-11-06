@@ -96,7 +96,7 @@ vars.AddVariables(
 
   PathVariable( 'asagiInputDir', 'location of netcdf input files', '', PathVariable.PathAccept ),
 
-  EnumVariable( 'solver', 'Riemann solver', 'augrie',
+  EnumVariable( 'solver', 'Riemann solver', 'fwave',
                 allowed_values=('rusanov', 'fwave', 'augrie', 'hybrid', 'fwavevec', 'augriefun', 'augrie_simd')
               ),
                   
