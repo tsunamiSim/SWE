@@ -32,6 +32,11 @@
 #include "blocks/SWE_Block.hh"
 #include "solvers/FWave.hpp"
 #include "tools/help.hh"
+#include <iostream>
+
+#ifndef NDEBUG
+	#define NDEBUG
+#endif
 
 class SWE_DimensionalSplitting: public SWE_Block {
 
@@ -50,9 +55,11 @@ private :
 
 	void setZero(Float2D& array, int xSize, int ySize)
 	{
-		for(int i = 0; i < xSize; i++)
-			for(int j = 0; j < ySize; j++)
+		for(int i = 0; i < xSize-1; i++){
+			for(int j = 0; j < ySize-1; j++){
 				array[i][j] = 0;
+			}		
+		}
 	}
 public :
 	SWE_DimensionalSplitting(int l_nx, int l_ny, float l_dx, float l_dy) :
@@ -70,18 +77,17 @@ public :
 }
 	void computeNumericalFluxes()
 	{
-		float maxWaveSpeed = 0.f;
-		for(unsigned int y = 0; y < ny+2; y++)
+		for(unsigned int y = 0; y < ny; y++)
 		{	
 			for(unsigned int x = 0; x < nx+1; x++) 
 			{
 				float maxEdgeSpeed;
-				solver.computeNetUpdates(h[x][y], h[x+1][y], hu[x][y], hu[x+1][y], b[x][y], b[x+1][y],
-								hNetUpdatesLeft[x][y], hNetUpdatesRight[x+1][y],
-								huNetUpdatesLeft[x][y], huNetUpdatesRight[x+1][y],
+				solver.computeNetUpdates(h[x][y+1], h[x+1][y+1], hu[x][y+1], hu[x+1][y+1], b[x][y+1], b[x+1][y+1],
+								hNetUpdatesLeft[x][y], hNetUpdatesRight[x][y],
+								huNetUpdatesLeft[x][y], huNetUpdatesRight[x][y],
 								maxEdgeSpeed
 							);
-				maxWaveSpeed = std::max(maxEdgeSpeed, maxWaveSpeed);
+				maxTimestep = std::max(maxEdgeSpeed, maxTimestep);
 			}
 		}
 
@@ -90,30 +96,44 @@ public :
 		setZero(hvNetUpdatesAbove, nx, ny + 1);
 		setZero(hvNetUpdatesBelow, nx, ny + 1);
 		
-		maxWaveSpeed = 0.4 * dx / maxWaveSpeed;
-		updateUnknowns(maxWaveSpeed);
+		maxTimestep = 0.4 * dx / maxTimestep;
+		updateUnknowns(maxTimestep);
+//std::cout << "(update)";
 	
+#ifndef NDEBUG
+			maxTimestepY = 0.f;
+#endif //NDEBUG
 
 		for(unsigned int y = 0; y < ny+1; y++)
 		{	
-			for(unsigned int x = 0; x < nx+2; x++) 
+			for(unsigned int x = 0; x < nx; x++) 
 			{
 				float maxEdgeSpeed;
-				solver.computeNetUpdates(h[x][y], h[x][y+1], hv[x][y], hv[x][y+1], b[x][y], b[x][y+1],
-								hNetUpdatesBelow[x][y], hNetUpdatesAbove[x][y+1],
-								hvNetUpdatesBelow[x][y], hvNetUpdatesAbove[x][y+1],
+				solver.computeNetUpdates(h[x+1][y], h[x+1][y+1], hv[x+1][y], hv[x+1][y+1], b[x+1][y], b[x+1][y+1],
+								hNetUpdatesBelow[x][y], hNetUpdatesAbove[x][y],
+								hvNetUpdatesBelow[x][y], hvNetUpdatesAbove[x][y],
 								maxEdgeSpeed
 							);
-				//TODO DEBUG
+//TODO DEBUG
+#ifndef NDEBUG
+					maxTimestepY = std::max(maxEdgeSpeed, maxTimestepY);
+#endif //NDEBUG
+					
 			}
 		}
+
+#ifndef NDEBUG
+			if(maxTimestep >= 0.5f * dy / maxTimestepY)
+				std::cerr << "Used timestep was to big! Used/In X-DIR computed: " << maxTimestep << "; In Y-DIR computed: " << (0.5f * dy / maxTimestepY) << std::endl;			
+#endif //NDEBUG
 
 		setZero(hNetUpdatesLeft, nx + 1, ny);
 		setZero(hNetUpdatesRight, nx + 1, ny);
 		setZero(huNetUpdatesLeft, nx + 1, ny);
 		setZero(huNetUpdatesRight, nx + 1, ny);
 
-		updateUnknowns(maxWaveSpeed);
+		updateUnknowns(maxTimestep);
+//std::cout << "(update2)";
 			
 	}
 
