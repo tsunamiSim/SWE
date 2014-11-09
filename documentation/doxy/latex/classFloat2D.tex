@@ -1,0 +1,99 @@
+\hypertarget{classFloat2D}{\section{Float2\-D Class Reference}
+\label{classFloat2D}\index{Float2\-D@{Float2\-D}}
+}
+
+
+{\ttfamily \#include $<$help.\-hh$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classFloat2D_aceac75782e5db5cb644a893de73f7933}{Float2\-D} (int \-\_\-cols, int \-\_\-rows, bool \-\_\-allocate\-Memory=true)
+\item 
+\hyperlink{classFloat2D_a51ccca3defa8be28c89f63f1768a79b0}{Float2\-D} (int \-\_\-cols, int \-\_\-rows, float $\ast$\-\_\-elem)
+\item 
+\hyperlink{classFloat2D_aa4c91cf3f61da6180d2d3e92699d7c92}{Float2\-D} (\hyperlink{classFloat2D}{Float2\-D} \&\-\_\-elem, bool shallow\-Copy)
+\item 
+\hypertarget{classFloat2D_a0c514deed419976c1de95a476148edb7}{float $\ast$ {\bfseries operator\mbox{[}$\,$\mbox{]}} (int i)}\label{classFloat2D_a0c514deed419976c1de95a476148edb7}
+
+\item 
+\hypertarget{classFloat2D_a2890be398d2b6381253169f26225e93b}{float const $\ast$ {\bfseries operator\mbox{[}$\,$\mbox{]}} (int i) const }\label{classFloat2D_a2890be398d2b6381253169f26225e93b}
+
+\item 
+\hypertarget{classFloat2D_ab7ea635b12555d35bae9c4ef87024b07}{float $\ast$ {\bfseries elem\-Vector} ()}\label{classFloat2D_ab7ea635b12555d35bae9c4ef87024b07}
+
+\item 
+\hypertarget{classFloat2D_a9f523397af4e14fb2006ad4484f95380}{int {\bfseries get\-Rows} () const }\label{classFloat2D_a9f523397af4e14fb2006ad4484f95380}
+
+\item 
+\hypertarget{classFloat2D_af029eb7eb99dc96e95095796d7ea93fa}{int {\bfseries get\-Cols} () const }\label{classFloat2D_af029eb7eb99dc96e95095796d7ea93fa}
+
+\item 
+\hypertarget{classFloat2D_abea4f5de8e07341d0564a87065af6091}{\hyperlink{classFloat1D}{Float1\-D} {\bfseries get\-Col\-Proxy} (int i)}\label{classFloat2D_abea4f5de8e07341d0564a87065af6091}
+
+\item 
+\hypertarget{classFloat2D_a6c3329adba1854ea3e9589fd7271765b}{\hyperlink{classFloat1D}{Float1\-D} {\bfseries get\-Row\-Proxy} (int j)}\label{classFloat2D_a6c3329adba1854ea3e9589fd7271765b}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class \hyperlink{classFloat2D}{Float2\-D} is a very basic helper class to deal with 2\-D float arrays\-: indices represent columns (1st index, \char`\"{}horizontal\char`\"{}/x-\/coordinate) and rows (2nd index, \char`\"{}vertical\char`\"{}/y-\/coordinate) of a 2\-D grid; values are sequentially ordered in memory using \char`\"{}column major\char`\"{} order. Besides constructor/deconstructor, the class provides overloading of the \mbox{[}\mbox{]}-\/operator, such that elements can be accessed as a\mbox{[}i\mbox{]}\mbox{[}j\mbox{]}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classFloat2D_aceac75782e5db5cb644a893de73f7933}{\index{Float2\-D@{Float2\-D}!Float2\-D@{Float2\-D}}
+\index{Float2\-D@{Float2\-D}!Float2D@{Float2\-D}}
+\subsubsection[{Float2\-D}]{\setlength{\rightskip}{0pt plus 5cm}Float2\-D\-::\-Float2\-D (
+\begin{DoxyParamCaption}
+\item[{int}]{\-\_\-cols, }
+\item[{int}]{\-\_\-rows, }
+\item[{bool}]{\-\_\-allocate\-Memory = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classFloat2D_aceac75782e5db5cb644a893de73f7933}
+Constructor\-: takes size of the 2\-D array as parameters and creates a respective \hyperlink{classFloat2D}{Float2\-D} object; allocates memory for the array, but does not initialise value. 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-cols} & number of columns (i.\-e., elements in horizontal direction) \\
+\hline
+{\em \-\_\-rows} & rumber of rows (i.\-e., elements in vertical directions) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classFloat2D_a51ccca3defa8be28c89f63f1768a79b0}{\index{Float2\-D@{Float2\-D}!Float2\-D@{Float2\-D}}
+\index{Float2\-D@{Float2\-D}!Float2D@{Float2\-D}}
+\subsubsection[{Float2\-D}]{\setlength{\rightskip}{0pt plus 5cm}Float2\-D\-::\-Float2\-D (
+\begin{DoxyParamCaption}
+\item[{int}]{\-\_\-cols, }
+\item[{int}]{\-\_\-rows, }
+\item[{float $\ast$}]{\-\_\-elem}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classFloat2D_a51ccca3defa8be28c89f63f1768a79b0}
+Constructor\-: takes size of the 2\-D array as parameters and creates a respective \hyperlink{classFloat2D}{Float2\-D} object; this constructor does not allocate memory for the array, but uses the allocated memory provided via the respective variable \#\-\_\-elem 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-cols} & number of columns (i.\-e., elements in horizontal direction) \\
+\hline
+{\em \-\_\-rows} & rumber of rows (i.\-e., elements in vertical directions) \\
+\hline
+{\em \-\_\-elem} & pointer to a suitably allocated region of memory to be used for thew array elements \\
+\hline
+\end{DoxyParams}
+\hypertarget{classFloat2D_aa4c91cf3f61da6180d2d3e92699d7c92}{\index{Float2\-D@{Float2\-D}!Float2\-D@{Float2\-D}}
+\index{Float2\-D@{Float2\-D}!Float2D@{Float2\-D}}
+\subsubsection[{Float2\-D}]{\setlength{\rightskip}{0pt plus 5cm}Float2\-D\-::\-Float2\-D (
+\begin{DoxyParamCaption}
+\item[{{\bf Float2\-D} \&}]{\-\_\-elem, }
+\item[{bool}]{shallow\-Copy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classFloat2D_aa4c91cf3f61da6180d2d3e92699d7c92}
+Constructor\-: takes size of the 2\-D array as parameters and creates a respective \hyperlink{classFloat2D}{Float2\-D} object; this constructor does not allocate memory for the array, but uses the allocated memory provided via the respective variable \#\-\_\-elem 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-cols} & number of columns (i.\-e., elements in horizontal direction) \\
+\hline
+{\em \-\_\-rows} & rumber of rows (i.\-e., elements in vertical directions) \\
+\hline
+{\em \-\_\-elem} & pointer to a suitably allocated region of memory to be used for thew array elements \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/tools/\hyperlink{help_8hh}{help.\-hh}\end{DoxyCompactItemize}

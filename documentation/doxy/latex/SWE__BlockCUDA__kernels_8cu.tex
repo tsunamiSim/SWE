@@ -1,0 +1,154 @@
+\hypertarget{SWE__BlockCUDA__kernels_8cu}{\section{/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/cuda/\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.cu File Reference}
+\label{SWE__BlockCUDA__kernels_8cu}\index{/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/cuda/\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu@{/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/cuda/\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}}
+}
+{\ttfamily \#include \char`\"{}S\-W\-E\-\_\-\-Block\-C\-U\-D\-A.\-hh\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-hh\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__BlockCUDA__kernels_8cu_ad34d42b9197cf6063931cb1bf7c03bd4}{kernel\-Hd\-Buffer\-Edges} (float $\ast$hd, int nx, int ny)
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__BlockCUDA__kernels_8cu_a70e795bea06be7152de387957e090eb3}{kernel\-Left\-Boundary} (float $\ast$hd, float $\ast$hud, float $\ast$hvd, int nx, int ny, \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} bound)
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__BlockCUDA__kernels_8cu_a5b25e2843f0f18a4a5843165ce46054f}{kernel\-Right\-Boundary} (float $\ast$hd, float $\ast$hud, float $\ast$hvd, int nx, int ny, \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} bound)
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__BlockCUDA__kernels_8cu_a776336452fee130d27d02b109a7ab89d}{kernel\-Bottom\-Boundary} (float $\ast$hd, float $\ast$hud, float $\ast$hvd, int nx, int ny, \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} bound)
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__BlockCUDA__kernels_8cu_a655f11967ba2a7ed124b92a9f1400788}{kernel\-Top\-Boundary} (float $\ast$hd, float $\ast$hud, float $\ast$hvd, int nx, int ny, \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} bound)
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__BlockCUDA__kernels_8cu_a899b7431f0cec06555bf3b0d8e848782}{kernel\-Bottom\-Ghost\-Boundary} (float $\ast$hd, float $\ast$hud, float $\ast$hvd, float $\ast$bottom\-Ghost\-Layer, int nx, int ny)
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__BlockCUDA__kernels_8cu_a7cf7164d51b1b16664556c25dd675a46}{kernel\-Top\-Ghost\-Boundary} (float $\ast$hd, float $\ast$hud, float $\ast$hvd, float $\ast$top\-Ghost\-Layer, int nx, int ny)
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__BlockCUDA__kernels_8cu_af1a79800b1a5fca1daaeded30541769b}{kernel\-Bottom\-Copy\-Layer} (float $\ast$hd, float $\ast$hud, float $\ast$hvd, float $\ast$bottom\-Copy\-Layer, int nx, int ny)
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__BlockCUDA__kernels_8cu_a48b8d7d4d3bf3c69a289df057f4b6f3e}{kernel\-Top\-Copy\-Layer} (float $\ast$hd, float $\ast$hud, float $\ast$hvd, float $\ast$top\-Copy\-Layer, int nx, int ny)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file is part of S\-W\-E.
+
+\begin{DoxyAuthor}{Author}
+Michael Bader (bader A\-T in.\-tum.\-de, \href{http://www5.in.tum.de/wiki/index.php/Univ.-Prof._Dr._Michael_Bader}{\tt http\-://www5.\-in.\-tum.\-de/wiki/index.\-php/\-Univ.-\/\-Prof.\-\_\-\-Dr.\-\_\-\-Michael\-\_\-\-Bader})
+\end{DoxyAuthor}
+\hypertarget{Writer_8hh_LICENSE}{}\subsection{L\-I\-C\-E\-N\-S\-E}\label{Writer_8hh_LICENSE}
+S\-W\-E is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+S\-W\-E is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with S\-W\-E. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}.\hypertarget{NetCdfWriter_8hh_DESCRIPTION}{}\subsection{D\-E\-S\-C\-R\-I\-P\-T\-I\-O\-N}\label{NetCdfWriter_8hh_DESCRIPTION}
+T\-O\-D\-O 
+
+\subsection{Function Documentation}
+\hypertarget{SWE__BlockCUDA__kernels_8cu_a776336452fee130d27d02b109a7ab89d}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}!kernel\-Bottom\-Boundary@{kernel\-Bottom\-Boundary}}
+\index{kernel\-Bottom\-Boundary@{kernel\-Bottom\-Boundary}!SWE_BlockCUDA_kernels.cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}}
+\subsubsection[{kernel\-Bottom\-Boundary}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void kernel\-Bottom\-Boundary (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{hd, }
+\item[{float $\ast$}]{hud, }
+\item[{float $\ast$}]{hvd, }
+\item[{int}]{nx, }
+\item[{int}]{ny, }
+\item[{{\bf Boundary\-Type}}]{bound}
+\end{DoxyParamCaption}
+)}}\label{SWE__BlockCUDA__kernels_8cu_a776336452fee130d27d02b109a7ab89d}
+C\-U\-D\-A kernel to set bottom boundary layer for conditions W\-A\-L\-L \& O\-U\-T\-F\-L\-O\-W block\-Idx.\-x and thread\-Idx.\-x loop over the boundary elements \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} size ny is assumed to be a multiple of the T\-I\-L\-E\-\_\-\-S\-I\-Z\-E \hypertarget{SWE__BlockCUDA__kernels_8cu_af1a79800b1a5fca1daaeded30541769b}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}!kernel\-Bottom\-Copy\-Layer@{kernel\-Bottom\-Copy\-Layer}}
+\index{kernel\-Bottom\-Copy\-Layer@{kernel\-Bottom\-Copy\-Layer}!SWE_BlockCUDA_kernels.cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}}
+\subsubsection[{kernel\-Bottom\-Copy\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void kernel\-Bottom\-Copy\-Layer (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{hd, }
+\item[{float $\ast$}]{hud, }
+\item[{float $\ast$}]{hvd, }
+\item[{float $\ast$}]{bottom\-Copy\-Layer, }
+\item[{int}]{nx, }
+\item[{int}]{ny}
+\end{DoxyParamCaption}
+)}}\label{SWE__BlockCUDA__kernels_8cu_af1a79800b1a5fca1daaeded30541769b}
+C\-U\-D\-A kernel to update bottom copy layer according (for boundary conditions P\-A\-S\-S\-I\-V\-E and C\-O\-N\-N\-E\-C\-T) block\-Idx.\-x and thread\-Idx.\-x loop over the boundary elements. Note that diagonal elements are currently not copied! \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} size ny is assumed to be a multiple of the T\-I\-L\-E\-\_\-\-S\-I\-Z\-E \hypertarget{SWE__BlockCUDA__kernels_8cu_a899b7431f0cec06555bf3b0d8e848782}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}!kernel\-Bottom\-Ghost\-Boundary@{kernel\-Bottom\-Ghost\-Boundary}}
+\index{kernel\-Bottom\-Ghost\-Boundary@{kernel\-Bottom\-Ghost\-Boundary}!SWE_BlockCUDA_kernels.cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}}
+\subsubsection[{kernel\-Bottom\-Ghost\-Boundary}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void kernel\-Bottom\-Ghost\-Boundary (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{hd, }
+\item[{float $\ast$}]{hud, }
+\item[{float $\ast$}]{hvd, }
+\item[{float $\ast$}]{bottom\-Ghost\-Layer, }
+\item[{int}]{nx, }
+\item[{int}]{ny}
+\end{DoxyParamCaption}
+)}}\label{SWE__BlockCUDA__kernels_8cu_a899b7431f0cec06555bf3b0d8e848782}
+C\-U\-D\-A kernel to set bottom boundary layer according to the external ghost layer status (conditions P\-A\-S\-S\-I\-V\-E and C\-O\-N\-N\-E\-C\-T) block\-Idx.\-x and thread\-Idx.\-x loop over the boundary elements. Note that diagonal elements are currently not copied! \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} size ny is assumed to be a multiple of the T\-I\-L\-E\-\_\-\-S\-I\-Z\-E \hypertarget{SWE__BlockCUDA__kernels_8cu_ad34d42b9197cf6063931cb1bf7c03bd4}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}!kernel\-Hd\-Buffer\-Edges@{kernel\-Hd\-Buffer\-Edges}}
+\index{kernel\-Hd\-Buffer\-Edges@{kernel\-Hd\-Buffer\-Edges}!SWE_BlockCUDA_kernels.cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}}
+\subsubsection[{kernel\-Hd\-Buffer\-Edges}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void kernel\-Hd\-Buffer\-Edges (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{hd, }
+\item[{int}]{nx, }
+\item[{int}]{ny}
+\end{DoxyParamCaption}
+)}}\label{SWE__BlockCUDA__kernels_8cu_ad34d42b9197cf6063931cb1bf7c03bd4}
+Sets corner values of hd (only needed for visualization) 
+\begin{DoxyParams}{Parameters}
+{\em hd} & h-\/values on device \\
+\hline
+\end{DoxyParams}
+\hypertarget{SWE__BlockCUDA__kernels_8cu_a70e795bea06be7152de387957e090eb3}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}!kernel\-Left\-Boundary@{kernel\-Left\-Boundary}}
+\index{kernel\-Left\-Boundary@{kernel\-Left\-Boundary}!SWE_BlockCUDA_kernels.cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}}
+\subsubsection[{kernel\-Left\-Boundary}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void kernel\-Left\-Boundary (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{hd, }
+\item[{float $\ast$}]{hud, }
+\item[{float $\ast$}]{hvd, }
+\item[{int}]{nx, }
+\item[{int}]{ny, }
+\item[{{\bf Boundary\-Type}}]{bound}
+\end{DoxyParamCaption}
+)}}\label{SWE__BlockCUDA__kernels_8cu_a70e795bea06be7152de387957e090eb3}
+C\-U\-D\-A kernel to set left boundary layer for conditions W\-A\-L\-L \& O\-U\-T\-F\-L\-O\-W block\-Idx.\-y and thread\-Idx.\-y loop over the boundary elements \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} size ny is assumed to be a multiple of the T\-I\-L\-E\-\_\-\-S\-I\-Z\-E \hypertarget{SWE__BlockCUDA__kernels_8cu_a5b25e2843f0f18a4a5843165ce46054f}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}!kernel\-Right\-Boundary@{kernel\-Right\-Boundary}}
+\index{kernel\-Right\-Boundary@{kernel\-Right\-Boundary}!SWE_BlockCUDA_kernels.cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}}
+\subsubsection[{kernel\-Right\-Boundary}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void kernel\-Right\-Boundary (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{hd, }
+\item[{float $\ast$}]{hud, }
+\item[{float $\ast$}]{hvd, }
+\item[{int}]{nx, }
+\item[{int}]{ny, }
+\item[{{\bf Boundary\-Type}}]{bound}
+\end{DoxyParamCaption}
+)}}\label{SWE__BlockCUDA__kernels_8cu_a5b25e2843f0f18a4a5843165ce46054f}
+C\-U\-D\-A kernel to set right boundary layer for conditions W\-A\-L\-L \& O\-U\-T\-F\-L\-O\-W block\-Idx.\-y and thread\-Idx.\-y loop over the boundary elements \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} size ny is assumed to be a multiple of the T\-I\-L\-E\-\_\-\-S\-I\-Z\-E \hypertarget{SWE__BlockCUDA__kernels_8cu_a655f11967ba2a7ed124b92a9f1400788}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}!kernel\-Top\-Boundary@{kernel\-Top\-Boundary}}
+\index{kernel\-Top\-Boundary@{kernel\-Top\-Boundary}!SWE_BlockCUDA_kernels.cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}}
+\subsubsection[{kernel\-Top\-Boundary}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void kernel\-Top\-Boundary (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{hd, }
+\item[{float $\ast$}]{hud, }
+\item[{float $\ast$}]{hvd, }
+\item[{int}]{nx, }
+\item[{int}]{ny, }
+\item[{{\bf Boundary\-Type}}]{bound}
+\end{DoxyParamCaption}
+)}}\label{SWE__BlockCUDA__kernels_8cu_a655f11967ba2a7ed124b92a9f1400788}
+C\-U\-D\-A kernel to set bottom boundary layer for conditions W\-A\-L\-L \& O\-U\-T\-F\-L\-O\-W block\-Idx.\-x and thread\-Idx.\-x loop over the boundary elements \hypertarget{SWE__BlockCUDA__kernels_8cu_a48b8d7d4d3bf3c69a289df057f4b6f3e}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}!kernel\-Top\-Copy\-Layer@{kernel\-Top\-Copy\-Layer}}
+\index{kernel\-Top\-Copy\-Layer@{kernel\-Top\-Copy\-Layer}!SWE_BlockCUDA_kernels.cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}}
+\subsubsection[{kernel\-Top\-Copy\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void kernel\-Top\-Copy\-Layer (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{hd, }
+\item[{float $\ast$}]{hud, }
+\item[{float $\ast$}]{hvd, }
+\item[{float $\ast$}]{top\-Copy\-Layer, }
+\item[{int}]{nx, }
+\item[{int}]{ny}
+\end{DoxyParamCaption}
+)}}\label{SWE__BlockCUDA__kernels_8cu_a48b8d7d4d3bf3c69a289df057f4b6f3e}
+C\-U\-D\-A kernel to set top boundary layer according to the external ghost layer status (conditions P\-A\-S\-S\-I\-V\-E and C\-O\-N\-N\-E\-C\-T) block\-Idx.\-x and thread\-Idx.\-x loop over the boundary elements Note that diagonal elements are currently not copied! \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} size ny is assumed to be a multiple of the T\-I\-L\-E\-\_\-\-S\-I\-Z\-E \hypertarget{SWE__BlockCUDA__kernels_8cu_a7cf7164d51b1b16664556c25dd675a46}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}!kernel\-Top\-Ghost\-Boundary@{kernel\-Top\-Ghost\-Boundary}}
+\index{kernel\-Top\-Ghost\-Boundary@{kernel\-Top\-Ghost\-Boundary}!SWE_BlockCUDA_kernels.cu@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-\_\-kernels.\-cu}}
+\subsubsection[{kernel\-Top\-Ghost\-Boundary}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void kernel\-Top\-Ghost\-Boundary (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{hd, }
+\item[{float $\ast$}]{hud, }
+\item[{float $\ast$}]{hvd, }
+\item[{float $\ast$}]{top\-Ghost\-Layer, }
+\item[{int}]{nx, }
+\item[{int}]{ny}
+\end{DoxyParamCaption}
+)}}\label{SWE__BlockCUDA__kernels_8cu_a7cf7164d51b1b16664556c25dd675a46}
+C\-U\-D\-A kernel to set top boundary layer according to the external ghost layer status (conditions P\-A\-S\-S\-I\-V\-E and C\-O\-N\-N\-E\-C\-T) block\-Idx.\-x and thread\-Idx.\-x loop over the boundary elements Note that diagonal elements are currently not copied! \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} size ny is assumed to be a multiple of the T\-I\-L\-E\-\_\-\-S\-I\-Z\-E 

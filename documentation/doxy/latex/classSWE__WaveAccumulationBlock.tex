@@ -1,0 +1,83 @@
+\hypertarget{classSWE__WaveAccumulationBlock}{\section{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block Class Reference}
+\label{classSWE__WaveAccumulationBlock}\index{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block@{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Wave\-Accumulation\-Block.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Wave\-Accumulation\-Block\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSWE__WaveAccumulationBlock}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__WaveAccumulationBlock_a20e04bf219dbf3d82c9f5eac1e7bd848}{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block} (int l\-\_\-nx, int l\-\_\-ny, float l\-\_\-dx, float l\-\_\-dy)
+\item 
+void \hyperlink{classSWE__WaveAccumulationBlock_acac0b73f22b256bc91a58ff8d0831e5d}{compute\-Numerical\-Fluxes} ()
+\item 
+void \hyperlink{classSWE__WaveAccumulationBlock_a67b78723e81aec6e661b3710e6c41b43}{update\-Unknowns} (float dt)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classSWE__WaveAccumulationBlock}{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block} is an implementation of the \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} abstract class. It uses a wave propagation solver which is defined with the pre-\/compiler flag W\-A\-V\-E\-\_\-\-P\-R\-O\-P\-A\-G\-A\-T\-I\-O\-N\-\_\-\-S\-O\-L\-V\-E\-R (see above).
+
+Possible wave propagation solvers are\-: F-\/\-Wave, Apprximate Augmented Riemann, Hybrid (f-\/wave + augmented). (details can be found in the corresponding source files) 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__WaveAccumulationBlock_a20e04bf219dbf3d82c9f5eac1e7bd848}{\index{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block@{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}!S\-W\-E\-\_\-\-Wave\-Accumulation\-Block@{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}}
+\index{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block@{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}!SWE_WaveAccumulationBlock@{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}}
+\subsubsection[{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Wave\-Accumulation\-Block\-::\-S\-W\-E\-\_\-\-Wave\-Accumulation\-Block (
+\begin{DoxyParamCaption}
+\item[{int}]{l\-\_\-nx, }
+\item[{int}]{l\-\_\-ny, }
+\item[{float}]{l\-\_\-dx, }
+\item[{float}]{l\-\_\-dy}
+\end{DoxyParamCaption}
+)}}\label{classSWE__WaveAccumulationBlock_a20e04bf219dbf3d82c9f5eac1e7bd848}
+Constructor of a \hyperlink{classSWE__WaveAccumulationBlock}{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}.
+
+Allocates the variables for the simulation\-: unknowns h,hu,hv,b are defined on grid indices \mbox{[}0,..,nx+1\mbox{]}$\ast$\mbox{[}0,..,ny+1\mbox{]} (-\/$>$ Abstract class \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block}) -\/$>$ computational domain is \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} -\/$>$ plus ghost cell layer
+
+Similar, all net-\/updates are defined as cell-\/local variables with indices \mbox{[}0,..,nx+1\mbox{]}$\ast$\mbox{[}0,..,ny+1\mbox{]}, however, only values on \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} are used (i.\-e., ghost layers are not accessed). Net updates are intended to hold the accumulated(!) net updates computed on the edges. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__WaveAccumulationBlock_acac0b73f22b256bc91a58ff8d0831e5d}{\index{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block@{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}!compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}}
+\index{compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}!SWE_WaveAccumulationBlock@{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}}
+\subsubsection[{compute\-Numerical\-Fluxes}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Wave\-Accumulation\-Block\-::compute\-Numerical\-Fluxes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__WaveAccumulationBlock_acac0b73f22b256bc91a58ff8d0831e5d}
+Compute net updates for the block. The member variable \hyperlink{classSWE__Block_a05cbc9b40e0483bf73dbc2bdeae7dee3}{max\-Timestep} will be updated with the maximum allowed time step size 
+
+Implements \hyperlink{classSWE__Block_a94dcf2c6ae31731e4586e45628b0c00e}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__WaveAccumulationBlock_a67b78723e81aec6e661b3710e6c41b43}{\index{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block@{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}!update\-Unknowns@{update\-Unknowns}}
+\index{update\-Unknowns@{update\-Unknowns}!SWE_WaveAccumulationBlock@{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}}
+\subsubsection[{update\-Unknowns}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Wave\-Accumulation\-Block\-::update\-Unknowns (
+\begin{DoxyParamCaption}
+\item[{float}]{dt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__WaveAccumulationBlock_a67b78723e81aec6e661b3710e6c41b43}
+Updates the unknowns with the already computed net-\/updates.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & time step width used in the update. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classSWE__Block_ab2b4b659f23d5d45413dece8d2da3298}{S\-W\-E\-\_\-\-Block}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/\hyperlink{SWE__WaveAccumulationBlock_8hh}{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block.\-hh}\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/\hyperlink{SWE__WaveAccumulationBlock_8cpp}{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block.\-cpp}\end{DoxyCompactItemize}

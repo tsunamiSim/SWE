@@ -1,0 +1,91 @@
+\hypertarget{classio_1_1Writer}{\section{io\-:\-:Writer Class Reference}
+\label{classio_1_1Writer}\index{io\-::\-Writer@{io\-::\-Writer}}
+}
+Inheritance diagram for io\-:\-:Writer\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classio_1_1Writer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classio_1_1Writer_a6fe95f4a66e8b8ee1c9a52196ff3433f}{Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, int i\-\_\-n\-X, int i\-\_\-n\-Y)
+\item 
+virtual void \hyperlink{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{write\-Time\-Step} (const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-h, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hu, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hv, float i\-\_\-time)=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classio_1_1Writer_a93b978e8cbfc6bcf6dbfdc3f393d300a}{const std\-::string \hyperlink{classio_1_1Writer_a93b978e8cbfc6bcf6dbfdc3f393d300a}{file\-Name}}\label{classio_1_1Writer_a93b978e8cbfc6bcf6dbfdc3f393d300a}
+
+\begin{DoxyCompactList}\small\item\em file name of the data file \end{DoxyCompactList}\item 
+\hypertarget{classio_1_1Writer_a1f5d4ab8728ae1c2ceba52c6c822d0bc}{const \hyperlink{classFloat2D}{Float2\-D} \& \hyperlink{classio_1_1Writer_a1f5d4ab8728ae1c2ceba52c6c822d0bc}{b}}\label{classio_1_1Writer_a1f5d4ab8728ae1c2ceba52c6c822d0bc}
+
+\begin{DoxyCompactList}\small\item\em (Reference) to bathymetry data \end{DoxyCompactList}\item 
+\hypertarget{classio_1_1Writer_a7cf701232192c20c41cbb4454601c219}{const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \hyperlink{classio_1_1Writer_a7cf701232192c20c41cbb4454601c219}{boundary\-Size}}\label{classio_1_1Writer_a7cf701232192c20c41cbb4454601c219}
+
+\begin{DoxyCompactList}\small\item\em Boundary layer size. \end{DoxyCompactList}\item 
+\hypertarget{classio_1_1Writer_a080fc86da3b2d8ea130382917d96252d}{const unsigned int \hyperlink{classio_1_1Writer_a080fc86da3b2d8ea130382917d96252d}{n\-X}}\label{classio_1_1Writer_a080fc86da3b2d8ea130382917d96252d}
+
+\begin{DoxyCompactList}\small\item\em dimensions of the grid in x-\/ and y-\/direction. \end{DoxyCompactList}\item 
+\hypertarget{classio_1_1Writer_a8c4ceaedd4b3e571cc4a5cacbcb21604}{const unsigned int {\bfseries n\-Y}}\label{classio_1_1Writer_a8c4ceaedd4b3e571cc4a5cacbcb21604}
+
+\item 
+\hypertarget{classio_1_1Writer_aa21f3ee8a54cf9278d711fe4f454f45c}{size\-\_\-t \hyperlink{classio_1_1Writer_aa21f3ee8a54cf9278d711fe4f454f45c}{time\-Step}}\label{classio_1_1Writer_aa21f3ee8a54cf9278d711fe4f454f45c}
+
+\begin{DoxyCompactList}\small\item\em current time step \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classio_1_1Writer_a6fe95f4a66e8b8ee1c9a52196ff3433f}{\index{io\-::\-Writer@{io\-::\-Writer}!Writer@{Writer}}
+\index{Writer@{Writer}!io::Writer@{io\-::\-Writer}}
+\subsubsection[{Writer}]{\setlength{\rightskip}{0pt plus 5cm}io\-::\-Writer\-::\-Writer (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{i\-\_\-file\-Name, }
+\item[{const {\bf Float2\-D} \&}]{i\-\_\-b, }
+\item[{const {\bf Boundary\-Size} \&}]{i\-\_\-boundary\-Size, }
+\item[{int}]{i\-\_\-n\-X, }
+\item[{int}]{i\-\_\-n\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classio_1_1Writer_a6fe95f4a66e8b8ee1c9a52196ff3433f}
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-boundary\-Size} & size of the boundaries. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{\index{io\-::\-Writer@{io\-::\-Writer}!write\-Time\-Step@{write\-Time\-Step}}
+\index{write\-Time\-Step@{write\-Time\-Step}!io::Writer@{io\-::\-Writer}}
+\subsubsection[{write\-Time\-Step}]{\setlength{\rightskip}{0pt plus 5cm}virtual void io\-::\-Writer\-::write\-Time\-Step (
+\begin{DoxyParamCaption}
+\item[{const {\bf Float2\-D} \&}]{i\-\_\-h, }
+\item[{const {\bf Float2\-D} \&}]{i\-\_\-hu, }
+\item[{const {\bf Float2\-D} \&}]{i\-\_\-hv, }
+\item[{float}]{i\-\_\-time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}
+Writes one time step
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-h} & water heights at a given time step. \\
+\hline
+{\em i\-\_\-hu} & momentums in x-\/direction at a given time step. \\
+\hline
+{\em i\-\_\-hv} & momentums in y-\/direction at a given time step. \\
+\hline
+{\em i\-\_\-time} & simulation time of the time step. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classio_1_1NetCdfWriter_a8e49f21f16b1720a348de50485754b0c}{io\-::\-Net\-Cdf\-Writer}, and \hyperlink{classio_1_1VtkWriter_ad464e594a34f4cd94b02087a2fade7bf}{io\-::\-Vtk\-Writer}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/writer/\hyperlink{Writer_8hh}{Writer.\-hh}\end{DoxyCompactItemize}

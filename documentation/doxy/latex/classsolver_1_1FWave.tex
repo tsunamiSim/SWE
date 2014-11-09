@@ -1,0 +1,84 @@
+\hypertarget{classsolver_1_1FWave}{\section{solver\-:\-:F\-Wave$<$ T $>$ Class Template Reference}
+\label{classsolver_1_1FWave}\index{solver\-::\-F\-Wave$<$ T $>$@{solver\-::\-F\-Wave$<$ T $>$}}
+}
+
+
+{\ttfamily \#include $<$F\-Wave.\-hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsolver_1_1FWave_a446e2721d799afa5612a3a2b8c30d668}{F\-Wave} ()
+\item 
+\hypertarget{classsolver_1_1FWave_ac300b35d491bfc9ff591c79115017042}{{\bfseries F\-Wave} (bool use\-Outflow)}\label{classsolver_1_1FWave_ac300b35d491bfc9ff591c79115017042}
+
+\item 
+void \hyperlink{classsolver_1_1FWave_afb800cb94c48af043ac828c9d730ae63}{compute\-Net\-Updates} (T i\-\_\-h\-\_\-l, T i\-\_\-h\-\_\-r, T i\-\_\-hu\-\_\-l, T i\-\_\-hu\-\_\-r, T i\-\_\-b\-\_\-l, T i\-\_\-b\-\_\-r, T \&o\-\_\-h\-\_\-l, T \&o\-\_\-h\-\_\-r, T \&o\-\_\-hu\-\_\-l, T \&o\-\_\-hu\-\_\-r, T \&o\-\_\-max\-\_\-ws)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$class solver\-::\-F\-Wave$<$ T $>$}
+
+Simple solver used to compute net udates for a given set of height, momentum and bathymetry values 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classsolver_1_1FWave_a446e2721d799afa5612a3a2b8c30d668}{\index{solver\-::\-F\-Wave@{solver\-::\-F\-Wave}!F\-Wave@{F\-Wave}}
+\index{F\-Wave@{F\-Wave}!solver::FWave@{solver\-::\-F\-Wave}}
+\subsubsection[{F\-Wave}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf solver\-::\-F\-Wave}$<$ T $>$\-::{\bf F\-Wave} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classsolver_1_1FWave_a446e2721d799afa5612a3a2b8c30d668}
+The default constructor just setting gravity 
+
+\subsection{Member Function Documentation}
+\hypertarget{classsolver_1_1FWave_afb800cb94c48af043ac828c9d730ae63}{\index{solver\-::\-F\-Wave@{solver\-::\-F\-Wave}!compute\-Net\-Updates@{compute\-Net\-Updates}}
+\index{compute\-Net\-Updates@{compute\-Net\-Updates}!solver::FWave@{solver\-::\-F\-Wave}}
+\subsubsection[{compute\-Net\-Updates}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ void {\bf solver\-::\-F\-Wave}$<$ T $>$\-::compute\-Net\-Updates (
+\begin{DoxyParamCaption}
+\item[{T}]{i\-\_\-h\-\_\-l, }
+\item[{T}]{i\-\_\-h\-\_\-r, }
+\item[{T}]{i\-\_\-hu\-\_\-l, }
+\item[{T}]{i\-\_\-hu\-\_\-r, }
+\item[{T}]{i\-\_\-b\-\_\-l, }
+\item[{T}]{i\-\_\-b\-\_\-r, }
+\item[{T \&}]{o\-\_\-h\-\_\-l, }
+\item[{T \&}]{o\-\_\-h\-\_\-r, }
+\item[{T \&}]{o\-\_\-hu\-\_\-l, }
+\item[{T \&}]{o\-\_\-hu\-\_\-r, }
+\item[{T \&}]{o\-\_\-max\-\_\-ws}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classsolver_1_1FWave_afb800cb94c48af043ac828c9d730ae63}
+Computes the next timesteps net updates
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-h\-\_\-l} & the height on the left cell of the edge \\
+\hline
+{\em i\-\_\-h\-\_\-r} & the height on the right cell of the edge \\
+\hline
+{\em i\-\_\-hu\-\_\-l} & the momentum on the left cell of the edge \\
+\hline
+{\em i\-\_\-hu\-\_\-r} & the momentum on the right cell of the edge \\
+\hline
+{\em i\-\_\-b\-\_\-l} & the bathymetry on the left cell of the edge \\
+\hline
+{\em i\-\_\-b\-\_\-r} & the bathymetry on the right cell of the edge\\
+\hline
+{\em o\-\_\-h\-\_\-l} & output\-: the height update for the left cell \\
+\hline
+{\em o\-\_\-h\-\_\-r} & output\-: the height update for the right cell \\
+\hline
+{\em o\-\_\-hu\-\_\-l} & output\-: the momentum update for the left cell \\
+\hline
+{\em o\-\_\-hu\-\_\-r} & output\-: the momentum update for the right cell \\
+\hline
+{\em o\-\_\-max\-\_\-wd} & output\-: the maximum wavespeed (which is the maximum of the left and right wave speed) \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/submodules/swe\-\_\-solvers/F\-Wave.\-hpp\end{DoxyCompactItemize}

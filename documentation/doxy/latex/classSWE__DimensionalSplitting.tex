@@ -1,0 +1,82 @@
+\hypertarget{classSWE__DimensionalSplitting}{\section{S\-W\-E\-\_\-\-Dimensional\-Splitting Class Reference}
+\label{classSWE__DimensionalSplitting}\index{S\-W\-E\-\_\-\-Dimensional\-Splitting@{S\-W\-E\-\_\-\-Dimensional\-Splitting}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Dimensional\-Splitting.\-hpp$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Dimensional\-Splitting\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSWE__DimensionalSplitting}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__DimensionalSplitting_a3ab0c9de647ca241dbab1aa02cc42a04}{S\-W\-E\-\_\-\-Dimensional\-Splitting} (int l\-\_\-nx, int l\-\_\-ny, float l\-\_\-dx, float l\-\_\-dy)
+\item 
+void \hyperlink{classSWE__DimensionalSplitting_a84759f8fbbbfe1e46613375515826f0f}{compute\-Numerical\-Fluxes} ()
+\item 
+void \hyperlink{classSWE__DimensionalSplitting_af74b527ff9ca7727442db92d2e438531}{update\-Unknowns} (float dt)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This class implements \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} using the dimensional splitting approach and the F-\/\-Wave solver 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__DimensionalSplitting_a3ab0c9de647ca241dbab1aa02cc42a04}{\index{S\-W\-E\-\_\-\-Dimensional\-Splitting@{S\-W\-E\-\_\-\-Dimensional\-Splitting}!S\-W\-E\-\_\-\-Dimensional\-Splitting@{S\-W\-E\-\_\-\-Dimensional\-Splitting}}
+\index{S\-W\-E\-\_\-\-Dimensional\-Splitting@{S\-W\-E\-\_\-\-Dimensional\-Splitting}!SWE_DimensionalSplitting@{S\-W\-E\-\_\-\-Dimensional\-Splitting}}
+\subsubsection[{S\-W\-E\-\_\-\-Dimensional\-Splitting}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Dimensional\-Splitting\-::\-S\-W\-E\-\_\-\-Dimensional\-Splitting (
+\begin{DoxyParamCaption}
+\item[{int}]{l\-\_\-nx, }
+\item[{int}]{l\-\_\-ny, }
+\item[{float}]{l\-\_\-dx, }
+\item[{float}]{l\-\_\-dy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__DimensionalSplitting_a3ab0c9de647ca241dbab1aa02cc42a04}
+Constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em l\-\_\-nx} & x dimension of the domain \\
+\hline
+{\em l\-\_\-ny} & y dimension of the domain \\
+\hline
+{\em l\-\_\-dx} & cell size in x dimension \\
+\hline
+{\em l\-\_\-dy} & cell size in y dimension \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__DimensionalSplitting_a84759f8fbbbfe1e46613375515826f0f}{\index{S\-W\-E\-\_\-\-Dimensional\-Splitting@{S\-W\-E\-\_\-\-Dimensional\-Splitting}!compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}}
+\index{compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}!SWE_DimensionalSplitting@{S\-W\-E\-\_\-\-Dimensional\-Splitting}}
+\subsubsection[{compute\-Numerical\-Fluxes}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Dimensional\-Splitting\-::compute\-Numerical\-Fluxes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__DimensionalSplitting_a84759f8fbbbfe1e46613375515826f0f}
+computing the net updates A\-N\-D applying them already 
+
+Implements \hyperlink{classSWE__Block_a94dcf2c6ae31731e4586e45628b0c00e}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__DimensionalSplitting_af74b527ff9ca7727442db92d2e438531}{\index{S\-W\-E\-\_\-\-Dimensional\-Splitting@{S\-W\-E\-\_\-\-Dimensional\-Splitting}!update\-Unknowns@{update\-Unknowns}}
+\index{update\-Unknowns@{update\-Unknowns}!SWE_DimensionalSplitting@{S\-W\-E\-\_\-\-Dimensional\-Splitting}}
+\subsubsection[{update\-Unknowns}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Dimensional\-Splitting\-::update\-Unknowns (
+\begin{DoxyParamCaption}
+\item[{float}]{dt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__DimensionalSplitting_af74b527ff9ca7727442db92d2e438531}
+Applying the net updates (C\-A\-R\-E\-: Compute\-Numerical\-Fluxes already calls this, don't use it again) 
+
+Implements \hyperlink{classSWE__Block_ab2b4b659f23d5d45413dece8d2da3298}{S\-W\-E\-\_\-\-Block}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/\hyperlink{SWE__DimensionalSplitting_8hpp}{S\-W\-E\-\_\-\-Dimensional\-Splitting.\-hpp}\end{DoxyCompactItemize}

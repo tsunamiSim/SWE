@@ -1,0 +1,95 @@
+\hypertarget{classShader}{\section{Shader Class Reference}
+\label{classShader}\index{Shader@{Shader}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShader_a662551e9ee2ac3a0b1658ac929e16c1a}{Shader} (char const $\ast$vertex\-Shader\-File, char const $\ast$fragment\-Shader\-File)
+\item 
+\hyperlink{classShader_aff01df87e8a102f270b5b135a295e59d}{$\sim$\-Shader} ()
+\item 
+bool \hyperlink{classShader_af70fd9c2a4bc664dc0dce167cba627e6}{shaders\-Loaded} ()
+\item 
+void \hyperlink{classShader_a537720c8635f679c74d843d02c2dc98d}{enable\-Shader} ()
+\item 
+void \hyperlink{classShader_a858693041864f93142536850be5963dd}{disable\-Shader} ()
+\item 
+G\-Lint \hyperlink{classShader_a348d7c110ee1e4092aaddc50a657112a}{get\-Uniform\-Location} (const char $\ast$name)
+\item 
+void \hyperlink{classShader_a0c16e2e949cd318bee4dd00d2f73559a}{set\-Uniform} (G\-Lint location, G\-Lfloat value)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShader_a662551e9ee2ac3a0b1658ac929e16c1a}{\index{Shader@{Shader}!Shader@{Shader}}
+\index{Shader@{Shader}!Shader@{Shader}}
+\subsubsection[{Shader}]{\setlength{\rightskip}{0pt plus 5cm}Shader\-::\-Shader (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{vertex\-Shader\-File, }
+\item[{char const $\ast$}]{fragment\-Shader\-File}
+\end{DoxyParamCaption}
+)}}\label{classShader_a662551e9ee2ac3a0b1658ac929e16c1a}
+Constructor. Check whether shaders are supported. If yes, load vertex and fragment shader from textfile into memory and compile
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\-Shader\-File} & name of the text file containing the vertex shader code \\
+\hline
+{\em fragment\-Shader\-File} & name of the text file containing the fragment shader code \\
+\hline
+\end{DoxyParams}
+\hypertarget{classShader_aff01df87e8a102f270b5b135a295e59d}{\index{Shader@{Shader}!$\sim$\-Shader@{$\sim$\-Shader}}
+\index{$\sim$\-Shader@{$\sim$\-Shader}!Shader@{Shader}}
+\subsubsection[{$\sim$\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}Shader\-::$\sim$\-Shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShader_aff01df87e8a102f270b5b135a295e59d}
+Destructor. Unload shaders and free resources. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classShader_a858693041864f93142536850be5963dd}{\index{Shader@{Shader}!disable\-Shader@{disable\-Shader}}
+\index{disable\-Shader@{disable\-Shader}!Shader@{Shader}}
+\subsubsection[{disable\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}void Shader\-::disable\-Shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShader_a858693041864f93142536850be5963dd}
+Restores Open\-G\-L default shaders \hypertarget{classShader_a537720c8635f679c74d843d02c2dc98d}{\index{Shader@{Shader}!enable\-Shader@{enable\-Shader}}
+\index{enable\-Shader@{enable\-Shader}!Shader@{Shader}}
+\subsubsection[{enable\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}void Shader\-::enable\-Shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShader_a537720c8635f679c74d843d02c2dc98d}
+Replaces Open\-G\-L shaders by our custom shaders \hypertarget{classShader_a348d7c110ee1e4092aaddc50a657112a}{\index{Shader@{Shader}!get\-Uniform\-Location@{get\-Uniform\-Location}}
+\index{get\-Uniform\-Location@{get\-Uniform\-Location}!Shader@{Shader}}
+\subsubsection[{get\-Uniform\-Location}]{\setlength{\rightskip}{0pt plus 5cm}G\-Lint Shader\-::get\-Uniform\-Location (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShader_a348d7c110ee1e4092aaddc50a657112a}
+\begin{DoxyReturn}{Returns}
+Location of the uniform variable 
+\end{DoxyReturn}
+\hypertarget{classShader_a0c16e2e949cd318bee4dd00d2f73559a}{\index{Shader@{Shader}!set\-Uniform@{set\-Uniform}}
+\index{set\-Uniform@{set\-Uniform}!Shader@{Shader}}
+\subsubsection[{set\-Uniform}]{\setlength{\rightskip}{0pt plus 5cm}void Shader\-::set\-Uniform (
+\begin{DoxyParamCaption}
+\item[{G\-Lint}]{location, }
+\item[{G\-Lfloat}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShader_a0c16e2e949cd318bee4dd00d2f73559a}
+Set a uniform variable in the shader \hypertarget{classShader_af70fd9c2a4bc664dc0dce167cba627e6}{\index{Shader@{Shader}!shaders\-Loaded@{shaders\-Loaded}}
+\index{shaders\-Loaded@{shaders\-Loaded}!Shader@{Shader}}
+\subsubsection[{shaders\-Loaded}]{\setlength{\rightskip}{0pt plus 5cm}bool Shader\-::shaders\-Loaded (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShader_af70fd9c2a4bc664dc0dce167cba627e6}
+Returns, whether shaders could by loaded successfully 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/opengl/shader.\-h\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/opengl/shader.\-cpp\end{DoxyCompactItemize}

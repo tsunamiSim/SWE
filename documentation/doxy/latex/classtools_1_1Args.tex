@@ -1,0 +1,82 @@
+\hypertarget{classtools_1_1Args}{\section{tools\-:\-:Args Class Reference}
+\label{classtools_1_1Args}\index{tools\-::\-Args@{tools\-::\-Args}}
+}
+
+
+{\ttfamily \#include $<$args.\-hh$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries Argument} \{ {\bfseries Required} = required\-\_\-argument, 
+{\bfseries No} = no\-\_\-argument, 
+{\bfseries Optional} = optional\-\_\-argument
+ \}
+\item 
+enum \hyperlink{classtools_1_1Args_ae0b38617134893616df504e543ba6e6e}{Result} \{ {\bfseries Success} = 0, 
+{\bfseries Error}, 
+\hyperlink{classtools_1_1Args_ae0b38617134893616df504e543ba6e6ea3be887fb99c1931485e91a4e0bdcf539}{Help}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classtools_1_1Args_ac990064dc296955154be98d98acd46b9}{{\bfseries Args} (const std\-::string \&description=\char`\"{}\char`\"{}, bool add\-Help=true)}\label{classtools_1_1Args_ac990064dc296955154be98d98acd46b9}
+
+\item 
+\hypertarget{classtools_1_1Args_a10d5693fa13e60f9da62dcd8696c150d}{void {\bfseries add\-Option} (const std\-::string \&long\-Option, char short\-Option=0, const std\-::string \&description=\char`\"{}\char`\"{}, Argument argument=Required, bool required=true)}\label{classtools_1_1Args_a10d5693fa13e60f9da62dcd8696c150d}
+
+\item 
+\hyperlink{classtools_1_1Args_ae0b38617134893616df504e543ba6e6e}{Result} \hyperlink{classtools_1_1Args_a9d8751d3ca13ddf37d390f42384ba49a}{parse} (int argc, char $\ast$const $\ast$argv, bool print\-Help=true)
+\item 
+\hypertarget{classtools_1_1Args_a73558f89ba2c7592c0bbb5c29bee228c}{bool {\bfseries is\-Set} (const std\-::string \&option)}\label{classtools_1_1Args_a73558f89ba2c7592c0bbb5c29bee228c}
+
+\item 
+\hypertarget{classtools_1_1Args_ab21287411ac81cd228184ee520267851}{{\footnotesize template$<$typename T $>$ }\\T {\bfseries get\-Argument} (const std\-::string \&option)}\label{classtools_1_1Args_ab21287411ac81cd228184ee520267851}
+
+\item 
+\hypertarget{classtools_1_1Args_a6247cd94f3bc79ce2a120777caeaea7c}{{\footnotesize template$<$typename T $>$ }\\T {\bfseries get\-Argument} (const std\-::string \&option, T default\-Argument)}\label{classtools_1_1Args_a6247cd94f3bc79ce2a120777caeaea7c}
+
+\item 
+\hypertarget{classtools_1_1Args_a8e805f57e66ed5407fe3762b8409d685}{void {\bfseries help\-Message} (const char $\ast$prog, std\-::ostream \&out=std\-::cout)}\label{classtools_1_1Args_a8e805f57e66ed5407fe3762b8409d685}
+
+\item 
+\hypertarget{classtools_1_1Args_ab9c570cfa217f4694ac801de1e835351}{{\footnotesize template$<$$>$ }\\std\-::string {\bfseries get\-Argument} (const std\-::string \&option)}\label{classtools_1_1Args_ab9c570cfa217f4694ac801de1e835351}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Parses command line arguments 
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{classtools_1_1Args_ae0b38617134893616df504e543ba6e6e}{\index{tools\-::\-Args@{tools\-::\-Args}!Result@{Result}}
+\index{Result@{Result}!tools::Args@{tools\-::\-Args}}
+\subsubsection[{Result}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf tools\-::\-Args\-::\-Result}}}\label{classtools_1_1Args_ae0b38617134893616df504e543ba6e6e}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Help@{Help}!tools\-::\-Args@{tools\-::\-Args}}\index{tools\-::\-Args@{tools\-::\-Args}!Help@{Help}}\item[{\em 
+\hypertarget{classtools_1_1Args_ae0b38617134893616df504e543ba6e6ea3be887fb99c1931485e91a4e0bdcf539}{Help}\label{classtools_1_1Args_ae0b38617134893616df504e543ba6e6ea3be887fb99c1931485e91a4e0bdcf539}
+}]Help message printed \end{description}
+\end{Desc}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classtools_1_1Args_a9d8751d3ca13ddf37d390f42384ba49a}{\index{tools\-::\-Args@{tools\-::\-Args}!parse@{parse}}
+\index{parse@{parse}!tools::Args@{tools\-::\-Args}}
+\subsubsection[{parse}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Result} tools\-::\-Args\-::parse (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$const $\ast$}]{argv, }
+\item[{bool}]{print\-Help = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Args_a9d8751d3ca13ddf37d390f42384ba49a}
+\begin{DoxyReturn}{Returns}
+True of options are successfully parsed, false otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/tools/\hyperlink{args_8hh}{args.\-hh}\end{DoxyCompactItemize}

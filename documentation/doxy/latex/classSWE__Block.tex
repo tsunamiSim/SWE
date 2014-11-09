@@ -1,0 +1,670 @@
+\hypertarget{classSWE__Block}{\section{S\-W\-E\-\_\-\-Block Class Reference}
+\label{classSWE__Block}\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Block.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Block\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.111111cm]{classSWE__Block}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSWE__Block_a46b715c584468a5daa975ec1eb1ab947}{init\-Scenario} (float \-\_\-offset\-X, float \-\_\-offset\-Y, \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario} \&i\-\_\-scenario, const bool i\-\_\-multiple\-Blocks=false)
+\begin{DoxyCompactList}\small\item\em initialise unknowns to a specific scenario\-: \end{DoxyCompactList}\item 
+void \hyperlink{classSWE__Block_a6481ce1c80a219fbefefdcbd13ed3688}{set\-Water\-Height} (float($\ast$\-\_\-h)(float, float))
+\begin{DoxyCompactList}\small\item\em set the water height according to a given function \end{DoxyCompactList}\item 
+void \hyperlink{classSWE__Block_a245332c325fd0ff6a7e9c2d3d9454970}{set\-Discharge} (float($\ast$\-\_\-u)(float, float), float($\ast$\-\_\-v)(float, float))
+\begin{DoxyCompactList}\small\item\em set the momentum/discharge according to the provided functions \end{DoxyCompactList}\item 
+void \hyperlink{classSWE__Block_af2ab34b138a14f2c295849f3b2acc5f3}{set\-Bathymetry} (float \-\_\-b)
+\begin{DoxyCompactList}\small\item\em set the bathymetry to a uniform value \end{DoxyCompactList}\item 
+void \hyperlink{classSWE__Block_ad4214fcfd102a4c167d274ad87d9dd90}{set\-Bathymetry} (float($\ast$\-\_\-b)(float, float))
+\begin{DoxyCompactList}\small\item\em set the bathymetry according to a given function \end{DoxyCompactList}\item 
+const \hyperlink{classFloat2D}{Float2\-D} \& \hyperlink{classSWE__Block_ab1aea4294403c194180c3dc107339fd7}{get\-Water\-Height} ()
+\begin{DoxyCompactList}\small\item\em provides read access to the water height array \end{DoxyCompactList}\item 
+const \hyperlink{classFloat2D}{Float2\-D} \& \hyperlink{classSWE__Block_ae5e766626a1e3fee89625610e2c67f1f}{get\-Discharge\-\_\-hu} ()
+\begin{DoxyCompactList}\small\item\em provides read access to the momentum/discharge array (x-\/component) \end{DoxyCompactList}\item 
+const \hyperlink{classFloat2D}{Float2\-D} \& \hyperlink{classSWE__Block_aece9e8dc3f9b8ab27420e537c76daf7c}{get\-Discharge\-\_\-hv} ()
+\begin{DoxyCompactList}\small\item\em provides read access to the momentum/discharge array (y-\/component) \end{DoxyCompactList}\item 
+const \hyperlink{classFloat2D}{Float2\-D} \& \hyperlink{classSWE__Block_a98e2c99a335d11d09a1489d6873b5615}{get\-Bathymetry} ()
+\begin{DoxyCompactList}\small\item\em provides read access to the bathymetry data \end{DoxyCompactList}\item 
+void \hyperlink{classSWE__Block_aa220b93e43b10f56c72a44d7363645c1}{set\-Boundary\-Type} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} edge, \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} boundtype, const \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D} $\ast$inflow=N\-U\-L\-L)
+\begin{DoxyCompactList}\small\item\em set type of boundary condition for the specified boundary \end{DoxyCompactList}\item 
+virtual \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D} $\ast$ \hyperlink{classSWE__Block_a827ee5c61dc9c1b472ac8b4e1c19956a}{register\-Copy\-Layer} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} edge)
+\begin{DoxyCompactList}\small\item\em return a pointer to proxy class to access the copy layer \end{DoxyCompactList}\item 
+virtual \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D} $\ast$ \hyperlink{classSWE__Block_a9a96c59444645e237d098803009158a3}{grab\-Ghost\-Layer} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} edge)
+\begin{DoxyCompactList}\small\item\em \char`\"{}grab\char`\"{} the ghost layer in order to set these values externally \end{DoxyCompactList}\item 
+void \hyperlink{classSWE__Block_afd17334abee3145e27cc3c9b7b935da2}{set\-Ghost\-Layer} ()
+\begin{DoxyCompactList}\small\item\em set values in ghost layers \end{DoxyCompactList}\item 
+float \hyperlink{classSWE__Block_a74da1eb712e639e47b5b848081b2afad}{get\-Max\-Timestep} ()
+\begin{DoxyCompactList}\small\item\em return maximum size of the time step to ensure stability of the method \end{DoxyCompactList}\item 
+void \hyperlink{classSWE__Block_acf2ff6617cbc0d3d837f0e618039cfe2}{compute\-Max\-Timestep} (const float i\-\_\-dry\-Tol=0.\-1, const float i\-\_\-cfl\-Number=0.\-4)
+\item 
+virtual void \hyperlink{classSWE__Block_add6908e1ceb261a0a1f3ebc262cc5f11}{simulate\-Timestep} (float dt)
+\begin{DoxyCompactList}\small\item\em execute a single time step (with fixed time step size) of the simulation \end{DoxyCompactList}\item 
+virtual float \hyperlink{classSWE__Block_a69784e2be2d09035fb2af9d306768f07}{simulate} (float t\-Start, float t\-End)
+\item 
+virtual void \hyperlink{classSWE__Block_a94dcf2c6ae31731e4586e45628b0c00e}{compute\-Numerical\-Fluxes} ()=0
+\begin{DoxyCompactList}\small\item\em compute the numerical fluxes for each edge of the Cartesian grid \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSWE__Block_ab2b4b659f23d5d45413dece8d2da3298}{update\-Unknowns} (float dt)=0
+\begin{DoxyCompactList}\small\item\em compute the new values of the unknowns h, hu, and hv in all grid cells \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_aa27028fa4bc13bb2d9251b09e0fdfce6}{int \hyperlink{classSWE__Block_aa27028fa4bc13bb2d9251b09e0fdfce6}{get\-Nx} ()}\label{classSWE__Block_aa27028fa4bc13bb2d9251b09e0fdfce6}
+
+\begin{DoxyCompactList}\small\item\em returns \hyperlink{classSWE__Block_a46ec0dc1157997bd255fb39924f1e2bb}{nx}, i.\-e. the grid size in x-\/direction \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_a4b65557b6f73ffb6454dad3dbf86e9ad}{int \hyperlink{classSWE__Block_a4b65557b6f73ffb6454dad3dbf86e9ad}{get\-Ny} ()}\label{classSWE__Block_a4b65557b6f73ffb6454dad3dbf86e9ad}
+
+\begin{DoxyCompactList}\small\item\em returns \hyperlink{classSWE__Block_a3f139630d12423eb4bd7df3e45c7f5da}{ny}, i.\-e. the grid size in y-\/direction \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSWE__Block_a073ca743ff4077a7e456906be704958f}{static const float \hyperlink{classSWE__Block_a073ca743ff4077a7e456906be704958f}{g} = 9.\-81f}\label{classSWE__Block_a073ca743ff4077a7e456906be704958f}
+
+\begin{DoxyCompactList}\small\item\em static variable that holds the gravity constant (g = 9.\-81 m/s$^\wedge$2)\-: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__Block_a114ed3bb6a8a2c482e5f94f768543b82}{S\-W\-E\-\_\-\-Block} (int l\-\_\-nx, int l\-\_\-ny, float l\-\_\-dx, float l\-\_\-dy)
+\item 
+virtual \hyperlink{classSWE__Block_a2ddff1c284663ba514985a3574def1b0}{$\sim$\-S\-W\-E\-\_\-\-Block} ()
+\item 
+void \hyperlink{classSWE__Block_a6beb68dacde9c8479647c25c6a5cbcf5}{set\-Boundary\-Bathymetry} ()
+\item 
+virtual void \hyperlink{classSWE__Block_ae914f9bf6d4ef8f974f9f005114985e7}{synch\-After\-Write} ()
+\item 
+virtual void \hyperlink{classSWE__Block_aa2924833e29a795d8c04fb79bfe794de}{synch\-Water\-Height\-After\-Write} ()
+\item 
+virtual void \hyperlink{classSWE__Block_a94c34030153178c9d94f3f14be174eaf}{synch\-Discharge\-After\-Write} ()
+\item 
+virtual void \hyperlink{classSWE__Block_a4bece8aa90f67e55c40b91aab900febb}{synch\-Bathymetry\-After\-Write} ()
+\item 
+virtual void \hyperlink{classSWE__Block_a4657993ebdb5f0132b077e63790d0b2b}{synch\-Ghost\-Layer\-After\-Write} ()
+\item 
+virtual void \hyperlink{classSWE__Block_a23d936cb9a4367092e5b2515f81fe819}{synch\-Before\-Read} ()
+\item 
+virtual void \hyperlink{classSWE__Block_a07c85681ab29106c3b164db969899ace}{synch\-Water\-Height\-Before\-Read} ()
+\item 
+virtual void \hyperlink{classSWE__Block_a3773dcb194212fb8cb40ab8465575aa1}{synch\-Discharge\-Before\-Read} ()
+\item 
+virtual void \hyperlink{classSWE__Block_a7c8258c6949518ca44f4e9ce89d33b09}{synch\-Bathymetry\-Before\-Read} ()
+\item 
+virtual void \hyperlink{classSWE__Block_a13c90d5a6596336013c41e73c8795f83}{synch\-Copy\-Layer\-Before\-Read} ()
+\item 
+virtual void \hyperlink{classSWE__Block_a379807f0bf932b40aeb42065633fce60}{set\-Boundary\-Conditions} ()
+\begin{DoxyCompactList}\small\item\em set boundary conditions in ghost layers (set boundary conditions) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSWE__Block_a46ec0dc1157997bd255fb39924f1e2bb}{int \hyperlink{classSWE__Block_a46ec0dc1157997bd255fb39924f1e2bb}{nx}}\label{classSWE__Block_a46ec0dc1157997bd255fb39924f1e2bb}
+
+\begin{DoxyCompactList}\small\item\em size of Cartesian arrays in x-\/direction \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_a3f139630d12423eb4bd7df3e45c7f5da}{int \hyperlink{classSWE__Block_a3f139630d12423eb4bd7df3e45c7f5da}{ny}}\label{classSWE__Block_a3f139630d12423eb4bd7df3e45c7f5da}
+
+\begin{DoxyCompactList}\small\item\em size of Cartesian arrays in y-\/direction \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_af2262b1cce6834d939c5a2315dae49b1}{float \hyperlink{classSWE__Block_af2262b1cce6834d939c5a2315dae49b1}{dx}}\label{classSWE__Block_af2262b1cce6834d939c5a2315dae49b1}
+
+\begin{DoxyCompactList}\small\item\em mesh size of the Cartesian grid in x-\/direction \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_a9feb988748d792bca0ca0508e43bd87f}{float \hyperlink{classSWE__Block_a9feb988748d792bca0ca0508e43bd87f}{dy}}\label{classSWE__Block_a9feb988748d792bca0ca0508e43bd87f}
+
+\begin{DoxyCompactList}\small\item\em mesh size of the Cartesian grid in y-\/direction \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_a64a0f8f437f38b5f3b8ec5b4abdb864e}{\hyperlink{classFloat2D}{Float2\-D} \hyperlink{classSWE__Block_a64a0f8f437f38b5f3b8ec5b4abdb864e}{h}}\label{classSWE__Block_a64a0f8f437f38b5f3b8ec5b4abdb864e}
+
+\begin{DoxyCompactList}\small\item\em array that holds the water height for each element \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_aec2c1278fdb23f083216d8d397f26060}{\hyperlink{classFloat2D}{Float2\-D} \hyperlink{classSWE__Block_aec2c1278fdb23f083216d8d397f26060}{hu}}\label{classSWE__Block_aec2c1278fdb23f083216d8d397f26060}
+
+\begin{DoxyCompactList}\small\item\em array that holds the x-\/component of the momentum for each element (water height h multiplied by velocity in x-\/direction) \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_a0897aa3c2d78749f209c95e08196d831}{\hyperlink{classFloat2D}{Float2\-D} \hyperlink{classSWE__Block_a0897aa3c2d78749f209c95e08196d831}{hv}}\label{classSWE__Block_a0897aa3c2d78749f209c95e08196d831}
+
+\begin{DoxyCompactList}\small\item\em array that holds the y-\/component of the momentum for each element (water height h multiplied by velocity in y-\/direction) \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_af7487209129f40b26ea171762754a261}{\hyperlink{classFloat2D}{Float2\-D} \hyperlink{classSWE__Block_af7487209129f40b26ea171762754a261}{b}}\label{classSWE__Block_af7487209129f40b26ea171762754a261}
+
+\begin{DoxyCompactList}\small\item\em array that holds the bathymetry data (sea floor elevation) for each element \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_a0e56d0cad169abd4f5de95d9f96c7a73}{\hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \hyperlink{classSWE__Block_a0e56d0cad169abd4f5de95d9f96c7a73}{boundary} \mbox{[}4\mbox{]}}\label{classSWE__Block_a0e56d0cad169abd4f5de95d9f96c7a73}
+
+\begin{DoxyCompactList}\small\item\em type of boundary conditions at L\-E\-F\-T, R\-I\-G\-H\-T, T\-O\-P, and B\-O\-T\-T\-O\-M boundary \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_a5ea4ea4815af9eb66c51de9ad9b8d148}{const \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D} $\ast$ \hyperlink{classSWE__Block_a5ea4ea4815af9eb66c51de9ad9b8d148}{neighbour} \mbox{[}4\mbox{]}}\label{classSWE__Block_a5ea4ea4815af9eb66c51de9ad9b8d148}
+
+\begin{DoxyCompactList}\small\item\em for C\-O\-N\-N\-E\-C\-T boundaries\-: pointer to connected neighbour block \end{DoxyCompactList}\item 
+float \hyperlink{classSWE__Block_a05cbc9b40e0483bf73dbc2bdeae7dee3}{max\-Timestep}
+\begin{DoxyCompactList}\small\item\em maximum time step allowed to ensure stability of the method \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_aa9e9b1fa797c133c4989e4c54f09b542}{float \hyperlink{classSWE__Block_aa9e9b1fa797c133c4989e4c54f09b542}{offset\-X}}\label{classSWE__Block_aa9e9b1fa797c133c4989e4c54f09b542}
+
+\begin{DoxyCompactList}\small\item\em x-\/coordinate of the origin (left-\/bottom corner) of the Cartesian grid \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_aa05241101a66f0f0548eba6dbbaa1bbb}{float \hyperlink{classSWE__Block_aa05241101a66f0f0548eba6dbbaa1bbb}{offset\-Y}}\label{classSWE__Block_aa05241101a66f0f0548eba6dbbaa1bbb}
+
+\begin{DoxyCompactList}\small\item\em y-\/coordinate of the origin (left-\/bottom corner) of the Cartesian grid \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} is the main data structure to compute our shallow water model on a single Cartesian grid block\-: \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} is an abstract class (and interface) that should be extended by respective implementation classes.
+
+\paragraph*{Cartesian Grid for Discretization\-:}
+
+S\-W\-E\-\_\-\-Blocks uses a regular Cartesian grid of size \hyperlink{classSWE__Block_a46ec0dc1157997bd255fb39924f1e2bb}{nx} by \hyperlink{classSWE__Block_a3f139630d12423eb4bd7df3e45c7f5da}{ny}, where each grid cell carries three unknowns\-:
+\begin{DoxyItemize}
+\item the water level \hyperlink{classSWE__Block_a64a0f8f437f38b5f3b8ec5b4abdb864e}{h}
+\item the momentum components \hyperlink{classSWE__Block_aec2c1278fdb23f083216d8d397f26060}{hu} and \hyperlink{classSWE__Block_a0897aa3c2d78749f209c95e08196d831}{hv} (in x-\/ and y-\/ direction, resp.)
+\item the bathymetry \hyperlink{classSWE__Block_af7487209129f40b26ea171762754a261}{b}
+\end{DoxyItemize}
+
+Each of the components is stored as a 2\-D array, implemented as a \hyperlink{classFloat2D}{Float2\-D} object, and are defined on grid indices \mbox{[}0,..,\hyperlink{classSWE__Block_a46ec0dc1157997bd255fb39924f1e2bb}{nx}+1\mbox{]}$\ast$\mbox{[}0,..,\hyperlink{classSWE__Block_a3f139630d12423eb4bd7df3e45c7f5da}{ny}+1\mbox{]}. The computational domain is indexed with \mbox{[}1,..,\hyperlink{classSWE__Block_a46ec0dc1157997bd255fb39924f1e2bb}{nx}\mbox{]}$\ast$\mbox{[}1,..,\hyperlink{classSWE__Block_a3f139630d12423eb4bd7df3e45c7f5da}{ny}\mbox{]}.
+
+The mesh sizes of the grid in x-\/ and y-\/direction are stored in static variables \hyperlink{classSWE__Block_af2262b1cce6834d939c5a2315dae49b1}{dx} and \hyperlink{classSWE__Block_a9feb988748d792bca0ca0508e43bd87f}{dy}. The position of the Cartesian grid in space is stored via the coordinates of the left-\/bottom corner of the grid, in the variables \hyperlink{classSWE__Block_aa9e9b1fa797c133c4989e4c54f09b542}{offset\-X} and \hyperlink{classSWE__Block_aa05241101a66f0f0548eba6dbbaa1bbb}{offset\-Y}.
+
+\paragraph*{Ghost layers\-:}
+
+To implement the behaviour of the fluid at boundaries and for using multiple block in serial and parallel settings, \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} adds an additional layer of so-\/called ghost cells to the Cartesian grid, as illustrated in the following figure. Cells in the ghost layer have indices 0 or \hyperlink{classSWE__Block_a46ec0dc1157997bd255fb39924f1e2bb}{nx}+1 / \hyperlink{classSWE__Block_a3f139630d12423eb4bd7df3e45c7f5da}{ny}+1.
+
+
+
+\paragraph*{Memory Model\-:}
+
+The variables \hyperlink{classSWE__Block_a64a0f8f437f38b5f3b8ec5b4abdb864e}{h}, \hyperlink{classSWE__Block_aec2c1278fdb23f083216d8d397f26060}{hu}, \hyperlink{classSWE__Block_a0897aa3c2d78749f209c95e08196d831}{hv} for water height and momentum will typically be updated by classes derived from \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block}. However, it is not assumed that such and updated will be performed in every time step. Instead, subclasses are welcome to update \hyperlink{classSWE__Block_a64a0f8f437f38b5f3b8ec5b4abdb864e}{h}, \hyperlink{classSWE__Block_aec2c1278fdb23f083216d8d397f26060}{hu}, and \hyperlink{classSWE__Block_a0897aa3c2d78749f209c95e08196d831}{hv} in a lazy fashion, and keep data in faster memory (incl. local memory of acceleration hardware, such as G\-P\-G\-P\-Us), instead.
+
+It is assumed that the bathymetry data \hyperlink{classSWE__Block_af7487209129f40b26ea171762754a261}{b} is not changed during the algorithm (up to the exceptions mentioned in the following).
+
+To force a synchronization of the respective data structures, the following methods are provided as part of \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block}\-:
+\begin{DoxyItemize}
+\item \hyperlink{classSWE__Block_ae914f9bf6d4ef8f974f9f005114985e7}{synch\-After\-Write()} to synchronize \hyperlink{classSWE__Block_a64a0f8f437f38b5f3b8ec5b4abdb864e}{h}, \hyperlink{classSWE__Block_aec2c1278fdb23f083216d8d397f26060}{hu}, \hyperlink{classSWE__Block_a0897aa3c2d78749f209c95e08196d831}{hv}, and \hyperlink{classSWE__Block_af7487209129f40b26ea171762754a261}{b} after an external update (reading a file, e.\-g.);
+\item \hyperlink{classSWE__Block_aa2924833e29a795d8c04fb79bfe794de}{synch\-Water\-Height\-After\-Write()}, \hyperlink{classSWE__Block_a94c34030153178c9d94f3f14be174eaf}{synch\-Discharge\-After\-Write()}, \hyperlink{classSWE__Block_a4bece8aa90f67e55c40b91aab900febb}{synch\-Bathymetry\-After\-Write()}\-: to synchronize only \hyperlink{classSWE__Block_a64a0f8f437f38b5f3b8ec5b4abdb864e}{h} or momentum (\hyperlink{classSWE__Block_aec2c1278fdb23f083216d8d397f26060}{hu} and \hyperlink{classSWE__Block_a0897aa3c2d78749f209c95e08196d831}{hv}) or bathymetry \hyperlink{classSWE__Block_af7487209129f40b26ea171762754a261}{b};
+\item \hyperlink{classSWE__Block_a4657993ebdb5f0132b077e63790d0b2b}{synch\-Ghost\-Layer\-After\-Write()} to synchronize only the ghost layers
+\item \hyperlink{classSWE__Block_a23d936cb9a4367092e5b2515f81fe819}{synch\-Before\-Read()} to synchronize \hyperlink{classSWE__Block_a64a0f8f437f38b5f3b8ec5b4abdb864e}{h}, \hyperlink{classSWE__Block_aec2c1278fdb23f083216d8d397f26060}{hu}, \hyperlink{classSWE__Block_a0897aa3c2d78749f209c95e08196d831}{hv}, and \hyperlink{classSWE__Block_af7487209129f40b26ea171762754a261}{b} before an output of the variables (writing a visualization file, e.\-g.)
+\item \hyperlink{classSWE__Block_a07c85681ab29106c3b164db969899ace}{synch\-Water\-Height\-Before\-Read()}, \hyperlink{classSWE__Block_a3773dcb194212fb8cb40ab8465575aa1}{synch\-Discharge\-Before\-Read()}, \hyperlink{classSWE__Block_a7c8258c6949518ca44f4e9ce89d33b09}{synch\-Bathymetry\-Before\-Read()}\-: as \hyperlink{classSWE__Block_a23d936cb9a4367092e5b2515f81fe819}{synch\-Before\-Read()}, but only for the specified variables
+\item \hyperlink{classSWE__Block_a13c90d5a6596336013c41e73c8795f83}{synch\-Copy\-Layer\-Before\-Read()}\-: synchronizes the copy layer only (i.\-e., a layer that is to be replicated in a neighbouring \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block}.
+\end{DoxyItemize}
+
+\paragraph*{Derived Classes}
+
+As \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} just provides an abstract base class together with the most important data structures, the implementation of concrete models is the job of respective derived classes (see the class diagram at the top of this page). Similar, parallel implementations that are based on a specific parallel programming model (such as Open\-M\-P) or parallel architecture (such as G\-P\-U/\-C\-U\-D\-A) should form subclasses of their own. Please refer to the documentation of these classes for more details on the model and on the parallelisation approach. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__Block_a114ed3bb6a8a2c482e5f94f768543b82}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}}
+\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{S\-W\-E\-\_\-\-Block}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Block\-::\-S\-W\-E\-\_\-\-Block (
+\begin{DoxyParamCaption}
+\item[{int}]{l\-\_\-nx, }
+\item[{int}]{l\-\_\-ny, }
+\item[{float}]{l\-\_\-dx, }
+\item[{float}]{l\-\_\-dy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSWE__Block_a114ed3bb6a8a2c482e5f94f768543b82}
+Constructor\-: allocate variables for simulation
+
+unknowns h (water height), hu,hv (discharge in x-\/ and y-\/direction), and b (bathymetry) are defined on grid indices \mbox{[}0,..,nx+1\mbox{]}$\ast$\mbox{[}0,..,ny+1\mbox{]} -\/$>$ computational domain is \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} -\/$>$ plus ghost cell layer
+
+The constructor is protected\-: no instances of \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} can be generated. \hypertarget{classSWE__Block_a2ddff1c284663ba514985a3574def1b0}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!$\sim$\-S\-W\-E\-\_\-\-Block@{$\sim$\-S\-W\-E\-\_\-\-Block}}
+\index{$\sim$\-S\-W\-E\-\_\-\-Block@{$\sim$\-S\-W\-E\-\_\-\-Block}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{$\sim$\-S\-W\-E\-\_\-\-Block}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Block\-::$\sim$\-S\-W\-E\-\_\-\-Block (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_a2ddff1c284663ba514985a3574def1b0}
+Destructor\-: de-\/allocate all variables 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__Block_acf2ff6617cbc0d3d837f0e618039cfe2}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!compute\-Max\-Timestep@{compute\-Max\-Timestep}}
+\index{compute\-Max\-Timestep@{compute\-Max\-Timestep}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{compute\-Max\-Timestep}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::compute\-Max\-Timestep (
+\begin{DoxyParamCaption}
+\item[{const float}]{i\-\_\-dry\-Tol = {\ttfamily 0.1}, }
+\item[{const float}]{i\-\_\-cfl\-Number = {\ttfamily 0.4}}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_acf2ff6617cbc0d3d837f0e618039cfe2}
+Compute the largest allowed time step for the current grid block (reference implementation) depending on the current values of variables h, hu, and hv, and store this time step size in member variable max\-Timestep.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-dry\-Tol} & dry tolerance (dry cells do not affect the time step). \\
+\hline
+{\em i\-\_\-cfl\-Number} & C\-F\-L number of the used method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__Block_a94dcf2c6ae31731e4586e45628b0c00e}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}}
+\index{compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{compute\-Numerical\-Fluxes}]{\setlength{\rightskip}{0pt plus 5cm}virtual void S\-W\-E\-\_\-\-Block\-::compute\-Numerical\-Fluxes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classSWE__Block_a94dcf2c6ae31731e4586e45628b0c00e}
+
+
+compute the numerical fluxes for each edge of the Cartesian grid 
+
+The computation of fluxes strongly depends on the chosen numerical method. Hence, this purely virtual function has to be implemented in the respective derived classes. 
+
+Implemented in \hyperlink{classSWE__WavePropagationBlockSIMD_a4aa15050ec1db113f54fff06539a900f}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}, \hyperlink{classSWE__DimensionalSplitting_a84759f8fbbbfe1e46613375515826f0f}{S\-W\-E\-\_\-\-Dimensional\-Splitting}, \hyperlink{classSWE__WavePropagationBlock_a5f6335a38fb3cf38623326959f06baf4}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block}, \hyperlink{classSWE__WavePropagationBlockCuda_a8a89bf61b9fc4433652f400ca8e564ed}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}, \hyperlink{classSWE__WaveAccumulationBlock_acac0b73f22b256bc91a58ff8d0831e5d}{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}, \hyperlink{classSWE__RusanovBlock_a78cdefa510cd2d88ca4e213f75b9b10b}{S\-W\-E\-\_\-\-Rusanov\-Block}, and \hyperlink{classSWE__RusanovBlockCUDA_a85ec49606ab69ded8cd6f39aa4be1505}{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_a98e2c99a335d11d09a1489d6873b5615}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!get\-Bathymetry@{get\-Bathymetry}}
+\index{get\-Bathymetry@{get\-Bathymetry}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{get\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Float2\-D} \& S\-W\-E\-\_\-\-Block\-::get\-Bathymetry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_a98e2c99a335d11d09a1489d6873b5615}
+
+
+provides read access to the bathymetry data 
+
+return reference to bathymetry unknown b \hypertarget{classSWE__Block_ae5e766626a1e3fee89625610e2c67f1f}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!get\-Discharge\-\_\-hu@{get\-Discharge\-\_\-hu}}
+\index{get\-Discharge\-\_\-hu@{get\-Discharge\-\_\-hu}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{get\-Discharge\-\_\-hu}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Float2\-D} \& S\-W\-E\-\_\-\-Block\-::get\-Discharge\-\_\-hu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_ae5e766626a1e3fee89625610e2c67f1f}
+
+
+provides read access to the momentum/discharge array (x-\/component) 
+
+return reference to discharge unknown hu \hypertarget{classSWE__Block_aece9e8dc3f9b8ab27420e537c76daf7c}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!get\-Discharge\-\_\-hv@{get\-Discharge\-\_\-hv}}
+\index{get\-Discharge\-\_\-hv@{get\-Discharge\-\_\-hv}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{get\-Discharge\-\_\-hv}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Float2\-D} \& S\-W\-E\-\_\-\-Block\-::get\-Discharge\-\_\-hv (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_aece9e8dc3f9b8ab27420e537c76daf7c}
+
+
+provides read access to the momentum/discharge array (y-\/component) 
+
+return reference to discharge unknown hv \hypertarget{classSWE__Block_a74da1eb712e639e47b5b848081b2afad}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!get\-Max\-Timestep@{get\-Max\-Timestep}}
+\index{get\-Max\-Timestep@{get\-Max\-Timestep}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{get\-Max\-Timestep}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Block\-::get\-Max\-Timestep (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__Block_a74da1eb712e639e47b5b848081b2afad}
+
+
+return maximum size of the time step to ensure stability of the method 
+
+\begin{DoxyReturn}{Returns}
+current value of the member variable \hyperlink{classSWE__Block_a05cbc9b40e0483bf73dbc2bdeae7dee3}{max\-Timestep} 
+\end{DoxyReturn}
+\hypertarget{classSWE__Block_ab1aea4294403c194180c3dc107339fd7}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!get\-Water\-Height@{get\-Water\-Height}}
+\index{get\-Water\-Height@{get\-Water\-Height}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{get\-Water\-Height}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Float2\-D} \& S\-W\-E\-\_\-\-Block\-::get\-Water\-Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_ab1aea4294403c194180c3dc107339fd7}
+
+
+provides read access to the water height array 
+
+Restores values for h, v, and u from file data 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-b} & array holding b-\/values in sequence return reference to water height unknown h \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__Block_a9a96c59444645e237d098803009158a3}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!grab\-Ghost\-Layer@{grab\-Ghost\-Layer}}
+\index{grab\-Ghost\-Layer@{grab\-Ghost\-Layer}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{grab\-Ghost\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf S\-W\-E\-\_\-\-Block1\-D} $\ast$ S\-W\-E\-\_\-\-Block\-::grab\-Ghost\-Layer (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{edge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__Block_a9a96c59444645e237d098803009158a3}
+
+
+\char`\"{}grab\char`\"{} the ghost layer in order to set these values externally 
+
+\char`\"{}grab\char`\"{} the ghost layer at the specific boundary in order to set boundary values in this ghost layer externally. The boundary conditions at the respective ghost layer is set to P\-A\-S\-S\-I\-V\-E, such that the grabbing program component is responsible to provide correct values in the ghost layer, for example by receiving data from a remote copy layer via M\-P\-I communication. 
+\begin{DoxyParams}{Parameters}
+{\em specified} & edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D} object that contains row variables h, hu, and hv 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_ab8671269d89d544a333a0b8c0fa72f37}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_a46b715c584468a5daa975ec1eb1ab947}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!init\-Scenario@{init\-Scenario}}
+\index{init\-Scenario@{init\-Scenario}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{init\-Scenario}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::init\-Scenario (
+\begin{DoxyParamCaption}
+\item[{float}]{\-\_\-offset\-X, }
+\item[{float}]{\-\_\-offset\-Y, }
+\item[{{\bf S\-W\-E\-\_\-\-Scenario} \&}]{i\-\_\-scenario, }
+\item[{const bool}]{i\-\_\-multiple\-Blocks = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_a46b715c584468a5daa975ec1eb1ab947}
+
+
+initialise unknowns to a specific scenario\-: 
+
+Initializes the unknowns and bathymetry in all grid cells according to the given \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+In the case of multiple S\-W\-E\-\_\-\-Blocks at this point, it is not clear how the boundary conditions should be set. This is because an isolated \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} doesn't have any in information about the grid. Therefore the calling routine, which has the information about multiple blocks, has to take care about setting the right boundary conditions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-scenario} & scenario, which is used during the setup. \\
+\hline
+{\em i\-\_\-multiple\-Blocks} & are the multiple S\-W\-E\-\_\-blocks? \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__Block_a827ee5c61dc9c1b472ac8b4e1c19956a}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!register\-Copy\-Layer@{register\-Copy\-Layer}}
+\index{register\-Copy\-Layer@{register\-Copy\-Layer}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{register\-Copy\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf S\-W\-E\-\_\-\-Block1\-D} $\ast$ S\-W\-E\-\_\-\-Block\-::register\-Copy\-Layer (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{edge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__Block_a827ee5c61dc9c1b472ac8b4e1c19956a}
+
+
+return a pointer to proxy class to access the copy layer 
+
+register the row or column layer next to a boundary as a \char`\"{}copy layer\char`\"{}, from which values will be copied into the ghost layer or a neighbour; \begin{DoxyReturn}{Returns}
+a \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D} object that contains row variables h, hu, and hv 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_a22782766fc679ac14e9ba30a4efc1688}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_af2ab34b138a14f2c295849f3b2acc5f3}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Bathymetry@{set\-Bathymetry}}
+\index{set\-Bathymetry@{set\-Bathymetry}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{set\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Bathymetry (
+\begin{DoxyParamCaption}
+\item[{float}]{\-\_\-b}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_af2ab34b138a14f2c295849f3b2acc5f3}
+
+
+set the bathymetry to a uniform value 
+
+set Bathymetry b in all grid cells (incl. ghost/boundary layers) to a uniform value bathymetry source terms are re-\/computed \hypertarget{classSWE__Block_ad4214fcfd102a4c167d274ad87d9dd90}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Bathymetry@{set\-Bathymetry}}
+\index{set\-Bathymetry@{set\-Bathymetry}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{set\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Bathymetry (
+\begin{DoxyParamCaption}
+\item[{float($\ast$)(float, float)}]{\-\_\-b}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_ad4214fcfd102a4c167d274ad87d9dd90}
+
+
+set the bathymetry according to a given function 
+
+set Bathymetry b in all grid cells (incl. ghost/boundary layers) using the specified bathymetry function; bathymetry source terms are re-\/computed \hypertarget{classSWE__Block_a6beb68dacde9c8479647c25c6a5cbcf5}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Boundary\-Bathymetry@{set\-Boundary\-Bathymetry}}
+\index{set\-Boundary\-Bathymetry@{set\-Boundary\-Bathymetry}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{set\-Boundary\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Boundary\-Bathymetry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSWE__Block_a6beb68dacde9c8479647c25c6a5cbcf5}
+Sets the bathymetry on O\-U\-T\-F\-L\-O\-W or W\-A\-L\-L boundaries. Should be called very time a boundary is changed to a O\-U\-T\-F\-L\-O\-W or W\-A\-L\-L boundary {\bfseries or} the bathymetry changes. \hypertarget{classSWE__Block_a379807f0bf932b40aeb42065633fce60}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Boundary\-Conditions@{set\-Boundary\-Conditions}}
+\index{set\-Boundary\-Conditions@{set\-Boundary\-Conditions}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{set\-Boundary\-Conditions}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Boundary\-Conditions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_a379807f0bf932b40aeb42065633fce60}
+
+
+set boundary conditions in ghost layers (set boundary conditions) 
+
+set the values of all ghost cells depending on the specifed boundary conditions
+\begin{DoxyItemize}
+\item set boundary conditions for typs W\-A\-L\-L and O\-U\-T\-F\-L\-O\-W
+\item derived classes need to transfer ghost layers 
+\end{DoxyItemize}
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_a7cf66067cb7f023aadbd910051d389c8}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_aa220b93e43b10f56c72a44d7363645c1}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Boundary\-Type@{set\-Boundary\-Type}}
+\index{set\-Boundary\-Type@{set\-Boundary\-Type}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{set\-Boundary\-Type}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Boundary\-Type (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{edge, }
+\item[{{\bf Boundary\-Type}}]{boundtype, }
+\item[{const {\bf S\-W\-E\-\_\-\-Block1\-D} $\ast$}]{i\-\_\-inflow = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_aa220b93e43b10f56c72a44d7363645c1}
+
+
+set type of boundary condition for the specified boundary 
+
+Set the boundary type for specific block boundary.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-edge} & location of the edge relative to the S\-W\-E\-\_\-block. \\
+\hline
+{\em i\-\_\-boundary\-Type} & type of the boundary condition. \\
+\hline
+{\em i\-\_\-inflow} & pointer to an \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D}, which specifies the inflow (should be N\-U\-L\-L for W\-A\-L\-L or O\-U\-T\-F\-L\-O\-W boundary) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__Block_a245332c325fd0ff6a7e9c2d3d9454970}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Discharge@{set\-Discharge}}
+\index{set\-Discharge@{set\-Discharge}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{set\-Discharge}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Discharge (
+\begin{DoxyParamCaption}
+\item[{float($\ast$)(float, float)}]{\-\_\-u, }
+\item[{float($\ast$)(float, float)}]{\-\_\-v}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_a245332c325fd0ff6a7e9c2d3d9454970}
+
+
+set the momentum/discharge according to the provided functions 
+
+set discharge in all interior grid cells (i.\-e. except ghost layer) to values specified by parameter functions Note\-: unknowns hu and hv represent momentum, while parameters u and v are velocities! \hypertarget{classSWE__Block_afd17334abee3145e27cc3c9b7b935da2}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Ghost\-Layer@{set\-Ghost\-Layer}}
+\index{set\-Ghost\-Layer@{set\-Ghost\-Layer}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{set\-Ghost\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Ghost\-Layer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_afd17334abee3145e27cc3c9b7b935da2}
+
+
+set values in ghost layers 
+
+set the values of all ghost cells depending on the specifed boundary conditions; if the ghost layer replicates the variables of a remote \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block}, the values are copied \hypertarget{classSWE__Block_a6481ce1c80a219fbefefdcbd13ed3688}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Water\-Height@{set\-Water\-Height}}
+\index{set\-Water\-Height@{set\-Water\-Height}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{set\-Water\-Height}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Water\-Height (
+\begin{DoxyParamCaption}
+\item[{float($\ast$)(float, float)}]{\-\_\-h}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_a6481ce1c80a219fbefefdcbd13ed3688}
+
+
+set the water height according to a given function 
+
+set water height h in all interior grid cells (i.\-e. except ghost layer) to values specified by parameter function \-\_\-h \hypertarget{classSWE__Block_a69784e2be2d09035fb2af9d306768f07}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!simulate@{simulate}}
+\index{simulate@{simulate}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{simulate}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Block\-::simulate (
+\begin{DoxyParamCaption}
+\item[{float}]{i\-\_\-t\-Start, }
+\item[{float}]{i\-\_\-t\-End}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__Block_a69784e2be2d09035fb2af9d306768f07}
+perform the simulation starting with simulation time t\-Start, until simulation time t\-End is reached
+
+simulate implements the main simulation loop between two checkpoints; Note\-: this implementation can only be used, if you only use a single \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} and only apply simple boundary conditions! In particular, \hyperlink{classSWE__Block_a69784e2be2d09035fb2af9d306768f07}{S\-W\-E\-\_\-\-Block\-::simulate} can not trigger calls to exchange values of copy and ghost layers between blocks! 
+\begin{DoxyParams}{Parameters}
+{\em t\-Start} & time where the simulation is started \\
+\hline
+{\em t\-End} & time of the next checkpoint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+actual end time reached 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classSWE__WavePropagationBlockSIMD_a6c54dbcd43a77b46bae4de36b8d16af7}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}, \hyperlink{classSWE__WavePropagationBlockCuda_a8c0fbb70ad29f3775d35978bf2d5b396}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}, \hyperlink{classSWE__RusanovBlockCUDA_a77719262dc1789adea136ed50f17bb58}{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}, and \hyperlink{classSWE__RusanovBlock_a645322106b3e5b6f0cca077611ad2159}{S\-W\-E\-\_\-\-Rusanov\-Block}.
+
+\hypertarget{classSWE__Block_add6908e1ceb261a0a1f3ebc262cc5f11}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!simulate\-Timestep@{simulate\-Timestep}}
+\index{simulate\-Timestep@{simulate\-Timestep}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{simulate\-Timestep}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::simulate\-Timestep (
+\begin{DoxyParamCaption}
+\item[{float}]{dt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__Block_add6908e1ceb261a0a1f3ebc262cc5f11}
+
+
+execute a single time step (with fixed time step size) of the simulation 
+
+Executes a single timestep with fixed time step size
+\begin{DoxyItemize}
+\item compute net updates for every edge
+\item update cell values with the net updates
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & time step width of the update \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{classSWE__WavePropagationBlockSIMD_a99c288632c402eaf7dff76f03624872a}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}, \hyperlink{classSWE__WavePropagationBlockCuda_ab401d17ea7a60ff30219076bc85dc591}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}, \hyperlink{classSWE__RusanovBlockCUDA_a238b383e0458babb52e3dd5b5784bc48}{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}, and \hyperlink{classSWE__RusanovBlock_ada062db4f54700011d50378b0045830a}{S\-W\-E\-\_\-\-Rusanov\-Block}.
+
+\hypertarget{classSWE__Block_ae914f9bf6d4ef8f974f9f005114985e7}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!synch\-After\-Write@{synch\-After\-Write}}
+\index{synch\-After\-Write@{synch\-After\-Write}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{synch\-After\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::synch\-After\-Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_ae914f9bf6d4ef8f974f9f005114985e7}
+Update all temporary and non-\/local (for heterogeneous computing) variables after an external update of the main variables h, hu, hv, and b. 
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_a0876ef53f667c142d7d4dd9d01cfd2dc}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_a4bece8aa90f67e55c40b91aab900febb}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!synch\-Bathymetry\-After\-Write@{synch\-Bathymetry\-After\-Write}}
+\index{synch\-Bathymetry\-After\-Write@{synch\-Bathymetry\-After\-Write}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{synch\-Bathymetry\-After\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::synch\-Bathymetry\-After\-Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_a4bece8aa90f67e55c40b91aab900febb}
+Update temporary and non-\/local (for heterogeneous computing) variables after an external update of the bathymetry b 
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_aef79c805fec82b4d439642a758a8e95f}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_a7c8258c6949518ca44f4e9ce89d33b09}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!synch\-Bathymetry\-Before\-Read@{synch\-Bathymetry\-Before\-Read}}
+\index{synch\-Bathymetry\-Before\-Read@{synch\-Bathymetry\-Before\-Read}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{synch\-Bathymetry\-Before\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::synch\-Bathymetry\-Before\-Read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_a7c8258c6949518ca44f4e9ce89d33b09}
+Update temporary and non-\/local (for heterogeneous computing) variables before an external access to the bathymetry b 
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_a3edd34c86eb0837d09f24cbf56a16e69}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_a23d936cb9a4367092e5b2515f81fe819}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!synch\-Before\-Read@{synch\-Before\-Read}}
+\index{synch\-Before\-Read@{synch\-Before\-Read}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{synch\-Before\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::synch\-Before\-Read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_a23d936cb9a4367092e5b2515f81fe819}
+Update all temporary and non-\/local (for heterogeneous computing) variables before an external access to the main variables h, hu, hv, and b. 
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_a9ba846c6fa27734412d9fdfaa3823de2}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_a13c90d5a6596336013c41e73c8795f83}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!synch\-Copy\-Layer\-Before\-Read@{synch\-Copy\-Layer\-Before\-Read}}
+\index{synch\-Copy\-Layer\-Before\-Read@{synch\-Copy\-Layer\-Before\-Read}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{synch\-Copy\-Layer\-Before\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::synch\-Copy\-Layer\-Before\-Read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_a13c90d5a6596336013c41e73c8795f83}
+Update (for heterogeneous computing) variables in copy layers before an external access to the unknowns 
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_a41d117ca8fe9a8c5509369edd026fd63}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_a94c34030153178c9d94f3f14be174eaf}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!synch\-Discharge\-After\-Write@{synch\-Discharge\-After\-Write}}
+\index{synch\-Discharge\-After\-Write@{synch\-Discharge\-After\-Write}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{synch\-Discharge\-After\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::synch\-Discharge\-After\-Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_a94c34030153178c9d94f3f14be174eaf}
+Update temporary and non-\/local (for heterogeneous computing) variables after an external update of the discharge variables hu and hv 
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_a71b1d0b2e6959c298dfccf6a36264e13}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_a3773dcb194212fb8cb40ab8465575aa1}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!synch\-Discharge\-Before\-Read@{synch\-Discharge\-Before\-Read}}
+\index{synch\-Discharge\-Before\-Read@{synch\-Discharge\-Before\-Read}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{synch\-Discharge\-Before\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::synch\-Discharge\-Before\-Read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_a3773dcb194212fb8cb40ab8465575aa1}
+Update temporary and non-\/local (for heterogeneous computing) variables before an external access to the discharge variables hu and hv 
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_adea7daf7794147d73d9465d37b37055e}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_a4657993ebdb5f0132b077e63790d0b2b}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!synch\-Ghost\-Layer\-After\-Write@{synch\-Ghost\-Layer\-After\-Write}}
+\index{synch\-Ghost\-Layer\-After\-Write@{synch\-Ghost\-Layer\-After\-Write}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{synch\-Ghost\-Layer\-After\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::synch\-Ghost\-Layer\-After\-Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_a4657993ebdb5f0132b077e63790d0b2b}
+Update the ghost layers (only for C\-O\-N\-N\-E\-C\-T and P\-A\-S\-S\-I\-V\-E boundary conditions) after an external update of the main variables h, hu, hv, and b in the ghost layer. 
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_ab9cc911c9d67bcab9ecb2818a056930b}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_aa2924833e29a795d8c04fb79bfe794de}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!synch\-Water\-Height\-After\-Write@{synch\-Water\-Height\-After\-Write}}
+\index{synch\-Water\-Height\-After\-Write@{synch\-Water\-Height\-After\-Write}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{synch\-Water\-Height\-After\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::synch\-Water\-Height\-After\-Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_aa2924833e29a795d8c04fb79bfe794de}
+Update temporary and non-\/local (for heterogeneous computing) variables after an external update of the water height h 
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_ae54054af51e68415a68f3a1c7b25c139}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_a07c85681ab29106c3b164db969899ace}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!synch\-Water\-Height\-Before\-Read@{synch\-Water\-Height\-Before\-Read}}
+\index{synch\-Water\-Height\-Before\-Read@{synch\-Water\-Height\-Before\-Read}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{synch\-Water\-Height\-Before\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::synch\-Water\-Height\-Before\-Read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__Block_a07c85681ab29106c3b164db969899ace}
+Update temporary and non-\/local (for heterogeneous computing) variables before an external access to the water height h 
+
+Reimplemented in \hyperlink{classSWE__BlockCUDA_adfd3185b108632b2506558063714d7df}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}.
+
+\hypertarget{classSWE__Block_ab2b4b659f23d5d45413dece8d2da3298}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!update\-Unknowns@{update\-Unknowns}}
+\index{update\-Unknowns@{update\-Unknowns}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{update\-Unknowns}]{\setlength{\rightskip}{0pt plus 5cm}virtual void S\-W\-E\-\_\-\-Block\-::update\-Unknowns (
+\begin{DoxyParamCaption}
+\item[{float}]{dt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classSWE__Block_ab2b4b659f23d5d45413dece8d2da3298}
+
+
+compute the new values of the unknowns h, hu, and hv in all grid cells 
+
+based on the numerical fluxes (computed by compute\-Numerical\-Fluxes) and the specified time step size dt, an Euler time step is executed. As the computational fluxes will depend on the numerical method, this purely virtual function has to be implemented separately for each specific numerical model (and parallelisation approach). 
+\begin{DoxyParams}{Parameters}
+{\em dt} & size of the time step \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classSWE__DimensionalSplitting_af74b527ff9ca7727442db92d2e438531}{S\-W\-E\-\_\-\-Dimensional\-Splitting}, \hyperlink{classSWE__WavePropagationBlockSIMD_a2596238868efd3cdd453d9ac2de15997}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}, \hyperlink{classSWE__WavePropagationBlock_a1b1422472a36602b34180e4ed27f6d8c}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block}, \hyperlink{classSWE__WavePropagationBlockCuda_a4163045a47a73515841e754ca3859fc5}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}, \hyperlink{classSWE__WaveAccumulationBlock_a67b78723e81aec6e661b3710e6c41b43}{S\-W\-E\-\_\-\-Wave\-Accumulation\-Block}, \hyperlink{classSWE__RusanovBlock_a2980aa21030ba8fc607001ad817d7454}{S\-W\-E\-\_\-\-Rusanov\-Block}, and \hyperlink{classSWE__RusanovBlockCUDA_a0a18726a733492218423eed37a7ab406}{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classSWE__Block_a05cbc9b40e0483bf73dbc2bdeae7dee3}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!max\-Timestep@{max\-Timestep}}
+\index{max\-Timestep@{max\-Timestep}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{max\-Timestep}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Block\-::max\-Timestep\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSWE__Block_a05cbc9b40e0483bf73dbc2bdeae7dee3}
+
+
+maximum time step allowed to ensure stability of the method 
+
+max\-Timestep can be updated as part of the methods compute\-Numerical\-Fluxes and update\-Unknowns (depending on the numerical method) 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/\hyperlink{SWE__Block_8hh}{S\-W\-E\-\_\-\-Block.\-hh}\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/\hyperlink{SWE__Block_8cpp}{S\-W\-E\-\_\-\-Block.\-cpp}\end{DoxyCompactItemize}

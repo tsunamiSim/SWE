@@ -1,0 +1,185 @@
+\hypertarget{classSWE__WavePropagationBlockSIMD}{\section{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D Class Reference}
+\label{classSWE__WavePropagationBlockSIMD}\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSWE__WavePropagationBlockSIMD}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__WavePropagationBlockSIMD_a57dc616f1aa84f33a9c75ecb116b3228}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D} (int l\-\_\-nx, int l\-\_\-ny, float l\-\_\-dx, float l\-\_\-dy)
+\item 
+virtual void \hyperlink{classSWE__WavePropagationBlockSIMD_a99c288632c402eaf7dff76f03624872a}{simulate\-Timestep} (float dt)
+\item 
+void \hyperlink{classSWE__WavePropagationBlockSIMD_a4aa15050ec1db113f54fff06539a900f}{compute\-Numerical\-Fluxes} ()
+\item 
+void \hyperlink{classSWE__WavePropagationBlockSIMD_a2596238868efd3cdd453d9ac2de15997}{update\-Unknowns} (float dt)
+\item 
+float \hyperlink{classSWE__WavePropagationBlockSIMD_a6c54dbcd43a77b46bae4de36b8d16af7}{simulate} (float i\-\_\-t\-Start, float i\-\_\-t\-End)
+\item 
+virtual \hyperlink{classSWE__WavePropagationBlockSIMD_aee73625ee731614849f398ea392137a7}{$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classSWE__WavePropagationBlockSIMD}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D} is an implementation of the \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} abstract class. It uses a wave propagation solver which is defined with the pre-\/compiler flag W\-A\-V\-E\-\_\-\-P\-R\-O\-P\-A\-G\-A\-T\-I\-O\-N\-\_\-\-S\-O\-L\-V\-E\-R (see above).
+
+Possible wave propagation solvers are\-: F-\/\-Wave, Apprximate Augmented Riemann, Hybrid (f-\/wave + augmented). (details can be found in the corresponding source files) 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__WavePropagationBlockSIMD_a57dc616f1aa84f33a9c75ecb116b3228}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}!S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}}
+\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}!SWE_WavePropagationBlockSIMD@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}}
+\subsubsection[{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D\-::\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D (
+\begin{DoxyParamCaption}
+\item[{int}]{l\-\_\-nx, }
+\item[{int}]{l\-\_\-ny, }
+\item[{float}]{l\-\_\-dx, }
+\item[{float}]{l\-\_\-dy}
+\end{DoxyParamCaption}
+)}}\label{classSWE__WavePropagationBlockSIMD_a57dc616f1aa84f33a9c75ecb116b3228}
+Constructor of a \hyperlink{classSWE__WavePropagationBlockSIMD}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}.
+
+Allocates the variables for the simulation\-: unknowns h,hu,hv,b are defined on grid indices \mbox{[}0,..,nx+1\mbox{]}$\ast$\mbox{[}0,..,ny+1\mbox{]} (-\/$>$ Abstract class \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block}) -\/$>$ computational domain is \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} -\/$>$ plus ghost cell layer
+
+net-\/updates are defined for edges with indices \mbox{[}0,..,nx\mbox{]}$\ast$\mbox{[}0,..,ny-\/1\mbox{]} or \mbox{[}0,..,nx-\/1\mbox{]}$\ast$\href{for horizontal/vertical edges}{\tt 0,..,ny}
+
+A left/right net update with index (i-\/1,j-\/1) is located on the edge between cells with index (i-\/1,j) and (i,j)\-: 
+\begin{DoxyPre}
+  *********************
+  *         *         *
+  * (i-1,j) *  (i,j)  *
+  *         *         *
+  *********************\end{DoxyPre}
+
+
+
+\begin{DoxyPre}            *
+           ***
+          *****
+            *
+            *
+  NetUpdatesLeft(i-1,j-1)
+            or
+  NetUpdatesRight(i-1,j-1)
+\end{DoxyPre}
+
+
+A below/above net update with index (i-\/1, j-\/1) is located on the edge between cells with index (i, j-\/1) and (i,j)\-: 
+\begin{DoxyPre}
+
+
+
+  *         *
+  * (i, j)  *   *
+  *         *  **  NetUpdatesBelow(i-1,j-1)
+  *********** *****         or
+  *         *  **  NetUpdatesAbove(i-1,j-1)
+  * (i,j-1) *   *
+  *         *
+
+
+
+\end{DoxyPre}
+ \hypertarget{classSWE__WavePropagationBlockSIMD_aee73625ee731614849f398ea392137a7}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}!$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}}
+\index{$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}!SWE_WavePropagationBlockSIMD@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}}
+\subsubsection[{$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}]{\setlength{\rightskip}{0pt plus 5cm}virtual S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D\-::$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__WavePropagationBlockSIMD_aee73625ee731614849f398ea392137a7}
+Destructor of a \hyperlink{classSWE__WavePropagationBlockSIMD}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}.
+
+In the case of a hybrid solver (N\-D\-E\-B\-U\-G not defined) information about the used solvers will be printed. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__WavePropagationBlockSIMD_a4aa15050ec1db113f54fff06539a900f}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}!compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}}
+\index{compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}!SWE_WavePropagationBlockSIMD@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}}
+\subsubsection[{compute\-Numerical\-Fluxes}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D\-::compute\-Numerical\-Fluxes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__WavePropagationBlockSIMD_a4aa15050ec1db113f54fff06539a900f}
+Compute net updates for the block. The member variable \hyperlink{classSWE__Block_a05cbc9b40e0483bf73dbc2bdeae7dee3}{max\-Timestep} will be updated with the maximum allowed time step size 
+
+Implements \hyperlink{classSWE__Block_a94dcf2c6ae31731e4586e45628b0c00e}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__WavePropagationBlockSIMD_a6c54dbcd43a77b46bae4de36b8d16af7}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}!simulate@{simulate}}
+\index{simulate@{simulate}!SWE_WavePropagationBlockSIMD@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}}
+\subsubsection[{simulate}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D\-::simulate (
+\begin{DoxyParamCaption}
+\item[{float}]{i\-\_\-t\-Start, }
+\item[{float}]{i\-\_\-t\-End}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__WavePropagationBlockSIMD_a6c54dbcd43a77b46bae4de36b8d16af7}
+Runs the simulation until i\-\_\-t\-End is reached.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-t\-Start} & time when the simulation starts \\
+\hline
+{\em i\-\_\-t\-End} & time when the simulation should end \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+time we reached after the last update step, in general a bit later than i\-\_\-t\-End 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Block_a69784e2be2d09035fb2af9d306768f07}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__WavePropagationBlockSIMD_a99c288632c402eaf7dff76f03624872a}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}!simulate\-Timestep@{simulate\-Timestep}}
+\index{simulate\-Timestep@{simulate\-Timestep}!SWE_WavePropagationBlockSIMD@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}}
+\subsubsection[{simulate\-Timestep}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D\-::simulate\-Timestep (
+\begin{DoxyParamCaption}
+\item[{float}]{dt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__WavePropagationBlockSIMD_a99c288632c402eaf7dff76f03624872a}
+Update the bathymetry values with the displacement corresponding to the current time step.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-asagi\-Scenario} & the corresponding A\-S\-A\-G\-I-\/scenario Executes a single timestep.
+\begin{DoxyItemize}
+\item compute net updates for every edge
+\item update cell values with the net updates
+\end{DoxyItemize}\\
+\hline
+{\em dt} & time step width of the update \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSWE__Block_add6908e1ceb261a0a1f3ebc262cc5f11}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__WavePropagationBlockSIMD_a2596238868efd3cdd453d9ac2de15997}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}!update\-Unknowns@{update\-Unknowns}}
+\index{update\-Unknowns@{update\-Unknowns}!SWE_WavePropagationBlockSIMD@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D}}
+\subsubsection[{update\-Unknowns}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D\-::update\-Unknowns (
+\begin{DoxyParamCaption}
+\item[{float}]{dt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__WavePropagationBlockSIMD_a2596238868efd3cdd453d9ac2de15997}
+Updates the unknowns with the already computed net-\/updates.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & time step width used in the update. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classSWE__Block_ab2b4b659f23d5d45413dece8d2da3298}{S\-W\-E\-\_\-\-Block}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/\hyperlink{SWE__WavePropagationBlockSIMD_8hh}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D.\-hh}\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/\hyperlink{SWE__WavePropagationBlockSIMD_8cpp}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-S\-I\-M\-D.\-cpp}\end{DoxyCompactItemize}

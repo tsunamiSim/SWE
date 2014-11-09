@@ -1,0 +1,141 @@
+\hypertarget{classSWE__RusanovBlockCUDA}{\section{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A Class Reference}
+\label{classSWE__RusanovBlockCUDA}\index{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classSWE__RusanovBlockCUDA}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__RusanovBlockCUDA_a5bd6db4a52d816534923d851ea6f9314}{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A} (float \-\_\-offset\-X=0, float \-\_\-offset\-Y=0, const int i\-\_\-cuda\-Device=0)
+\item 
+virtual \hyperlink{classSWE__RusanovBlockCUDA_a4af9183cc7715e1b1a3d91cdb98f9cda}{$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A} ()
+\item 
+virtual void \hyperlink{classSWE__RusanovBlockCUDA_a85ec49606ab69ded8cd6f39aa4be1505}{compute\-Numerical\-Fluxes} ()
+\item 
+virtual void \hyperlink{classSWE__RusanovBlockCUDA_a0a18726a733492218423eed37a7ab406}{update\-Unknowns} (float dt)
+\item 
+virtual void \hyperlink{classSWE__RusanovBlockCUDA_a238b383e0458babb52e3dd5b5784bc48}{simulate\-Timestep} (float dt)
+\begin{DoxyCompactList}\small\item\em execute a single time step of the simulation \end{DoxyCompactList}\item 
+virtual float \hyperlink{classSWE__RusanovBlockCUDA_a77719262dc1789adea136ed50f17bb58}{simulate} (float t\-Start, float t\-End)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{classSWE__RusanovBlockCUDA_adbdcb6417643b695657724ea16f84954}{operator$<$$<$} (ostream \&os, const \hyperlink{classSWE__RusanovBlockCUDA}{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A} \&swe)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classSWE__RusanovBlockCUDA}{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A} extends the base class \hyperlink{classSWE__BlockCUDA}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}, and provides a concrete C\-U\-D\-A implementation of a simple shallow water model based on Rusanov Flux computation on the edges and explicit time stepping. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__RusanovBlockCUDA_a5bd6db4a52d816534923d851ea6f9314}{\index{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}!S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}}
+\index{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}!SWE_RusanovBlockCUDA@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}}
+\subsubsection[{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A\-::\-S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A (
+\begin{DoxyParamCaption}
+\item[{float}]{\-\_\-offset\-X = {\ttfamily 0}, }
+\item[{float}]{\-\_\-offset\-Y = {\ttfamily 0}, }
+\item[{const int}]{i\-\_\-cuda\-Device = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{classSWE__RusanovBlockCUDA_a5bd6db4a52d816534923d851ea6f9314}
+Constructor\-: allocate variables for simulation
+
+unknowns h,hu,hv,b are defined on grid indices \mbox{[}0,..,nx+1\mbox{]}$\ast$\mbox{[}0,..,ny+1\mbox{]} -\/$>$ computational domain is \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} -\/$>$ plus ghost cell layer
+
+flux terms are defined for edges with indices \mbox{[}0,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} or \mbox{[}1,..,nx\mbox{]}$\ast$\href{for horizontal/vertical edges}{\tt 0,..,ny} Flux term with index (i,j) is located on the edge between cells with index (i,j) and (i+1,j) or (i,j+1)
+
+bathymetry source terms are defined for cells with indices \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} \hypertarget{classSWE__RusanovBlockCUDA_a4af9183cc7715e1b1a3d91cdb98f9cda}{\index{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}!$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}}
+\index{$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}!SWE_RusanovBlockCUDA@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}}
+\subsubsection[{$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A\-::$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__RusanovBlockCUDA_a4af9183cc7715e1b1a3d91cdb98f9cda}
+Destructor\-: de-\/allocate all variables 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__RusanovBlockCUDA_a85ec49606ab69ded8cd6f39aa4be1505}{\index{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}!compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}}
+\index{compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}!SWE_RusanovBlockCUDA@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}}
+\subsubsection[{compute\-Numerical\-Fluxes}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A\-::compute\-Numerical\-Fluxes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__RusanovBlockCUDA_a85ec49606ab69ded8cd6f39aa4be1505}
+compute the flux terms on all edges 
+
+Implements \hyperlink{classSWE__Block_a94dcf2c6ae31731e4586e45628b0c00e}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__RusanovBlockCUDA_a77719262dc1789adea136ed50f17bb58}{\index{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}!simulate@{simulate}}
+\index{simulate@{simulate}!SWE_RusanovBlockCUDA@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}}
+\subsubsection[{simulate}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-host\-\_\-\-\_\- float S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A\-::simulate (
+\begin{DoxyParamCaption}
+\item[{float}]{t\-Start, }
+\item[{float}]{t\-End}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__RusanovBlockCUDA_a77719262dc1789adea136ed50f17bb58}
+perform forward-\/\-Euler time steps, starting with simulation time t\-Start,\-: until simulation time t\-End is reached; device-\/global variables hd, hud, hvd are updated; unknowns h, hu, hv in main memory are not updated. Ghost layers and bathymetry sources are updated between timesteps. intended as main simulation loop between two checkpoints 
+
+Reimplemented from \hyperlink{classSWE__Block_a69784e2be2d09035fb2af9d306768f07}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__RusanovBlockCUDA_a238b383e0458babb52e3dd5b5784bc48}{\index{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}!simulate\-Timestep@{simulate\-Timestep}}
+\index{simulate\-Timestep@{simulate\-Timestep}!SWE_RusanovBlockCUDA@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}}
+\subsubsection[{simulate\-Timestep}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A\-::simulate\-Timestep (
+\begin{DoxyParamCaption}
+\item[{float}]{dt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__RusanovBlockCUDA_a238b383e0458babb52e3dd5b5784bc48}
+
+
+execute a single time step of the simulation 
+
+Depending on the current values of h, hu, hv (incl. ghost layers) update these unknowns in each grid cell (ghost layers and bathymetry are not updated). The Rusanov C\-U\-D\-A-\/implementation of simulate\-Timestep subsequently calls the functions compute\-Numerical\-Fluxes (to compute all fluxes on grid edges), and update\-Unknowns (to update the variables according to flux values, typically according to an Euler time step). 
+\begin{DoxyParams}{Parameters}
+{\em dt} & size of the time step \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSWE__Block_add6908e1ceb261a0a1f3ebc262cc5f11}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__RusanovBlockCUDA_a0a18726a733492218423eed37a7ab406}{\index{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}!update\-Unknowns@{update\-Unknowns}}
+\index{update\-Unknowns@{update\-Unknowns}!SWE_RusanovBlockCUDA@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}}
+\subsubsection[{update\-Unknowns}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-host\-\_\-\-\_\- void S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A\-::update\-Unknowns (
+\begin{DoxyParamCaption}
+\item[{float}]{dt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__RusanovBlockCUDA_a0a18726a733492218423eed37a7ab406}
+implements interface function update\-Unknowns\-: based on the (Rusanov) fluxes computed on each edge (and stored in the variables Fh, Gh, etc.); compute the balance terms for each cell, and update the unknowns according to an Euler time step. It will force an update of the copy layer in the main memory by calling \hyperlink{classSWE__BlockCUDA_a41d117ca8fe9a8c5509369edd026fd63}{synch\-Copy\-Layer\-Before\-Read()}, and provide an compute the maximum allowed time step size by calling compute\-Max\-Timestep\-C\-U\-D\-A(). 
+\begin{DoxyParams}{Parameters}
+{\em dt} & size of the time step. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classSWE__Block_ab2b4b659f23d5d45413dece8d2da3298}{S\-W\-E\-\_\-\-Block}.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classSWE__RusanovBlockCUDA_adbdcb6417643b695657724ea16f84954}{\index{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!SWE_RusanovBlockCUDA@{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const {\bf S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A} \&}]{swe}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classSWE__RusanovBlockCUDA_adbdcb6417643b695657724ea16f84954}
+overload operator$<$$<$ such that data can be written via cout $<$$<$ -\/$>$ needs to be declared as friend to be allowed to access private data 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/rusanov/\hyperlink{SWE__RusanovBlockCUDA_8hh}{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A.\-hh}\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/rusanov/\hyperlink{SWE__RusanovBlockCUDA_8cu}{S\-W\-E\-\_\-\-Rusanov\-Block\-C\-U\-D\-A.\-cu}\end{DoxyCompactItemize}

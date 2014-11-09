@@ -1,0 +1,111 @@
+\hypertarget{classCamera}{\section{Camera Class Reference}
+\label{classCamera}\index{Camera@{Camera}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classCamera_abd689594d0f4923a86c6246eb6f0b19b}{Camera} (const char $\ast$window\-\_\-title)
+\item 
+void \hyperlink{classCamera_a778673e0a23face89f7bcc091d6cde90}{set\-Camera} ()
+\item 
+\hypertarget{classCamera_a02be8aa0dbef77e02dddc715a726fb67}{void {\bfseries reset} ()}\label{classCamera_a02be8aa0dbef77e02dddc715a726fb67}
+
+\item 
+void \hyperlink{classCamera_a0d7176e717c810846265bcdcd9b84dfc}{view\-Distance} (float view\-Distance)
+\item 
+void \hyperlink{classCamera_a33f913cbf4a80da781dba52394874510}{orient} (float ang\-X, float ang\-Y)
+\item 
+void \hyperlink{classCamera_a8c2cbaf57e3af080a081526971b444d5}{zoom\-In} (float scale\-Factor)
+\item 
+void \hyperlink{classCamera_aab00e9276abe4e02232496de6a7853da}{zoom\-Out} (float scale\-Factor)
+\item 
+void \hyperlink{classCamera_a3c26259ca3463566848fc69e4c7fe286}{start\-Panning} (int x\-Pos, int y\-Pos)
+\item 
+void \hyperlink{classCamera_abf9c2431830d130ccde9a942e203acb3}{panning} (int new\-X, int new\-Y)
+\item 
+void \hyperlink{classCamera_addc91448d3f388b8410dc9cf98b571e8}{display\-Image} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classCamera_abd689594d0f4923a86c6246eb6f0b19b}{\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\subsubsection[{Camera}]{\setlength{\rightskip}{0pt plus 5cm}Camera\-::\-Camera (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{window\-\_\-title}
+\end{DoxyParamCaption}
+)}}\label{classCamera_abd689594d0f4923a86c6246eb6f0b19b}
+Constructor \begin{DoxyVerb}@param view_distance        initial view distance from the origin 
+@param window_title         title of the current window\end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\hypertarget{classCamera_addc91448d3f388b8410dc9cf98b571e8}{\index{Camera@{Camera}!display\-Image@{display\-Image}}
+\index{display\-Image@{display\-Image}!Camera@{Camera}}
+\subsubsection[{display\-Image}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::display\-Image (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classCamera_addc91448d3f388b8410dc9cf98b571e8}
+Calculates the current framerate, updates the window title and swaps framebuffers to display the new image \hypertarget{classCamera_a33f913cbf4a80da781dba52394874510}{\index{Camera@{Camera}!orient@{orient}}
+\index{orient@{orient}!Camera@{Camera}}
+\subsubsection[{orient}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::orient (
+\begin{DoxyParamCaption}
+\item[{float}]{angle\-\_\-d\-X, }
+\item[{float}]{angle\-\_\-d\-Y}
+\end{DoxyParamCaption}
+)}}\label{classCamera_a33f913cbf4a80da781dba52394874510}
+Increment viewing orientation of the camera \begin{DoxyVerb}@param angle_dX             angle relative to the x-axis
+@param angle_dY             angle relative to the rotated y-axis\end{DoxyVerb}
+ \hypertarget{classCamera_abf9c2431830d130ccde9a942e203acb3}{\index{Camera@{Camera}!panning@{panning}}
+\index{panning@{panning}!Camera@{Camera}}
+\subsubsection[{panning}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::panning (
+\begin{DoxyParamCaption}
+\item[{int}]{new\-X, }
+\item[{int}]{new\-Y}
+\end{DoxyParamCaption}
+)}}\label{classCamera_abf9c2431830d130ccde9a942e203acb3}
+User drags our object. Transform screen coordinates into world coordinates and update the objects position \hypertarget{classCamera_a778673e0a23face89f7bcc091d6cde90}{\index{Camera@{Camera}!set\-Camera@{set\-Camera}}
+\index{set\-Camera@{set\-Camera}!Camera@{Camera}}
+\subsubsection[{set\-Camera}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::set\-Camera (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classCamera_a778673e0a23face89f7bcc091d6cde90}
+Set the camera via glu\-Look\-At and set the light position afterwards \hypertarget{classCamera_a3c26259ca3463566848fc69e4c7fe286}{\index{Camera@{Camera}!start\-Panning@{start\-Panning}}
+\index{start\-Panning@{start\-Panning}!Camera@{Camera}}
+\subsubsection[{start\-Panning}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::start\-Panning (
+\begin{DoxyParamCaption}
+\item[{int}]{x\-Pos, }
+\item[{int}]{y\-Pos}
+\end{DoxyParamCaption}
+)}}\label{classCamera_a3c26259ca3463566848fc69e4c7fe286}
+User starts dragging. Remember the old mouse coordinates. \hypertarget{classCamera_a0d7176e717c810846265bcdcd9b84dfc}{\index{Camera@{Camera}!view\-Distance@{view\-Distance}}
+\index{view\-Distance@{view\-Distance}!Camera@{Camera}}
+\subsubsection[{view\-Distance}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::view\-Distance (
+\begin{DoxyParamCaption}
+\item[{float}]{view\-Distance}
+\end{DoxyParamCaption}
+)}}\label{classCamera_a0d7176e717c810846265bcdcd9b84dfc}
+Set the view distance \hypertarget{classCamera_a8c2cbaf57e3af080a081526971b444d5}{\index{Camera@{Camera}!zoom\-In@{zoom\-In}}
+\index{zoom\-In@{zoom\-In}!Camera@{Camera}}
+\subsubsection[{zoom\-In}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::zoom\-In (
+\begin{DoxyParamCaption}
+\item[{float}]{scale\-Factor}
+\end{DoxyParamCaption}
+)}}\label{classCamera_a8c2cbaf57e3af080a081526971b444d5}
+Zoom in \begin{DoxyVerb}@param scaleFactor          factor which is used for zooming                        \end{DoxyVerb}
+ \hypertarget{classCamera_aab00e9276abe4e02232496de6a7853da}{\index{Camera@{Camera}!zoom\-Out@{zoom\-Out}}
+\index{zoom\-Out@{zoom\-Out}!Camera@{Camera}}
+\subsubsection[{zoom\-Out}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::zoom\-Out (
+\begin{DoxyParamCaption}
+\item[{float}]{scale\-Factor}
+\end{DoxyParamCaption}
+)}}\label{classCamera_aab00e9276abe4e02232496de6a7853da}
+Zoom out \begin{DoxyVerb}@param scaleFactor          factor which is used for zooming                        \end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/opengl/camera.\-h\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/opengl/camera.\-cpp\end{DoxyCompactItemize}

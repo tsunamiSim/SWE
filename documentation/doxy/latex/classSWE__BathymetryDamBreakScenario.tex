@@ -1,0 +1,85 @@
+\hypertarget{classSWE__BathymetryDamBreakScenario}{\section{S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario Class Reference}
+\label{classSWE__BathymetryDamBreakScenario}\index{S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario@{S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-simple\-\_\-scenarios.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSWE__BathymetryDamBreakScenario}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSWE__BathymetryDamBreakScenario_abbc8b6d317163f21d2e9d46f67a6465f}{float {\bfseries get\-Bathymetry} (float x, float y)}\label{classSWE__BathymetryDamBreakScenario_abbc8b6d317163f21d2e9d46f67a6465f}
+
+\item 
+\hypertarget{classSWE__BathymetryDamBreakScenario_a29a5d3d82ad7092504b79a263c766feb}{virtual float {\bfseries end\-Simulation} ()}\label{classSWE__BathymetryDamBreakScenario_a29a5d3d82ad7092504b79a263c766feb}
+
+\item 
+\hypertarget{classSWE__BathymetryDamBreakScenario_ac7a07d56d659238c0dc099c6251e265b}{virtual \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} {\bfseries get\-Boundary\-Type} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} edge)}\label{classSWE__BathymetryDamBreakScenario_ac7a07d56d659238c0dc099c6251e265b}
+
+\item 
+float \hyperlink{classSWE__BathymetryDamBreakScenario_aa861ba2d4d7e71509f78e1d4d4cb82c7}{get\-Boundary\-Pos} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} i\-\_\-edge)
+\item 
+float \hyperlink{classSWE__BathymetryDamBreakScenario_aa903538480526b092fff75160d7e225c}{get\-Water\-Height} (float i\-\_\-position\-X, float i\-\_\-position\-Y)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Scenario \char`\"{}\-Bathymetry Dam Break\char`\"{}\-: uniform water depth, but elevated bathymetry in the centre of the domain 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__BathymetryDamBreakScenario_aa861ba2d4d7e71509f78e1d4d4cb82c7}{\index{S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario@{S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario}!get\-Boundary\-Pos@{get\-Boundary\-Pos}}
+\index{get\-Boundary\-Pos@{get\-Boundary\-Pos}!SWE_BathymetryDamBreakScenario@{S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario}}
+\subsubsection[{get\-Boundary\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario\-::get\-Boundary\-Pos (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{i\-\_\-edge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__BathymetryDamBreakScenario_aa861ba2d4d7e71509f78e1d4d4cb82c7}
+Get the boundary positions
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-edge} & which edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value in the corresponding dimension 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__BathymetryDamBreakScenario_aa903538480526b092fff75160d7e225c}{\index{S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario@{S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario}!get\-Water\-Height@{get\-Water\-Height}}
+\index{get\-Water\-Height@{get\-Water\-Height}!SWE_BathymetryDamBreakScenario@{S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario}}
+\subsubsection[{get\-Water\-Height}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Scenario\-::get\-Water\-Height (
+\begin{DoxyParamCaption}
+\item[{float}]{i\-\_\-position\-X, }
+\item[{float}]{i\-\_\-position\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__BathymetryDamBreakScenario_aa903538480526b092fff75160d7e225c}
+Get the water height at a specific location.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-position\-X} & position relative to the origin of the bathymetry grid in x-\/direction \\
+\hline
+{\em i\-\_\-position\-Y} & position relative to the origin of the bathymetry grid in y-\/direction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+water height (before the initial displacement) 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/scenarios/\hyperlink{SWE__simple__scenarios_8hh}{S\-W\-E\-\_\-simple\-\_\-scenarios.\-hh}\end{DoxyCompactItemize}

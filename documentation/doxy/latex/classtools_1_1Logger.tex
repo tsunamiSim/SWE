@@ -1,0 +1,507 @@
+\hypertarget{classtools_1_1Logger}{\section{tools\-:\-:Logger Class Reference}
+\label{classtools_1_1Logger}\index{tools\-::\-Logger@{tools\-::\-Logger}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classtools_1_1Logger_a9e1e0651776fcc78f89a1a1dcf339249}{Logger} (const int i\-\_\-process\-Rank=0, const std\-::string i\-\_\-program\-Name=\char`\"{}S\-W\-E\char`\"{}, const std\-::string i\-\_\-welcome\-Message=\char`\"{}Welcome to\char`\"{}, const std\-::string i\-\_\-copy\-Rights=\char`\"{}\textbackslash{}n\textbackslash{}n\-S\-W\-E Copyright (C) 2012-\/2013\textbackslash{}n\char`\"{}\char`\"{}  Technische Universitaet Muenchen\textbackslash{}n\char`\"{}\char`\"{}  Department of Informatics\textbackslash{}n\char`\"{}\char`\"{}  Chair of Scientific Computing\textbackslash{}n\char`\"{}\char`\"{}  http\-://www5.\-in.\-tum.\-de/S\-W\-E\textbackslash{}n\char`\"{}\char`\"{}\textbackslash{}n\char`\"{}\char`\"{}S\-W\-E comes with A\-B\-S\-O\-L\-U\-T\-E\-L\-Y N\-O W\-A\-R\-R\-A\-N\-T\-Y.\textbackslash{}n\char`\"{}\char`\"{}S\-W\-E is free software, and you are welcome to redistribute it\textbackslash{}n\char`\"{}\char`\"{}under certain conditions.\textbackslash{}n\char`\"{}\char`\"{}Details can be found in the file \textbackslash{}'gpl.\-txt\textbackslash{}'.\char`\"{}, const std\-::string i\-\_\-finish\-Message=\char`\"{}finished successfully.\char`\"{}, const std\-::string i\-\_\-mid\-Delimiter=\char`\"{}\textbackslash{}n-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\textbackslash{}n\char`\"{}, const std\-::string i\-\_\-large\-Delimiter=\char`\"{}\textbackslash{}n$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$\textbackslash{}n\char`\"{}, const std\-::string i\-\_\-indentation=\char`\"{}\textbackslash{}t\char`\"{})
+\item 
+virtual \hyperlink{classtools_1_1Logger_a58f170bf361ba7ceb3a4e0d9ec36bdf5}{$\sim$\-Logger} ()
+\item 
+void \hyperlink{classtools_1_1Logger_af45e7a1b4e9c33ab9fbb43e18e284eae}{print\-Welcome\-Message} ()
+\item 
+void \hyperlink{classtools_1_1Logger_a539d6f7c8e60c0ee887912c92c1dfa5c}{print\-Finish\-Message} ()
+\item 
+std\-::ostream \& \hyperlink{classtools_1_1Logger_ab0d82d23125a3d5d8b737984e678f43a}{cout} ()
+\item 
+void \hyperlink{classtools_1_1Logger_a1d3e0fcc3cb4c58eb486ac3fe14d30b0}{set\-Process\-Rank} (const int i\-\_\-process\-Rank)
+\item 
+void \hyperlink{classtools_1_1Logger_a9642689522ece27ca9c908f24f290134}{print\-String} (const std\-::string i\-\_\-string)
+\item 
+void \hyperlink{classtools_1_1Logger_a89b9dfd5340a4e18d7b8f1225d996730}{print\-Number\-Of\-Processes} (const int i\-\_\-number\-Of\-Processes, const std\-::string i\-\_\-processes\-Name=\char`\"{}M\-P\-I processes\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_a2da0a6c575304e91bea546dddc94f72d}{print\-Number\-Of\-Cells} (const int i\-\_\-n\-X, const int i\-\_\-n\-Y, const std\-::string i\-\_\-cell\-Message=\char`\"{}cells\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_acf2b4547c8b138e4e8e338002687a149}{print\-Number\-Of\-Cells\-Per\-Process} (const int i\-\_\-n\-X, const int i\-\_\-n\-Y)
+\item 
+void \hyperlink{classtools_1_1Logger_a4c81063c055f072c465853d6da85743b}{print\-Cell\-Size} (const float i\-\_\-d\-X, const float i\-\_\-d\-Y, const std\-::string i\-\_\-unit=\char`\"{}m\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_a6c71eab182524a84037eb6fe1ac42e9e}{print\-Number\-Of\-Blocks} (const int i\-\_\-n\-X, const int i\-\_\-n\-Y)
+\item 
+void \hyperlink{classtools_1_1Logger_a2d54396c65885248374009cb3b18c2da}{print\-Start\-Message} (const std\-::string i\-\_\-start\-Message=\char`\"{}Everything is set up, starting the simulation.\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_ac829729cc06f2a6e43f0272ada747685}{print\-Simulation\-Time} (const float i\-\_\-time, const std\-::string i\-\_\-simulation\-Time\-Message=\char`\"{}Simulation at time\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_aec0d76a09748963c9f0b68239e4499c0}{print\-Output\-File\-Creation} (const std\-::string i\-\_\-file\-Name, const int i\-\_\-block\-X, const int i\-\_\-block\-Y, const std\-::string i\-\_\-file\-Type=\char`\"{}net\-C\-D\-F\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_ab7f380c82631174ff826dfd8bf519058}{print\-Output\-Time} (const float i\-\_\-time, const std\-::string i\-\_\-output\-Time\-Message=\char`\"{}Writing output file at time\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_a6030321e16a66849dbf237420702a0da}{print\-Statistics\-Message} (const std\-::string i\-\_\-statistics\-Message=\char`\"{}Simulation finished. Printing statistics for each process.\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_a6f23f0f674d0e7bbf1a52442eff5c031}{print\-Solver\-Statistics} (const long i\-\_\-first\-Solver\-Counter, const long i\-\_\-second\-Solver\-Counter, const int i\-\_\-block\-X=0, const int i\-\_\-block\-Y=0, const std\-::string i\-\_\-first\-Solver\-Name=\char`\"{}f-\/Wave solver\char`\"{}, const std\-::string i\-\_\-second\-Solver\-Name=\char`\"{}Augemented Riemann solver\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_ad5986d50f6c7bec49b9d07e9b1e7ac1b}{update\-Time} (const std\-::string \&i\-\_\-name)
+\item 
+void \hyperlink{classtools_1_1Logger_a46e0d98ad67c8ac1d26ff8d695c5fceb}{reset\-Clock\-To\-Current\-Time} (const std\-::string \&i\-\_\-name)
+\item 
+void \hyperlink{classtools_1_1Logger_ab1bb09a74580560b36c19979d88ef3bc}{init\-Wall\-Clock\-Time} (const double i\-\_\-wall\-Clock\-Time)
+\item 
+void \hyperlink{classtools_1_1Logger_a432c4dbdbc532bc792cd0d4b30b3b42e}{print\-Wall\-Clock\-Time} (const double i\-\_\-wall\-Clock\-Time, const std\-::string i\-\_\-wall\-Clock\-Time\-Message=\char`\"{}wall clock time\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_a538f0d1e94f6a957a8936d663f56859c}{print\-Time} (const std\-::string \&i\-\_\-name, const std\-::string \&i\-\_\-message)
+\item 
+double \hyperlink{classtools_1_1Logger_a01a480f7c6ce911114529b193188f211}{get\-Time} (const std\-::string \&i\-\_\-name)
+\item 
+void \hyperlink{classtools_1_1Logger_a2e9f836ab40bfde976770aa711b8547d}{print\-Iterations\-Done} (unsigned int i\-\_\-iterations, std\-::string i\-\_\-iteration\-Message=\char`\"{}iterations done\char`\"{})
+\item 
+void \hyperlink{classtools_1_1Logger_aff8aabe69fd994258cf5238ff0e1f55f}{print\-Element\-Updates\-Done} (unsigned int i\-\_\-iterations, const int i\-\_\-n\-X, const int i\-\_\-n\-Y, const std\-::string \&i\-\_\-name, const std\-::string i\-\_\-iteration\-Message=\char`\"{}element updates per second done\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classtools_1_1Logger}{Logger} \hyperlink{classtools_1_1Logger_a341eaab3865b60362db6736c2e2b7c68}{logger}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classtools_1_1Logger_a9e1e0651776fcc78f89a1a1dcf339249}{\index{tools\-::\-Logger@{tools\-::\-Logger}!Logger@{Logger}}
+\index{Logger@{Logger}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{Logger}]{\setlength{\rightskip}{0pt plus 5cm}tools\-::\-Logger\-::\-Logger (
+\begin{DoxyParamCaption}
+\item[{const int}]{i\-\_\-process\-Rank = {\ttfamily 0}, }
+\item[{const std\-::string}]{i\-\_\-program\-Name = {\ttfamily \char`\"{}SWE\char`\"{}}, }
+\item[{const std\-::string}]{i\-\_\-welcome\-Message = {\ttfamily \char`\"{}Welcome~to\char`\"{}}, }
+\item[{const std\-::string}]{i\-\_\-copy\-Rights = {\ttfamily \char`\"{}\textbackslash{}n\textbackslash{}nSWE~Copyright~(C)~2012-\/2013\textbackslash{}n\char`\"{}~\char`\"{}~~Technische~Universitaet~Muenchen\textbackslash{}n\char`\"{}~\char`\"{}~~Department~of~Informatics\textbackslash{}n\char`\"{}~\char`\"{}~~Chair~of~Scientific~Computing\textbackslash{}n\char`\"{}~\char`\"{}~~http\-://www5.in.tum.de/SWE\textbackslash{}n\char`\"{}~\char`\"{}\textbackslash{}n\char`\"{}~\char`\"{}SWE~comes~with~ABSOLUTELY~NO~WARRANTY.\textbackslash{}n\char`\"{}~\char`\"{}SWE~is~free~software,~and~you~are~welcome~to~redistribute~it\textbackslash{}n\char`\"{}~\char`\"{}under~certain~conditions.\textbackslash{}n\char`\"{}~\char`\"{}Details~can~be~found~in~the~file~\textbackslash{}'gpl.txt\textbackslash{}'.\char`\"{}}, }
+\item[{const std\-::string}]{i\-\_\-finish\-Message = {\ttfamily \char`\"{}finished~successfully.\char`\"{}}, }
+\item[{const std\-::string}]{i\-\_\-mid\-Delimiter = {\ttfamily \char`\"{}\textbackslash{}n-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\textbackslash{}n\char`\"{}}, }
+\item[{const std\-::string}]{i\-\_\-large\-Delimiter = {\ttfamily \char`\"{}\textbackslash{}n$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$\textbackslash{}n\char`\"{}}, }
+\item[{const std\-::string}]{i\-\_\-indentation = {\ttfamily \char`\"{}\textbackslash{}t\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a9e1e0651776fcc78f89a1a1dcf339249}
+The Constructor. Prints the welcome message (process rank 0 only).
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-process\-Rank} & rank of the constructing process. \\
+\hline
+{\em i\-\_\-program\-Name} & definition of the program name. \\
+\hline
+{\em i\-\_\-welcome\-Message} & definition of the welcome message. \\
+\hline
+{\em i\-\_\-start\-Message} & definition of the start message. \\
+\hline
+{\em i\-\_\-simulation\-Time\-Message} & definition of the simulation time message. \\
+\hline
+{\em i\-\_\-execution\-Time\-Message} & definition of the execution time message. \\
+\hline
+{\em i\-\_\-cpu\-Time\-Message} & definition of the C\-P\-U time message. \\
+\hline
+{\em i\-\_\-finish\-Message} & definition of the finish message. \\
+\hline
+{\em i\-\_\-mid\-Delimiter} & definition of the mid-\/size delimiter. \\
+\hline
+{\em i\-\_\-large\-Delimiter} & definition of the large delimiter. \\
+\hline
+{\em i\-\_\-indentation} & definition of the indentation (used in all messages, except welcome, start and finish). \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a58f170bf361ba7ceb3a4e0d9ec36bdf5}{\index{tools\-::\-Logger@{tools\-::\-Logger}!$\sim$\-Logger@{$\sim$\-Logger}}
+\index{$\sim$\-Logger@{$\sim$\-Logger}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{$\sim$\-Logger}]{\setlength{\rightskip}{0pt plus 5cm}virtual tools\-::\-Logger\-::$\sim$\-Logger (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classtools_1_1Logger_a58f170bf361ba7ceb3a4e0d9ec36bdf5}
+The Destructor. Prints the finish message (process rank 0 only). 
+
+\subsection{Member Function Documentation}
+\hypertarget{classtools_1_1Logger_ab0d82d23125a3d5d8b737984e678f43a}{\index{tools\-::\-Logger@{tools\-::\-Logger}!cout@{cout}}
+\index{cout@{cout}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{cout}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream\& tools\-::\-Logger\-::cout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_ab0d82d23125a3d5d8b737984e678f43a}
+Default output stream of the logger.
+
+\begin{DoxyReturn}{Returns}
+extended (time + indentation) std\-::cout stream. 
+\end{DoxyReturn}
+\hypertarget{classtools_1_1Logger_a01a480f7c6ce911114529b193188f211}{\index{tools\-::\-Logger@{tools\-::\-Logger}!get\-Time@{get\-Time}}
+\index{get\-Time@{get\-Time}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{get\-Time}]{\setlength{\rightskip}{0pt plus 5cm}double tools\-::\-Logger\-::get\-Time (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{i\-\_\-name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a01a480f7c6ce911114529b193188f211}
+Get elapsed time
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-name} & Name of the time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+elapsed time 
+\end{DoxyReturn}
+\hypertarget{classtools_1_1Logger_ab1bb09a74580560b36c19979d88ef3bc}{\index{tools\-::\-Logger@{tools\-::\-Logger}!init\-Wall\-Clock\-Time@{init\-Wall\-Clock\-Time}}
+\index{init\-Wall\-Clock\-Time@{init\-Wall\-Clock\-Time}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{init\-Wall\-Clock\-Time}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::init\-Wall\-Clock\-Time (
+\begin{DoxyParamCaption}
+\item[{const double}]{i\-\_\-wall\-Clock\-Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_ab1bb09a74580560b36c19979d88ef3bc}
+Initialize the wall clock time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-wall\-Clock\-Time} & value the wall block time will be set to. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a4c81063c055f072c465853d6da85743b}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Cell\-Size@{print\-Cell\-Size}}
+\index{print\-Cell\-Size@{print\-Cell\-Size}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Cell\-Size}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Cell\-Size (
+\begin{DoxyParamCaption}
+\item[{const float}]{i\-\_\-d\-X, }
+\item[{const float}]{i\-\_\-d\-Y, }
+\item[{const std\-::string}]{i\-\_\-unit = {\ttfamily \char`\"{}m\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a4c81063c055f072c465853d6da85743b}
+Print the size of a cell
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-d\-X} & size in x-\/direction. \\
+\hline
+{\em i\-\_\-d\-Y} & size in y-\/direction. \\
+\hline
+{\em i\-\_\-unit} & measurement unit. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_aff8aabe69fd994258cf5238ff0e1f55f}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Element\-Updates\-Done@{print\-Element\-Updates\-Done}}
+\index{print\-Element\-Updates\-Done@{print\-Element\-Updates\-Done}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Element\-Updates\-Done}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Element\-Updates\-Done (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{i\-\_\-iterations, }
+\item[{const int}]{i\-\_\-n\-X, }
+\item[{const int}]{i\-\_\-n\-Y, }
+\item[{const std\-::string \&}]{i\-\_\-name, }
+\item[{const std\-::string}]{i\-\_\-iteration\-Message = {\ttfamily \char`\"{}element~updates~per~second~done\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_aff8aabe69fd994258cf5238ff0e1f55f}
+Print number of element updates done
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-iterations} & Number of iterations done \\
+\hline
+{\em i\-\_\-interation\-Message} & Iterations done message \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a539d6f7c8e60c0ee887912c92c1dfa5c}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Finish\-Message@{print\-Finish\-Message}}
+\index{print\-Finish\-Message@{print\-Finish\-Message}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Finish\-Message}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Finish\-Message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a539d6f7c8e60c0ee887912c92c1dfa5c}
+Print the finish message. \hypertarget{classtools_1_1Logger_a2e9f836ab40bfde976770aa711b8547d}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Iterations\-Done@{print\-Iterations\-Done}}
+\index{print\-Iterations\-Done@{print\-Iterations\-Done}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Iterations\-Done}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Iterations\-Done (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{i\-\_\-iterations, }
+\item[{std\-::string}]{i\-\_\-iteration\-Message = {\ttfamily \char`\"{}iterations~done\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a2e9f836ab40bfde976770aa711b8547d}
+Print number of iterations done
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-iterations} & Number of iterations done \\
+\hline
+{\em i\-\_\-interation\-Message} & Iterations done message \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a6c71eab182524a84037eb6fe1ac42e9e}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Number\-Of\-Blocks@{print\-Number\-Of\-Blocks}}
+\index{print\-Number\-Of\-Blocks@{print\-Number\-Of\-Blocks}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Number\-Of\-Blocks}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Number\-Of\-Blocks (
+\begin{DoxyParamCaption}
+\item[{const int}]{i\-\_\-n\-X, }
+\item[{const int}]{i\-\_\-n\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a6c71eab182524a84037eb6fe1ac42e9e}
+Print the number of defined blocks. (process rank 0 only)
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-n\-X} & number of blocks in x-\/direction. \\
+\hline
+{\em i\-\_\-n\-Y} & number of blocks in y-\/direction. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a2da0a6c575304e91bea546dddc94f72d}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Number\-Of\-Cells@{print\-Number\-Of\-Cells}}
+\index{print\-Number\-Of\-Cells@{print\-Number\-Of\-Cells}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Number\-Of\-Cells}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Number\-Of\-Cells (
+\begin{DoxyParamCaption}
+\item[{const int}]{i\-\_\-n\-X, }
+\item[{const int}]{i\-\_\-n\-Y, }
+\item[{const std\-::string}]{i\-\_\-cell\-Message = {\ttfamily \char`\"{}cells\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a2da0a6c575304e91bea546dddc94f72d}
+Print the number of cells. (process rank 0 only)
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-n\-X} & number of cells in x-\/direction. \\
+\hline
+{\em i\-\_\-n\-Y} & number of cells in y-\/direction. \\
+\hline
+{\em i\-\_\-cell\-Message} & cell message. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_acf2b4547c8b138e4e8e338002687a149}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Number\-Of\-Cells\-Per\-Process@{print\-Number\-Of\-Cells\-Per\-Process}}
+\index{print\-Number\-Of\-Cells\-Per\-Process@{print\-Number\-Of\-Cells\-Per\-Process}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Number\-Of\-Cells\-Per\-Process}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Number\-Of\-Cells\-Per\-Process (
+\begin{DoxyParamCaption}
+\item[{const int}]{i\-\_\-n\-X, }
+\item[{const int}]{i\-\_\-n\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_acf2b4547c8b138e4e8e338002687a149}
+Print the number of cells per Process.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-n\-X} & number of cells in x-\/direction. \\
+\hline
+{\em i\-\_\-n\-Y} & number of cells in y-\/direction. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a89b9dfd5340a4e18d7b8f1225d996730}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Number\-Of\-Processes@{print\-Number\-Of\-Processes}}
+\index{print\-Number\-Of\-Processes@{print\-Number\-Of\-Processes}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Number\-Of\-Processes}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Number\-Of\-Processes (
+\begin{DoxyParamCaption}
+\item[{const int}]{i\-\_\-number\-Of\-Processes, }
+\item[{const std\-::string}]{i\-\_\-processes\-Name = {\ttfamily \char`\"{}MPI~processes\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a89b9dfd5340a4e18d7b8f1225d996730}
+Print the number of processes. (process rank 0 only)
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-number\-Of\-Processes} & number of processes. \\
+\hline
+{\em i\-\_\-processes\-Name} & name of the processes. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_aec0d76a09748963c9f0b68239e4499c0}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Output\-File\-Creation@{print\-Output\-File\-Creation}}
+\index{print\-Output\-File\-Creation@{print\-Output\-File\-Creation}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Output\-File\-Creation}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Output\-File\-Creation (
+\begin{DoxyParamCaption}
+\item[{const std\-::string}]{i\-\_\-file\-Name, }
+\item[{const int}]{i\-\_\-block\-X, }
+\item[{const int}]{i\-\_\-block\-Y, }
+\item[{const std\-::string}]{i\-\_\-file\-Type = {\ttfamily \char`\"{}netCDF\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_aec0d76a09748963c9f0b68239e4499c0}
+Print the creation of an output file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-file\-Name} & name of the file. \\
+\hline
+{\em i\-\_\-block\-X} & block position in x-\/direction. \\
+\hline
+{\em i\-\_\-block\-Y} & block position in y-\/direction. \\
+\hline
+{\em i\-\_\-file\-Type} & type of the output file. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_ab7f380c82631174ff826dfd8bf519058}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Output\-Time@{print\-Output\-Time}}
+\index{print\-Output\-Time@{print\-Output\-Time}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Output\-Time}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Output\-Time (
+\begin{DoxyParamCaption}
+\item[{const float}]{i\-\_\-time, }
+\item[{const std\-::string}]{i\-\_\-output\-Time\-Message = {\ttfamily \char`\"{}Writing~output~file~at~time\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_ab7f380c82631174ff826dfd8bf519058}
+Print the current output time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-time} & time in seconds. \\
+\hline
+{\em i\-\_\-output\-Time\-Message} & output message. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_ac829729cc06f2a6e43f0272ada747685}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Simulation\-Time@{print\-Simulation\-Time}}
+\index{print\-Simulation\-Time@{print\-Simulation\-Time}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Simulation\-Time}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Simulation\-Time (
+\begin{DoxyParamCaption}
+\item[{const float}]{i\-\_\-time, }
+\item[{const std\-::string}]{i\-\_\-simulation\-Time\-Message = {\ttfamily \char`\"{}Simulation~at~time\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_ac829729cc06f2a6e43f0272ada747685}
+Print current simulation time. (process rank 0 only)
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-time} & time in seconds. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a6f23f0f674d0e7bbf1a52442eff5c031}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Solver\-Statistics@{print\-Solver\-Statistics}}
+\index{print\-Solver\-Statistics@{print\-Solver\-Statistics}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Solver\-Statistics}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Solver\-Statistics (
+\begin{DoxyParamCaption}
+\item[{const long}]{i\-\_\-first\-Solver\-Counter, }
+\item[{const long}]{i\-\_\-second\-Solver\-Counter, }
+\item[{const int}]{i\-\_\-block\-X = {\ttfamily 0}, }
+\item[{const int}]{i\-\_\-block\-Y = {\ttfamily 0}, }
+\item[{const std\-::string}]{i\-\_\-first\-Solver\-Name = {\ttfamily \char`\"{}f-\/Wave~solver\char`\"{}}, }
+\item[{const std\-::string}]{i\-\_\-second\-Solver\-Name = {\ttfamily \char`\"{}Augemented~Riemann~solver\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a6f23f0f674d0e7bbf1a52442eff5c031}
+Print solver statistics
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-first\-Solver\-Counter} & times the first solver was used. \\
+\hline
+{\em i\-\_\-second\-Solver\-Counter} & times the second solver was used. \\
+\hline
+{\em i\-\_\-block\-X} & position of the block in x-\/direction \\
+\hline
+{\em i\-\_\-block\-Y} & position of the block in y-\/direction \\
+\hline
+{\em i\-\_\-first\-Solver\-Name} & name of the first solver. \\
+\hline
+{\em i\-\_\-second\-Solver\-Name} & name of the second solver. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a2d54396c65885248374009cb3b18c2da}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Start\-Message@{print\-Start\-Message}}
+\index{print\-Start\-Message@{print\-Start\-Message}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Start\-Message}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Start\-Message (
+\begin{DoxyParamCaption}
+\item[{const std\-::string}]{i\-\_\-start\-Message = {\ttfamily \char`\"{}Everything~is~set~up,~starting~the~simulation.\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a2d54396c65885248374009cb3b18c2da}
+Print the start message. (process rank 0 only) \hypertarget{classtools_1_1Logger_a6030321e16a66849dbf237420702a0da}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Statistics\-Message@{print\-Statistics\-Message}}
+\index{print\-Statistics\-Message@{print\-Statistics\-Message}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Statistics\-Message}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Statistics\-Message (
+\begin{DoxyParamCaption}
+\item[{const std\-::string}]{i\-\_\-statistics\-Message = {\ttfamily \char`\"{}Simulation~finished.~Printing~statistics~for~each~process.\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a6030321e16a66849dbf237420702a0da}
+Print the statics message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-statistics\-Message} & statistics message. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a9642689522ece27ca9c908f24f290134}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-String@{print\-String}}
+\index{print\-String@{print\-String}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-String}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-String (
+\begin{DoxyParamCaption}
+\item[{const std\-::string}]{i\-\_\-string}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a9642689522ece27ca9c908f24f290134}
+Print an arbitrary string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-string} & some string. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a538f0d1e94f6a957a8936d663f56859c}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Time@{print\-Time}}
+\index{print\-Time@{print\-Time}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Time}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Time (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{i\-\_\-name, }
+\item[{const std\-::string \&}]{i\-\_\-message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a538f0d1e94f6a957a8936d663f56859c}
+Print elapsed time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-name} & Name of the timer \\
+\hline
+{\em i\-\_\-message} & time message. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a432c4dbdbc532bc792cd0d4b30b3b42e}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Wall\-Clock\-Time@{print\-Wall\-Clock\-Time}}
+\index{print\-Wall\-Clock\-Time@{print\-Wall\-Clock\-Time}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Wall\-Clock\-Time}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Wall\-Clock\-Time (
+\begin{DoxyParamCaption}
+\item[{const double}]{i\-\_\-wall\-Clock\-Time, }
+\item[{const std\-::string}]{i\-\_\-wall\-Clock\-Time\-Message = {\ttfamily \char`\"{}wall~clock~time\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a432c4dbdbc532bc792cd0d4b30b3b42e}
+Print the elapsed wall clock time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-wall\-Clock\-Time} & wall clock time message. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_af45e7a1b4e9c33ab9fbb43e18e284eae}{\index{tools\-::\-Logger@{tools\-::\-Logger}!print\-Welcome\-Message@{print\-Welcome\-Message}}
+\index{print\-Welcome\-Message@{print\-Welcome\-Message}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{print\-Welcome\-Message}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::print\-Welcome\-Message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_af45e7a1b4e9c33ab9fbb43e18e284eae}
+Print the welcome message. \hypertarget{classtools_1_1Logger_a46e0d98ad67c8ac1d26ff8d695c5fceb}{\index{tools\-::\-Logger@{tools\-::\-Logger}!reset\-Clock\-To\-Current\-Time@{reset\-Clock\-To\-Current\-Time}}
+\index{reset\-Clock\-To\-Current\-Time@{reset\-Clock\-To\-Current\-Time}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{reset\-Clock\-To\-Current\-Time}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::reset\-Clock\-To\-Current\-Time (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{i\-\_\-name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a46e0d98ad67c8ac1d26ff8d695c5fceb}
+Reset a clock to the current time
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-name} & Name of timer/clock \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_a1d3e0fcc3cb4c58eb486ac3fe14d30b0}{\index{tools\-::\-Logger@{tools\-::\-Logger}!set\-Process\-Rank@{set\-Process\-Rank}}
+\index{set\-Process\-Rank@{set\-Process\-Rank}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{set\-Process\-Rank}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::set\-Process\-Rank (
+\begin{DoxyParamCaption}
+\item[{const int}]{i\-\_\-process\-Rank}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_a1d3e0fcc3cb4c58eb486ac3fe14d30b0}
+Set the process rank.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-process\-Rank} & process rank. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classtools_1_1Logger_ad5986d50f6c7bec49b9d07e9b1e7ac1b}{\index{tools\-::\-Logger@{tools\-::\-Logger}!update\-Time@{update\-Time}}
+\index{update\-Time@{update\-Time}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{update\-Time}]{\setlength{\rightskip}{0pt plus 5cm}void tools\-::\-Logger\-::update\-Time (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{i\-\_\-name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classtools_1_1Logger_ad5986d50f6c7bec49b9d07e9b1e7ac1b}
+Update a timer
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-name} & Name of timer \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classtools_1_1Logger_a341eaab3865b60362db6736c2e2b7c68}{\index{tools\-::\-Logger@{tools\-::\-Logger}!logger@{logger}}
+\index{logger@{logger}!tools::Logger@{tools\-::\-Logger}}
+\subsubsection[{logger}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tools\-::\-Logger} tools\-::\-Logger\-::logger\hspace{0.3cm}{\ttfamily [static]}}}\label{classtools_1_1Logger_a341eaab3865b60362db6736c2e2b7c68}
+The logger all classes should use 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/tools/\hyperlink{Logger_8hh}{Logger.\-hh}\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/tools/\hyperlink{Logger_8cpp}{Logger.\-cpp}\end{DoxyCompactItemize}
