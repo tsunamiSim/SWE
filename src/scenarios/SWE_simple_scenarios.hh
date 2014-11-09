@@ -49,7 +49,45 @@ class SWE_RadialDamBreakScenario : public SWE_Scenario {
        return ( sqrt( (x-500.f)*(x-500.f) + (y-500.f)*(y-500.f) ) < 100.f ) ? 15.f: 10.0f;
     };
 
-	virtual float endSimulation() { return (float) 15; };
+	virtual float endSimulation() { return (float) 30; };
+
+    virtual BoundaryType getBoundaryType(BoundaryEdge edge) { return OUTFLOW; };
+
+    /** Get the boundary positions
+     *
+     * @param i_edge which edge
+     * @return value in the corresponding dimension
+     */
+    float getBoundaryPos(BoundaryEdge i_edge) {
+       if ( i_edge == BND_LEFT )
+         return (float)0;
+       else if ( i_edge == BND_RIGHT)
+         return (float)1000;
+       else if ( i_edge == BND_BOTTOM )
+         return (float)0;
+       else
+         return (float)1000;
+    };
+};
+
+/**
+ * Scenario "Obstacle Dam Break":
+ * elevated water in the center of the domain
+ * batymetrical obstacle on the left side 
+ */
+class SWE_ObstacleDamBreakScenario : public SWE_Scenario {
+
+  public:
+
+    float getBathymetry(float x, float y) {       
+	return ( x < 300 && x > 200 ) ? -5.f: -10.f;
+    };
+
+    float getWaterHeight(float x, float y) { 
+       return ( sqrt( (x-500.f)*(x-500.f) + (y-500.f)*(y-500.f) ) < 100.f ) ? 5.f-getBathymetry(x,y): 0.0f-getBathymetry(x,y);
+    };
+
+	virtual float endSimulation() { return (float) 30; };
 
     virtual BoundaryType getBoundaryType(BoundaryEdge edge) { return OUTFLOW; };
 
