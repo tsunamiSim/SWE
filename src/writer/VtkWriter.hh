@@ -60,7 +60,7 @@ private:
     {
     	std::ostringstream name;
 
-    	name << fileName << '.' << timeStep << ".vts";
+    	name << "results/" << fileName << '.' << timeStep << ".vts";
     	return name.str();
     }
 };
