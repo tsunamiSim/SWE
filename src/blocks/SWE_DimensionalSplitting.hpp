@@ -35,7 +35,7 @@
 #include <iostream>
 
 #ifndef NDEBUG
-	#define NDEBUG
+	//#define NDEBUG
 #endif
 
 class SWE_DimensionalSplitting: public SWE_Block {
@@ -88,6 +88,7 @@ public :
 								maxEdgeSpeed
 							);
 				maxTimestep = std::max(maxEdgeSpeed, maxTimestep);
+
 			}
 		}
 
@@ -98,7 +99,6 @@ public :
 		
 		maxTimestep = 0.4 * dx / maxTimestep;
 		updateUnknowns(maxTimestep);
-//std::cout << "(update)";
 	
 #ifndef NDEBUG
 			maxTimestepY = 0.f;
@@ -118,7 +118,7 @@ public :
 #ifndef NDEBUG
 					maxTimestepY = std::max(maxEdgeSpeed, maxTimestepY);
 #endif //NDEBUG
-					
+						
 			}
 		}
 
@@ -133,7 +133,6 @@ public :
 		setZero(huNetUpdatesRight, nx + 1, ny);
 
 		updateUnknowns(maxTimestep);
-//std::cout << "(update2)";
 			
 	}
 
