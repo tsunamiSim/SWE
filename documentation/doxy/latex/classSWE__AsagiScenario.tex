@@ -1,0 +1,209 @@
+\hypertarget{classSWE__AsagiScenario}{\section{S\-W\-E\-\_\-\-Asagi\-Scenario Class Reference}
+\label{classSWE__AsagiScenario}\index{S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}}
+}
+Inheritance diagram for S\-W\-E\-\_\-\-Asagi\-Scenario\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSWE__AsagiScenario}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__AsagiScenario_a9add0345b6793da297a44598451074e1}{S\-W\-E\-\_\-\-Asagi\-Scenario} (const std\-::string i\-\_\-bathymetry\-File, const std\-::string i\-\_\-displacement\-File, const float i\-\_\-duration, const float i\-\_\-simulation\-Area\mbox{[}4\mbox{]}, const bool i\-\_\-dynamic\-Displacement=false)
+\item 
+\hypertarget{classSWE__AsagiScenario_a48d6ba2326cbc06df693990cf41144e6}{void {\bfseries delete\-Grids} ()}\label{classSWE__AsagiScenario_a48d6ba2326cbc06df693990cf41144e6}
+
+\item 
+float \hyperlink{classSWE__AsagiScenario_a3d2772883dc584cb1c8ffaafa4dafb8f}{get\-Water\-Height} (float i\-\_\-position\-X, float i\-\_\-position\-Y)
+\item 
+float \hyperlink{classSWE__AsagiScenario_a95456b79bd1f96120bd8efa73d927568}{get\-Bathymetry} (const float i\-\_\-position\-X, const float i\-\_\-position\-Y)
+\item 
+float \hyperlink{classSWE__AsagiScenario_a462a4df01aec18b2e5af37f42e86cfde}{get\-Bathymetry\-And\-Dynamic\-Displacement} (const float i\-\_\-position\-X, const float i\-\_\-position\-Y, const float i\-\_\-time)
+\item 
+bool \hyperlink{classSWE__AsagiScenario_ada067ab5b456f445c66b9fe84c3a4ca5}{dynamic\-Displacement\-Available} (const float i\-\_\-time)
+\item 
+float \hyperlink{classSWE__AsagiScenario_a44449cbcfad023f60ae2af020576fe4b}{end\-Simulation} ()
+\item 
+\hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \hyperlink{classSWE__AsagiScenario_adf7992278300b2cb2475398245bad877}{get\-Boundary\-Type} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} i\-\_\-edge)
+\item 
+float \hyperlink{classSWE__AsagiScenario_a1f35638db4394f05fa2d0669634aa9ca}{get\-Boundary\-Pos} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} i\-\_\-edge)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__AsagiScenario_a9add0345b6793da297a44598451074e1}{\index{S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}!S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}}
+\index{S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}!SWE_AsagiScenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}}
+\subsubsection[{S\-W\-E\-\_\-\-Asagi\-Scenario}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Asagi\-Scenario\-::\-S\-W\-E\-\_\-\-Asagi\-Scenario (
+\begin{DoxyParamCaption}
+\item[{const std\-::string}]{i\-\_\-bathymetry\-File, }
+\item[{const std\-::string}]{i\-\_\-displacement\-File, }
+\item[{const float}]{i\-\_\-duration, }
+\item[{const float}]{i\-\_\-simulation\-Area\mbox{[}4\mbox{]}, }
+\item[{const bool}]{i\-\_\-dynamic\-Displacement = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__AsagiScenario_a9add0345b6793da297a44598451074e1}
+Constructor of an Asagi Scenario, which initializes the corresponding Asagi grids.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-origin\-X} & origin of the simulation area (x-\/direction) \\
+\hline
+{\em i\-\_\-origin\-Y} & origin of the simulation area (y-\/direction) \\
+\hline
+{\em i\-\_\-bathymetry\-File} & path to the net\-C\-D\-F-\/bathymetry file \\
+\hline
+{\em i\-\_\-displacement\-File} & path to the net\-C\-D\-F-\/displacement file \\
+\hline
+{\em i\-\_\-duration} & time the simulation runs (in seconds) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__AsagiScenario_ada067ab5b456f445c66b9fe84c3a4ca5}{\index{S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}!dynamic\-Displacement\-Available@{dynamic\-Displacement\-Available}}
+\index{dynamic\-Displacement\-Available@{dynamic\-Displacement\-Available}!SWE_AsagiScenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}}
+\subsubsection[{dynamic\-Displacement\-Available}]{\setlength{\rightskip}{0pt plus 5cm}bool S\-W\-E\-\_\-\-Asagi\-Scenario\-::dynamic\-Displacement\-Available (
+\begin{DoxyParamCaption}
+\item[{const float}]{i\-\_\-time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__AsagiScenario_ada067ab5b456f445c66b9fe84c3a4ca5}
+Check if there is an dynamic displacement is available for the corresponding time. 
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-time} & current simulation time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if there is data available, false else 
+\end{DoxyReturn}
+\hypertarget{classSWE__AsagiScenario_a44449cbcfad023f60ae2af020576fe4b}{\index{S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}!end\-Simulation@{end\-Simulation}}
+\index{end\-Simulation@{end\-Simulation}!SWE_AsagiScenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}}
+\subsubsection[{end\-Simulation}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Asagi\-Scenario\-::end\-Simulation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__AsagiScenario_a44449cbcfad023f60ae2af020576fe4b}
+Get the number of seconds, the simulation should run. \begin{DoxyReturn}{Returns}
+number of seconds, the simulation should run 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__AsagiScenario_a95456b79bd1f96120bd8efa73d927568}{\index{S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}!get\-Bathymetry@{get\-Bathymetry}}
+\index{get\-Bathymetry@{get\-Bathymetry}!SWE_AsagiScenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}}
+\subsubsection[{get\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Asagi\-Scenario\-::get\-Bathymetry (
+\begin{DoxyParamCaption}
+\item[{const float}]{i\-\_\-position\-X, }
+\item[{const float}]{i\-\_\-position\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__AsagiScenario_a95456b79bd1f96120bd8efa73d927568}
+Get the bathymetry including static displacement at a specific location
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-position\-X} & position relative to the origin of the displacement grid in x-\/direction \\
+\hline
+{\em i\-\_\-position\-Y} & position relative to the origin of the displacement grid in y-\/direction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bathymetry (after the initial displacement (static displacement) 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__AsagiScenario_a462a4df01aec18b2e5af37f42e86cfde}{\index{S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}!get\-Bathymetry\-And\-Dynamic\-Displacement@{get\-Bathymetry\-And\-Dynamic\-Displacement}}
+\index{get\-Bathymetry\-And\-Dynamic\-Displacement@{get\-Bathymetry\-And\-Dynamic\-Displacement}!SWE_AsagiScenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}}
+\subsubsection[{get\-Bathymetry\-And\-Dynamic\-Displacement}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Asagi\-Scenario\-::get\-Bathymetry\-And\-Dynamic\-Displacement (
+\begin{DoxyParamCaption}
+\item[{const float}]{i\-\_\-position\-X, }
+\item[{const float}]{i\-\_\-position\-Y, }
+\item[{const float}]{i\-\_\-time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__AsagiScenario_a462a4df01aec18b2e5af37f42e86cfde}
+Get the bathymetry including dynamic displacement at a specific location
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-position\-X} & position relative to the origin of the displacement grid in x-\/direction \\
+\hline
+{\em i\-\_\-position\-Y} & position relative to the origin of the displacement grid in y-\/direction \\
+\hline
+{\em i\-\_\-time} & time relative to the origin of the dynamic displacement \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bathymetry (after the initial displacement (static displacement), after the specified amount of time (dynamic displacement)) 
+\end{DoxyReturn}
+\hypertarget{classSWE__AsagiScenario_a1f35638db4394f05fa2d0669634aa9ca}{\index{S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}!get\-Boundary\-Pos@{get\-Boundary\-Pos}}
+\index{get\-Boundary\-Pos@{get\-Boundary\-Pos}!SWE_AsagiScenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}}
+\subsubsection[{get\-Boundary\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Asagi\-Scenario\-::get\-Boundary\-Pos (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{i\-\_\-edge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__AsagiScenario_a1f35638db4394f05fa2d0669634aa9ca}
+Get the boundary positions
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-edge} & which edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value in the corresponding dimension 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__AsagiScenario_adf7992278300b2cb2475398245bad877}{\index{S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}!get\-Boundary\-Type@{get\-Boundary\-Type}}
+\index{get\-Boundary\-Type@{get\-Boundary\-Type}!SWE_AsagiScenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}}
+\subsubsection[{get\-Boundary\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Boundary\-Type} S\-W\-E\-\_\-\-Asagi\-Scenario\-::get\-Boundary\-Type (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{i\-\_\-edge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__AsagiScenario_adf7992278300b2cb2475398245bad877}
+Get the boundary types of the simulation 
+\begin{DoxyParams}{Parameters}
+{\em edge} & specific edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+type of the edge 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__AsagiScenario_a3d2772883dc584cb1c8ffaafa4dafb8f}{\index{S\-W\-E\-\_\-\-Asagi\-Scenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}!get\-Water\-Height@{get\-Water\-Height}}
+\index{get\-Water\-Height@{get\-Water\-Height}!SWE_AsagiScenario@{S\-W\-E\-\_\-\-Asagi\-Scenario}}
+\subsubsection[{get\-Water\-Height}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Asagi\-Scenario\-::get\-Water\-Height (
+\begin{DoxyParamCaption}
+\item[{float}]{i\-\_\-position\-X, }
+\item[{float}]{i\-\_\-position\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__AsagiScenario_a3d2772883dc584cb1c8ffaafa4dafb8f}
+Get the water height at a specific location (before the initial displacement).
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-position\-X} & position relative to the origin of the bathymetry grid in x-\/direction \\
+\hline
+{\em i\-\_\-position\-Y} & position relative to the origin of the bathymetry grid in y-\/direction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+water height (before the initial displacement) 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/scenarios/\hyperlink{SWE__AsagiScenario_8hh}{S\-W\-E\-\_\-\-Asagi\-Scenario.\-hh}\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/scenarios/\hyperlink{SWE__AsagiScenario_8cpp}{S\-W\-E\-\_\-\-Asagi\-Scenario.\-cpp}\end{DoxyCompactItemize}

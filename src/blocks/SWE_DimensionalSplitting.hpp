@@ -38,21 +38,37 @@
 	//#define NDEBUG
 #endif
 
+/**
+* This class implements SWE_Block using the dimensional splitting approach and the F-Wave solver
+*/
 class SWE_DimensionalSplitting: public SWE_Block {
 
 private : 
 	solver::FWave<float> solver;
 	
-	//TODO
+	//! Left net updates for height
 	Float2D hNetUpdatesLeft;
+	//! Right net updates for height
 	Float2D hNetUpdatesRight;
+	//! Left net updates for momentum
 	Float2D huNetUpdatesLeft;
+	//! Right net updates for momentum
 	Float2D huNetUpdatesRight;
+	//! Net updates above for height
 	Float2D hNetUpdatesBelow;
+	//! Net updates below for height
 	Float2D hNetUpdatesAbove;
+	//! Net updates for momentum below
 	Float2D hvNetUpdatesBelow;
+	//! Net updates for momentum above
 	Float2D hvNetUpdatesAbove;
 
+	/**
+	* Sets all entries of an array to zero
+	* @param array: the array itself
+	* @param xSize: the array's size in the first dimension
+	* @param ySize: the array's size in the second dimension
+	*/
 	void setZero(Float2D& array, int xSize, int ySize)
 	{
 		for(int i = 0; i < xSize-1; i++){
@@ -62,6 +78,14 @@ private :
 		}
 	}
 public :
+	/**
+	* Constructor
+	*
+	* @param l_nx: x dimension of the domain
+	* @param l_ny: y dimension of the domain
+	* @param l_dx: cell size in x dimension
+	* @param l_dy: cell size in y dimension
+	*/
 	SWE_DimensionalSplitting(int l_nx, int l_ny, float l_dx, float l_dy) :
 		SWE_Block(l_nx, l_ny, l_dx, l_dy),
 		hNetUpdatesLeft (l_nx + 1, l_ny),
@@ -75,6 +99,10 @@ public :
 		hvNetUpdatesAbove (l_nx, l_ny + 1)
 {
 }
+	
+	/**
+	* computing the net updates AND applying them already
+	*/
 	void computeNumericalFluxes()
 	{
 		for(unsigned int y = 0; y < ny; y++)
@@ -136,6 +164,9 @@ public :
 			
 	}
 
+	/**
+	* Applying the net updates (CARE: ComputeNumericalFluxes already calls this, don't use it again)
+	*/
 	void updateUnknowns(float dt)
 	{
 		for(unsigned int y = 1; y < ny+1; y++)

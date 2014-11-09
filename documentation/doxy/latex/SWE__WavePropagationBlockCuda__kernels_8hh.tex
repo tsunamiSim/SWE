@@ -1,0 +1,248 @@
+\hypertarget{SWE__WavePropagationBlockCuda__kernels_8hh}{\section{/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/cuda/\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.hh File Reference}
+\label{SWE__WavePropagationBlockCuda__kernels_8hh}\index{/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/cuda/\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh@{/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/cuda/\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__WavePropagationBlockCuda__kernels_8hh_a2bc584d7ead34df704e1c977c38c98bf}{compute\-Net\-Updates\-Kernel} (const float $\ast$i\-\_\-h, const float $\ast$i\-\_\-hu, const float $\ast$i\-\_\-hv, const float $\ast$i\-\_\-b, float $\ast$o\-\_\-h\-Net\-Updates\-Left\-D, float $\ast$o\-\_\-h\-Net\-Updates\-Right\-D, float $\ast$o\-\_\-hu\-Net\-Updates\-Left\-D, float $\ast$o\-\_\-hu\-Net\-Updates\-Right\-D, float $\ast$o\-\_\-h\-Net\-Updates\-Below\-D, float $\ast$o\-\_\-h\-Net\-Updates\-Above\-D, float $\ast$o\-\_\-hv\-Net\-Updates\-Below\-D, float $\ast$o\-\_\-hv\-Net\-Updates\-Above\-D, float $\ast$o\-\_\-maximum\-Wave\-Speeds, const int i\-\_\-nx, const int i\-\_\-ny, const int i\-\_\-offset\-X=0, const int i\-\_\-offset\-Y=0, const int i\-\_\-block\-Off\-Set\-X=0, const int i\-\_\-block\-Off\-Set\-Y=0)
+\item 
+\-\_\-\-\_\-global\-\_\-\-\_\- void \hyperlink{SWE__WavePropagationBlockCuda__kernels_8hh_a8b864dfc09bf8e43d7f2849fb74add2e}{update\-Unknowns\-Kernel} (const float $\ast$i\-\_\-h\-Net\-Updates\-Left\-D, const float $\ast$i\-\_\-h\-Net\-Updates\-Right\-D, const float $\ast$i\-\_\-hu\-Net\-Updates\-Left\-D, const float $\ast$i\-\_\-hu\-Net\-Updates\-Right\-D, const float $\ast$i\-\_\-h\-Net\-Updates\-Below\-D, const float $\ast$i\-\_\-h\-Net\-Updates\-Above\-D, const float $\ast$i\-\_\-hv\-Net\-Updates\-Below\-D, const float $\ast$i\-\_\-hv\-Net\-Updates\-Above\-D, float $\ast$io\-\_\-h, float $\ast$io\-\_\-hu, float $\ast$io\-\_\-hv, const float i\-\_\-update\-Width\-X, const float i\-\_\-update\-Width\-Y, const int i\-\_\-nx, const int i\-\_\-ny)
+\item 
+\-\_\-\-\_\-device\-\_\-\-\_\- int \hyperlink{SWE__WavePropagationBlockCuda__kernels_8hh_aa1828414f270d255b05e877dd2f8b7df}{compute\-One\-D\-Position\-Kernel} (const int i\-\_\-i, const int i\-\_\-j, const int i\-\_\-nx)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file is part of S\-W\-E.
+
+\begin{DoxyAuthor}{Author}
+Alexander Breuer (breuera A\-T in.\-tum.\-de, \href{http://www5.in.tum.de/wiki/index.php/Dipl.-Math._Alexander_Breuer}{\tt http\-://www5.\-in.\-tum.\-de/wiki/index.\-php/\-Dipl.-\/\-Math.\-\_\-\-Alexander\-\_\-\-Breuer})
+\end{DoxyAuthor}
+\hypertarget{Writer_8hh_LICENSE}{}\subsection{L\-I\-C\-E\-N\-S\-E}\label{Writer_8hh_LICENSE}
+S\-W\-E is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+S\-W\-E is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with S\-W\-E. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}.\hypertarget{NetCdfWriter_8hh_DESCRIPTION}{}\subsection{D\-E\-S\-C\-R\-I\-P\-T\-I\-O\-N}\label{NetCdfWriter_8hh_DESCRIPTION}
+C\-U\-D\-A Kernels for a \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block}, which uses solvers in the wave propagation formulation. 
+
+\subsection{Function Documentation}
+\hypertarget{SWE__WavePropagationBlockCuda__kernels_8hh_a2bc584d7ead34df704e1c977c38c98bf}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh}!compute\-Net\-Updates\-Kernel@{compute\-Net\-Updates\-Kernel}}
+\index{compute\-Net\-Updates\-Kernel@{compute\-Net\-Updates\-Kernel}!SWE_WavePropagationBlockCuda_kernels.hh@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh}}
+\subsubsection[{compute\-Net\-Updates\-Kernel}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void compute\-Net\-Updates\-Kernel (
+\begin{DoxyParamCaption}
+\item[{const float $\ast$}]{i\-\_\-h, }
+\item[{const float $\ast$}]{i\-\_\-hu, }
+\item[{const float $\ast$}]{i\-\_\-hv, }
+\item[{const float $\ast$}]{i\-\_\-b, }
+\item[{float $\ast$}]{o\-\_\-h\-Net\-Updates\-Left\-D, }
+\item[{float $\ast$}]{o\-\_\-h\-Net\-Updates\-Right\-D, }
+\item[{float $\ast$}]{o\-\_\-hu\-Net\-Updates\-Left\-D, }
+\item[{float $\ast$}]{o\-\_\-hu\-Net\-Updates\-Right\-D, }
+\item[{float $\ast$}]{o\-\_\-h\-Net\-Updates\-Below\-D, }
+\item[{float $\ast$}]{o\-\_\-h\-Net\-Updates\-Above\-D, }
+\item[{float $\ast$}]{o\-\_\-hv\-Net\-Updates\-Below\-D, }
+\item[{float $\ast$}]{o\-\_\-hv\-Net\-Updates\-Above\-D, }
+\item[{float $\ast$}]{o\-\_\-maximum\-Wave\-Speeds, }
+\item[{const int}]{i\-\_\-n\-X, }
+\item[{const int}]{i\-\_\-n\-Y, }
+\item[{const int}]{i\-\_\-offset\-X, }
+\item[{const int}]{i\-\_\-offset\-Y, }
+\item[{const int}]{i\-\_\-block\-Off\-Set\-X, }
+\item[{const int}]{i\-\_\-block\-Off\-Set\-Y}
+\end{DoxyParamCaption}
+)}}\label{SWE__WavePropagationBlockCuda__kernels_8hh_a2bc584d7ead34df704e1c977c38c98bf}
+The compute net-\/updates kernel calls the solver for a defined C\-U\-D\-A-\/\-Block and does a reduction over the computed wave speeds within this block.
+
+Remark\-: In overall we have nx+1 / ny+1 edges. Therefore the edges \char`\"{}simulation domain\char`\"{}/\char`\"{}top ghost layer\char`\"{} and \char`\"{}simulation domain\char`\"{}/\char`\"{}right ghost layer\char`\"{} will not be computed in a typical call of the function\-: compute\-Net\-Updates\-Kernel$<$$<$$<$dim\-Grid,dim\-Block$>$$>$$>$( hd, hud, hvd, bd, h\-Net\-Updates\-Left\-D, h\-Net\-Updates\-Right\-D, hu\-Net\-Updates\-Left\-D, hu\-Net\-Updates\-Right\-D, h\-Net\-Updates\-Below\-D, h\-Net\-Updates\-Above\-D, hv\-Net\-Updates\-Below\-D, hv\-Net\-Updates\-Above\-D, l\-\_\-maximum\-Wave\-Speeds\-D, i\-\_\-nx, i\-\_\-ny ); To reduce the effect of branch-\/mispredictions the kernel provides optional offsets, which can be used to compute the missing edges.
+
+\hyperlink{classSWE__WavePropagationBlockCuda_a8a89bf61b9fc4433652f400ca8e564ed}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-::compute\-Numerical\-Fluxes()} explains the coalesced memory access.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-h} & water heights (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-hu} & momentums in x-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-hv} & momentums in y-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-b} & bathymetry values (C\-U\-D\-A-\/array). \\
+\hline
+{\em o\-\_\-h\-Net\-Updates\-Left\-D} & left going net-\/updates for the water height (C\-U\-D\-A-\/array). \\
+\hline
+{\em o\-\_\-h\-Net\-Updates\-Right\-D} & right going net-\/updates for the water height (C\-U\-D\-A-\/array). \\
+\hline
+{\em o\-\_\-hu\-Net\-Updates\-Left\-D} & left going net-\/updates for the momentum in x-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em o\-\_\-hu\-Net\-Updates\-Right\-D} & right going net-\/updates for the momentum in x-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em o\-\_\-h\-Net\-Updates\-Below\-D} & downwards going net-\/updates for the water height (C\-U\-D\-A-\/array). \\
+\hline
+{\em o\-\_\-h\-Net\-Updates\-Above\-D} & upwards going net-\/updates for the water height (C\-U\-D\-A-\/array). \\
+\hline
+{\em o\-\_\-hv\-Net\-Updates\-Below\-D} & downwards going net-\/updates for the momentum in y-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em o\-\_\-hv\-Net\-Updates\-Above\-D} & upwards going net-\/updates for the momentum in y-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em o\-\_\-maximum\-Wave\-Speeds} & maximum wave speed which occurred within the C\-U\-D\-A-\/block is written here (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-nx} & number of cells within the simulation domain in x-\/direction (excludes ghost layers). \\
+\hline
+{\em i\-\_\-ny} & number of cells within the simulation domain in y-\/direction (excludes ghost layers). \\
+\hline
+{\em i\-\_\-offset\-X} & cell/edge offset in x-\/direction. \\
+\hline
+{\em i\-\_\-offset\-Y} & cell/edge offset in y-\/direction. \\
+\hline
+\end{DoxyParams}
+array maximum wave speed within this C\-U\-D\-A-\/block
+
+thread local index in the shared maximum wave speed array
+
+index (l\-\_\-cell\-Index\-I,l\-\_\-cell\-Index\-J) of the cell lying on the right side of the edge/above the edge where the thread works on.
+
+array which holds the thread local net-\/updates.
+
+location of the thread local cells in the global C\-U\-D\-A-\/arrays.
+
+reduction partner for a thread
+
+Position of the maximum wave speed in the global device array.
+
+In the 'main' part (e.\-g. grid\-Dim = nx/\-T\-I\-L\-E\-\_\-\-S\-I\-Z\-Em ny/\-T\-I\-L\-E\-\_\-\-S\-I\-Z\-E) the position is simply given by the block\-Id in x-\/ and y-\/direction with a stride of grid\-Dim.\-x + 1. The +1 results from the speeds in the 'boundary' case, see below.
+
+In the 'boundary' case, where the edges lie between the computational domain and the right/top ghost layer, this is more complicated. In this case block offsets in x-\/ and y-\/direction are used. The offsets define how many blocks in the resp. direction have to be added to get a valid result. Computational domain -\/ right ghost layer\-: In this case the dimension of the grid in x-\/direction is 1. Computational domain -\/ top ghost layer\-: In this case the dimension of the grid in y-\/direction is 1.
+
+Same Example as in \hyperlink{classSWE__WavePropagationBlockCuda_a8a89bf61b9fc4433652f400ca8e564ed}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-::compute\-Numerical\-Fluxes()}, assume the C\-U\-D\-A-\/grid/-\/blocks has the following layout\-: 
+\begin{DoxyPre}
+                                                         *
+                                                        **        top ghost layer,
+                       * block 8 * block 9 * block 10* ********   cell ids
+                       ******************************** **
+                       *         *         *         *   *
+                       *  block  *  block  *  block  * b
+                       *    4    *    5    *    6    * 7
+                       *         *         *         *
+                       ********************************
+                       *         *         *         *
+                       *  block  *  block  *  block  * b
+                   *   *    0    *    1    *    2    * 3
+    bottom         **  *         *         *         *
+    ghost     ******** ********************************
+    layer          **
+                   *   *                              *
+                      ***                            ***
+                       *                              *
+                       *                              *
+                 left ghost layer              right ghost layer
+\end{DoxyPre}
+ This results in a 'main' part containing of (3$\ast$2) blocks and two 'boundary' parts containing of (1$\ast$2) blocks and (3$\ast$1) blocks.
+
+The maximum wave speed array on the device represents therefore logically a (4 $\ast$ 3)-\/1 2\-D-\/array (-\/1\-: no block on the top right). The 'main' part writes into cells 0, 1, 2, 4, 5 and 6. The 'computational domain -\/ right ghost layer' part writes into 3 and 7 with offset in x-\/direction = 3 The 'computational domain -\/ top ghost layer' part writes into 8, 9, 10 with offset in y-\/direction = 2\hypertarget{SWE__WavePropagationBlockCuda__kernels_8hh_aa1828414f270d255b05e877dd2f8b7df}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh}!compute\-One\-D\-Position\-Kernel@{compute\-One\-D\-Position\-Kernel}}
+\index{compute\-One\-D\-Position\-Kernel@{compute\-One\-D\-Position\-Kernel}!SWE_WavePropagationBlockCuda_kernels.hh@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh}}
+\subsubsection[{compute\-One\-D\-Position\-Kernel}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-device\-\_\-\-\_\- int compute\-One\-D\-Position\-Kernel (
+\begin{DoxyParamCaption}
+\item[{const int}]{i\-\_\-i, }
+\item[{const int}]{i\-\_\-j, }
+\item[{const int}]{i\-\_\-ny}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{SWE__WavePropagationBlockCuda__kernels_8hh_aa1828414f270d255b05e877dd2f8b7df}
+Compute the position of 2\-D coordinates in a 1\-D array. array\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} -\/$>$ i $\ast$ ny + j
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-i} & row index. \\
+\hline
+{\em i\-\_\-j} & column index. \\
+\hline
+{\em i\-\_\-ny} & \#(cells in y-\/direction). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1\-D index. 
+\end{DoxyReturn}
+\hypertarget{SWE__WavePropagationBlockCuda__kernels_8hh_a8b864dfc09bf8e43d7f2849fb74add2e}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh}!update\-Unknowns\-Kernel@{update\-Unknowns\-Kernel}}
+\index{update\-Unknowns\-Kernel@{update\-Unknowns\-Kernel}!SWE_WavePropagationBlockCuda_kernels.hh@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-\_\-kernels.\-hh}}
+\subsubsection[{update\-Unknowns\-Kernel}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-global\-\_\-\-\_\- void update\-Unknowns\-Kernel (
+\begin{DoxyParamCaption}
+\item[{const float $\ast$}]{i\-\_\-h\-Net\-Updates\-Left\-D, }
+\item[{const float $\ast$}]{i\-\_\-h\-Net\-Updates\-Right\-D, }
+\item[{const float $\ast$}]{i\-\_\-hu\-Net\-Updates\-Left\-D, }
+\item[{const float $\ast$}]{i\-\_\-hu\-Net\-Updates\-Right\-D, }
+\item[{const float $\ast$}]{i\-\_\-h\-Net\-Updates\-Below\-D, }
+\item[{const float $\ast$}]{i\-\_\-h\-Net\-Updates\-Above\-D, }
+\item[{const float $\ast$}]{i\-\_\-hv\-Net\-Updates\-Below\-D, }
+\item[{const float $\ast$}]{i\-\_\-hv\-Net\-Updates\-Above\-D, }
+\item[{float $\ast$}]{io\-\_\-h, }
+\item[{float $\ast$}]{io\-\_\-hu, }
+\item[{float $\ast$}]{io\-\_\-hv, }
+\item[{const float}]{i\-\_\-update\-Width\-X, }
+\item[{const float}]{i\-\_\-update\-Width\-Y, }
+\item[{const int}]{i\-\_\-n\-X, }
+\item[{const int}]{i\-\_\-n\-Y}
+\end{DoxyParamCaption}
+)}}\label{SWE__WavePropagationBlockCuda__kernels_8hh_a8b864dfc09bf8e43d7f2849fb74add2e}
+The \char`\"{}update unknowns\char`\"{}-\/kernel updates the unknowns in the cells with precomputed net-\/updates.
+
+\hyperlink{classSWE__WavePropagationBlockCuda_a8a89bf61b9fc4433652f400ca8e564ed}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-::compute\-Numerical\-Fluxes()} explains the coalesced memory access.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-h\-Net\-Updates\-Left\-D} & left going net-\/updates for the water height (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-h\-Net\-Updates\-Right\-D} & right going net-\/updates for the water height (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-hu\-Net\-Updates\-Left\-D} & left going net-\/updates for the momentum in x-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-hu\-Net\-Updates\-Right\-D} & right going net-\/updates for the momentum in x-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-h\-Net\-Updates\-Below\-D} & downwards going net-\/updates for the water height (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-h\-Net\-Updates\-Above\-D} & upwards going net-\/updates for the water height (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-hv\-Net\-Updates\-Below\-D} & downwards going net-\/updates for the momentum in y-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-hv\-Net\-Updates\-Above\-D} & upwards going net-\/updates for the momentum in y-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em io\-\_\-h} & water heights (C\-U\-D\-A-\/array). \\
+\hline
+{\em io\-\_\-hu} & momentums in x-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em io\-\_\-hv} & momentums in y-\/direction (C\-U\-D\-A-\/array). \\
+\hline
+{\em i\-\_\-update\-Width\-X} & update width in x-\/direction. \\
+\hline
+{\em i\-\_\-update\-Width\-Y} & update width in y-\/direction. \\
+\hline
+{\em i\-\_\-nx} & number of cells within the simulation domain in x-\/direction (excludes ghost layers). \\
+\hline
+{\em i\-\_\-ny} & number of cells within the simulation domain in y-\/direction (excludes ghost layers). \\
+\hline
+\end{DoxyParams}
+cell indices (l\-\_\-cell\-Index\-I,l\-\_\-cell\-Index\-J) of the cell which the thread updates.
+
+location of the thread local cell in the global C\-U\-D\-A-\/arrays.
+
+positions of the net-\/updates in the global C\-U\-D\-A-\/arrays.
+
+Compute the positions of the net updates relative to a given cell
+
+
+\begin{DoxyPre}
+                 netUpdateRight(i-1, j)\end{DoxyPre}
+
+
+
+\begin{DoxyPre}                          |           |
+                          |           |
+                          |           |
+ netUpdateBelow(i,j) -----*************-----
+                          *           *
+                          * cell(i,j) *
+                          *           *
+                     -----*************------ netUpdateAbove(i, j-1)
+                          |           |
+                          |           |
+                          |           |
+                               netUpdatesLeft(i,j)
+\end{DoxyPre}

@@ -1,0 +1,132 @@
+\hypertarget{help_8hh}{\section{/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/tools/help.hh File Reference}
+\label{help_8hh}\index{/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/tools/help.\-hh@{/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/tools/help.\-hh}}
+}
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classFloat1D}{Float1\-D}
+\item 
+class \hyperlink{classFloat2D}{Float2\-D}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\-::string \hyperlink{help_8hh_aa10dc278c6ac60f9cd49955cbe16fbcb}{generate\-File\-Name} (std\-::string base\-Name, int time\-Step)
+\item 
+std\-::string \hyperlink{help_8hh_a206f33ce37fa47f8635d02a1cfc9881f}{generate\-File\-Name} (std\-::string i\-\_\-base\-Name, int i\-\_\-block\-Position\-X, int i\-\_\-block\-Position\-Y, std\-::string i\-\_\-file\-Extension=\char`\"{}.nc\char`\"{})
+\item 
+std\-::string \hyperlink{help_8hh_ab05bce4e4d30d0b9fb85f81668f98f79}{generate\-File\-Name} (std\-::string base\-Name, int time\-Step, int block\-\_\-\-X, int block\-\_\-\-Y, std\-::string i\-\_\-file\-Extension=\char`\"{}.vts\char`\"{})
+\item 
+std\-::string \hyperlink{help_8hh_a7dc37444a6b7771aefff04a38e74e086}{generate\-Base\-File\-Name} (std\-::string \&i\-\_\-base\-Name, int i\-\_\-block\-Position\-X, int i\-\_\-block\-Position\-Y)
+\item 
+std\-::string \hyperlink{help_8hh_a427928180ec14bf889c55e5cc51d8e36}{generate\-Container\-File\-Name} (std\-::string base\-Name, int time\-Step)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file is part of S\-W\-E.
+
+\begin{DoxyAuthor}{Author}
+Michael Bader, Kaveh Rahnema 
+
+Sebastian Rettenberger
+\end{DoxyAuthor}
+\hypertarget{Writer_8hh_LICENSE}{}\subsection{L\-I\-C\-E\-N\-S\-E}\label{Writer_8hh_LICENSE}
+S\-W\-E is free software\-: you can redistribute it and/or modify it under the terms of the G\-N\-U General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+S\-W\-E is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U General Public License for more details.
+
+You should have received a copy of the G\-N\-U General Public License along with S\-W\-E. If not, see \href{http://www.gnu.org/licenses/}{\tt http\-://www.\-gnu.\-org/licenses/}.\hypertarget{NetCdfWriter_8hh_DESCRIPTION}{}\subsection{D\-E\-S\-C\-R\-I\-P\-T\-I\-O\-N}\label{NetCdfWriter_8hh_DESCRIPTION}
+T\-O\-D\-O 
+
+\subsection{Function Documentation}
+\hypertarget{help_8hh_a7dc37444a6b7771aefff04a38e74e086}{\index{help.\-hh@{help.\-hh}!generate\-Base\-File\-Name@{generate\-Base\-File\-Name}}
+\index{generate\-Base\-File\-Name@{generate\-Base\-File\-Name}!help.hh@{help.\-hh}}
+\subsubsection[{generate\-Base\-File\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string generate\-Base\-File\-Name (
+\begin{DoxyParamCaption}
+\item[{std\-::string \&}]{i\-\_\-base\-Name, }
+\item[{int}]{i\-\_\-block\-Position\-X, }
+\item[{int}]{i\-\_\-block\-Position\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{help_8hh_a7dc37444a6b7771aefff04a38e74e086}
+Generates an output file name for a multiple \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} version based on the ordering of the blocks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-base\-Name} & base name of the output. \\
+\hline
+{\em i\-\_\-block\-Position\-X} & position of the \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} in x-\/direction. \\
+\hline
+{\em i\-\_\-block\-Position\-Y} & position of the \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} in y-\/direction.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the output filename {\bfseries without} timestep information and file extension 
+\end{DoxyReturn}
+\hypertarget{help_8hh_a427928180ec14bf889c55e5cc51d8e36}{\index{help.\-hh@{help.\-hh}!generate\-Container\-File\-Name@{generate\-Container\-File\-Name}}
+\index{generate\-Container\-File\-Name@{generate\-Container\-File\-Name}!help.hh@{help.\-hh}}
+\subsubsection[{generate\-Container\-File\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string generate\-Container\-File\-Name (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{base\-Name, }
+\item[{int}]{time\-Step}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{help_8hh_a427928180ec14bf889c55e5cc51d8e36}
+generate output filename for the Para\-View-\/\-Container-\/\-File (to visualize multiple S\-W\-E\-\_\-\-Blocks per checkpoint) \hypertarget{help_8hh_aa10dc278c6ac60f9cd49955cbe16fbcb}{\index{help.\-hh@{help.\-hh}!generate\-File\-Name@{generate\-File\-Name}}
+\index{generate\-File\-Name@{generate\-File\-Name}!help.hh@{help.\-hh}}
+\subsubsection[{generate\-File\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string generate\-File\-Name (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{base\-Name, }
+\item[{int}]{time\-Step}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{help_8hh_aa10dc278c6ac60f9cd49955cbe16fbcb}
+generate output filenames for the single-\/\-S\-W\-E\-\_\-\-Block version (for serial and Open\-M\-P-\/parallelised versions that use only a single \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} -\/ one output file is generated per checkpoint)
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000001}{Deprecated}]\end{DoxyRefDesc}
+\hypertarget{help_8hh_a206f33ce37fa47f8635d02a1cfc9881f}{\index{help.\-hh@{help.\-hh}!generate\-File\-Name@{generate\-File\-Name}}
+\index{generate\-File\-Name@{generate\-File\-Name}!help.hh@{help.\-hh}}
+\subsubsection[{generate\-File\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string generate\-File\-Name (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{i\-\_\-base\-Name, }
+\item[{int}]{i\-\_\-block\-Position\-X, }
+\item[{int}]{i\-\_\-block\-Position\-Y, }
+\item[{std\-::string}]{i\-\_\-file\-Extension = {\ttfamily \char`\"{}.nc\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{help_8hh_a206f33ce37fa47f8635d02a1cfc9881f}
+Generates an output file name for a multiple \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} version based on the ordering of the blocks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-base\-Name} & base name of the output. \\
+\hline
+{\em i\-\_\-block\-Position\-X} & position of the \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} in x-\/direction. \\
+\hline
+{\em i\-\_\-block\-Position\-Y} & position of the \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} in y-\/direction. \\
+\hline
+{\em i\-\_\-file\-Extension} & file extension of the output file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000002}{Deprecated}]\end{DoxyRefDesc}
+\hypertarget{help_8hh_ab05bce4e4d30d0b9fb85f81668f98f79}{\index{help.\-hh@{help.\-hh}!generate\-File\-Name@{generate\-File\-Name}}
+\index{generate\-File\-Name@{generate\-File\-Name}!help.hh@{help.\-hh}}
+\subsubsection[{generate\-File\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string generate\-File\-Name (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{base\-Name, }
+\item[{int}]{time\-Step, }
+\item[{int}]{block\-\_\-\-X, }
+\item[{int}]{block\-\_\-\-Y, }
+\item[{std\-::string}]{i\-\_\-file\-Extension = {\ttfamily \char`\"{}.vts\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{help_8hh_ab05bce4e4d30d0b9fb85f81668f98f79}
+generate output filename for the multiple-\/\-S\-W\-E\-\_\-\-Block version (for serial and parallel (Open\-M\-P and M\-P\-I) versions that use multiple S\-W\-E\-\_\-\-Blocks -\/ for each block, one output file is generated per checkpoint)
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000003}{Deprecated}]\end{DoxyRefDesc}

@@ -1,0 +1,33 @@
+\hypertarget{classFloat1D}{\section{Float1\-D Class Reference}
+\label{classFloat1D}\index{Float1\-D@{Float1\-D}}
+}
+
+
+{\ttfamily \#include $<$help.\-hh$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classFloat1D_abac72fb922ec7c6d05818be856ede9a2}{{\bfseries Float1\-D} (float $\ast$\-\_\-elem, int \-\_\-rows, int \-\_\-stride=1)}\label{classFloat1D_abac72fb922ec7c6d05818be856ede9a2}
+
+\item 
+\hypertarget{classFloat1D_a4602b1598eaf2e130a55df93b9723e91}{float \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (int i)}\label{classFloat1D_a4602b1598eaf2e130a55df93b9723e91}
+
+\item 
+\hypertarget{classFloat1D_af3356b364d5ff56f3740729724da0467}{const float \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (int i) const }\label{classFloat1D_af3356b364d5ff56f3740729724da0467}
+
+\item 
+\hypertarget{classFloat1D_a2e7889e514588f539a8dc47c75e70601}{float $\ast$ {\bfseries elem\-Vector} ()}\label{classFloat1D_a2e7889e514588f539a8dc47c75e70601}
+
+\item 
+\hypertarget{classFloat1D_a247a2e783f7300467c55fa2e7b19aa43}{int {\bfseries get\-Size} () const }\label{classFloat1D_a247a2e783f7300467c55fa2e7b19aa43}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class \hyperlink{classFloat1D}{Float1\-D} is a proxy class that can represent, for example, a column or row vector of a \hyperlink{classFloat2D}{Float2\-D} array, where row (sub-\/)arrays are stored with a respective stride. Besides constructor/deconstructor, the class provides overloading of the \mbox{[}\mbox{]}-\/operator, such that elements can be accessed as v\mbox{[}i\mbox{]} (independent of the stride). The class will never allocate separate memory for the vectors, but point to the interior data structure of \hyperlink{classFloat2D}{Float2\-D} (or other \char`\"{}host\char`\"{} data structures). 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/tools/\hyperlink{help_8hh}{help.\-hh}\end{DoxyCompactItemize}

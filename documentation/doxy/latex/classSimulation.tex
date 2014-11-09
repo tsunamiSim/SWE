@@ -1,0 +1,107 @@
+\hypertarget{classSimulation}{\section{Simulation Class Reference}
+\label{classSimulation}\index{Simulation@{Simulation}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSimulation_a5b224cc5b36bcc8eb29689aff223de41}{Simulation} ()
+\item 
+\hyperlink{classSimulation_a80fad3f57dfaf195a36f7bc49bc88279}{$\sim$\-Simulation} ()
+\item 
+void \hyperlink{classSimulation_a6be9990c6b2e31959254c8aa7b6df8a1}{restart} ()
+\item 
+\hypertarget{classSimulation_a0d9c93f7fbb498ac6f84d22baab8bbb0}{void {\bfseries load\-New\-Scenario} (\hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario} $\ast$scene)}\label{classSimulation_a0d9c93f7fbb498ac6f84d22baab8bbb0}
+
+\item 
+\hypertarget{classSimulation_a349cba71f66fac2a159e3517ae7327ab}{void {\bfseries resize} (float factor)}\label{classSimulation_a349cba71f66fac2a159e3517ae7327ab}
+
+\item 
+void \hyperlink{classSimulation_a3d8e72877a4c982eaead748b8f8faf36}{set\-Bath\-Buffer} (float $\ast$output)
+\item 
+void \hyperlink{classSimulation_ab49e788b7f797a1bebdb3f5667cc95b9}{run\-Cuda} (struct cuda\-Graphics\-Resource $\ast$$\ast$vbo\-\_\-resource, struct cuda\-Graphics\-Resource $\ast$$\ast$vbo\-\_\-normals)
+\item 
+\hypertarget{classSimulation_a3e99b3b75a733fe887f1ea60307af78e}{int {\bfseries get\-Nx} ()}\label{classSimulation_a3e99b3b75a733fe887f1ea60307af78e}
+
+\item 
+\hypertarget{classSimulation_a58809b28521e41ba4b853cbf49dcd5a6}{int {\bfseries get\-Ny} ()}\label{classSimulation_a58809b28521e41ba4b853cbf49dcd5a6}
+
+\item 
+\hypertarget{classSimulation_a54ff6716f1d6d7a7627ee31062afa2c2}{const \hyperlink{classFloat2D}{Float2\-D} \& {\bfseries get\-Bathymetry} ()}\label{classSimulation_a54ff6716f1d6d7a7627ee31062afa2c2}
+
+\item 
+void \hyperlink{classSimulation_aeb1357e23e68821bb27922f3c97b04c2}{get\-Scaling\-Approximation} (float \&b\-Scale, float \&b\-Offset, float \&w\-Scale)
+\item 
+\hypertarget{classSimulation_a60120697b4c33d63ed3226f30683f207}{void {\bfseries toogle\-Loop} ()}\label{classSimulation_a60120697b4c33d63ed3226f30683f207}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSimulation_a5b224cc5b36bcc8eb29689aff223de41}{\index{Simulation@{Simulation}!Simulation@{Simulation}}
+\index{Simulation@{Simulation}!Simulation@{Simulation}}
+\subsubsection[{Simulation}]{\setlength{\rightskip}{0pt plus 5cm}Simulation\-::\-Simulation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_a5b224cc5b36bcc8eb29689aff223de41}
+Constructor. Initializes \hyperlink{classSWE__BlockCUDA}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A} and creates a new instance of it. \hypertarget{classSimulation_a80fad3f57dfaf195a36f7bc49bc88279}{\index{Simulation@{Simulation}!$\sim$\-Simulation@{$\sim$\-Simulation}}
+\index{$\sim$\-Simulation@{$\sim$\-Simulation}!Simulation@{Simulation}}
+\subsubsection[{$\sim$\-Simulation}]{\setlength{\rightskip}{0pt plus 5cm}Simulation\-::$\sim$\-Simulation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_a80fad3f57dfaf195a36f7bc49bc88279}
+Destructor. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSimulation_aeb1357e23e68821bb27922f3c97b04c2}{\index{Simulation@{Simulation}!get\-Scaling\-Approximation@{get\-Scaling\-Approximation}}
+\index{get\-Scaling\-Approximation@{get\-Scaling\-Approximation}!Simulation@{Simulation}}
+\subsubsection[{get\-Scaling\-Approximation}]{\setlength{\rightskip}{0pt plus 5cm}void Simulation\-::get\-Scaling\-Approximation (
+\begin{DoxyParamCaption}
+\item[{float \&}]{b\-Scale, }
+\item[{float \&}]{b\-Offset, }
+\item[{float \&}]{w\-Scale}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_aeb1357e23e68821bb27922f3c97b04c2}
+Computes a first approximation of the scaling values needed for visualization. Gets called before simulation starts and determines the average, mininimum and maximum values of the bathymetry and water surface data. Uses latter values to estimate the scaling factors. \hypertarget{classSimulation_a6be9990c6b2e31959254c8aa7b6df8a1}{\index{Simulation@{Simulation}!restart@{restart}}
+\index{restart@{restart}!Simulation@{Simulation}}
+\subsubsection[{restart}]{\setlength{\rightskip}{0pt plus 5cm}void Simulation\-::restart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_a6be9990c6b2e31959254c8aa7b6df8a1}
+Restarts the simulation. Restores the initial bondaries. \hypertarget{classSimulation_ab49e788b7f797a1bebdb3f5667cc95b9}{\index{Simulation@{Simulation}!run\-Cuda@{run\-Cuda}}
+\index{run\-Cuda@{run\-Cuda}!Simulation@{Simulation}}
+\subsubsection[{run\-Cuda}]{\setlength{\rightskip}{0pt plus 5cm}void Simulation\-::run\-Cuda (
+\begin{DoxyParamCaption}
+\item[{struct cuda\-Graphics\-Resource $\ast$$\ast$}]{vbo\-\_\-resource, }
+\item[{struct cuda\-Graphics\-Resource $\ast$$\ast$}]{vbo\-\_\-normals}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_ab49e788b7f797a1bebdb3f5667cc95b9}
+This is the main simulation procedure. Simulates one timestep and computes normals afterwards.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vbo\-\_\-resource} & cuda resource holding the vertex positions \\
+\hline
+{\em vbo\-\_\-normals} & cuda resource holding the normals \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSimulation_a3d8e72877a4c982eaead748b8f8faf36}{\index{Simulation@{Simulation}!set\-Bath\-Buffer@{set\-Bath\-Buffer}}
+\index{set\-Bath\-Buffer@{set\-Bath\-Buffer}!Simulation@{Simulation}}
+\subsubsection[{set\-Bath\-Buffer}]{\setlength{\rightskip}{0pt plus 5cm}void Simulation\-::set\-Bath\-Buffer (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{bath}
+\end{DoxyParamCaption}
+)}}\label{classSimulation_a3d8e72877a4c982eaead748b8f8faf36}
+Sets the bathymetry buffer. Buffer contains vertex position and vertex normal in sequence. 
+\begin{DoxyParams}{Parameters}
+{\em bath} & float array in which computed values will be stored \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/opengl/simulation.\-h\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/opengl/simulation.\-cu\end{DoxyCompactItemize}

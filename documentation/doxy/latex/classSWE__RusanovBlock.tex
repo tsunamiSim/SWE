@@ -1,0 +1,227 @@
+\hypertarget{classSWE__RusanovBlock}{\section{S\-W\-E\-\_\-\-Rusanov\-Block Class Reference}
+\label{classSWE__RusanovBlock}\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Rusanov\-Block.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Rusanov\-Block\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSWE__RusanovBlock}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__RusanovBlock_a479a282899300076c44ccabcb42b5b5c}{S\-W\-E\-\_\-\-Rusanov\-Block} (float \-\_\-offset\-X=0, float \-\_\-offset\-Y=0)
+\item 
+virtual \hyperlink{classSWE__RusanovBlock_aab12f79b94c8ac3cc541ceb2814f72d4}{$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block} ()
+\item 
+virtual void \hyperlink{classSWE__RusanovBlock_ada062db4f54700011d50378b0045830a}{simulate\-Timestep} (float dt)
+\begin{DoxyCompactList}\small\item\em execute a single time step of the simulation \end{DoxyCompactList}\item 
+virtual float \hyperlink{classSWE__RusanovBlock_a645322106b3e5b6f0cca077611ad2159}{simulate} (float t\-Start, float t\-End)
+\begin{DoxyCompactList}\small\item\em compute simulate from specified start to end time \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSWE__RusanovBlock_a78cdefa510cd2d88ca4e213f75b9b10b}{compute\-Numerical\-Fluxes} ()
+\begin{DoxyCompactList}\small\item\em compute flux terms on edges \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSWE__RusanovBlock_a2980aa21030ba8fc607001ad817d7454}{update\-Unknowns} (float dt)
+\begin{DoxyCompactList}\small\item\em update unknowns according to fluxes (Euler time step) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classSWE__RusanovBlock_ac7306305d9c39e418301fc588693c88b}{compute\-Bathymetry\-Sources} ()
+\begin{DoxyCompactList}\small\item\em compute source terms \end{DoxyCompactList}\item 
+float \hyperlink{classSWE__RusanovBlock_a5a2f154dd2110e8515829564dd806530}{compute\-Local\-S\-V} (int i, int j, char dir)
+\item 
+\hypertarget{classSWE__RusanovBlock_a88b3537e5dbe509b0b7495b8e28275bf}{virtual void {\bfseries compute\-Max\-Timestep} ()}\label{classSWE__RusanovBlock_a88b3537e5dbe509b0b7495b8e28275bf}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \hyperlink{classSWE__RusanovBlock_a37c4e0d841054a32adaa8ab26fb7c208}{compute\-Flux} (float f\-Loc, float f\-Neigh, float xi\-Loc, float xi\-Neigh, float llf)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSWE__RusanovBlock_a13e147a6a4f8b39e1a95f37372a04d5b}{\hyperlink{classFloat2D}{Float2\-D} {\bfseries Fh}}\label{classSWE__RusanovBlock_a13e147a6a4f8b39e1a95f37372a04d5b}
+
+\item 
+\hypertarget{classSWE__RusanovBlock_a945f257acfa7b05dd0989c9525160b0b}{\hyperlink{classFloat2D}{Float2\-D} {\bfseries Fhu}}\label{classSWE__RusanovBlock_a945f257acfa7b05dd0989c9525160b0b}
+
+\item 
+\hypertarget{classSWE__RusanovBlock_a788982f2b64f97d271291ef7df669c57}{\hyperlink{classFloat2D}{Float2\-D} {\bfseries Fhv}}\label{classSWE__RusanovBlock_a788982f2b64f97d271291ef7df669c57}
+
+\item 
+\hypertarget{classSWE__RusanovBlock_aaa1d9c2b8f3dc1afe0f818bade7c3940}{\hyperlink{classFloat2D}{Float2\-D} {\bfseries Gh}}\label{classSWE__RusanovBlock_aaa1d9c2b8f3dc1afe0f818bade7c3940}
+
+\item 
+\hypertarget{classSWE__RusanovBlock_af479e7882925550951da40ce85736f83}{\hyperlink{classFloat2D}{Float2\-D} {\bfseries Ghu}}\label{classSWE__RusanovBlock_af479e7882925550951da40ce85736f83}
+
+\item 
+\hypertarget{classSWE__RusanovBlock_a2f856e0d68708748451c9ca1f166aa79}{\hyperlink{classFloat2D}{Float2\-D} {\bfseries Ghv}}\label{classSWE__RusanovBlock_a2f856e0d68708748451c9ca1f166aa79}
+
+\item 
+\hypertarget{classSWE__RusanovBlock_af6f73bf8459849ad75c1d7e70b279710}{\hyperlink{classFloat2D}{Float2\-D} {\bfseries Bx}}\label{classSWE__RusanovBlock_af6f73bf8459849ad75c1d7e70b279710}
+
+\item 
+\hypertarget{classSWE__RusanovBlock_a0c044eadcc80059b8708cf8f8c77add1}{\hyperlink{classFloat2D}{Float2\-D} {\bfseries By}}\label{classSWE__RusanovBlock_a0c044eadcc80059b8708cf8f8c77add1}
+
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{classSWE__RusanovBlock_a11f96afabd5e590e50d491568b96503a}{operator$<$$<$} (ostream \&os, const \hyperlink{classSWE__RusanovBlock}{S\-W\-E\-\_\-\-Rusanov\-Block} \&swe)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classSWE__RusanovBlock}{S\-W\-E\-\_\-\-Rusanov\-Block} is an implementation of the \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} abstract class. It uses a simple Rusanov flux (aka local Lax-\/\-Friedrich) in the model, with some simple modifications to obtain a well-\/balanced scheme. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__RusanovBlock_a479a282899300076c44ccabcb42b5b5c}{\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!SWE_RusanovBlock@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\subsubsection[{S\-W\-E\-\_\-\-Rusanov\-Block}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Rusanov\-Block\-::\-S\-W\-E\-\_\-\-Rusanov\-Block (
+\begin{DoxyParamCaption}
+\item[{float}]{\-\_\-offset\-X = {\ttfamily 0}, }
+\item[{float}]{\-\_\-offset\-Y = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{classSWE__RusanovBlock_a479a282899300076c44ccabcb42b5b5c}
+Constructor\-: allocate variables for simulation
+
+unknowns h,hu,hv,b are defined on grid indices \mbox{[}0,..,nx+1\mbox{]}$\ast$\mbox{[}0,..,ny+1\mbox{]} -\/$>$ computational domain is \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} -\/$>$ plus ghost cell layer
+
+flux terms are defined for edges with indices \mbox{[}0,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} or \mbox{[}1,..,nx\mbox{]}$\ast$\href{for horizontal/vertical edges}{\tt 0,..,ny} Flux term with index (i,j) is located on the edge between cells with index (i,j) and (i+1,j) or (i,j+1)
+
+bathymetry source terms are defined for cells with indices \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]}
+
+@ param \-\_\-offset\-X x coordinate of block origin @ param \-\_\-offset\-Y y coordinate of block origin \hypertarget{classSWE__RusanovBlock_aab12f79b94c8ac3cc541ceb2814f72d4}{\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block@{$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block}}
+\index{$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block@{$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block}!SWE_RusanovBlock@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\subsubsection[{$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Rusanov\-Block\-::$\sim$\-S\-W\-E\-\_\-\-Rusanov\-Block (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__RusanovBlock_aab12f79b94c8ac3cc541ceb2814f72d4}
+Destructor\-: de-\/allocate all variables 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__RusanovBlock_ac7306305d9c39e418301fc588693c88b}{\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!compute\-Bathymetry\-Sources@{compute\-Bathymetry\-Sources}}
+\index{compute\-Bathymetry\-Sources@{compute\-Bathymetry\-Sources}!SWE_RusanovBlock@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\subsubsection[{compute\-Bathymetry\-Sources}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Rusanov\-Block\-::compute\-Bathymetry\-Sources (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__RusanovBlock_ac7306305d9c39e418301fc588693c88b}
+
+
+compute source terms 
+
+compute the bathymetry source terms in all cells \hypertarget{classSWE__RusanovBlock_a37c4e0d841054a32adaa8ab26fb7c208}{\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!compute\-Flux@{compute\-Flux}}
+\index{compute\-Flux@{compute\-Flux}!SWE_RusanovBlock@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\subsubsection[{compute\-Flux}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Rusanov\-Block\-::compute\-Flux (
+\begin{DoxyParamCaption}
+\item[{float}]{f\-Low, }
+\item[{float}]{f\-High, }
+\item[{float}]{xi\-Low, }
+\item[{float}]{xi\-High, }
+\item[{float}]{llf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}}\label{classSWE__RusanovBlock_a37c4e0d841054a32adaa8ab26fb7c208}
+compute the flux term on a given edge (acc. to local Lax-\/\-Friedrich method aka Rusanov flux)\-: f\-Low and f\-High contain the values of the flux function in the two adjacent grid cells xi\-Low and xi\-High are the values of the unknowns in the two adjacent grid cells \char`\"{}\-Low\char`\"{} represents the cell with lower i/j index (\char`\"{}\-High\char`\"{} for larger index). llf should contain the local signal velocity (as compute by compute\-Local\-S\-V) for llf=dx/dt (or dy/dt), we obtain the standard Lax Friedrich method \hypertarget{classSWE__RusanovBlock_a5a2f154dd2110e8515829564dd806530}{\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!compute\-Local\-S\-V@{compute\-Local\-S\-V}}
+\index{compute\-Local\-S\-V@{compute\-Local\-S\-V}!SWE_RusanovBlock@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\subsubsection[{compute\-Local\-S\-V}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Rusanov\-Block\-::compute\-Local\-S\-V (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{int}]{j, }
+\item[{char}]{dir}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSWE__RusanovBlock_a5a2f154dd2110e8515829564dd806530}
+computes the local signal velocity in x-\/ or y-\/direction for two adjacent cells with indices (i,j) and (i+1,j) (if dir='x') or (i,j+1) (if dir='y' \hypertarget{classSWE__RusanovBlock_a78cdefa510cd2d88ca4e213f75b9b10b}{\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}}
+\index{compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}!SWE_RusanovBlock@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\subsubsection[{compute\-Numerical\-Fluxes}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Rusanov\-Block\-::compute\-Numerical\-Fluxes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__RusanovBlock_a78cdefa510cd2d88ca4e213f75b9b10b}
+
+
+compute flux terms on edges 
+
+compute the flux terms on all edges; before the computation, compute\-Bathymetry\-Sources is called 
+
+Implements \hyperlink{classSWE__Block_a94dcf2c6ae31731e4586e45628b0c00e}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__RusanovBlock_a645322106b3e5b6f0cca077611ad2159}{\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!simulate@{simulate}}
+\index{simulate@{simulate}!SWE_RusanovBlock@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\subsubsection[{simulate}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Rusanov\-Block\-::simulate (
+\begin{DoxyParamCaption}
+\item[{float}]{t\-Start, }
+\item[{float}]{t\-End}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__RusanovBlock_a645322106b3e5b6f0cca077611ad2159}
+
+
+compute simulate from specified start to end time 
+
+implements interface function simulate\-: perform forward-\/\-Euler time steps, starting with simulation time t\-Start,\-: until simulation time t\-End is reached; boundary conditions and bathymetry source terms are computed for each timestep as required -\/ intended as main simulation loop between two checkpoints 
+
+Reimplemented from \hyperlink{classSWE__Block_a69784e2be2d09035fb2af9d306768f07}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__RusanovBlock_ada062db4f54700011d50378b0045830a}{\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!simulate\-Timestep@{simulate\-Timestep}}
+\index{simulate\-Timestep@{simulate\-Timestep}!SWE_RusanovBlock@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\subsubsection[{simulate\-Timestep}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Rusanov\-Block\-::simulate\-Timestep (
+\begin{DoxyParamCaption}
+\item[{float}]{dt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__RusanovBlock_ada062db4f54700011d50378b0045830a}
+
+
+execute a single time step of the simulation 
+
+Depending on the current values of h, hu, hv (incl. ghost layers) update these unknowns in each grid cell (ghost layers and bathymetry are not updated). The Rusanov implementation of simulate\-Timestep subsequently calls the functions compute\-Numerical\-Fluxes (to compute all fluxes on grid edges), and update\-Unknowns (to update the variables according to flux values, typically according to an Euler time step). 
+\begin{DoxyParams}{Parameters}
+{\em dt} & size of the time step \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSWE__Block_add6908e1ceb261a0a1f3ebc262cc5f11}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__RusanovBlock_a2980aa21030ba8fc607001ad817d7454}{\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!update\-Unknowns@{update\-Unknowns}}
+\index{update\-Unknowns@{update\-Unknowns}!SWE_RusanovBlock@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\subsubsection[{update\-Unknowns}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Rusanov\-Block\-::update\-Unknowns (
+\begin{DoxyParamCaption}
+\item[{float}]{dt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__RusanovBlock_a2980aa21030ba8fc607001ad817d7454}
+
+
+update unknowns according to fluxes (Euler time step) 
+
+implements interface function update\-Unknowns\-: based on the (Rusanov) fluxes computed on each edge (and stored in the variables Fh, Gh, etc.); compute the balance terms for each cell, and update the unknowns according to an Euler time step. 
+\begin{DoxyParams}{Parameters}
+{\em dt} & size of the time step. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classSWE__Block_ab2b4b659f23d5d45413dece8d2da3298}{S\-W\-E\-\_\-\-Block}.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classSWE__RusanovBlock_a11f96afabd5e590e50d491568b96503a}{\index{S\-W\-E\-\_\-\-Rusanov\-Block@{S\-W\-E\-\_\-\-Rusanov\-Block}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!SWE_RusanovBlock@{S\-W\-E\-\_\-\-Rusanov\-Block}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const {\bf S\-W\-E\-\_\-\-Rusanov\-Block} \&}]{swe}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classSWE__RusanovBlock_a11f96afabd5e590e50d491568b96503a}
+overload operator$<$$<$ such that data can be written via cout $<$$<$ -\/$>$ needs to be declared as friend to be allowed to access private data 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/rusanov/\hyperlink{SWE__RusanovBlock_8hh}{S\-W\-E\-\_\-\-Rusanov\-Block.\-hh}\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/rusanov/\hyperlink{SWE__RusanovBlock_8cpp}{S\-W\-E\-\_\-\-Rusanov\-Block.\-cpp}\end{DoxyCompactItemize}

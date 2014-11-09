@@ -1,0 +1,220 @@
+\hypertarget{classSWE__WavePropagationBlockCuda}{\section{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda Class Reference}
+\label{classSWE__WavePropagationBlockCuda}\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classSWE__WavePropagationBlockCuda}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__WavePropagationBlockCuda_a82f9de16ebab1bff58ead034416ab9ef}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda} (int l\-\_\-nx, int l\-\_\-ny, float l\-\_\-dx, float l\-\_\-dy)
+\item 
+\hyperlink{classSWE__WavePropagationBlockCuda_ab4ad10c9704b7f5501f2a1d828672b57}{$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda} ()
+\item 
+void \hyperlink{classSWE__WavePropagationBlockCuda_ab401d17ea7a60ff30219076bc85dc591}{simulate\-Timestep} (float i\-\_\-d\-T)
+\item 
+float \hyperlink{classSWE__WavePropagationBlockCuda_a8c0fbb70ad29f3775d35978bf2d5b396}{simulate} (float, float)
+\item 
+void \hyperlink{classSWE__WavePropagationBlockCuda_a8a89bf61b9fc4433652f400ca8e564ed}{compute\-Numerical\-Fluxes} ()
+\item 
+void \hyperlink{classSWE__WavePropagationBlockCuda_a4163045a47a73515841e754ca3859fc5}{update\-Unknowns} (const float i\-\_\-delta\-T)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classSWE__WavePropagationBlockCuda}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda} is an implementation of the S\-W\-E\-\_\-\-Block\-Cuda abstract class. It uses a wave propagation solver which is defined with the pre-\/compiler flag W\-A\-V\-E\-\_\-\-P\-R\-O\-P\-A\-G\-A\-T\-I\-O\-N\-\_\-\-S\-O\-L\-V\-E\-R (see above).
+
+Possible wave propagation solvers are\-: F-\/\-Wave, $<$strike$>$Approximate Augmented Riemann, Hybrid (f-\/wave + augmented).$<$/strike$>$ (details can be found in the corresponding source files) 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__WavePropagationBlockCuda_a82f9de16ebab1bff58ead034416ab9ef}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}!S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}}
+\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}!SWE_WavePropagationBlockCuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}}
+\subsubsection[{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-::\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda (
+\begin{DoxyParamCaption}
+\item[{int}]{l\-\_\-nx, }
+\item[{int}]{l\-\_\-ny, }
+\item[{float}]{l\-\_\-dx, }
+\item[{float}]{l\-\_\-dy}
+\end{DoxyParamCaption}
+)}}\label{classSWE__WavePropagationBlockCuda_a82f9de16ebab1bff58ead034416ab9ef}
+Constructor of a \hyperlink{classSWE__WavePropagationBlockCuda}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}.
+
+Allocates the variables for the simulation\-: Please note\-: The definition of indices changed in contrast to the C\-P\-U-\/\-Implementation.
+
+unknowns hd,hud,hvd,bd stored on the C\-U\-D\-A device are defined for grid indices \mbox{[}0,..,nx+1\mbox{]}$\ast$\mbox{[}0,..,ny+1\mbox{]} (-\/$>$ Abstract class \hyperlink{classSWE__BlockCUDA}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}) -\/$>$ computational domain is \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} -\/$>$ plus ghost cell layer
+
+net-\/updates are defined for edges with indices \mbox{[}0,..,nx\mbox{]}$\ast$\mbox{[}0,..,ny\mbox{]} for horizontal and vertical edges for simplicity (one layer is not necessary).
+
+A left/right net update with index (i-\/1,j) is located on the edge between cells with index (i-\/1,j) and (i,j)\-: 
+\begin{DoxyPre}
+  *********************
+  *         *         *
+  * (i-1,j) *  (i,j)  *
+  *         *         *
+  *********************\end{DoxyPre}
+
+
+
+\begin{DoxyPre}            *
+           ***
+          *****
+            *
+            *
+  NetUpdatesLeft(i-1,j)
+            or
+  NetUpdatesRight(i-1,j)
+\end{DoxyPre}
+
+
+A below/above net update with index (i, j-\/1) is located on the edge between cells with index (i, j-\/1) and (i,j)\-: 
+\begin{DoxyPre}
+  ***********
+  *         *
+  * (i, j)  *   *
+  *         *  **  NetUpdatesBelow(i,j-1)
+  *********** *****         or
+  *         *  **  NetUpdatesAbove(i,j-1)
+  * (i,j-1) *   *
+  *         *
+  ***********
+\end{DoxyPre}
+ 
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-offset\-X} & spatial offset of the block in x-\/direction. \\
+\hline
+{\em i\-\_\-offset\-Y} & spatial offset of the offset in y-\/direction. \\
+\hline
+{\em i\-\_\-cuda\-Device} & I\-D of the C\-U\-D\-A-\/device, which should be used. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__WavePropagationBlockCuda_ab4ad10c9704b7f5501f2a1d828672b57}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}!$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}}
+\index{$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}!SWE_WavePropagationBlockCuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}}
+\subsubsection[{$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-::$\sim$\-S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSWE__WavePropagationBlockCuda_ab4ad10c9704b7f5501f2a1d828672b57}
+Destructor of a \hyperlink{classSWE__WavePropagationBlockCuda}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}.
+
+Frees all of the memory, which was allocated within the constructor. Resets the C\-U\-D\-A device\-: Useful if error occured and printf is used on the device (buffer). 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__WavePropagationBlockCuda_a8a89bf61b9fc4433652f400ca8e564ed}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}!compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}}
+\index{compute\-Numerical\-Fluxes@{compute\-Numerical\-Fluxes}!SWE_WavePropagationBlockCuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}}
+\subsubsection[{compute\-Numerical\-Fluxes}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-::compute\-Numerical\-Fluxes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__WavePropagationBlockCuda_a8a89bf61b9fc4433652f400ca8e564ed}
+Compute the numerical fluxes (net-\/update formulation here) on all edges.
+
+The maximum wave speed is computed within the net-\/updates kernel for each C\-U\-D\-A-\/block. To finalize the method the Thrust-\/library is called, which does the reduction over all blockwise maxima. In the wave speed reduction step the actual cell width in x-\/ and y-\/direction is not taken into account.
+
+T\-O\-D\-O\-: A splitting or direct computation of the time step width might increase the total time step size. Example\-: dx = 11, dy = 6; max wave speed in x-\/direction\-: 10 max wave speed in y-\/direction\-: 5.\-5 max wave speed in both direction\-: 10
+
+=$>$ maximum time step (current implementation)\-: min(11/10, 6/10) = 0.\-6 =$>$ maximum time step (splitting the dimensions)\-: min(11/10, 6/5.\-5) = 1.\-09.. {\bfseries Row-\/major vs column-\/major}
+
+C/\-C++ arrays are row-\/major whereas warps are constructed in column-\/major order from threads/blocks. To get coalesced memory access in C\-U\-D\-A, we can use a 2-\/dimensional C\-U\-D\-A structure but we have to switch x and y inside a block.
+
+This means, we have to switch thread\-Idx.\-x $<$-\/$>$ thread\-Idx.\-y as well as block\-Dim.\-x $<$-\/$>$ block\-Dim.\-y. Important\-: block\-Dim has to be switched for the kernel call as well!
+
+definition of one C\-U\-D\-A-\/block. Typical size are 8$\ast$8 or 16$\ast$16
+
+Definition of the \char`\"{}main\char`\"{} C\-U\-D\-A-\/grid. This grid covers only edges 0..\#(edges in x-\/direction)-\/2 and 0..\#(edges in y-\/direction)-\/2.
+
+An example with a computational domain of size nx = 24, ny = 16 with a 1 cell ghost layer would result in a grid with (nx+2)$\ast$(ny+2) = (26$\ast$18) cells and (nx+1)$\ast$(ny+1) = (25$\ast$17) edges.
+
+The C\-U\-D\-A-\/blocks (here 8$\ast$8) mentioned above would cover all edges except the ones lying between the computational domain and the right/top ghost layer\-: 
+\begin{DoxyPre}
+                                                         *
+                                                        **        top ghost layer,
+                                                       ********   cell ids
+                       *******************************  **        = (*, ny+1)
+                       *         *         *         *   *
+                       *   8*8   *   8*8   *   8*8   *
+                       *  block  *  block  *  block  *
+                       *         *         *         *
+                       *******************************
+                       *         *         *         *
+                       *   8*8   *   8*8   *   8*8   *
+                   *   *  block  *  block  *  block  *
+    bottom         **  *         *         *         *
+    ghost     ******** *******************************
+    layer,         **
+    cell ids       *   *                              *
+    =(*,0)            ***                            ***
+                       *                              *
+                       *                              *
+                 left ghost layer,             right ghost layer,
+                 cell ids = (0,*)             cell ids = (nx+1, *)
+\end{DoxyPre}
+
+
+Implements \hyperlink{classSWE__Block_a94dcf2c6ae31731e4586e45628b0c00e}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__WavePropagationBlockCuda_a8c0fbb70ad29f3775d35978bf2d5b396}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}!simulate@{simulate}}
+\index{simulate@{simulate}!SWE_WavePropagationBlockCuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}}
+\subsubsection[{simulate}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-host\-\_\-\-\_\- float S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-::simulate (
+\begin{DoxyParamCaption}
+\item[{float}]{t\-Start, }
+\item[{float}]{t\-End}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__WavePropagationBlockCuda_a8c0fbb70ad29f3775d35978bf2d5b396}
+perform forward-\/\-Euler time steps, starting with simulation time t\-Start,\-: until simulation time t\-End is reached; device-\/global variables hd, hud, hvd are updated; unknowns h, hu, hv in main memory are not updated. Ghost layers and bathymetry sources are updated between timesteps. intended as main simulation loop between two checkpoints 
+
+Reimplemented from \hyperlink{classSWE__Block_a69784e2be2d09035fb2af9d306768f07}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__WavePropagationBlockCuda_ab401d17ea7a60ff30219076bc85dc591}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}!simulate\-Timestep@{simulate\-Timestep}}
+\index{simulate\-Timestep@{simulate\-Timestep}!SWE_WavePropagationBlockCuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}}
+\subsubsection[{simulate\-Timestep}]{\setlength{\rightskip}{0pt plus 5cm}\-\_\-\-\_\-host\-\_\-\-\_\- void S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-::simulate\-Timestep (
+\begin{DoxyParamCaption}
+\item[{float}]{i\-\_\-d\-T}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__WavePropagationBlockCuda_ab401d17ea7a60ff30219076bc85dc591}
+Compute a single global time step of a given time step width. Remark\-: The user has to take care about the time step width. No additional check is done. The time step width typically available after the computation of the numerical fluxes (hidden in this method).
+
+First the net-\/updates are computed. Then the cells are updated with the net-\/updates and the given time step width.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-d\-T} & time step width in seconds. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSWE__Block_add6908e1ceb261a0a1f3ebc262cc5f11}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__WavePropagationBlockCuda_a4163045a47a73515841e754ca3859fc5}{\index{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}!update\-Unknowns@{update\-Unknowns}}
+\index{update\-Unknowns@{update\-Unknowns}!SWE_WavePropagationBlockCuda@{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda}}
+\subsubsection[{update\-Unknowns}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda\-::update\-Unknowns (
+\begin{DoxyParamCaption}
+\item[{const float}]{i\-\_\-delta\-T}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__WavePropagationBlockCuda_a4163045a47a73515841e754ca3859fc5}
+Update the cells with a given global time step.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-delta\-T} & time step size. \\
+\hline
+\end{DoxyParams}
+definition of one C\-U\-D\-A-\/block. Typical size are 8$\ast$8 or 16$\ast$16
+
+definition of the C\-U\-D\-A-\/grid. 
+
+Implements \hyperlink{classSWE__Block_ab2b4b659f23d5d45413dece8d2da3298}{S\-W\-E\-\_\-\-Block}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/cuda/\hyperlink{SWE__WavePropagationBlockCuda_8hh}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda.\-hh}\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/cuda/\hyperlink{SWE__WavePropagationBlockCuda_8cu}{S\-W\-E\-\_\-\-Wave\-Propagation\-Block\-Cuda.\-cu}\end{DoxyCompactItemize}

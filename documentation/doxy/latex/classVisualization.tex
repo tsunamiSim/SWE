@@ -1,0 +1,179 @@
+\hypertarget{classVisualization}{\section{Visualization Class Reference}
+\label{classVisualization}\index{Visualization@{Visualization}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classVisualization_af3e258903a7c4b52a12cfbeb3332aed8}{Visualization} (int window\-Width, int window\-Height, const char $\ast$window\-\_\-title)
+\item 
+\hyperlink{classVisualization_a1b3dc8c07a781aaf8f4cbe95031e191c}{$\sim$\-Visualization} ()
+\item 
+void \hyperlink{classVisualization_ad2ba8e6ef021127f111419c6c2605842}{init} (\hyperlink{classSimulation}{Simulation} \&sim, \hyperlink{classSWE__VisInfo}{S\-W\-E\-\_\-\-Vis\-Info} $\ast$vis\-Info=0\-L)
+\item 
+void \hyperlink{classVisualization_a9f636583bc52bd7b5180eff2751fbb70}{clean\-Up} ()
+\item 
+cuda\-Graphics\-Resource $\ast$$\ast$ \hyperlink{classVisualization_a0c618934d4dc368e4f400099c9aa2e84}{get\-Cuda\-Normals\-Ptr} ()
+\item 
+cuda\-Graphics\-Resource $\ast$$\ast$ \hyperlink{classVisualization_aa19e824f46baf01a66b1d991107f26f2}{get\-Cuda\-Water\-Surface\-Ptr} ()
+\item 
+void \hyperlink{classVisualization_acce7d4076eb313acaa526741428b53cb}{render\-Display} ()
+\item 
+\hypertarget{classVisualization_a8c985ef294e7d35ab65257c30f757807}{void {\bfseries modify\-Water\-Scaling} (float factor)}\label{classVisualization_a8c985ef294e7d35ab65257c30f757807}
+
+\item 
+void \hyperlink{classVisualization_ae608b97c9e82e78b212cc1cb2b744c5d}{set\-Rendering\-Mode} (Render\-Mode mode)
+\item 
+void \hyperlink{classVisualization_a39038b57b96b4718c2c06710100d6317}{toggle\-Rendering\-Mode} ()
+\item 
+int \hyperlink{classVisualization_a0bb75d211b64d94fddf5e17b80c3f165}{resize\-Window} (int new\-Width, int new\-Height)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classVisualization_a4d2ba4c344b5c6aca5410123281ddbc9}{is\-Extension\-Supported} (const char $\ast$sz\-Target\-Extension)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classVisualization_a7013e42778d25e78c1d45724895b8442}{\hyperlink{classCamera}{Camera} $\ast$ {\bfseries camera}}\label{classVisualization_a7013e42778d25e78c1d45724895b8442}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classVisualization_af3e258903a7c4b52a12cfbeb3332aed8}{\index{Visualization@{Visualization}!Visualization@{Visualization}}
+\index{Visualization@{Visualization}!Visualization@{Visualization}}
+\subsubsection[{Visualization}]{\setlength{\rightskip}{0pt plus 5cm}Visualization\-::\-Visualization (
+\begin{DoxyParamCaption}
+\item[{int}]{window\-Width, }
+\item[{int}]{window\-Height, }
+\item[{const char $\ast$}]{window\-\_\-title}
+\end{DoxyParamCaption}
+)}}\label{classVisualization_af3e258903a7c4b52a12cfbeb3332aed8}
+Constructor. All dimensions are node-\/based, this means a grid consisting of 2x2 cells would have 3x3 nodes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & window\-\_\-title title of the window created \\
+\hline
+{\em } & \-\_\-grid\-\_\-x\-\_\-size number of nodes of the grid (in x-\/direction) \\
+\hline
+{\em } & \-\_\-grid\-\_\-y\-\_\-size number of nodes of the grid (in y-\/direction) \\
+\hline
+\end{DoxyParams}
+\hypertarget{classVisualization_a1b3dc8c07a781aaf8f4cbe95031e191c}{\index{Visualization@{Visualization}!$\sim$\-Visualization@{$\sim$\-Visualization}}
+\index{$\sim$\-Visualization@{$\sim$\-Visualization}!Visualization@{Visualization}}
+\subsubsection[{$\sim$\-Visualization}]{\setlength{\rightskip}{0pt plus 5cm}Visualization\-::$\sim$\-Visualization (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classVisualization_a1b3dc8c07a781aaf8f4cbe95031e191c}
+Destructor (see note below) 
+
+\subsection{Member Function Documentation}
+\hypertarget{classVisualization_a9f636583bc52bd7b5180eff2751fbb70}{\index{Visualization@{Visualization}!clean\-Up@{clean\-Up}}
+\index{clean\-Up@{clean\-Up}!Visualization@{Visualization}}
+\subsubsection[{clean\-Up}]{\setlength{\rightskip}{0pt plus 5cm}void Visualization\-::clean\-Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classVisualization_a9f636583bc52bd7b5180eff2751fbb70}
+Frees all memory we used for geometry data Needs to be called before destructor gets called in order to work correctly \hypertarget{classVisualization_a0c618934d4dc368e4f400099c9aa2e84}{\index{Visualization@{Visualization}!get\-Cuda\-Normals\-Ptr@{get\-Cuda\-Normals\-Ptr}}
+\index{get\-Cuda\-Normals\-Ptr@{get\-Cuda\-Normals\-Ptr}!Visualization@{Visualization}}
+\subsubsection[{get\-Cuda\-Normals\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}cuda\-Graphics\-Resource $\ast$$\ast$ Visualization\-::get\-Cuda\-Normals\-Ptr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classVisualization_a0c618934d4dc368e4f400099c9aa2e84}
+Returns a pointer to the cuda memory object holding the vertex normals \hypertarget{classVisualization_aa19e824f46baf01a66b1d991107f26f2}{\index{Visualization@{Visualization}!get\-Cuda\-Water\-Surface\-Ptr@{get\-Cuda\-Water\-Surface\-Ptr}}
+\index{get\-Cuda\-Water\-Surface\-Ptr@{get\-Cuda\-Water\-Surface\-Ptr}!Visualization@{Visualization}}
+\subsubsection[{get\-Cuda\-Water\-Surface\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}cuda\-Graphics\-Resource $\ast$$\ast$ Visualization\-::get\-Cuda\-Water\-Surface\-Ptr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classVisualization_aa19e824f46baf01a66b1d991107f26f2}
+Returns a pointer to the cuda memory object holding the vertex positions \hypertarget{classVisualization_ad2ba8e6ef021127f111419c6c2605842}{\index{Visualization@{Visualization}!init@{init}}
+\index{init@{init}!Visualization@{Visualization}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Visualization\-::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Simulation} \&}]{sim, }
+\item[{{\bf S\-W\-E\-\_\-\-Vis\-Info} $\ast$}]{vis\-Info = {\ttfamily 0L}}
+\end{DoxyParamCaption}
+)}}\label{classVisualization_ad2ba8e6ef021127f111419c6c2605842}
+Allocates memory for vertices and other geometry data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sim} & instance of the simulation class \\
+\hline
+\end{DoxyParams}
+\hypertarget{classVisualization_a4d2ba4c344b5c6aca5410123281ddbc9}{\index{Visualization@{Visualization}!is\-Extension\-Supported@{is\-Extension\-Supported}}
+\index{is\-Extension\-Supported@{is\-Extension\-Supported}!Visualization@{Visualization}}
+\subsubsection[{is\-Extension\-Supported}]{\setlength{\rightskip}{0pt plus 5cm}bool Visualization\-::is\-Extension\-Supported (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{sz\-Target\-Extension}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classVisualization_a4d2ba4c344b5c6aca5410123281ddbc9}
+Returns, whether a special extension is supported by the current graphics card
+
+
+\begin{DoxyParams}{Parameters}
+{\em sz\-Target\-Extention} & string describing the extension to look for \\
+\hline
+\end{DoxyParams}
+\hypertarget{classVisualization_acce7d4076eb313acaa526741428b53cb}{\index{Visualization@{Visualization}!render\-Display@{render\-Display}}
+\index{render\-Display@{render\-Display}!Visualization@{Visualization}}
+\subsubsection[{render\-Display}]{\setlength{\rightskip}{0pt plus 5cm}void Visualization\-::render\-Display (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classVisualization_acce7d4076eb313acaa526741428b53cb}
+Main rendering function. Draws the scene and updates screen \hypertarget{classVisualization_a0bb75d211b64d94fddf5e17b80c3f165}{\index{Visualization@{Visualization}!resize\-Window@{resize\-Window}}
+\index{resize\-Window@{resize\-Window}!Visualization@{Visualization}}
+\subsubsection[{resize\-Window}]{\setlength{\rightskip}{0pt plus 5cm}int Visualization\-::resize\-Window (
+\begin{DoxyParamCaption}
+\item[{int}]{new\-Width, }
+\item[{int}]{new\-Height}
+\end{DoxyParamCaption}
+)}}\label{classVisualization_a0bb75d211b64d94fddf5e17b80c3f165}
+Gets called when window gets resized
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\-Width} & new window width in pixels \\
+\hline
+{\em new\-Height} & height in pixels \\
+\hline
+\end{DoxyParams}
+\hypertarget{classVisualization_ae608b97c9e82e78b212cc1cb2b744c5d}{\index{Visualization@{Visualization}!set\-Rendering\-Mode@{set\-Rendering\-Mode}}
+\index{set\-Rendering\-Mode@{set\-Rendering\-Mode}!Visualization@{Visualization}}
+\subsubsection[{set\-Rendering\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}void Visualization\-::set\-Rendering\-Mode (
+\begin{DoxyParamCaption}
+\item[{Render\-Mode}]{mode}
+\end{DoxyParamCaption}
+)}}\label{classVisualization_ae608b97c9e82e78b212cc1cb2b744c5d}
+Sets current rendering mode
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & rendering mode \\
+\hline
+\end{DoxyParams}
+\hypertarget{classVisualization_a39038b57b96b4718c2c06710100d6317}{\index{Visualization@{Visualization}!toggle\-Rendering\-Mode@{toggle\-Rendering\-Mode}}
+\index{toggle\-Rendering\-Mode@{toggle\-Rendering\-Mode}!Visualization@{Visualization}}
+\subsubsection[{toggle\-Rendering\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}void Visualization\-::toggle\-Rendering\-Mode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classVisualization_a39038b57b96b4718c2c06710100d6317}
+Switches between 3 different rendering modes\-:
+\begin{DoxyItemize}
+\item Shaded\-: Use Open\-G\-L shading
+\item Wireframe\-: Only render edges of each triangle
+\item Watershader\-: Use custom G\-L\-S\-L shader for water surface 
+\end{DoxyItemize}
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/opengl/visualization.\-h\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/opengl/visualization.\-cpp\end{DoxyCompactItemize}

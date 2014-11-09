@@ -1,0 +1,98 @@
+\hypertarget{classSWE__VisInfo}{\section{S\-W\-E\-\_\-\-Vis\-Info Class Reference}
+\label{classSWE__VisInfo}\index{S\-W\-E\-\_\-\-Vis\-Info@{S\-W\-E\-\_\-\-Vis\-Info}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Vis\-Info.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Vis\-Info\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSWE__VisInfo}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classSWE__VisInfo_a40c49045acf4e50dc29551d767f11e15}{$\sim$\-S\-W\-E\-\_\-\-Vis\-Info} ()
+\item 
+virtual float \hyperlink{classSWE__VisInfo_a9552a55a7581b7835d415315e2c17f04}{water\-Vertical\-Scaling} ()
+\item 
+virtual float \hyperlink{classSWE__VisInfo_a9c24e444c209f6f0c03a96950931e677}{bathy\-Vertical\-Offset} ()
+\item 
+virtual float \hyperlink{classSWE__VisInfo_a10ddd7a192e67c69832e695e48b26e91}{bathy\-Vertical\-Scaling} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classSWE__VisInfo}{S\-W\-E\-\_\-\-Vis\-Info} defines an interface that can be used for online visualization of a shallow water simulation. In particular, it provides information required for proper scaling of the involved variables.
+
+For water height\-: displayed\-Water\-Height = \hyperlink{classSWE__VisInfo_a9552a55a7581b7835d415315e2c17f04}{water\-Vertical\-Scaling()} $\ast$ simulated\-Water\-Height
+
+For bathymetry\-: displayed\-Batyhmetry = \hyperlink{classSWE__VisInfo_a10ddd7a192e67c69832e695e48b26e91}{bathy\-Vertical\-Scaling()} $\ast$ real\-Bathymetry
+\begin{DoxyItemize}
+\item \hyperlink{classSWE__VisInfo_a9c24e444c209f6f0c03a96950931e677}{bathy\-Vertical\-Offset()}
+\end{DoxyItemize}
+
+The default water height should be 0. In this case a bathymetry value smaller than 0 means water and a value greater than 0 is land. Therefore bathy\-Vertical\-Offset should 0 for all real scenarios.
+
+If you do not not provide an \hyperlink{classSWE__VisInfo}{S\-W\-E\-\_\-\-Vis\-Info} for scenario, (water$\vert$bathy)Vertical\-Scaling will be guessed form the value initial values. bathy\-Vertical\-Offset is always 0 in this case. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__VisInfo_a40c49045acf4e50dc29551d767f11e15}{\index{S\-W\-E\-\_\-\-Vis\-Info@{S\-W\-E\-\_\-\-Vis\-Info}!$\sim$\-S\-W\-E\-\_\-\-Vis\-Info@{$\sim$\-S\-W\-E\-\_\-\-Vis\-Info}}
+\index{$\sim$\-S\-W\-E\-\_\-\-Vis\-Info@{$\sim$\-S\-W\-E\-\_\-\-Vis\-Info}!SWE_VisInfo@{S\-W\-E\-\_\-\-Vis\-Info}}
+\subsubsection[{$\sim$\-S\-W\-E\-\_\-\-Vis\-Info}]{\setlength{\rightskip}{0pt plus 5cm}virtual S\-W\-E\-\_\-\-Vis\-Info\-::$\sim$\-S\-W\-E\-\_\-\-Vis\-Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__VisInfo_a40c49045acf4e50dc29551d767f11e15}
+Empty virtual destructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__VisInfo_a9c24e444c209f6f0c03a96950931e677}{\index{S\-W\-E\-\_\-\-Vis\-Info@{S\-W\-E\-\_\-\-Vis\-Info}!bathy\-Vertical\-Offset@{bathy\-Vertical\-Offset}}
+\index{bathy\-Vertical\-Offset@{bathy\-Vertical\-Offset}!SWE_VisInfo@{S\-W\-E\-\_\-\-Vis\-Info}}
+\subsubsection[{bathy\-Vertical\-Offset}]{\setlength{\rightskip}{0pt plus 5cm}virtual float S\-W\-E\-\_\-\-Vis\-Info\-::bathy\-Vertical\-Offset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__VisInfo_a9c24e444c209f6f0c03a96950931e677}
+\begin{DoxyReturn}{Returns}
+The vertical offset for the bathymetry. Should be 0 for \char`\"{}real\char`\"{} scenarios (scenarios with dry areas) 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classSWE__BathymetryDamBreakVisInfo_aaecf007665b780a6066485ea0d2d2695}{S\-W\-E\-\_\-\-Bathymetry\-Dam\-Break\-Vis\-Info}.
+
+\hypertarget{classSWE__VisInfo_a10ddd7a192e67c69832e695e48b26e91}{\index{S\-W\-E\-\_\-\-Vis\-Info@{S\-W\-E\-\_\-\-Vis\-Info}!bathy\-Vertical\-Scaling@{bathy\-Vertical\-Scaling}}
+\index{bathy\-Vertical\-Scaling@{bathy\-Vertical\-Scaling}!SWE_VisInfo@{S\-W\-E\-\_\-\-Vis\-Info}}
+\subsubsection[{bathy\-Vertical\-Scaling}]{\setlength{\rightskip}{0pt plus 5cm}virtual float S\-W\-E\-\_\-\-Vis\-Info\-::bathy\-Vertical\-Scaling (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__VisInfo_a10ddd7a192e67c69832e695e48b26e91}
+\begin{DoxyReturn}{Returns}
+The vertical scaling factor for the bathymetry 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classSWE__AsagiJapanSmallVisInfo_ab25d85575460a76d88b90e2c927d49ac}{S\-W\-E\-\_\-\-Asagi\-Japan\-Small\-Vis\-Info}.
+
+\hypertarget{classSWE__VisInfo_a9552a55a7581b7835d415315e2c17f04}{\index{S\-W\-E\-\_\-\-Vis\-Info@{S\-W\-E\-\_\-\-Vis\-Info}!water\-Vertical\-Scaling@{water\-Vertical\-Scaling}}
+\index{water\-Vertical\-Scaling@{water\-Vertical\-Scaling}!SWE_VisInfo@{S\-W\-E\-\_\-\-Vis\-Info}}
+\subsubsection[{water\-Vertical\-Scaling}]{\setlength{\rightskip}{0pt plus 5cm}virtual float S\-W\-E\-\_\-\-Vis\-Info\-::water\-Vertical\-Scaling (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__VisInfo_a9552a55a7581b7835d415315e2c17f04}
+\begin{DoxyReturn}{Returns}
+The vertical scaling factor of the water 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classSWE__AsagiJapanSmallVisInfo_a9c2092b5e02596e5ca2ba57c39d3b77e}{S\-W\-E\-\_\-\-Asagi\-Japan\-Small\-Vis\-Info}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/scenarios/\hyperlink{SWE__VisInfo_8hh}{S\-W\-E\-\_\-\-Vis\-Info.\-hh}\end{DoxyCompactItemize}

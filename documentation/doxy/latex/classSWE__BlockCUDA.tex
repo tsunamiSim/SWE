@@ -1,0 +1,327 @@
+\hypertarget{classSWE__BlockCUDA}{\section{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A Class Reference}
+\label{classSWE__BlockCUDA}\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Block\-C\-U\-D\-A.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classSWE__BlockCUDA}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__BlockCUDA_a7e4f5f08cf6179d17e7ff64cb2f182d8}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A} (int l\-\_\-nx, int l\-\_\-ny, float l\-\_\-dx, float l\-\_\-dy)
+\item 
+virtual \hyperlink{classSWE__BlockCUDA_a37517831b7f36a9405eb566bc86e4243}{$\sim$\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A} ()
+\item 
+virtual \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D} $\ast$ \hyperlink{classSWE__BlockCUDA_a22782766fc679ac14e9ba30a4efc1688}{register\-Copy\-Layer} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} edge)
+\item 
+virtual \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D} $\ast$ \hyperlink{classSWE__BlockCUDA_ab8671269d89d544a333a0b8c0fa72f37}{grab\-Ghost\-Layer} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} edge)
+\item 
+const float $\ast$ \hyperlink{classSWE__BlockCUDA_a6d1b455840114ed08d785e17741e3015}{get\-C\-U\-D\-A\-\_\-water\-Height} ()
+\item 
+const float $\ast$ \hyperlink{classSWE__BlockCUDA_ad8bf853a1319ed215010dc05c78d33e6}{get\-C\-U\-D\-A\-\_\-bathymetry} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classSWE__BlockCUDA_a73fceb94ac9c5ffc4164720967b06143}{print\-Device\-Information} ()
+\item 
+static void \hyperlink{classSWE__BlockCUDA_ad5143c0c87c6e28f84d446e3f93c0ec1}{init} (int i\-\_\-cuda\-Device=0)
+\item 
+static void \hyperlink{classSWE__BlockCUDA_a1d77f5dc1168bf11d1b10a92bcefa4ac}{finalize} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_a0876ef53f667c142d7d4dd9d01cfd2dc}{synch\-After\-Write} ()
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_ae54054af51e68415a68f3a1c7b25c139}{synch\-Water\-Height\-After\-Write} ()
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_a71b1d0b2e6959c298dfccf6a36264e13}{synch\-Discharge\-After\-Write} ()
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_aef79c805fec82b4d439642a758a8e95f}{synch\-Bathymetry\-After\-Write} ()
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_ab9cc911c9d67bcab9ecb2818a056930b}{synch\-Ghost\-Layer\-After\-Write} ()
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_a9ba846c6fa27734412d9fdfaa3823de2}{synch\-Before\-Read} ()
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_adfd3185b108632b2506558063714d7df}{synch\-Water\-Height\-Before\-Read} ()
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_adea7daf7794147d73d9465d37b37055e}{synch\-Discharge\-Before\-Read} ()
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_a3edd34c86eb0837d09f24cbf56a16e69}{synch\-Bathymetry\-Before\-Read} ()
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_a41d117ca8fe9a8c5509369edd026fd63}{synch\-Copy\-Layer\-Before\-Read} ()
+\item 
+virtual void \hyperlink{classSWE__BlockCUDA_a7cf66067cb7f023aadbd910051d389c8}{set\-Boundary\-Conditions} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSWE__BlockCUDA_a9c6a44214a75a9f5d4f8bb3806eaaf71}{float $\ast$ {\bfseries hd}}\label{classSWE__BlockCUDA_a9c6a44214a75a9f5d4f8bb3806eaaf71}
+
+\item 
+\hypertarget{classSWE__BlockCUDA_a2fb123601bbf091876dcccc351157c67}{float $\ast$ {\bfseries hud}}\label{classSWE__BlockCUDA_a2fb123601bbf091876dcccc351157c67}
+
+\item 
+\hypertarget{classSWE__BlockCUDA_a795fe87f7abfa7e6511232e03a808705}{float $\ast$ {\bfseries hvd}}\label{classSWE__BlockCUDA_a795fe87f7abfa7e6511232e03a808705}
+
+\item 
+\hypertarget{classSWE__BlockCUDA_ae08ee1752690e828a9e0470a3c55fb39}{float $\ast$ {\bfseries bd}}\label{classSWE__BlockCUDA_ae08ee1752690e828a9e0470a3c55fb39}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classSWE__BlockCUDA}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A} extends the base class \hyperlink{classSWE__Block}{S\-W\-E\-\_\-\-Block} towards a base class for a C\-U\-D\-A implementation of the shallow water equations. It adds the respective variables in G\-P\-U memory, and provides methods for data transfer between main and G\-P\-U memory. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__BlockCUDA_a7e4f5f08cf6179d17e7ff64cb2f182d8}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A (
+\begin{DoxyParamCaption}
+\item[{int}]{l\-\_\-nx, }
+\item[{int}]{l\-\_\-ny, }
+\item[{float}]{l\-\_\-dx, }
+\item[{float}]{l\-\_\-dy}
+\end{DoxyParamCaption}
+)}}\label{classSWE__BlockCUDA_a7e4f5f08cf6179d17e7ff64cb2f182d8}
+Constructor\-: allocate variables for simulation
+
+unknowns h,hu,hv,b are defined on grid indices \mbox{[}0,..,nx+1\mbox{]}$\ast$\mbox{[}0,..,ny+1\mbox{]} -\/$>$ computational domain is \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} -\/$>$ plus ghost cell layer
+
+flux terms are defined for edges with indices \mbox{[}0,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]} or \mbox{[}1,..,nx\mbox{]}$\ast$\href{for horizontal/vertical edges}{\tt 0,..,ny} Flux term with index (i,j) is located on the edge between cells with index (i,j) and (i+1,j) or (i,j+1)
+
+bathymetry source terms are defined for cells with indices \mbox{[}1,..,nx\mbox{]}$\ast$\mbox{[}1,..,ny\mbox{]}
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-cuda\-Device} & I\-D of the C\-U\-D\-A-\/device, which should be used. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__BlockCUDA_a37517831b7f36a9405eb566bc86e4243}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!$\sim$\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{$\sim$\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\index{$\sim$\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{$\sim$\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{$\sim$\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::$\sim$\-S\-W\-E\-\_\-\-Block\-C\-U\-D\-A (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_a37517831b7f36a9405eb566bc86e4243}
+Destructor\-: de-\/allocate all variables 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__BlockCUDA_a1d77f5dc1168bf11d1b10a92bcefa4ac}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!finalize@{finalize}}
+\index{finalize@{finalize}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{finalize}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::finalize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSWE__BlockCUDA_a1d77f5dc1168bf11d1b10a92bcefa4ac}
+Cleans up the cuda device \hypertarget{classSWE__BlockCUDA_ad8bf853a1319ed215010dc05c78d33e6}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!get\-C\-U\-D\-A\-\_\-bathymetry@{get\-C\-U\-D\-A\-\_\-bathymetry}}
+\index{get\-C\-U\-D\-A\-\_\-bathymetry@{get\-C\-U\-D\-A\-\_\-bathymetry}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{get\-C\-U\-D\-A\-\_\-bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}const float$\ast$ S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::get\-C\-U\-D\-A\-\_\-bathymetry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__BlockCUDA_ad8bf853a1319ed215010dc05c78d33e6}
+\begin{DoxyReturn}{Returns}
+pointer to the array \#hb (bathymetry) in device memory 
+\end{DoxyReturn}
+\hypertarget{classSWE__BlockCUDA_a6d1b455840114ed08d785e17741e3015}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!get\-C\-U\-D\-A\-\_\-water\-Height@{get\-C\-U\-D\-A\-\_\-water\-Height}}
+\index{get\-C\-U\-D\-A\-\_\-water\-Height@{get\-C\-U\-D\-A\-\_\-water\-Height}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{get\-C\-U\-D\-A\-\_\-water\-Height}]{\setlength{\rightskip}{0pt plus 5cm}const float$\ast$ S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::get\-C\-U\-D\-A\-\_\-water\-Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__BlockCUDA_a6d1b455840114ed08d785e17741e3015}
+\begin{DoxyReturn}{Returns}
+pointer to the array \#hd (water height) in device memory 
+\end{DoxyReturn}
+\hypertarget{classSWE__BlockCUDA_ab8671269d89d544a333a0b8c0fa72f37}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!grab\-Ghost\-Layer@{grab\-Ghost\-Layer}}
+\index{grab\-Ghost\-Layer@{grab\-Ghost\-Layer}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{grab\-Ghost\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf S\-W\-E\-\_\-\-Block1\-D} $\ast$ S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::grab\-Ghost\-Layer (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{edge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_ab8671269d89d544a333a0b8c0fa72f37}
+\char`\"{}grab\char`\"{} the ghost layer at the specific boundary in order to set boundary values in this ghost layer externally. The boundary conditions at the respective ghost layer is set to P\-A\-S\-S\-I\-V\-E, such that the grabbing program component is responsible to provide correct values in the ghost layer, for example by receiving data from a remote copy layer via M\-P\-I communication. 
+\begin{DoxyParams}{Parameters}
+{\em specified} & edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D} object that contains row variables h, hu, and hv 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Block_a9a96c59444645e237d098803009158a3}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_ad5143c0c87c6e28f84d446e3f93c0ec1}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!init@{init}}
+\index{init@{init}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::init (
+\begin{DoxyParamCaption}
+\item[{int}]{i\-\_\-cuda\-Device = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSWE__BlockCUDA_ad5143c0c87c6e28f84d446e3f93c0ec1}
+Initializes the cuda device Has to be called once at the beginning. \hypertarget{classSWE__BlockCUDA_a73fceb94ac9c5ffc4164720967b06143}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!print\-Device\-Information@{print\-Device\-Information}}
+\index{print\-Device\-Information@{print\-Device\-Information}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{print\-Device\-Information}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::print\-Device\-Information (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classSWE__BlockCUDA_a73fceb94ac9c5ffc4164720967b06143}
+Print some available information about the C\-U\-D\-A devices. id of the C\-U\-D\-A device.
+
+total number of C\-U\-D\-A devices on this host.
+
+drive and runtime version
+
+device properties \hypertarget{classSWE__BlockCUDA_a22782766fc679ac14e9ba30a4efc1688}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!register\-Copy\-Layer@{register\-Copy\-Layer}}
+\index{register\-Copy\-Layer@{register\-Copy\-Layer}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{register\-Copy\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf S\-W\-E\-\_\-\-Block1\-D} $\ast$ S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::register\-Copy\-Layer (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{edge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_a22782766fc679ac14e9ba30a4efc1688}
+register the row or column layer next to a boundary as a \char`\"{}copy layer\char`\"{}, from which values will be copied into the ghost layer or a neighbour; \begin{DoxyReturn}{Returns}
+a \hyperlink{structSWE__Block1D}{S\-W\-E\-\_\-\-Block1\-D} object that contains row variables h, hu, and hv 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Block_a827ee5c61dc9c1b472ac8b4e1c19956a}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_a7cf66067cb7f023aadbd910051d389c8}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!set\-Boundary\-Conditions@{set\-Boundary\-Conditions}}
+\index{set\-Boundary\-Conditions@{set\-Boundary\-Conditions}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{set\-Boundary\-Conditions}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::set\-Boundary\-Conditions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_a7cf66067cb7f023aadbd910051d389c8}
+set the values of all ghost cells depending on the specifed boundary conditions 
+
+Reimplemented from \hyperlink{classSWE__Block_a379807f0bf932b40aeb42065633fce60}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_a0876ef53f667c142d7d4dd9d01cfd2dc}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!synch\-After\-Write@{synch\-After\-Write}}
+\index{synch\-After\-Write@{synch\-After\-Write}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{synch\-After\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::synch\-After\-Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_a0876ef53f667c142d7d4dd9d01cfd2dc}
+Update all temporary and non-\/local (for heterogeneous computing) variables after an external update of the main variables h, hu, hv, and b. 
+
+Reimplemented from \hyperlink{classSWE__Block_ae914f9bf6d4ef8f974f9f005114985e7}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_aef79c805fec82b4d439642a758a8e95f}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!synch\-Bathymetry\-After\-Write@{synch\-Bathymetry\-After\-Write}}
+\index{synch\-Bathymetry\-After\-Write@{synch\-Bathymetry\-After\-Write}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{synch\-Bathymetry\-After\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::synch\-Bathymetry\-After\-Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_aef79c805fec82b4d439642a758a8e95f}
+Update temporary and non-\/local (for heterogeneous computing) variables after an external update of the bathymetry b 
+
+Reimplemented from \hyperlink{classSWE__Block_a4bece8aa90f67e55c40b91aab900febb}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_a3edd34c86eb0837d09f24cbf56a16e69}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!synch\-Bathymetry\-Before\-Read@{synch\-Bathymetry\-Before\-Read}}
+\index{synch\-Bathymetry\-Before\-Read@{synch\-Bathymetry\-Before\-Read}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{synch\-Bathymetry\-Before\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::synch\-Bathymetry\-Before\-Read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_a3edd34c86eb0837d09f24cbf56a16e69}
+Update temporary and non-\/local (for heterogeneous computing) variables before an external access to the bathymetry b 
+
+Reimplemented from \hyperlink{classSWE__Block_a7c8258c6949518ca44f4e9ce89d33b09}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_a9ba846c6fa27734412d9fdfaa3823de2}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!synch\-Before\-Read@{synch\-Before\-Read}}
+\index{synch\-Before\-Read@{synch\-Before\-Read}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{synch\-Before\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::synch\-Before\-Read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_a9ba846c6fa27734412d9fdfaa3823de2}
+Update the main variables h, hu, hv, and b before an external read access\-: copies current content of the respective device variables hd, hud, hvd, bd 
+
+Reimplemented from \hyperlink{classSWE__Block_a23d936cb9a4367092e5b2515f81fe819}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_a41d117ca8fe9a8c5509369edd026fd63}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!synch\-Copy\-Layer\-Before\-Read@{synch\-Copy\-Layer\-Before\-Read}}
+\index{synch\-Copy\-Layer\-Before\-Read@{synch\-Copy\-Layer\-Before\-Read}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{synch\-Copy\-Layer\-Before\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::synch\-Copy\-Layer\-Before\-Read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_a41d117ca8fe9a8c5509369edd026fd63}
+Update (for heterogeneous computing) variables h, hu, hv in copy layers before an external access to the unknowns (only required for P\-A\-S\-S\-I\-V\-E and C\-O\-N\-N\-E\-C\-T boundaries)
+\begin{DoxyItemize}
+\item copy (up-\/to-\/date) content from device memory into main memory 
+\end{DoxyItemize}
+
+Reimplemented from \hyperlink{classSWE__Block_a13c90d5a6596336013c41e73c8795f83}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_a71b1d0b2e6959c298dfccf6a36264e13}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!synch\-Discharge\-After\-Write@{synch\-Discharge\-After\-Write}}
+\index{synch\-Discharge\-After\-Write@{synch\-Discharge\-After\-Write}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{synch\-Discharge\-After\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::synch\-Discharge\-After\-Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_a71b1d0b2e6959c298dfccf6a36264e13}
+Update temporary and non-\/local (for heterogeneous computing) variables after an external update of the discharge variables hu and hv 
+
+Reimplemented from \hyperlink{classSWE__Block_a94c34030153178c9d94f3f14be174eaf}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_adea7daf7794147d73d9465d37b37055e}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!synch\-Discharge\-Before\-Read@{synch\-Discharge\-Before\-Read}}
+\index{synch\-Discharge\-Before\-Read@{synch\-Discharge\-Before\-Read}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{synch\-Discharge\-Before\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::synch\-Discharge\-Before\-Read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_adea7daf7794147d73d9465d37b37055e}
+Update temporary and non-\/local (for heterogeneous computing) variables before an external access to the discharge variables hu and hv 
+
+Reimplemented from \hyperlink{classSWE__Block_a3773dcb194212fb8cb40ab8465575aa1}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_ab9cc911c9d67bcab9ecb2818a056930b}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!synch\-Ghost\-Layer\-After\-Write@{synch\-Ghost\-Layer\-After\-Write}}
+\index{synch\-Ghost\-Layer\-After\-Write@{synch\-Ghost\-Layer\-After\-Write}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{synch\-Ghost\-Layer\-After\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::synch\-Ghost\-Layer\-After\-Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_ab9cc911c9d67bcab9ecb2818a056930b}
+synchronise the ghost layer content of h, hu, and hv in main memory with device memory and auxiliary data structures, i.\-e. transfer memory from main/auxiliary memory into device memory 
+
+Reimplemented from \hyperlink{classSWE__Block_a4657993ebdb5f0132b077e63790d0b2b}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_ae54054af51e68415a68f3a1c7b25c139}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!synch\-Water\-Height\-After\-Write@{synch\-Water\-Height\-After\-Write}}
+\index{synch\-Water\-Height\-After\-Write@{synch\-Water\-Height\-After\-Write}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{synch\-Water\-Height\-After\-Write}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::synch\-Water\-Height\-After\-Write (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_ae54054af51e68415a68f3a1c7b25c139}
+Update temporary and non-\/local (for heterogeneous computing) variables after an external update of the water height h 
+
+Reimplemented from \hyperlink{classSWE__Block_aa2924833e29a795d8c04fb79bfe794de}{S\-W\-E\-\_\-\-Block}.
+
+\hypertarget{classSWE__BlockCUDA_adfd3185b108632b2506558063714d7df}{\index{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}!synch\-Water\-Height\-Before\-Read@{synch\-Water\-Height\-Before\-Read}}
+\index{synch\-Water\-Height\-Before\-Read@{synch\-Water\-Height\-Before\-Read}!SWE_BlockCUDA@{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A}}
+\subsubsection[{synch\-Water\-Height\-Before\-Read}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-C\-U\-D\-A\-::synch\-Water\-Height\-Before\-Read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classSWE__BlockCUDA_adfd3185b108632b2506558063714d7df}
+Update temporary and non-\/local (for heterogeneous computing) variables before an external access to the water height h 
+
+Reimplemented from \hyperlink{classSWE__Block_a07c85681ab29106c3b164db969899ace}{S\-W\-E\-\_\-\-Block}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/cuda/\hyperlink{SWE__BlockCUDA_8hh}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A.\-hh}\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/cuda/\hyperlink{SWE__BlockCUDA_8cu}{S\-W\-E\-\_\-\-Block\-C\-U\-D\-A.\-cu}\end{DoxyCompactItemize}
