@@ -60,6 +60,8 @@ env = Environment(variables=vars)
 if 'buildVariablesFile' in env:
   vars = Variables(env['buildVariablesFile'])
 
+#env.Append(tools = ['default', 'cxxtest']) 
+
 # SWE specific variables
 vars.AddVariables(
   PathVariable( 'buildDir', 'where to build the code', 'build', PathVariable.PathIsDirCreate ),
@@ -392,5 +394,9 @@ Export('env')
 SConscript('src/SConscript', variant_dir=build_dir, duplicate=0)
 Import('env')
 
+# Build cxxtests
+#env.CxxTest('#build/CxxTests/DimenSplitTest', source='#CxxTests/dimenSplit_testsuite.t.h')
+
 # build the program
 env.Program('build/'+program_name, env.src_files)
+

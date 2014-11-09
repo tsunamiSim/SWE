@@ -77,6 +77,7 @@ public :
 }
 	void computeNumericalFluxes()
 	{
+		// compute horizontal updates
 		for(unsigned int y = 0; y < ny; y++)
 		{	
 			for(unsigned int x = 0; x < nx+1; x++) 
@@ -88,22 +89,27 @@ public :
 								maxEdgeSpeed
 							);
 				maxTimestep = std::max(maxEdgeSpeed, maxTimestep);
+				// no negative timesteps
+				assert(maxTimestep > 0);
 
 			}
 		}
-
+		
+		// set vertical updates to zero (for updateUnknowns necessarry)
 		setZero(hNetUpdatesBelow, nx, ny + 1);
 		setZero(hNetUpdatesAbove, nx, ny + 1);
 		setZero(hvNetUpdatesAbove, nx, ny + 1);
 		setZero(hvNetUpdatesBelow, nx, ny + 1);
 		
+		// approximate timestep by slow down maxTimestep 
 		maxTimestep = 0.4 * dx / maxTimestep;
 		updateUnknowns(maxTimestep);
 	
 #ifndef NDEBUG
 			maxTimestepY = 0.f;
 #endif //NDEBUG
-
+		
+		// compute vertical updates
 		for(unsigned int y = 0; y < ny+1; y++)
 		{	
 			for(unsigned int x = 0; x < nx; x++) 
@@ -127,6 +133,7 @@ public :
 				std::cerr << "Used timestep was to big! Used/In X-DIR computed: " << maxTimestep << "; In Y-DIR computed: " << (0.5f * dy / maxTimestepY) << std::endl;			
 #endif //NDEBUG
 
+		// set horizontal updates to zero (for updateUnknowns necessarry)
 		setZero(hNetUpdatesLeft, nx + 1, ny);
 		setZero(hNetUpdatesRight, nx + 1, ny);
 		setZero(huNetUpdatesLeft, nx + 1, ny);
@@ -135,7 +142,8 @@ public :
 		updateUnknowns(maxTimestep);
 			
 	}
-
+	
+	// compute the new waterhights
 	void updateUnknowns(float dt)
 	{
 		for(unsigned int y = 1; y < ny+1; y++)
@@ -146,6 +154,8 @@ public :
 						dt / dy * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
 				hu[x][y] -= dt / dx * (huNetUpdatesRight[x - 1][y - 1] + huNetUpdatesLeft[x][y - 1]);
 				hv[x][y] -= dt / dy * (hvNetUpdatesAbove[x - 1][y - 1] + hvNetUpdatesBelow[x - 1][y]);
+				// wet states should stay wet
+				assert(h[x][y] > 0);
 			}
 		}
 	}

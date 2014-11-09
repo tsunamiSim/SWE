@@ -1,0 +1,4 @@
+Run 'scons' to compile the programm!
+Run SWE1D from here.
+
+To compile without dimensional splitting run scons with '-dimenSplit=no' as option.
