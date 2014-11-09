@@ -59,6 +59,8 @@ int main(int argc, char** argv){
 
 	while(l_time < l_endOfSimulation)
 	{	
+		l_dimensionalSplitting.setGhostLayer();
+
 		l_dimensionalSplitting.computeNumericalFluxes();
 	
 		l_time += l_dimensionalSplitting.getMaxTimestep();
