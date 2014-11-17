@@ -201,6 +201,17 @@ void io::NetCdfWriter::writeTimeStep( const Float2D &i_h,
                                       const Float2D &i_hu,
                                       const Float2D &i_hv,
                                       float i_time) {
+
+	/*
+	 * Prints the arrays
+	for(int row = 0; row < i_h.getRows(); row++)
+		for(int col = 0; col < i_h.getCols(); col++)
+			{
+				std::cout << "Row " << row << ", Column " << col << std::endl;
+				std::cout << i_h[row][col] << " " << i_hu[row][col] << " " << i_hv[row][col] << std::endl;
+			}
+	*/
+
 	if (timeStep == 0)
 		// Write bathymetry
 		writeVarTimeIndependent(b, bVar);

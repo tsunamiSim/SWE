@@ -4,7 +4,6 @@
 #include "tools/args.hh"
 #include "blocks/SWE_DimensionalSplitting.hpp"
 #include "scenarios/SWE_simple_scenarios.hh"
-#include "writer/VtkWriter.hh"
 #ifdef WRITENETCDF
 #include "writer/NetCdfWriter.hh"
 #else
