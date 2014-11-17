@@ -5,6 +5,11 @@
 #include "blocks/SWE_DimensionalSplitting.hpp"
 #include "scenarios/SWE_simple_scenarios.hh"
 #include "writer/VtkWriter.hh"
+#ifdef WRITENETCDF
+#include "writer/NetCdfWriter.hh"
+#else
+#include "writer/VtkWriter.hh"
+#endif
 
 /**
 * Main program for the simulation using dimensional splitting
@@ -53,23 +58,40 @@ int main(int argc, char** argv){
 	float l_time = 0.f;
 	float l_endOfSimulation = l_scenario.endSimulation();	
 
-	// configure VTK-writer
+	// configure Writer
 	std::string basename = "SWE";
 	std::string l_fileName = generateBaseFileName(basename,0,0);
 	
  	io::BoundarySize l_boundarySize = {{1, 1, 1, 1}};
 
-	io::VtkWriter l_writer( l_fileName,
-		  l_dimensionalSplitting.getBathymetry(),
-		  l_boundarySize,
-		  l_nx, l_ny,
-		  l_dx, l_dy );
+#ifdef WRITENETCDF
 	
+	float l_originx, l_originy;
+	
+	l_originx = l_scenario.getBoundaryPos(BND_LEFT);
+	l_originy = l_scenario.getBoundaryPos(BND_BOTTOM);
+	//set up NetCdfWriter
+	io::NetCdfWriter l_writer( l_fileName,
+			l_dimensionalSplitting.getBathymetry(),
+			l_boundarySize,
+			l_nx, l_ny,
+			l_dx, l_dy,
+			l_originx, l_originy);
+
+#else
+	//set up VTKWriter
+	io::VtkWriter l_writer( l_fileName,
+		  	l_dimensionalSplitting.getBathymetry(),
+			l_boundarySize,
+			l_nx, l_ny,
+			l_dx, l_dy );
+#endif
+
 	//Print initial state
 	l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
-                          l_dimensionalSplitting.getDischarge_hu(),
-                          l_dimensionalSplitting.getDischarge_hv(),
-                          l_time);
+                        l_dimensionalSplitting.getDischarge_hu(),
+                        l_dimensionalSplitting.getDischarge_hv(),
+                        l_time);
 	
 	// Loop over timesteps
 	while(l_time < l_endOfSimulation)
@@ -84,9 +106,9 @@ int main(int argc, char** argv){
 
 		// write timestep
 		l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
-                            l_dimensionalSplitting.getDischarge_hu(),
-                            l_dimensionalSplitting.getDischarge_hv(),
-                            l_time);
+                	l_dimensionalSplitting.getDischarge_hu(),
+			l_dimensionalSplitting.getDischarge_hv(),
+                        l_time);
 		
 		// write time to console
 	  	std::cout << l_time << std::endl << std::endl ;
