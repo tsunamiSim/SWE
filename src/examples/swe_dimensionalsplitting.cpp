@@ -4,7 +4,11 @@
 #include "tools/args.hh"
 #include "blocks/SWE_DimensionalSplitting.hpp"
 #include "scenarios/SWE_simple_scenarios.hh"
+#ifdef WRITENETCDF
+#include "writer/NetCdfWriter.hh"
+#else
 #include "writer/VtkWriter.hh"
+#endif
 
 /**
 * Main program for the simulation using dimensional splitting
@@ -56,14 +60,31 @@ int main(int argc, char** argv){
 	// configure VTK-writer
 	std::string basename = "SWE";
 	std::string l_fileName = generateBaseFileName(basename,0,0);
+	//! origin of the simulation domain in x- and y-direction
+  	float l_originX, l_originY;
+
+  	// get the origin from the scenario
+  	l_originX = l_scenario.getBoundaryPos(BND_LEFT);
+  	l_originY = l_scenario.getBoundaryPos(BND_BOTTOM);
+
 	
  	io::BoundarySize l_boundarySize = {{1, 1, 1, 1}};
-
-	io::VtkWriter l_writer( l_fileName,
+#ifdef WRITENETCDF
+  	//construct a NetCdfWriter
+  	io::NetCdfWriter l_writer( l_fileName,
+		  l_dimensionalSplitting.getBathymetry(),
+		  l_boundarySize,
+		  l_nx, l_ny,
+		  l_dx, l_dy,
+		  l_originX, l_originY);
+#else
+  	// consturct a VtkWriter
+  	io::VtkWriter l_writer( l_fileName,
 		  l_dimensionalSplitting.getBathymetry(),
 		  l_boundarySize,
 		  l_nx, l_ny,
 		  l_dx, l_dy );
+#endif
 	
 	//Print initial state
 	l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
