@@ -109,6 +109,48 @@ class SWE_ObstacleDamBreakScenario : public SWE_Scenario {
 };
 
 /**
+ * Scenario "Artificial Tsunami Scenario":
+ * displacement in the middle of the domain  
+ */
+class SWE_ArtificialTsunamiScenario : public SWE_Scenario {
+
+  public:
+
+    float getBathymetry(float x, float y) {
+	if(x < -500 || x > 500 || y < -500 || y > 500) return -100;       
+	float result = -100-5*sin((x/500 +1)*M_PI)*(y*y/250000 +1);
+	if(result < 20 && result >= 0) result = 20;
+	if(result > -20 && result <= 0) result = -20;
+	return result;
+    };
+
+    float getWaterHeight(float x, float y) { 
+       return 100;
+    };
+
+    virtual float endSimulation() { return (float) 30; };
+
+    virtual BoundaryType getBoundaryType(BoundaryEdge edge) { return OUTFLOW; };
+
+    /** Get the boundary positions
+     *
+     * @param i_edge which edge
+     * @return value in the corresponding dimension
+     */
+    float getBoundaryPos(BoundaryEdge i_edge) {
+       if ( i_edge == BND_LEFT )
+         return (float)-5000;
+       else if ( i_edge == BND_RIGHT)
+         return (float)5000;
+       else if ( i_edge == BND_BOTTOM )
+         return (float)-5000;
+       else
+         return (float)5000;
+    };
+};
+
+
+/**
  * Scenario "Bathymetry Dam Break":
  * uniform water depth, but elevated bathymetry in the centre of the domain
  */

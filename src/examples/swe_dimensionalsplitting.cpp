@@ -6,6 +6,7 @@
 #include "scenarios/SWE_simple_scenarios.hh"
 #ifdef WRITENETCDF
 #include "writer/NetCdfWriter.hh"
+#include "scenarios/SWE_TsunamiScenario.hh"
 #else
 #include "writer/VtkWriter.hh"
 #endif
@@ -39,7 +40,7 @@ int main(int argc, char** argv){
 	l_nx = args.getArgument<int>("size_x");
 	l_ny = args.getArgument<int>("size_y");
 	//Prepare dambreak scenario
-	SWE_RadialDamBreakScenario l_scenario;
+	SWE_TsunamiScenario l_scenario;
 
 	// Set step size
 	float l_dx, l_dy;
