@@ -58,10 +58,13 @@ public:
 
   SWE_TsunamiScenario() : SWE_Scenario(){
 
-	netCdfReader::readNcFile("NetCDF_Input/initBathymetry.nc", bathymetry, bathY, bathX);
-			cout << "succesfully read bathymetry" << endl;
-	netCdfReader::readNcFile("NetCDF_Input/displacement.nc", displacement, disY, disX);   
-			cout << "succesfully read displacement" << endl;     
+	bathY = NULL; bathX = NULL; bathymetry = NULL;
+	netCdfReader::readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
+	cout << "succesfully read bathymetry" << endl;
+	netCdfReader::readNcFile("NetCDF_Input/displacement.nc", &displacement, &disY, &disX);   
+	cout << "succesfully read displacement" << endl;
+	cout << "test" << endl;
+	cout << bathX << " " << bathY << " " << bathymetry << endl;
   };
 
   float getBathymetry(float x, float y) {
