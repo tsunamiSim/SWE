@@ -58,7 +58,6 @@ class SWE_TsunamiScenario : public SWE_Scenario {
 public:
 
   SWE_TsunamiScenario() : SWE_Scenario(){
-
 	tools::Logger::logger.printLine();
 	netCdfReader::readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
 	tools::Logger::logger.printString("Succesfully read bathymetry");
@@ -68,14 +67,17 @@ public:
   };
 
   float getBathymetry(float x, float y) {
-	
+	return 0;
   };
 
   float getWaterHeight(float x, float y) { 
 	int bestX, bestY;
 	lookUp(y, bathymetry->getRows(), bathY, &bestY);
 	lookUp(x, bathymetry->getCols(), bathX, &bestX);
-	return (*bathymetry)[bestY][bestX];
+	if((*bathymetry)[bestY][bestX] < 0)
+		return -(*bathymetry)[bestY][bestX];
+	else
+		return 0;
   };
 
   virtual float endSimulation() { return (float) 30; };

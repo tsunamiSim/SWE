@@ -334,8 +334,6 @@ inline void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** 
 		*buffY = tempY;
 		*buffX = tempX;
 
-	Float2D tmp = **buffZ;
-		
 #ifndef NDBUG
 		tools::Logger::logger.printString("File read");
 #endif
