@@ -28,13 +28,9 @@
 #define __SWE_TSUNAMI_SCENARIO_H
 
 #include <cmath>
-#include <math.h>
-#include <netcdf.h>
 
 #include "tools/help.hh"
 #include "SWE_Scenario.hh"
-
-#define ERR(e) {printf("Error: %s\n", nc_strerror(e)); assert(false);}
 
 /**
  * Scenario "Artificial Tsunami Scenario":
@@ -62,10 +58,13 @@ public:
 
   SWE_TsunamiScenario() : SWE_Scenario(){
 
-	netCdfReader::readNcFile("NetCDF_Input/initBathymetry.nc", bathymetry, bathY, bathX);
-			cout << "succesfully read bathymetry" << endl;
-	netCdfReader::readNcFile("NetCDF_Input/displacement.nc", displacement, disY, disX);   
-			cout << "succesfully read displacement" << endl;     
+	bathY = NULL; bathX = NULL; bathymetry = NULL;
+	netCdfReader::readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
+	cout << "succesfully read bathymetry" << endl;
+	netCdfReader::readNcFile("NetCDF_Input/displacement.nc", &displacement, &disY, &disX);   
+	cout << "succesfully read displacement" << endl;
+	cout << "test" << endl;
+	cout << bathX << " " << bathY << " " << bathymetry << endl;
   };
 
   float getBathymetry(float x, float y) {
@@ -89,16 +88,18 @@ public:
    * @return value in the corresponding dimension
    */
   float getBoundaryPos(BoundaryEdge i_edge) {
-     if ( i_edge == BND_LEFT )
-       return (float)-5000;
-     else if ( i_edge == BND_RIGHT)
-       return (float)5000;
-     else if ( i_edge == BND_BOTTOM )
-       return (float)-5000;
-     else
-       return (float)5000;
+	int min;
+	if ( i_edge == BND_LEFT ) {
+		return (float)-5000;
+	}
+	else if ( i_edge == BND_RIGHT)
+		return (float)5000;
+	else if ( i_edge == BND_BOTTOM )
+		return (float)-5000;
+	else
+		return (float)5000;
   };
-
+	
 
 };
 
