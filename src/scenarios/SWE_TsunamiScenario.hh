@@ -28,12 +28,9 @@
 #define __SWE_TSUNAMI_SCENARIO_H
 
 #include <cmath>
-#include <netcdf.h>
 
 #include "tools/help.hh"
 #include "SWE_Scenario.hh"
-
-#define ERR(e) {printf("Error: %s\n", nc_strerror(e)); assert(false);}
 
 /**
  * Scenario "Artificial Tsunami Scenario":
@@ -42,15 +39,7 @@
 class SWE_TsunamiScenario : public SWE_Scenario {
   private: 
   Float2D *bathymetry, *displacement;
-  int *bathX, *bathY, *disX, *disY;	    
-
-  void lookUp(float x, float y){
-                /*float tmp = (lookUpX - initX[index]) * (lookUpX - initX[index]) + (lookUpY - initY[index]) * (lookUpY - initY[index]);
-                if(squareDis < 0 || squareDis > tmp){
-                    buff = initZ[index]; 
-                    squareDis = tmp;
-                }*/
-  };
+  int *bathX, *bathY, *disX, *disY;
 
 public:
 
@@ -80,16 +69,18 @@ public:
    * @return value in the corresponding dimension
    */
   float getBoundaryPos(BoundaryEdge i_edge) {
-     if ( i_edge == BND_LEFT )
-       return (float)-5000;
-     else if ( i_edge == BND_RIGHT)
-       return (float)5000;
-     else if ( i_edge == BND_BOTTOM )
-       return (float)-5000;
-     else
-       return (float)5000;
+	int min;
+	if ( i_edge == BND_LEFT ) {
+		return (float)-5000;
+	}
+	else if ( i_edge == BND_RIGHT)
+		return (float)5000;
+	else if ( i_edge == BND_BOTTOM )
+		return (float)-5000;
+	else
+		return (float)5000;
   };
-
+	
 
 };
 
