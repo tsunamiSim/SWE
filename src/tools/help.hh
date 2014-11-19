@@ -33,6 +33,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <assert.h>
+
+#include <netcdf.h>
+using namespace std;
+#define ERR(e) {printf("Error: %s\n", nc_strerror(e)); assert(false);}
 
 /**
  * class Float1D is a proxy class that can represent, for example, 
@@ -267,6 +272,63 @@ inline std::string generateContainerFileName(std::string baseName, int timeStep)
 	return FileName.str();
 };
 
+namespace netCdfReader
+{
+inline void readNcFile(const char* fileDir, Float2D* buffZ, int* buffY, int* buffX){
+		int retval, ncid, dim, countVar, 
+		zid = 2, yid = 1, xid = 0, *tempX, *tempY;
+		float *initZ;      
+		size_t init_ylen, init_xlen;
+		
+		cout << buffY << endl;
+
+		if(retval = nc_open(fileDir, NC_NOWRITE, &ncid)) ERR(retval);
+
+		if(retval = nc_inq(ncid, &dim, &countVar, NULL, NULL)) ERR(retval);
+		assert(dim == 2); 
+		assert(countVar == 3); 
+
+#ifndef NDBUG
+		char dimZ, dimY, dimX;
+		nc_type nc;
+		if(retval = nc_inq_dim(ncid, yid, &dimY, &init_ylen)) ERR(retval);
+		if(retval = nc_inq_dim(ncid, xid, &dimX, &init_xlen)) ERR(retval);
+		if(retval = nc_inq_var(ncid, zid, &dimZ, NULL, NULL, NULL, NULL)) ERR(retval);
+		
+		cout << "name dimZ: " << dimZ << endl;
+		cout << "name/length dimY: " << dimY << init_ylen << endl;
+		cout << "name/length dimX: " << dimX << init_xlen << endl;
+#else 
+		if(retval = nc_inq_dim(ncid, yid, NULL, &init_ylen)) ERR(retval);
+		if(retval = nc_inq_dim(ncid, xid, NULL, &init_xlen)) ERR(retval);
+#endif
+
+		initZ = new float[init_ylen * init_xlen];
+	    //for(unsigned int i = 0; i < init_xlen; i++)
+			//initZ[i] = new float[init_ylen];
+			cout << "1" <<endl;
+		tempY = new int[init_ylen];
+	    tempX = new int[init_xlen];
+
+		cout << "1" <<endl;
+	    if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
+		cout << "1" <<endl;
+	    if(retval = nc_get_var_int(ncid, yid, tempY)) ERR(retval);
+		cout << "1" <<endl; 
+		if(retval = nc_get_var_int(ncid, xid, tempX)) ERR(retval);
+
+ 
+		cout << "1" <<endl;
+	    if(retval = nc_close(ncid));
+
+		cout << "1" <<endl;
+		buffZ = new Float2D(init_ylen, init_xlen, initZ);
+		buffY = tempY;
+		buffX = tempX;
+		assert(buffZ[10][15] = initZ[10][15]);
+
+  };
+}
 
 #endif
 
