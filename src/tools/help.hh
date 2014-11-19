@@ -283,7 +283,7 @@ namespace netCdfReader
  * @param buffY: The buffer for the Y-Values
  * @param buffX: The buffer for the X-Values
  */
-inline void readNcFile(const char* fileDir, Float2D* buffZ, int** buffY, int** buffX){
+inline void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** buffX){
 		int retval, ncid, dim, countVar, 
 		zid = 2, yid = 1, xid = 0, *initX, *initY;
 		float *initZ;      
@@ -330,7 +330,7 @@ inline void readNcFile(const char* fileDir, Float2D* buffZ, int** buffY, int** b
 
 	    if(retval = nc_close(ncid));
 
-		buffZ = new Float2D(init_ylen, init_xlen, initZ);
+		*buffZ = new Float2D(init_ylen, init_xlen, initZ);
 		*buffY = initY;
 		*buffX = initX;
 		assert(buffZ[10][15] == initZ[10][15]);

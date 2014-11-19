@@ -40,7 +40,8 @@
 class SWE_TsunamiScenario : public SWE_Scenario {
   private: 
   Float2D *bathymetry, *displacement;
-  int *bathX, *bathY, *disX, *disY;	    
+  int *bathX, *bathY, *disX, *disY;
+  float disTop, disBot, disLeft, disRight;
 
   void lookUp(int searchFor, int max, int* searchIn, int* best){
 		int disBest = abs(searchFor-searchIn[0]);
@@ -63,11 +64,24 @@ public:
 	tools::Logger::logger.printString("Succesfully read bathymetry");
 	netCdfReader::readNcFile("NetCDF_Input/displacement.nc", &displacement, &disY, &disX);   
 	tools::Logger::logger.printString("Succesfully read displacement");
+	disTop = Array::max(disY, displacement->getRows());
+	disBot = Array::min(disY, displacement->getRows());
+	disLeft = Array::min(disX, displacement->getCols());
+	disRight = Array::max(disY, displacement->getCols());
 	tools::Logger::logger.printLine();
   };
 
   float getBathymetry(float x, float y) {
-	return 0;
+	int bestXBath, bestYBath;
+	lookUp(y, bathymetry->getRows(), bathY, &bestYBath);
+	lookUp(x, bathymetry->getCols(), bathX, &bestXBath);
+	if(x < disLeft || x > disRight || y < disBot || y > disTop)
+		return (*bathymetry)[bestYBath][bestXBath];
+	
+	int bestXDis, bestYDis;
+	lookUp(y, displacement->getRows(), disX, &bestYDis);
+	lookUp(x, displacement->getCols(), disY, &bestXDis);
+	return (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
   };
 
   float getWaterHeight(float x, float y) { 
