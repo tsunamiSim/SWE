@@ -329,6 +329,13 @@ class tools::Logger {
       }
     }
 
+	/**
+	 * Prints a full line of stars
+	 */
+	void printLine() {
+		std::cout << midDelimiter;
+	}
+
     /**
      *  Print current simulation time.
      *  (process rank 0 only)

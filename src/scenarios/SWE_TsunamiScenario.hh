@@ -30,6 +30,7 @@
 #include <cmath>
 
 #include "tools/help.hh"
+#include "tools/Logger.hh"
 #include "SWE_Scenario.hh"
 
 /**
@@ -46,7 +47,7 @@ class SWE_TsunamiScenario : public SWE_Scenario {
 		*best = 0;		
 		for(int i = 1; i < max; i++){
 			int dis = abs(searchFor-searchIn[i]);
-			cout << best << " " ;
+			//cout << best << " " ;
 			if(disBest > dis) {
 				disBest = dis;
 				*best = i;
@@ -58,24 +59,23 @@ public:
 
   SWE_TsunamiScenario() : SWE_Scenario(){
 
-	bathY = NULL; bathX = NULL; bathymetry = NULL;
+	tools::Logger::logger.printLine();
 	netCdfReader::readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
-	cout << "succesfully read bathymetry" << endl;
+	tools::Logger::logger.printString("Succesfully read bathymetry");
 	netCdfReader::readNcFile("NetCDF_Input/displacement.nc", &displacement, &disY, &disX);   
-	cout << "succesfully read displacement" << endl;
-	cout << "test" << endl;
-	cout << bathX << " " << bathY << " " << bathymetry << endl;
+	tools::Logger::logger.printString("Succesfully read displacement");
+	tools::Logger::logger.printLine();
   };
 
   float getBathymetry(float x, float y) {
-    return 0;
+	
   };
 
   float getWaterHeight(float x, float y) { 
 	int bestX, bestY;
-	lookUp(y, bathymetry->getRows(), bathY, &bestY); 
-	lookUp(x, bathymetry->getCols(), bathX, &bestX); 
-     return *bathymetry[bestY][bestX];
+	lookUp(y, bathymetry->getRows(), bathY, &bestY);
+	lookUp(x, bathymetry->getCols(), bathX, &bestX);
+	return (*bathymetry)[bestY][bestX];
   };
 
   virtual float endSimulation() { return (float) 30; };
@@ -88,16 +88,14 @@ public:
    * @return value in the corresponding dimension
    */
   float getBoundaryPos(BoundaryEdge i_edge) {
-	int min;
-	if ( i_edge == BND_LEFT ) {
-		return (float)-5000;
-	}
+	if ( i_edge == BND_LEFT )
+		return Array::min(bathX, bathymetry->getCols());
 	else if ( i_edge == BND_RIGHT)
-		return (float)5000;
+		return Array::max(bathX, bathymetry->getCols());
 	else if ( i_edge == BND_BOTTOM )
-		return (float)-5000;
+		return Array::min(bathY, bathymetry->getRows());
 	else
-		return (float)5000;
+		return Array::max(bathY, bathymetry->getRows());
   };
 	
 
