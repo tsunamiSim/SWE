@@ -47,13 +47,11 @@ int main(int argc, char** argv){
   	l_dx = (l_scenario.getBoundaryPos(BND_RIGHT) - l_scenario.getBoundaryPos(BND_LEFT) )/l_nx;
   	l_dy = (l_scenario.getBoundaryPos(BND_TOP) - l_scenario.getBoundaryPos(BND_BOTTOM) )/l_ny;
 
-
 	// Prepare simulation class
 	SWE_DimensionalSplitting l_dimensionalSplitting(l_nx, l_ny, l_dx, l_dy);
 
 	// Initialize the scenario
-	l_dimensionalSplitting.initScenario(l_scenario.getBoundaryPos(BND_LEFT), l_scenario.getBoundaryPos(BND_BOTTOM), l_scenario);	
-
+	l_dimensionalSplitting.initScenario(l_scenario.getBoundaryPos(BND_LEFT), l_scenario.getBoundaryPos(BND_BOTTOM), l_scenario);
 	// set time and end of simulation
 	float l_time = 0.f;
 	float l_endOfSimulation = l_scenario.endSimulation();	
@@ -86,7 +84,6 @@ int main(int argc, char** argv){
 			l_nx, l_ny,
 			l_dx, l_dy );
 #endif
-
 	//Print initial state
 	l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
                         l_dimensionalSplitting.getDischarge_hu(),

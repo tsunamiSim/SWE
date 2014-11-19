@@ -36,6 +36,7 @@
 #include <assert.h>
 
 #include <netcdf.h>
+#include "tools/Logger.hh"
 using namespace std;
 #define ERR(e) {printf("Error: %s\n", nc_strerror(e)); assert(false);}
 
@@ -301,9 +302,19 @@ inline void readNcFile(const char* fileDir, Float2D* buffZ, int** buffY, int** b
 		if(retval = nc_inq_dim(ncid, xid, &dimX, &init_xlen)) ERR(retval);
 		if(retval = nc_inq_var(ncid, zid, &dimZ, NULL, NULL, NULL, NULL)) ERR(retval);
 		
-		cout << "name dimZ: " << dimZ << endl;
-		cout << "name/length dimY: " << dimY << init_ylen << endl;
-		cout << "name/length dimX: " << dimX << init_xlen << endl;
+		string text = "Name DimZ: ";
+		text = text + dimZ;
+		tools::Logger::logger.printString(text);
+		text = "Name | Length DimY: ";
+		text = text + dimY;
+		text = text + " | ";
+		text = text + static_cast<ostringstream*>( &(ostringstream() << init_ylen) )->str();
+		tools::Logger::logger.printString(text);
+		text = "Name | Length DimX: ";
+		text = text + dimX;
+		text = text + " | ";
+		text = text + static_cast<ostringstream*>( &(ostringstream() << init_xlen) )->str();
+		tools::Logger::logger.printString(text);
 #else 
 		if(retval = nc_inq_dim(ncid, yid, NULL, &init_ylen)) ERR(retval);
 		if(retval = nc_inq_dim(ncid, xid, NULL, &init_xlen)) ERR(retval);
@@ -322,17 +333,30 @@ inline void readNcFile(const char* fileDir, Float2D* buffZ, int** buffY, int** b
 		buffZ = new Float2D(init_ylen, init_xlen, initZ);
 		*buffY = initY;
 		*buffX = initX;
-		assert(buffZ[10][15] = initZ[10][15]);
+		assert(buffZ[10][15] == initZ[10][15]);
 		
 #ifndef NDBUG
-		cout << "File read" << endl;
+		tools::Logger::logger.printString("File read");
 #endif
   };
 }
 
 class Array {
-	template<typename T> T min(T* array, int length) {
-		T temp = 0;
+public:
+	template<typename T> static T min(T* array, int length) {
+		T temp;
+		if(length == 0)
+			return 0;
+		while(length >= 0)
+			if(temp > array[--length])
+				temp = array[length];
+		return temp;
+	}
+
+	template<typename T> static T max(T* array, int length) {
+		T temp;
+		if(length == 0)
+			return 0;
 		while(length >= 0)
 			if(temp < array[--length])
 				temp = array[length];
