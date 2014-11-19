@@ -28,6 +28,11 @@
 #define __SWE_TSUNAMI_SCENARIO_H
 
 #include <cmath>
+<<<<<<< HEAD
+=======
+#include <math.h>
+#include <netcdf.h>
+>>>>>>> e2ab6632aadb582181f6353b34c9bd147329c7a9
 
 #include "tools/help.hh"
 #include "SWE_Scenario.hh"
@@ -39,7 +44,20 @@
 class SWE_TsunamiScenario : public SWE_Scenario {
   private: 
   Float2D *bathymetry, *displacement;
-  int *bathX, *bathY, *disX, *disY;
+  int *bathX, *bathY, *disX, *disY;	    
+
+  void lookUp(int searchFor, int max, int* searchIn, int* best){
+		int disBest = abs(searchFor-searchIn[0]);
+		*best = 0;		
+		for(int i = 1; i < max; i++){
+			int dis = abs(searchFor-searchIn[i]);
+			cout << best << " " ;
+			if(disBest > dis) {
+				disBest = dis;
+				*best = i;
+			}				 
+		} 
+	};
 
 public:
 
@@ -56,7 +74,10 @@ public:
   };
 
   float getWaterHeight(float x, float y) { 
-     return 0;
+	int bestX, bestY;
+	lookUp(y, bathymetry->getRows(), bathY, &bestY); 
+	lookUp(x, bathymetry->getCols(), bathX, &bestX); 
+     return *bathymetry[bestY][bestX];
   };
 
   virtual float endSimulation() { return (float) 30; };
