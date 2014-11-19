@@ -33,6 +33,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <assert.h>
+
+#include <netcdf.h>
+using namespace std;
+#define ERR(e) {printf("Error: %s\n", nc_strerror(e)); assert(false);}
 
 /**
  * class Float1D is a proxy class that can represent, for example, 
@@ -267,6 +272,63 @@ inline std::string generateContainerFileName(std::string baseName, int timeStep)
 	return FileName.str();
 };
 
+namespace netCdfReader
+{
+/**
+ * Opens a nc-file and reads the content. File must contain the dimension values for x on index 0, y on 1 and the bathymetry values as z on index 2
+ *
+ * @param fileDir: The path to the file (relative or absolute)
+ * @param buffZ: The buffer for the bathymetry values
+ * @param buffY: The buffer for the Y-Values
+ * @param buffX: The buffer for the X-Values
+ */
+inline void readNcFile(const char* fileDir, Float2D* buffZ, int* buffY, int* buffX){
+		int retval, ncid, dim, countVar, 
+		zid = 2, yid = 1, xid = 0, *tempX, *tempY;
+		float *initZ;      
+		size_t init_ylen, init_xlen;
+
+		if(retval = nc_open(fileDir, NC_NOWRITE, &ncid)) ERR(retval);
+
+		if(retval = nc_inq(ncid, &dim, &countVar, NULL, NULL)) ERR(retval);
+		assert(dim == 2); 
+		assert(countVar == 3); 
+
+#ifndef NDBUG
+		char dimZ, dimY, dimX;
+		nc_type nc;
+		if(retval = nc_inq_dim(ncid, yid, &dimY, &init_ylen)) ERR(retval);
+		if(retval = nc_inq_dim(ncid, xid, &dimX, &init_xlen)) ERR(retval);
+		if(retval = nc_inq_var(ncid, zid, &dimZ, NULL, NULL, NULL, NULL)) ERR(retval);
+		
+		cout << "name dimZ: " << dimZ << endl;
+		cout << "name/length dimY: " << dimY << init_ylen << endl;
+		cout << "name/length dimX: " << dimX << init_xlen << endl;
+#else 
+		if(retval = nc_inq_dim(ncid, yid, NULL, &init_ylen)) ERR(retval);
+		if(retval = nc_inq_dim(ncid, xid, NULL, &init_xlen)) ERR(retval);
+#endif
+
+		initZ = new float[init_ylen * init_xlen];
+		tempY = new int[init_ylen];
+	    tempX = new int[init_xlen];
+
+	    if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
+	    if(retval = nc_get_var_int(ncid, yid, tempY)) ERR(retval);
+		if(retval = nc_get_var_int(ncid, xid, tempX)) ERR(retval);
+
+	    if(retval = nc_close(ncid));
+
+		buffZ = new Float2D(init_ylen, init_xlen, initZ);
+		buffY = tempY;
+		buffX = tempX;
+		assert(buffZ[10][15] = initZ[10][15]);
+		
+#ifndef NDBUG
+		cout << "File read" << endl;
+#endif
+  };
+}
 
 #endif
 
