@@ -283,9 +283,9 @@ namespace netCdfReader
  * @param buffY: The buffer for the Y-Values
  * @param buffX: The buffer for the X-Values
  */
-inline void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** buffX){
+inline void readNcFile(const char* fileDir, Float2D* buffZ, int** buffY, int** buffX){
 		int retval, ncid, dim, countVar, 
-		zid = 2, yid = 1, xid = 0, *tempX, *tempY;
+		zid = 2, yid = 1, xid = 0, *initX, *initY;
 		float *initZ;      
 		size_t init_ylen, init_xlen;
 
@@ -321,19 +321,20 @@ inline void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** 
 #endif
 
 		initZ = new float[init_ylen * init_xlen];
-		tempY = new int[init_ylen];
-	    tempX = new int[init_xlen];
+		initY = new int[init_ylen];
+	    initX = new int[init_xlen];
 
 	    if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
-	    if(retval = nc_get_var_int(ncid, yid, tempY)) ERR(retval);
-		if(retval = nc_get_var_int(ncid, xid, tempX)) ERR(retval);
+	    if(retval = nc_get_var_int(ncid, yid, initY)) ERR(retval);
+		if(retval = nc_get_var_int(ncid, xid, initX)) ERR(retval);
 
 	    if(retval = nc_close(ncid));
 
-		*buffZ = new Float2D(init_ylen, init_xlen, initZ);
-		*buffY = tempY;
-		*buffX = tempX;
-
+		buffZ = new Float2D(init_ylen, init_xlen, initZ);
+		*buffY = initY;
+		*buffX = initX;
+		assert(buffZ[10][15] == initZ[10][15]);
+		
 #ifndef NDBUG
 		tools::Logger::logger.printString("File read");
 #endif
