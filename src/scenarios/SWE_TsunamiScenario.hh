@@ -59,9 +59,9 @@ public:
   SWE_TsunamiScenario() : SWE_Scenario(){
 
 	bathY = NULL; bathX = NULL; bathymetry = NULL;
-	netCdfReader::readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
+	netCdfReader::readNcFile("NetCDF_Input/initBathymetry.nc", bathymetry, &bathY, &bathX);
 	cout << "succesfully read bathymetry" << endl;
-	netCdfReader::readNcFile("NetCDF_Input/displacement.nc", &displacement, &disY, &disX);   
+	netCdfReader::readNcFile("NetCDF_Input/displacement.nc", displacement, &disY, &disX);   
 	cout << "succesfully read displacement" << endl;
 	cout << "test" << endl;
 	cout << bathX << " " << bathY << " " << bathymetry << endl;
@@ -75,7 +75,7 @@ public:
 	int bestX, bestY;
 	lookUp(y, bathymetry->getRows(), bathY, &bestY); 
 	lookUp(x, bathymetry->getCols(), bathX, &bestX);
-     return *bathymetry[bestY][bestX];
+     return (*bathymetry)[bestY][bestX];
   };
 
   virtual float endSimulation() { return (float) 30; };
