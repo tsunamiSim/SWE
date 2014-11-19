@@ -75,7 +75,7 @@ public:
   float getWaterHeight(float x, float y) { 
 	int bestX, bestY;
 	lookUp(y, bathymetry->getRows(), bathY, &bestY); 
-	lookUp(x, bathymetry->getCols(), bathX, &bestX); 
+	lookUp(x, bathymetry->getCols(), bathX, &bestX);
      return *bathymetry[bestY][bestX];
   };
 
