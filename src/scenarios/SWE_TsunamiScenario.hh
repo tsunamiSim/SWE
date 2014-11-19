@@ -28,6 +28,7 @@
 #define __SWE_TSUNAMI_SCENARIO_H
 
 #include <cmath>
+#include <math.h>
 #include <netcdf.h>
 
 #include "tools/help.hh"
@@ -44,13 +45,18 @@ class SWE_TsunamiScenario : public SWE_Scenario {
   Float2D *bathymetry, *displacement;
   int *bathX, *bathY, *disX, *disY;	    
 
-  void lookUp(float x, float y){
-                /*float tmp = (lookUpX - initX[index]) * (lookUpX - initX[index]) + (lookUpY - initY[index]) * (lookUpY - initY[index]);
-                if(squareDis < 0 || squareDis > tmp){
-                    buff = initZ[index]; 
-                    squareDis = tmp;
-                }*/
-  };
+  void lookUp(int searchFor, int max, int* searchIn, int* best){
+		int disBest = abs(searchFor-searchIn[0]);
+		*best = 0;		
+		for(int i = 1; i < max; i++){
+			int dis = abs(searchFor-searchIn[i]);
+			cout << best << " " ;
+			if(disBest > dis) {
+				disBest = dis;
+				*best = i;
+			}				 
+		} 
+	};
 
 	void readNcFile(const char* fileDir, Float2D* buffZ, int* buffY, int* buffX){
 		int retval, ncid, dim, countVar, 
@@ -117,7 +123,10 @@ public:
   };
 
   float getWaterHeight(float x, float y) { 
-     return 0;
+	int bestX, bestY;
+	lookUp(y, bathymetry->getRows(), bathY, &bestY); 
+	lookUp(x, bathymetry->getCols(), bathX, &bestX); 
+     return *bathymetry[bestY][bestX];
   };
 
   virtual float endSimulation() { return (float) 30; };
