@@ -28,11 +28,6 @@
 #define __SWE_TSUNAMI_SCENARIO_H
 
 #include <cmath>
-<<<<<<< HEAD
-=======
-#include <math.h>
-#include <netcdf.h>
->>>>>>> e2ab6632aadb582181f6353b34c9bd147329c7a9
 
 #include "tools/help.hh"
 #include "SWE_Scenario.hh"
