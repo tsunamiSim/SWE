@@ -55,14 +55,80 @@ class SWE_TsunamiScenario : public SWE_Scenario {
 			}				 
 		} 
 	};
+	
+/**
+ * Opens a nc-file and reads the content. File must contain the dimension values for x on index 0, y on 1 and the bathymetry values as z on index 2
+ *
+ * @param fileDir: The path to the file (relative or absolute)
+ * @param buffZ: The buffer for the bathymetry values
+ * @param buffY: The buffer for the Y-Values
+ * @param buffX: The buffer for the X-Values
+ */
+void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** buffX){
+		int retval, ncid, dim, countVar, 
+		zid = 2, yid = 1, xid = 0, *initX, *initY;
+		float *initZ;      
+		size_t init_ylen, init_xlen;
+
+		if(retval = nc_open(fileDir, NC_NOWRITE, &ncid)) ERR(retval);
+
+		if(retval = nc_inq(ncid, &dim, &countVar, NULL, NULL)) ERR(retval);
+		assert(dim == 2); 
+		assert(countVar == 3); 
+
+#ifndef NDBUG
+		char dimZ, dimY, dimX;
+		//nc_type nc;
+		if(retval = nc_inq_dim(ncid, yid, &dimY, &init_ylen)) ERR(retval);
+		if(retval = nc_inq_dim(ncid, xid, &dimX, &init_xlen)) ERR(retval);
+		if(retval = nc_inq_var(ncid, zid, &dimZ, NULL, NULL, NULL, NULL)) ERR(retval);
+		
+		string text = "Name DimZ: ";
+		text = text + dimZ;
+		tools::Logger::logger.printString(text);
+		text = "Name | Length DimY: ";
+		text = text + dimY;
+		text = text + " | ";
+		text = text + static_cast<ostringstream*>( &(ostringstream() << init_ylen) )->str();
+		tools::Logger::logger.printString(text);
+		text = "Name | Length DimX: ";
+		text = text + dimX;
+		text = text + " | ";
+		text = text + static_cast<ostringstream*>( &(ostringstream() << init_xlen) )->str();
+		tools::Logger::logger.printString(text);
+#else 
+		if(retval = nc_inq_dim(ncid, yid, NULL, &init_ylen)) ERR(retval);
+		if(retval = nc_inq_dim(ncid, xid, NULL, &init_xlen)) ERR(retval);
+#endif
+
+		initZ = new float[init_ylen * init_xlen];
+		initY = new int[init_ylen];
+	    initX = new int[init_xlen];
+
+	    if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
+	    if(retval = nc_get_var_int(ncid, yid, initY)) ERR(retval);
+		if(retval = nc_get_var_int(ncid, xid, initX)) ERR(retval);
+
+	    if(retval = nc_close(ncid));
+
+		*buffZ = new Float2D(init_ylen, init_xlen, initZ);
+		*buffY = initY;
+		*buffX = initX;
+		assert(buffZ[10][15] == initZ[10][15]);
+		
+#ifndef NDBUG
+		tools::Logger::logger.printString("File read");
+#endif
+  };
+
 
 public:
 
   SWE_TsunamiScenario() : SWE_Scenario(){
 	tools::Logger::logger.printLine();
-	netCdfReader::readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
+	readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
 	tools::Logger::logger.printString("Succesfully read bathymetry");
-	netCdfReader::readNcFile("NetCDF_Input/displacement.nc", &displacement, &disY, &disX);   
+	readNcFile("NetCDF_Input/displacement.nc", &displacement, &disY, &disX);   
 	tools::Logger::logger.printString("Succesfully read displacement");
 	disTop = Array::max(disY, displacement->getRows());
 	disBot = Array::min(disY, displacement->getRows());
