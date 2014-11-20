@@ -46,6 +46,7 @@
 #endif
 
 #include "writer/Writer.hh"
+#include "scenarios/SWE_Scenario.hh"
 
 namespace io {
   class NetCdfWriter;
@@ -72,13 +73,27 @@ private:
 
 
   public:
-    NetCdfWriter(const std::string &i_fileName,
-    			 const Float2D &i_b,
-                 const BoundarySize &i_boundarySize,
-                 int i_nX, int i_nY,
-                 float i_dX, float i_dY,
-                 float i_originX = 0., float i_originY = 0.,
-                 unsigned int i_flush = 0);
+	NetCdfWriter(const std::string &i_fileName,
+					const Float2D &i_b,
+					const BoundarySize &i_boundarySize,
+					int i_nX, int i_nY,
+					float i_dX, float i_dY,
+					float i_originX = 0., float i_originY = 0.,
+					unsigned int i_flush = 0,
+					bool useCheckpoints = false);
+	NetCdfWriter(const std::string &i_fileName,
+					const Float2D &i_b,
+					const BoundarySize &i_boundarySize,
+					const BoundaryType &boundaryTypeLeft,
+					const BoundaryType &boundaryTypeRight,
+					const BoundaryType &boundaryTypeTop,
+					const BoundaryType &boundaryTypeBottom,
+					const float endOfSimulation,
+					int i_nX, int i_nY,
+					float i_dX, float i_dY,
+					float i_originX = 0., float i_originY = 0.,
+					unsigned int i_flush = 0,
+					bool useCheckpoints = false);
     virtual ~NetCdfWriter();
 
     // writes the unknowns at a given time step to the netCDF-file.
