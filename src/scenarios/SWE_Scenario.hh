@@ -51,15 +51,23 @@ typedef enum BoundaryEdge {
  * for more interesting scenarios.
  */
 class SWE_Scenario {
+protected:
+
+	int cells_x, cells_y;
 
  public:
+	SWE_Scenario(int x, int y) : cells_x(x), cells_y(y) { }
 
     virtual float getWaterHeight(float x, float y) { return 10.0f; };
     virtual float getVeloc_u(float x, float y) { return 0.0f; };
     virtual float getVeloc_v(float x, float y) { return 0.0f; };
     virtual float getBathymetry(float x, float y) { return 0.0f; };
     
+	virtual int getCellsX() { return cells_x; }
+	virtual int getCellsY() { return cells_y; }
     virtual float waterHeightAtRest() { return 10.0f; };
+
+	virtual float getLastTime() { return 0.f; };
 
     virtual float endSimulation() { return 0.1f; };
     

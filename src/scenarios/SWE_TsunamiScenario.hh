@@ -124,7 +124,7 @@ void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** buffX){
 
 public:
 
-  SWE_TsunamiScenario() : SWE_Scenario(){
+  SWE_TsunamiScenario(int cellsX, int cellsY) : SWE_Scenario(cellsX, cellsY) {
 	tools::Logger::logger.printLine();
 	readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
 	tools::Logger::logger.printString("Succesfully read bathymetry");

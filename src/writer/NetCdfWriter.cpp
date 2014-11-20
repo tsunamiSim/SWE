@@ -128,6 +128,8 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 
     	gridPosition += i_dY;
 	}
+
+	nc_sync(dataFile);
 }
 
 
@@ -259,6 +261,8 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 
     	gridPosition += i_dY;
 	}
+
+	nc_sync(dataFile);
 }
 
 /**
@@ -370,4 +374,11 @@ void io::NetCdfWriter::writeTimeStep( const Float2D &i_h,
 
 	if (flush > 0 && timeStep % flush == 0)
 		nc_sync(dataFile);
+
+	nc_sync(dataFile);
+	std:string text = "Wrote to file ";
+	
+	std::ostringstream buff;
+   		buff << dataFile;
+	tools::Logger::logger.printString(text + buff.str());
 }
