@@ -52,16 +52,19 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 		int i_nX, int i_nY,
 		float i_dX, float i_dY,
 		float i_originX, float i_originY,
-		unsigned int i_flush) :
+		unsigned int i_flush,
+		bool useCheckpoints) :
 		//const bool  &i_dynamicBathymetry) : //!TODO
   io::Writer(i_baseName + ".nc", i_b, i_boundarySize, i_nX, i_nY),
   flush(i_flush)
 {
 	int status;
-
-	//create a netCDF-file, an existing file will be replaced
-	status = nc_create(fileName.c_str(), NC_NETCDF4, &dataFile);
-
+	if(!useCheckpoints)
+		//create a netCDF-file, an existing file will be replaced
+		status = nc_create(fileName.c_str(), NC_NETCDF4, &dataFile);
+	else
+		status = nc_open(fileName.c_str(), NC_WRITE, &dataFile);
+	
   //check if the netCDF-file creation constructor succeeded.
 	if (status != NC_NOERR) {
 		assert(false);
