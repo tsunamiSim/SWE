@@ -18,23 +18,30 @@ int main(int argc, char** argv){
 	tools::Args args;
 	
 	// Prepare command line arguments
- 	args.addOption("size_x", 'x', "Number of cells in x direction");
-	args.addOption("size_y", 'y', "Number of cells in y direction");
-	args.addOption("number_checkpoints", 'c', "Number of checkpoints for visualization", tools::Args::Required, false);
+ 	args.addOption("size_x", 'x', "Number of cells in x direction", tools::Args::Required, false);
+	args.addOption("size_y", 'y', "Number of cells in y direction", tools::Args::Required, false);
+	args.addOption("checkpoint_file", 'f', "The relative/absolute path to the checkpoint file from where on to continue the iteration (default uses the default checkpoint file)", tools::Args::Optional, false);
 	
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
 	
+	int test_cp = args.isSet("checkpoint_file"), test_size = args.isSet("size_x") && args.isSet("size_y");
+	if(!test_cp && !test_size)
+		parseResult = tools::Args::Error;
+
 	// If parsing failed, break the program (if help was asked for and granted, execution did not fail though)
 
 	if(parseResult != tools::Args::Success)
-	{		
+	{
 		if(parseResult == tools::Args::Help)
 			return 0;
 		else
+		{
+			tools::Logger::logger.printString("Something went wrong!");
 			return 1;
+		}
 	}
-
+	
 	// Read simulation domain
 	int l_nx, l_ny; 
 	l_nx = args.getArgument<int>("size_x");
