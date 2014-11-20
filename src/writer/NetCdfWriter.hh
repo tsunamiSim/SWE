@@ -81,6 +81,7 @@ private:
 					float i_originX = 0., float i_originY = 0.,
 					unsigned int i_flush = 0,
 					bool useCheckpoints = false);
+
 	NetCdfWriter(const std::string &i_fileName,
 					const Float2D &i_b,
 					const BoundarySize &i_boundarySize,

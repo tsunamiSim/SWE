@@ -82,6 +82,20 @@ int main(int argc, char** argv){
 			l_nx, l_ny,
 			l_dx, l_dy,
 			l_originx, l_originy);
+	
+	// Set up Checkpoint writer
+	std::string checkpointFile = "SWE_checkpoints";
+	io::NetCdfWriter l_checkpointWriter(checkpointFile,
+				l_dimensionalSplitting.getBathymetry(),
+				l_boundarySize,
+				l_scenario.getBoundaryType(BND_LEFT),
+				l_scenario.getBoundaryType(BND_RIGHT),
+				l_scenario.getBoundaryType(BND_TOP),
+				l_scenario.getBoundaryType(BND_BOTTOM),
+				l_endOfSimulation,
+				l_nx, l_ny,
+				l_dx, l_dy,
+				l_originx, l_originy);
 
 #else
 	//set up VTKWriter
@@ -97,6 +111,8 @@ int main(int argc, char** argv){
                         l_dimensionalSplitting.getDischarge_hv(),
                         l_time);
 	
+	int l_timeStepsPerCheckpoint = 10, l_cpCounter = 0;
+	std::string time = "Time: ";
 	// Loop over timesteps
 	while(l_time < l_endOfSimulation)
 	{
@@ -114,9 +130,16 @@ int main(int argc, char** argv){
 			l_dimensionalSplitting.getDischarge_hv(),
                         l_time);
 		
+ 		std::ostringstream buff;
+    		buff << l_time;
 		// write time to console
-	  	std::cout << l_time << std::endl << std::endl ;
-
+		tools::Logger::logger.printString(time + buff.str());
+		
+		if(++l_cpCounter % l_timeStepsPerCheckpoint == 0)
+			l_checkpointWriter.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
+                	l_dimensionalSplitting.getDischarge_hu(),
+			l_dimensionalSplitting.getDischarge_hv(),
+                        l_time);
 	}
 	return 0;
 }
