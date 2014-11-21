@@ -100,6 +100,7 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		initH = new float[init_ylen * init_xlen];
 		initY = new float[init_ylen];
 		initX = new float[init_xlen];
+		cout << "Timesteps found: " << time << endl;
 		size_t start[3] = { time - 1, 0, 0 }, length[3] = { 1, 0, 0 }; 
 
 		if(retval = nc_get_var_float(ncid, b_id, initB)) ERRM(retval, "get b values");
@@ -130,6 +131,19 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		if(retval = nc_close(ncid)) ERR(retval);
 		tools::Logger::logger.printString("File closed");
 
+// Display sql: select DISTINCT value from initH
+		float temporary[init_xlen * init_ylen];
+		int j = 0;
+		for(int i = 0; i < init_xlen * init_ylen; i++) {
+			bool found = false;
+			for(int j_l = 0; j_l < j && !found; j_l++)
+				if(temporary[j_l] == initH[i])
+					found = true;
+			if(!found)
+				temporary[j++] = initH[i];
+		}
+		Array::print(temporary, j);
+
 		bathymetry = new Float2D(init_xlen, init_ylen, initB);
 		hu = new Float2D(init_xlen, init_ylen, initHu);
 		hv = new Float2D(init_xlen, init_ylen, initHv);
@@ -145,7 +159,9 @@ public:
   float getLastTime() { return startingTime; }
 
   SWE_CheckpointScenario() : SWE_Scenario(0, 0){
+	tools::Logger::logger.printString("Starting to read");
 	readNcFile();
+	tools::Logger::logger.printString("Reading finished");
 	cells_x = h->getCols();
 	cells_y = h->getRows();
 	boundRight = Array::max(initX, bathymetry->getCols());

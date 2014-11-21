@@ -108,7 +108,9 @@ int main(int argc, char** argv){
 			l_boundarySize,
 			l_nx, l_ny,
 			l_dx, l_dy,
-			l_originx, l_originy, test_cp);
+			l_originx, l_originy,
+			0,
+			test_cp);
 	
 	// Set up Checkpoint writer
 	std::string checkpointFile = "SWE_checkpoints";

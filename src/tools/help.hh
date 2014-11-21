@@ -35,6 +35,12 @@
 #include <sstream>
 #include <assert.h>
 
+#ifdef __linux__
+#include <unistd.h>
+#elif __WINDOWS__
+#include <windows.h>
+#endif
+
 #include <netcdf.h>
 #include "tools/Logger.hh"
 using namespace std;
@@ -275,7 +281,7 @@ inline std::string generateContainerFileName(std::string baseName, int timeStep)
 
 class Array {
 public:
-	template<typename T> static T min(T* array, int length) {
+	template<typename T> static inline T min(T* array, int length) {
 		T temp;
 #ifndef NDBUG /*
 		std::cout << "Array with the size " << length << std::endl;
@@ -292,7 +298,7 @@ public:
 		return temp;
 	}
 
-	template<typename T> static T max(T* array, int length) {
+	template<typename T> static inline T max(T* array, int length) {
 		T temp;
 #ifndef NDBUG /*
 		std::cout << "Array with the size " << length << std::endl;
@@ -323,5 +329,16 @@ inline std::string toString(T input) {
     	buff << input;
 	return buff.str();
 };
+
+inline void wait(unsigned int seconds) {
+	tools::Logger::logger.printString(toString("Waiting for ") + toString(seconds) + toString(" seconds"));
+#ifdef __linux__
+	sleep(seconds); // Seconds for Linux
+#elif __WINDOWS__
+	sleep(seconds * 1000); // Milliseconds for windows
+#endif
+};
+
+
 #endif
 

@@ -61,8 +61,25 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
   io::Writer(i_baseName + ".nc", i_b, i_boundarySize, i_nX, i_nY),
   flush(i_flush) {
 	int status;
-	if(!useCheckpoints)
+	if(useCheckpoints)
+	{
 		status = nc_open(fileName.c_str(), NC_WRITE, &dataFile);
+
+		
+		//check if the netCDF-file open command succeeded.
+		if (status != NC_NOERR) {
+			assert(false);
+			return;
+		}
+
+		size_t l_length;
+		if(status = nc_inq_varid(dataFile, "time", &timeVar)) ERR(status);
+		if(status = nc_inq_varid(dataFile, "h", &hVar)) ERR(status);
+		if(status = nc_inq_varid(dataFile, "hu", &huVar)) ERR(status);
+		if(status = nc_inq_varid(dataFile, "hv", &hvVar)) ERR(status);
+		if(status = nc_inq_varid(dataFile, "b", &bVar)) ERR(status);
+		if(status = nc_inq_dimlen(dataFile, timeVar, &timeStep)) ERR(status);
+	}
 	else {
 		//create a netCDF-file, an existing file will be replaced
 		status = nc_create(fileName.c_str(), NC_NETCDF4, &dataFile);
@@ -162,19 +179,14 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 		int i_nX, int i_nY,
 		float i_dX, float i_dY,
 		float i_originX, float i_originY,
-		unsigned int i_flush,
-		bool useCheckpoints) :
+		unsigned int i_flush) :
 	io::Writer(i_baseName + ".nc", i_b, i_boundarySize, i_nX, i_nY),
 	flush(i_flush) {
 
 	int retVal;
 
-	int status;
-	if(!useCheckpoints)
-		//create a netCDF-file, an existing file will be replaced
-		status = nc_create(fileName.c_str(), NC_NETCDF4, &dataFile);
-	else
-		status = nc_open(fileName.c_str(), NC_WRITE, &dataFile);
+	//create a netCDF-file, an existing file will be replaced
+	int status = nc_create(fileName.c_str(), NC_NETCDF4, &dataFile);
 	
 	//check if the netCDF-file creation constructor succeeded.
 	if (status != NC_NOERR) {

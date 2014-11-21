@@ -108,10 +108,10 @@ void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** buffX){
 		memset(initX, 0, init_xlen);
 
 		if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
-	    if(retval = nc_get_var_int(ncid, yid, initY)) ERR(retval);
+		if(retval = nc_get_var_int(ncid, yid, initY)) ERR(retval);
 		if(retval = nc_get_var_int(ncid, xid, initX)) ERR(retval);
 
-	    if(retval = nc_close(ncid));
+		if(retval = nc_close(ncid));
 
 		*buffZ = new Float2D(init_ylen, init_xlen, initZ);
 		*buffY = initY;
