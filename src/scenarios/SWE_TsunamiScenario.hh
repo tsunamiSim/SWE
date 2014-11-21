@@ -158,7 +158,13 @@ public:
 	int bestXDis, bestYDis;
 	lookUp(y, displacement->getRows(), disX, &bestYDis);
 	lookUp(x, displacement->getCols(), disY, &bestXDis);
-	return (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
+
+	float result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
+	if(result < 0 && result > -20)
+		return -20.f;
+	else if(result > 0 && result < 20)
+		return 20.f;
+	return result;
   };
 
   float getWaterHeight(float x, float y) { 
