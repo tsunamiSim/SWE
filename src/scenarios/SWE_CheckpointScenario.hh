@@ -38,8 +38,8 @@
 class SWE_CheckpointScenario : public SWE_Scenario {
   private: 
   Float2D *bathymetry, *hu, *hv, *h;
-  float endOfSimulation, *initX, *initY, initBu, initBd, initBr, initBl, startingTime;
-  int  boundaryUp, boundaryDown, boundaryLeft, boundaryRight, boundary;
+  float endOfSimulation, *initX, *initY, initBt, initBb, initBr, initBl, startingTime;
+  int  boundTop, boundBot, boundLeft, boundRight, boundary;
   
   void lookUp(float searchFor, int max, float* searchIn, int* best){
 		float disBest = abs(searchFor-searchIn[0]);
@@ -89,7 +89,8 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		if(retval = nc_inq_dimlen(ncid, x_id, &init_xlen)) ERRM(retval, "get dimension length x");
 		cells_x = init_xlen;
 		if(retval = nc_inq_dimlen(ncid, time_id, &time)) ERRM(retval, "get dimension length time");
-		if(retval = nc_get_vara(ncid, time_id, new size_t[1] { time - 1 }, new size_t[1] { 1 }, (&startingTime))) ERRM(retval, "get last time value");
+		size_t timeStart[1] = { time - 1 }, timeLength[1] = { 1 };
+		if(retval = nc_get_vara(ncid, time_id, timeStart, timeLength, (&startingTime))) ERRM(retval, "get last time value");
 
 		tools::Logger::logger.printString("Dimension length and last time successfully read");
 
@@ -103,9 +104,9 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 
 		if(retval = nc_get_var_float(ncid, b_id, initB)) ERRM(retval, "get b values");
 		tools::Logger::logger.printString("Bathymetry values successfully read");
-		if(retval = nc_get_var_float(ncid, hu_id, initHu)) ERRM(retval, "get hu values");
+		if(retval = nc_get_vara_float(ncid, hu_id, start, length, initHu)) ERRM(retval, "get hu values");
 		tools::Logger::logger.printString("HU values successfully read");
-		if(retval = nc_get_var_float(ncid, hv_id, initHv)) ERRM(retval, "get hv values");
+		if(retval = nc_get_vara_float(ncid, hv_id, start, length, initHv)) ERRM(retval, "get hv values");
 		tools::Logger::logger.printString("HV values successfully read");
 		if(retval = nc_get_vara_float(ncid, h_id, start, length, initH)) ERRM(retval, "get h values");
 		tools::Logger::logger.printString("H values successfully read");
@@ -114,10 +115,9 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		if(retval = nc_get_var_float(ncid, x_id, initX)) ERRM(retval, "get x values");
 		tools::Logger::logger.printString("X values successfully read");
 		
-		//if(retval = nc_get_var_int(ncid, bound_id, &boundary)) ERR(retval);
-		if(retval = nc_get_var_float(ncid, bU_id, &initBu)) ERR(retval);
+		if(retval = nc_get_var_float(ncid, bU_id, &initBt)) ERR(retval);
 		tools::Logger::logger.printString("Top boundary values successfully read");
-		if(retval = nc_get_var_float(ncid, bD_id, &initBd)) ERR(retval);
+		if(retval = nc_get_var_float(ncid, bD_id, &initBb)) ERR(retval);
 		tools::Logger::logger.printString("Bottom boundary values successfully read");
 		if(retval = nc_get_var_float(ncid, bR_id, &initBr)) ERR(retval);
 		tools::Logger::logger.printString("Right boundary values successfully read");
@@ -130,12 +130,10 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		if(retval = nc_close(ncid)) ERR(retval);
 		tools::Logger::logger.printString("File closed");
 
-		bathymetry = new Float2D(init_ylen, init_xlen, initB);
-		hu = new Float2D(init_ylen, init_xlen, initHu);
-		hv = new Float2D(init_ylen, init_xlen, initHv);
-		h = new Float2D(init_ylen, init_xlen, initH);
-		
-		assert(bathymetry[10][15] == initZ[10][15]);
+		bathymetry = new Float2D(init_xlen, init_ylen, initB);
+		hu = new Float2D(init_xlen, init_ylen, initHu);
+		hv = new Float2D(init_xlen, init_ylen, initHv);
+		h = new Float2D(init_xlen, init_ylen, initH);
 		
 #ifndef NDBUG
 		tools::Logger::logger.printString("File read");
@@ -150,46 +148,70 @@ public:
 	readNcFile();
 	cells_x = h->getCols();
 	cells_y = h->getRows();
+	boundRight = Array::max(initX, bathymetry->getCols());
+	boundLeft = Array::min(initX, bathymetry->getCols());
+	boundTop = Array::max(initY, bathymetry->getRows());
+	boundBot = Array::min(initY, bathymetry->getRows());
+	std::string comma = ", ";
+	tools::Logger::logger.printString(toString("Set boundaries to: left, right, top, bottom: ") + toString(boundLeft) + comma + toString(boundRight) + comma + toString(boundTop) + comma + toString(boundBot));
   };
 
   float getBathymetry(float x, float y) {
 	int bestX, bestY;
 	lookUp(y, bathymetry->getRows(), initY, &bestY);
 	lookUp(x, bathymetry->getCols(), initX, &bestX);
-	return (*bathymetry)[bestY][bestX];
+	return (*bathymetry)[bestX][bestY];
   };
 
   float getWaterHeight(float x, float y) { 
 	int bestX, bestY;
 	lookUp(y, h->getRows(), initY, &bestY);
 	lookUp(x, h->getCols(), initX, &bestX);
-	return (*h)[bestY][bestX];
+	return (*h)[bestX][bestY];
   };
   
-  float getHu(float x, float y){
+  float getVeloc_u(float x, float y){
     int bestX, bestY;
 	lookUp(y, hu->getRows(), initY, &bestY);
 	lookUp(x, hu->getCols(), initX, &bestX);
-	return (*hu)[bestY][bestX];
+	return (*hu)[bestX][bestY] / (*h)[bestX][bestY];
   };
   
-  float getHv(float x, float y){
+  float getVeloc_v(float x, float y){
     int bestX, bestY;
 	lookUp(y, hv->getRows(), initY, &bestY);
 	lookUp(x, hv->getCols(), initX, &bestX);
-	return (*hv)[bestY][bestX];
+	return (*hv)[bestX][bestY] / (*h)[bestX][bestY];
   };  
   
   void getBoundaries(float* u, float* d, float* r, float* l){
-    *u= initBu;
-    *d= initBd;
+    *u= initBt;
+    *d= initBb;
     *r= initBr;
     *l= initBl;
   };
 
   virtual float endSimulation() { return (float) endOfSimulation; };
 
-  virtual BoundaryType getBoundaryType(BoundaryEdge edge) { return boundary ? WALL : OUTFLOW; };
+  virtual BoundaryType getBoundaryType(BoundaryEdge edge) {
+		int tmp;
+		switch(edge) {
+			case BND_LEFT:
+				tmp = initBl; break;
+			case BND_RIGHT:
+				tmp = initBr; break;
+			case BND_TOP:
+				tmp = initBt; break;
+			case BND_BOTTOM:
+				tmp = initBb; break;
+		}
+		switch(tmp) {
+			case 0:
+				return OUTFLOW;
+			case 1:
+				return WALL;
+		}
+	};
 
   /** Get the boundary positions
    *
@@ -198,13 +220,13 @@ public:
    */
   float getBoundaryPos(BoundaryEdge i_edge) {
 	if ( i_edge == BND_LEFT )
-		return Array::min(initX, bathymetry->getCols());
+		return boundLeft;
 	else if ( i_edge == BND_RIGHT)
-		return Array::max(initX, bathymetry->getCols());
+		return boundRight;
 	else if ( i_edge == BND_BOTTOM )
-		return Array::min(initY, bathymetry->getRows());
+		return boundBot;
 	else
-		return Array::max(initY, bathymetry->getRows());
+		return boundTop;
   };
 	
 

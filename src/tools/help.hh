@@ -277,23 +277,51 @@ class Array {
 public:
 	template<typename T> static T min(T* array, int length) {
 		T temp;
-		if(length == 0)
-			return 0;
-		while(length >= 0)
-			if(temp > array[--length])
-				temp = array[length];
+#ifndef NDBUG /*
+		std::cout << "Array with the size " << length << std::endl;
+		for(int i = 0; i < length; i++)
+			std::cout << array[i];
+		std::cout << std::endl << std::endl;
+		std::cout << std::endl << std::endl;*/
+#endif
+		if(length == 0) return 0;
+		for(int i = 0; i < length; i++) {
+			if(temp > array[i])
+				temp = array[i];
+			}
 		return temp;
 	}
 
 	template<typename T> static T max(T* array, int length) {
 		T temp;
-		if(length == 0)
-			return 0;
-		while(length >= 0)
-			if(temp < array[--length])
-				temp = array[length];
+#ifndef NDBUG /*
+		std::cout << "Array with the size " << length << std::endl;
+		for(int i = 0; i < length; i++)
+			std::cout << array[i];
+		std::cout << std::endl << std::endl;
+		std::cout << std::endl << std::endl; */
+#endif
+		if(length == 0) return 0;
+		for(int i = 0; i < length; i++) {
+			if(temp < array[i])
+				temp = array[i];
+			}
 		return temp;
 	}
+
+	template<typename T> static void print(T* array, int length, std::string name = "Array") {
+		cout << name << ": ";
+		for(int i = 0; i < length; i++)
+			cout << array[i] << ", ";
+		cout << endl;
+	}
+};
+
+template<typename T>
+inline std::string toString(T input) {
+	std::ostringstream buff;
+    	buff << input;
+	return buff.str();
 };
 #endif
 

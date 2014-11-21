@@ -69,7 +69,7 @@ protected:
 
 	virtual float getLastTime() { return 0.f; };
 
-    virtual float endSimulation() { return 0.1f; };
+    virtual float endSimulation() { std::cout << "Base class Method" << std::endl; return 0.1f; };
     
     virtual BoundaryType getBoundaryType(BoundaryEdge edge) { return WALL; };
     virtual float getBoundaryPos(BoundaryEdge edge) {

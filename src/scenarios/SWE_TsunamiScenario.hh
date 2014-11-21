@@ -42,6 +42,7 @@ class SWE_TsunamiScenario : public SWE_Scenario {
   Float2D *bathymetry, *displacement;
   int *bathX, *bathY, *disX, *disY;
   float disTop, disBot, disLeft, disRight;
+	float boundLeft, boundRight, boundTop, boundBot;
 
   void lookUp(int searchFor, int max, int* searchIn, int* best){
 		int disBest = abs(searchFor-searchIn[0]);
@@ -103,9 +104,10 @@ void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** buffX){
 
 		initZ = new float[init_ylen * init_xlen];
 		initY = new int[init_ylen];
-	    initX = new int[init_xlen];
+		initX = new int[init_xlen];
+		memset(initX, 0, init_xlen);
 
-	    if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
+		if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
 	    if(retval = nc_get_var_int(ncid, yid, initY)) ERR(retval);
 		if(retval = nc_get_var_int(ncid, xid, initX)) ERR(retval);
 
@@ -114,6 +116,7 @@ void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** buffX){
 		*buffZ = new Float2D(init_ylen, init_xlen, initZ);
 		*buffY = initY;
 		*buffX = initX;
+
 		assert(buffZ[10][15] == initZ[10][15]);
 		
 #ifndef NDBUG
@@ -127,13 +130,21 @@ public:
   SWE_TsunamiScenario(int cellsX, int cellsY) : SWE_Scenario(cellsX, cellsY) {
 	tools::Logger::logger.printLine();
 	readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
-	tools::Logger::logger.printString("Succesfully read bathymetry");
+	tools::Logger::logger.printString(toString("Succesfully read bathymetry. Rows: ") + toString(bathymetry->getRows()) + toString(", Cols: ") + toString(bathymetry->getCols()));
 	readNcFile("NetCDF_Input/displacement.nc", &displacement, &disY, &disX);   
-	tools::Logger::logger.printString("Succesfully read displacement");
+	tools::Logger::logger.printString("Succesfully read displacement. Rows: " + toString(displacement->getRows()) + toString(", Cols: ") + toString(displacement->getCols()));
+	tools::Logger::logger.printString("Setting displacement boundaries");
 	disTop = Array::max(disY, displacement->getRows());
 	disBot = Array::min(disY, displacement->getRows());
 	disLeft = Array::min(disX, displacement->getCols());
 	disRight = Array::max(disY, displacement->getCols());
+	std::string comma = ", ";
+	tools::Logger::logger.printString(toString("Displacement boundaries set to: top, bot, left, right ") + toString(disTop) + comma + toString(disBot) + comma + toString(disLeft) + comma + toString(disRight));
+	boundTop = Array::max(bathY, bathymetry->getRows());
+	boundBot = Array::min(bathY, bathymetry->getRows());
+	boundLeft = Array::min(bathX, bathymetry->getCols());
+	boundRight = Array::max(bathX, bathymetry->getCols());
+	tools::Logger::logger.printString(toString("Bathymetry boundaries set to: top, bot, left, right ") + toString(boundTop) + comma + toString(boundBot) + comma + toString(boundLeft) + comma + toString(boundRight));
 	tools::Logger::logger.printLine();
   };
 
@@ -160,7 +171,7 @@ public:
 		return 0;
   };
 
-  virtual float endSimulation() { return (float) 30; };
+  virtual float endSimulation() { return (float) 100; };
 
   virtual BoundaryType getBoundaryType(BoundaryEdge edge) { return OUTFLOW; };
 
@@ -170,14 +181,18 @@ public:
    * @return value in the corresponding dimension
    */
   float getBoundaryPos(BoundaryEdge i_edge) {
-	if ( i_edge == BND_LEFT )
-		return Array::min(bathX, bathymetry->getCols());
-	else if ( i_edge == BND_RIGHT)
-		return Array::max(bathX, bathymetry->getCols());
-	else if ( i_edge == BND_BOTTOM )
-		return Array::min(bathY, bathymetry->getRows());
-	else
-		return Array::max(bathY, bathymetry->getRows());
+	if ( i_edge == BND_LEFT ) {
+		return boundLeft;
+	}
+	else if ( i_edge == BND_RIGHT) {
+		return boundRight;
+	}
+	else if ( i_edge == BND_BOTTOM ) {
+		return boundBot;
+	}
+	else {
+		return boundTop;
+	}
   };
 	
 

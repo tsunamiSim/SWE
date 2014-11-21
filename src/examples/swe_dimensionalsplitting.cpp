@@ -55,18 +55,22 @@ int main(int argc, char** argv){
 		l_scenario = new SWE_CheckpointScenario();
 		l_nx = l_scenario->getCellsX();
 		l_ny = l_scenario->getCellsY();
+		tools::Logger::logger.printString(toString("Read cell domain from file: (x, y) = ") + toString(l_nx) + toString(", ") + toString(l_ny));
 	}
 	else
 	{
 		l_nx = args.getArgument<int>("size_x");
 		l_ny = args.getArgument<int>("size_y");	
 		l_scenario = new SWE_TsunamiScenario(l_nx, l_ny);
+		tools::Logger::logger.printString(toString("Read cell domain from command line: (x, y) = ") + toString(l_nx) + toString(", ") + toString(l_ny));
 	}
 
 	// Set step size
 	float l_dx, l_dy;
   	l_dx = (l_scenario->getBoundaryPos(BND_RIGHT) - l_scenario->getBoundaryPos(BND_LEFT) )/l_nx;
   	l_dy = (l_scenario->getBoundaryPos(BND_TOP) - l_scenario->getBoundaryPos(BND_BOTTOM) )/l_ny;
+	cout << "Calulated step size d_x: (" << l_scenario->getBoundaryPos(BND_RIGHT) << " - " << l_scenario->getBoundaryPos(BND_LEFT) << ") / " << l_nx << " = " << l_dx << endl;
+	cout << "Calulated step size d_y: (" << l_scenario->getBoundaryPos(BND_TOP) << " - " << l_scenario->getBoundaryPos(BND_BOTTOM) << ") / " << l_ny << " = " << l_dy << endl;
 
 	tools::Logger::logger.printLine();
 	tools::Logger::logger.printString("Preparing simulation class");
@@ -74,8 +78,11 @@ int main(int argc, char** argv){
 	// Prepare simulation class
 	SWE_DimensionalSplitting l_dimensionalSplitting(l_nx, l_ny, l_dx, l_dy);
 
+	tools::Logger::logger.printString("Initializing simulation class");
 	// Initialize the scenario
 	l_dimensionalSplitting.initScenario(l_scenario->getBoundaryPos(BND_LEFT), l_scenario->getBoundaryPos(BND_BOTTOM), *l_scenario);
+
+	tools::Logger::logger.printString("Reading time domain from scenario");
 	// set time and end of simulation
 	float l_time = l_scenario->getLastTime();
 	float l_endOfSimulation = l_scenario->endSimulation();	
@@ -101,7 +108,7 @@ int main(int argc, char** argv){
 			l_boundarySize,
 			l_nx, l_ny,
 			l_dx, l_dy,
-			l_originx, l_originy);
+			l_originx, l_originy, test_cp);
 	
 	// Set up Checkpoint writer
 	std::string checkpointFile = "SWE_checkpoints";
@@ -137,7 +144,13 @@ int main(int argc, char** argv){
 #endif
 	tools::Logger::logger.printLine();
 	tools::Logger::logger.printString("Starting simulation");
+
+#ifndef NDBUG
+	tools::Logger::logger.printString(toString("Start Time: ") + toString(l_time));
+#endif
 	std::string time = "Time: ";
+
+	l_scenario->getBoundaryPos(BND_TOP);
 	// Loop over timesteps
 	while(l_time < l_endOfSimulation)
 	{
