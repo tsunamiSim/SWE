@@ -163,10 +163,10 @@ public:
 	cells_x = h->getCols();
 	cells_y = h->getRows();
 	cout << Array::max(initX, bathymetry->getCols()) << "\n";
-	boundRight = Array::max(initX, bathymetry->getCols())*2/(cells_x-1);
-	boundLeft = Array::min(initX, bathymetry->getCols())*2/(cells_x-1);
-	boundTop = Array::max(initY, bathymetry->getRows())*2/(cells_y-1);
-	boundBot = Array::min(initY, bathymetry->getRows())*2/(cells_y-1);
+	boundRight = Array::max(initX, bathymetry->getCols())*20/(cells_x-1);
+	boundLeft = Array::min(initX, bathymetry->getCols())*20/(cells_x-1);
+	boundTop = Array::max(initY, bathymetry->getRows())*20/(cells_y-1);
+	boundBot = Array::min(initY, bathymetry->getRows())*20/(cells_y-1);
 	std::string comma = ", ";
 	tools::Logger::logger.printString(toString("Set boundaries to: left, right, top, bottom: ") + toString(boundLeft) + comma + toString(boundRight) + comma + toString(boundTop) + comma + toString(boundBot));
   };
