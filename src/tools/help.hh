@@ -35,6 +35,12 @@
 #include <sstream>
 #include <assert.h>
 
+#ifdef __linux__
+#include <unistd.h>
+#elif __WINDOWS__
+#include <windows.h>
+#endif
+
 #include <netcdf.h>
 #include "tools/Logger.hh"
 using namespace std;
@@ -275,25 +281,64 @@ inline std::string generateContainerFileName(std::string baseName, int timeStep)
 
 class Array {
 public:
-	template<typename T> static T min(T* array, int length) {
+	template<typename T> static inline T min(T* array, int length) {
 		T temp;
-		if(length == 0)
-			return 0;
-		while(length >= 0)
-			if(temp > array[--length])
-				temp = array[length];
+#ifndef NDBUG /*
+		std::cout << "Array with the size " << length << std::endl;
+		for(int i = 0; i < length; i++)
+			std::cout << array[i];
+		std::cout << std::endl << std::endl;
+		std::cout << std::endl << std::endl;*/
+#endif
+		if(length == 0) return 0;
+		for(int i = 0; i < length; i++) {
+			if(temp > array[i])
+				temp = array[i];
+			}
 		return temp;
 	}
 
-	template<typename T> static T max(T* array, int length) {
+	template<typename T> static inline T max(T* array, int length) {
 		T temp;
-		if(length == 0)
-			return 0;
-		while(length >= 0)
-			if(temp < array[--length])
-				temp = array[length];
+#ifndef NDBUG /*
+		std::cout << "Array with the size " << length << std::endl;
+		for(int i = 0; i < length; i++)
+			std::cout << array[i];
+		std::cout << std::endl << std::endl;
+		std::cout << std::endl << std::endl; */
+#endif
+		if(length == 0) return 0;
+		for(int i = 0; i < length; i++) {
+			if(temp < array[i])
+				temp = array[i];
+			}
 		return temp;
 	}
+
+	template<typename T> static void print(T* array, int length, std::string name = "Array") {
+		cout << name << ": ";
+		for(int i = 0; i < length; i++)
+			cout << array[i] << ", ";
+		cout << endl;
+	}
 };
+
+template<typename T>
+inline std::string toString(T input) {
+	std::ostringstream buff;
+    	buff << input;
+	return buff.str();
+};
+
+inline void wait(unsigned int seconds) {
+	tools::Logger::logger.printString(toString("Waiting for ") + toString(seconds) + toString(" seconds"));
+#ifdef __linux__
+	sleep(seconds); // Seconds for Linux
+#elif __WINDOWS__
+	sleep(seconds * 1000); // Milliseconds for windows
+#endif
+};
+
+
 #endif
 

@@ -93,8 +93,7 @@ private:
 					int i_nX, int i_nY,
 					float i_dX, float i_dY,
 					float i_originX = 0., float i_originY = 0.,
-					unsigned int i_flush = 0,
-					bool useCheckpoints = false);
+					unsigned int i_flush = 0);
     virtual ~NetCdfWriter();
 
     // writes the unknowns at a given time step to the netCDF-file.
