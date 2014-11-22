@@ -22,11 +22,12 @@ int main(int argc, char** argv){
  	args.addOption("size_x", 'x', "Number of cells in x direction", tools::Args::Required, false);
 	args.addOption("size_y", 'y', "Number of cells in y direction", tools::Args::Required, false);
 	args.addOption("use_checkpoint_file", 'r', "Use this option to continue a previously failing run", tools::Args::No, false);
+	args.addOption("end_of_simulation", 'e' , "Sets the end of the simulation", tools::Args::Required, false);
 	
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
 	
-	int test_cp = args.isSet("use_checkpoint_file"), test_size = args.isSet("size_x") && args.isSet("size_y");
+	int test_cp = args.isSet("use_checkpoint_file"), test_size = args.isSet("size_x") && args.isSet("size_y"), test_eos = args.isSet("end_of_simulation");
 	if(!test_cp && !test_size)
 		parseResult = tools::Args::Error;
 
@@ -64,7 +65,8 @@ int main(int argc, char** argv){
 		l_scenario = new SWE_TsunamiScenario(l_nx, l_ny);
 		tools::Logger::logger.printString(toString("Read cell domain from command line: (x, y) = ") + toString(l_nx) + toString(", ") + toString(l_ny));
 	}
-
+    
+    
 	// Set step size
 	float l_dx, l_dy;
   	l_dx = (l_scenario->getBoundaryPos(BND_RIGHT) - l_scenario->getBoundaryPos(BND_LEFT) )/l_nx;
@@ -85,7 +87,11 @@ int main(int argc, char** argv){
 	tools::Logger::logger.printString("Reading time domain from scenario");
 	// set time and end of simulation
 	float l_time = l_scenario->getLastTime();
-	float l_endOfSimulation = l_scenario->endSimulation();	
+	float l_endOfSimulation;
+	if(test_eos)
+	    l_endOfSimulation = args.getArgument<float>("end_of_simulation");
+	else
+	    l_endOfSimulation = l_scenario->endSimulation();
 
 	// configure Writer
 	std::string basename = "SWE";
@@ -153,9 +159,27 @@ int main(int argc, char** argv){
 	std::string time = "Time: ";
 
 	l_scenario->getBoundaryPos(BND_TOP);
+	
+	//
+	//TODO remove
+	if(1){
+	cout << l_scenario->getBoundaryPos(BND_TOP);
+	cout << l_scenario->getBoundaryPos(BND_LEFT);
+	cout << l_scenario->getBoundaryPos(BND_RIGHT);
+	cout << l_scenario->getBoundaryPos(BND_BOTTOM);
+	cout << "\n";
+	cout << l_scenario->getBathymetry(-100,-100) << "\n";
+	cout << l_scenario->getBathymetry(100,-100) << "\n";
+	cout << l_scenario->getBathymetry(100,100) << "\n";
+	cout << l_scenario->getBathymetry(-100,100) << "\n";
+	cout << l_scenario->getBathymetry(0,0) << "\n";
+	}
+	//
+	
 	// Loop over timesteps
 	while(l_time < l_endOfSimulation)
 	{
+	    
 		l_dimensionalSplitting.setGhostLayer();
 		
 		// compute one timestep

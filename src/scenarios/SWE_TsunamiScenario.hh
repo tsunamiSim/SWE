@@ -40,11 +40,11 @@
 class SWE_TsunamiScenario : public SWE_Scenario {
   private: 
   Float2D *bathymetry, *displacement;
-  int *bathX, *bathY, *disX, *disY;
+  float *bathX, *bathY, *disX, *disY;
   float disTop, disBot, disLeft, disRight;
 	float boundLeft, boundRight, boundTop, boundBot;
 
-  void lookUp(int searchFor, int max, int* searchIn, int* best){
+  void lookUp(float searchFor, int max, float* searchIn, int* best){
 		int disBest = abs(searchFor-searchIn[0]);
 		*best = 0;		
 		for(int i = 1; i < max; i++){
@@ -65,10 +65,10 @@ class SWE_TsunamiScenario : public SWE_Scenario {
  * @param buffY: The buffer for the Y-Values
  * @param buffX: The buffer for the X-Values
  */
-void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** buffX){
+void readNcFile(const char* fileDir, Float2D** buffZ, float** buffY, float** buffX){
 		int retval, ncid, dim, countVar, 
-		zid = 2, yid = 1, xid = 0, *initX, *initY;
-		float *initZ;      
+		zid = 2, yid = 1, xid = 0;
+		float *initZ,*initX, *initY;      
 		size_t init_ylen, init_xlen;
 
 		if(retval = nc_open(fileDir, NC_NOWRITE, &ncid)) ERR(retval);
@@ -103,13 +103,13 @@ void readNcFile(const char* fileDir, Float2D** buffZ, int** buffY, int** buffX){
 #endif
 
 		initZ = new float[init_ylen * init_xlen];
-		initY = new int[init_ylen];
-		initX = new int[init_xlen];
+		initY = new float[init_ylen];
+		initX = new float[init_xlen];
 		memset(initX, 0, init_xlen);
 
 		if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
-		if(retval = nc_get_var_int(ncid, yid, initY)) ERR(retval);
-		if(retval = nc_get_var_int(ncid, xid, initX)) ERR(retval);
+		if(retval = nc_get_var_float(ncid, yid, initY)) ERR(retval);
+		if(retval = nc_get_var_float(ncid, xid, initX)) ERR(retval);
 
 		if(retval = nc_close(ncid));
 

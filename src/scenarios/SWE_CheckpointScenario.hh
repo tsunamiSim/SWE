@@ -101,7 +101,7 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		initY = new float[init_ylen];
 		initX = new float[init_xlen];
 		cout << "Timesteps found: " << time << endl;
-		size_t start[3] = { time - 1, 0, 0 }, length[3] = { 1, 0, 0 }; 
+		size_t start[3] = { time - 1, 0, 0 }, length[3] = { 1, init_xlen, init_ylen }; 
 
 		if(retval = nc_get_var_float(ncid, b_id, initB)) ERRM(retval, "get b values");
 		tools::Logger::logger.printString("Bathymetry values successfully read");
@@ -136,7 +136,7 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		int j = 0;
 		for(int i = 0; i < init_xlen * init_ylen; i++) {
 			bool found = false;
-			for(int j_l = 0; j_l < j && !found; j_l++)
+			for(int j_l = 0; j_l < j && !found; j_l++) 
 				if(temporary[j_l] == initH[i])
 					found = true;
 			if(!found)
@@ -156,48 +156,49 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 
 public:
 
-  float getLastTime() { return startingTime; }
-
   SWE_CheckpointScenario() : SWE_Scenario(0, 0){
 	tools::Logger::logger.printString("Starting to read");
 	readNcFile();
 	tools::Logger::logger.printString("Reading finished");
 	cells_x = h->getCols();
 	cells_y = h->getRows();
-	boundRight = Array::max(initX, bathymetry->getCols());
-	boundLeft = Array::min(initX, bathymetry->getCols());
-	boundTop = Array::max(initY, bathymetry->getRows());
-	boundBot = Array::min(initY, bathymetry->getRows());
+	cout << Array::max(initX, bathymetry->getCols()) << "\n";
+	boundRight = Array::max(initX, bathymetry->getCols())*2/(cells_x-1);
+	boundLeft = Array::min(initX, bathymetry->getCols())*2/(cells_x-1);
+	boundTop = Array::max(initY, bathymetry->getRows())*2/(cells_y-1);
+	boundBot = Array::min(initY, bathymetry->getRows())*2/(cells_y-1);
 	std::string comma = ", ";
 	tools::Logger::logger.printString(toString("Set boundaries to: left, right, top, bottom: ") + toString(boundLeft) + comma + toString(boundRight) + comma + toString(boundTop) + comma + toString(boundBot));
   };
 
+  float getLastTime() { return startingTime; };
+  
   float getBathymetry(float x, float y) {
 	int bestX, bestY;
 	lookUp(y, bathymetry->getRows(), initY, &bestY);
 	lookUp(x, bathymetry->getCols(), initX, &bestX);
-	return (*bathymetry)[bestX][bestY];
+	return (*bathymetry)[bestY][bestX];
   };
 
   float getWaterHeight(float x, float y) { 
 	int bestX, bestY;
 	lookUp(y, h->getRows(), initY, &bestY);
 	lookUp(x, h->getCols(), initX, &bestX);
-	return (*h)[bestX][bestY];
+	return (*h)[bestY][bestX];
   };
   
   float getVeloc_u(float x, float y){
     int bestX, bestY;
 	lookUp(y, hu->getRows(), initY, &bestY);
 	lookUp(x, hu->getCols(), initX, &bestX);
-	return (*hu)[bestX][bestY] / (*h)[bestX][bestY];
+	return (*hu)[bestY][bestX] / (*h)[bestY][bestX];
   };
   
   float getVeloc_v(float x, float y){
     int bestX, bestY;
 	lookUp(y, hv->getRows(), initY, &bestY);
 	lookUp(x, hv->getCols(), initX, &bestX);
-	return (*hv)[bestX][bestY] / (*h)[bestX][bestY];
+	return (*hv)[bestY][bestX] / (*h)[bestY][bestX];
   };  
   
   void getBoundaries(float* u, float* d, float* r, float* l){
