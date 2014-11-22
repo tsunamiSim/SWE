@@ -142,14 +142,14 @@ public:
 	return (*h)[bestY][bestX];
   };
   
-  float getHu(float x, float y){
+  float getVeloc_u(float x, float y){
     int bestX, bestY;
 	lookUp(y, hu->getRows(), initY, &bestY);
 	lookUp(x, hu->getCols(), initX, &bestX);
 	return (*hu)[bestY][bestX];
   };
   
-  float getHv(float x, float y){
+  float getVeloc_v(float x, float y){
     int bestX, bestY;
 	lookUp(y, hv->getRows(), initY, &bestY);
 	lookUp(x, hv->getCols(), initX, &bestX);
