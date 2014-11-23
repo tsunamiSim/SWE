@@ -83,12 +83,13 @@ public:
 	Writer(const std::string &i_fileName,
 		const Float2D &i_b,
 		const BoundarySize &i_boundarySize,
-		int i_nX, int i_nY)
+		int i_nX, int i_nY,
+		size_t i_timeStep = 0)
 		: fileName(i_fileName),
 		  b(i_b),
 		  boundarySize(i_boundarySize),
 		  nX(i_nX), nY(i_nY),
-		  timeStep(0)
+		  timeStep(i_timeStep)
 	{
 	}
 
