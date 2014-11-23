@@ -134,7 +134,7 @@ public :
 		updateUnknowns(maxTimestep);
 	
 #ifndef NDEBUG
-			maxTimestepY = 0.f;
+			float maxTimestepY = 0.f;
 #endif //NDEBUG
 		
 		// compute vertical updates

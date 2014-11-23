@@ -23,11 +23,12 @@ int main(int argc, char** argv){
 	args.addOption("size_y", 'y', "Number of cells in y direction", tools::Args::Required, false);
 	args.addOption("use_checkpoint_file", 'r', "Use this option to continue a previously failing run", tools::Args::No, false);
 	args.addOption("end_of_simulation", 'e' , "Sets the end of the simulation", tools::Args::Required, false);
+	args.addOption("boundary_condition", 'b', "Sets the type of boundary condition. Use '1' for Wall or '0' for OUTFLOW", tools::Args::Required, false); 
 	
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
 	
-	int test_cp = args.isSet("use_checkpoint_file"), test_size = args.isSet("size_x") && args.isSet("size_y"), test_eos = args.isSet("end_of_simulation");
+	int test_cp = args.isSet("use_checkpoint_file"), test_size = args.isSet("size_x") && args.isSet("size_y"), test_eos = args.isSet("end_of_simulation"), test_boundary = args.isSet("boundary_condition");
 	if(!test_cp && !test_size)
 		parseResult = tools::Args::Error;
 
@@ -83,6 +84,29 @@ int main(int argc, char** argv){
 	tools::Logger::logger.printString("Initializing simulation class");
 	// Initialize the scenario
 	l_dimensionalSplitting.initScenario(l_scenario->getBoundaryPos(BND_LEFT), l_scenario->getBoundaryPos(BND_BOTTOM), *l_scenario);
+	
+	// set the type of all fout boundaries if set via comandline
+	if(test_boundary){
+	     switch(args.getArgument<int>("boundary_condition")){
+	        case 1:
+	            l_dimensionalSplitting.setBoundaryType(BND_LEFT, WALL);
+                l_dimensionalSplitting.setBoundaryType(BND_RIGHT, WALL);
+                l_dimensionalSplitting.setBoundaryType(BND_BOTTOM, WALL);
+                l_dimensionalSplitting.setBoundaryType(BND_TOP, WALL);
+	            tools::Logger::logger.printString("Setting boundary conditions: WALL");
+	            break;
+	        case 0:
+	            l_dimensionalSplitting.setBoundaryType(BND_LEFT, OUTFLOW);
+                l_dimensionalSplitting.setBoundaryType(BND_RIGHT, OUTFLOW);
+                l_dimensionalSplitting.setBoundaryType(BND_BOTTOM, OUTFLOW);
+                l_dimensionalSplitting.setBoundaryType(BND_TOP, OUTFLOW);
+	            tools::Logger::logger.printString("Setting boundary conditions: OUTFLOW");
+	            break;
+	        default:  
+	            tools::Logger::logger.printString("Unable to parse boundary condition from comandline, used default!");
+	            break;
+	     }
+    }
 
 	tools::Logger::logger.printString("Reading time domain from scenario");
 	// set time and end of simulation
@@ -161,25 +185,6 @@ int main(int argc, char** argv){
 	std::string time = "Time: ";
 
 	l_scenario->getBoundaryPos(BND_TOP);
-	
-	//
-	//TODO remove
-	
-	
-	if(0){
-	cout << l_scenario->getBoundaryPos(BND_TOP);
-	cout << l_scenario->getBoundaryPos(BND_LEFT);
-	cout << l_scenario->getBoundaryPos(BND_RIGHT);
-	cout << l_scenario->getBoundaryPos(BND_BOTTOM);
-	cout << "\n";
-	cout << l_scenario->getBathymetry(-100,-100) << "\n";
-	cout << l_scenario->getBathymetry(100,-100) << "\n";
-	cout << l_scenario->getBathymetry(100,100) << "\n";
-	cout << l_scenario->getBathymetry(-100,100) << "\n";
-	cout << l_scenario->getBathymetry(0,0) << "\n";
-	
-	}
-	//
 	
 	// Loop over timesteps
 	while(l_time < l_endOfSimulation)
