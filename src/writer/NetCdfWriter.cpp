@@ -394,10 +394,6 @@ void io::NetCdfWriter::writeTimeStep( const Float2D &i_h,
 				std::cout << i_h[row][col] << " " << i_hu[row][col] << " " << i_hv[row][col] << std::endl;
 			}
 	*/
-	
-			
-		
-        cout << "\n\n" << timeStep << "\n\n";
 
 	if (timeStep == 0)
 		// Write bathymetry

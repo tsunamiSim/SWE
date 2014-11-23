@@ -71,8 +71,8 @@ int main(int argc, char** argv){
 	float l_dx, l_dy;
   	l_dx = (l_scenario->getBoundaryPos(BND_RIGHT) - l_scenario->getBoundaryPos(BND_LEFT) )/l_nx;
   	l_dy = (l_scenario->getBoundaryPos(BND_TOP) - l_scenario->getBoundaryPos(BND_BOTTOM) )/l_ny;
-	cout << "Calulated step size d_x: (" << l_scenario->getBoundaryPos(BND_RIGHT) << " - " << l_scenario->getBoundaryPos(BND_LEFT) << ") / " << l_nx << " = " << l_dx << endl;
-	cout << "Calulated step size d_y: (" << l_scenario->getBoundaryPos(BND_TOP) << " - " << l_scenario->getBoundaryPos(BND_BOTTOM) << ") / " << l_ny << " = " << l_dy << endl;
+	cout << "Calulated step size d_x (divided by 1000): (" << (double)l_scenario->getBoundaryPos(BND_RIGHT)/1000 << " - " << (double)l_scenario->getBoundaryPos(BND_LEFT)/1000 << ") / " << (double)l_nx << " = " << (double)l_dx/1000 << endl;
+	cout << "Calulated step size d_y (divided by 1000): (" << (double)l_scenario->getBoundaryPos(BND_TOP)/1000 << " - " << (double)l_scenario->getBoundaryPos(BND_BOTTOM)/1000 << ") / " << (double)l_ny << " = " << (double)l_dy/1000 << endl;
 
 	tools::Logger::logger.printLine();
 	tools::Logger::logger.printString("Preparing simulation class");
@@ -106,9 +106,6 @@ int main(int argc, char** argv){
 	int l_timeStepsPerCheckpoint = 10, l_cpCounter = 0;
 	size_t l_checkpoints = 0;
     l_checkpoints = l_scenario->getCheckpointCount();
-    		
-		
-        cout << "\n\n" << l_checkpoints << "\n\n";
 	
 	float l_originx, l_originy;
 	
@@ -167,7 +164,9 @@ int main(int argc, char** argv){
 	
 	//
 	//TODO remove
-	if(1){
+	
+	
+	if(0){
 	cout << l_scenario->getBoundaryPos(BND_TOP);
 	cout << l_scenario->getBoundaryPos(BND_LEFT);
 	cout << l_scenario->getBoundaryPos(BND_RIGHT);
@@ -178,6 +177,7 @@ int main(int argc, char** argv){
 	cout << l_scenario->getBathymetry(100,100) << "\n";
 	cout << l_scenario->getBathymetry(-100,100) << "\n";
 	cout << l_scenario->getBathymetry(0,0) << "\n";
+	
 	}
 	//
 	

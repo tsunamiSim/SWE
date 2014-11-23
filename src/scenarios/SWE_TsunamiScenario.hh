@@ -101,23 +101,32 @@ void readNcFile(const char* fileDir, Float2D** buffZ, float** buffY, float** buf
 		if(retval = nc_inq_dim(ncid, yid, NULL, &init_ylen)) ERR(retval);
 		if(retval = nc_inq_dim(ncid, xid, NULL, &init_xlen)) ERR(retval);
 #endif
-
 		initZ = new float[init_ylen * init_xlen];
 		initY = new float[init_ylen];
 		initX = new float[init_xlen];
 		memset(initX, 0, init_xlen);
-
-		if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
+        
+        if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
 		if(retval = nc_get_var_float(ncid, yid, initY)) ERR(retval);
 		if(retval = nc_get_var_float(ncid, xid, initX)) ERR(retval);
-
-		if(retval = nc_close(ncid));
-
+        
+		if(retval = nc_close(ncid)) ERR(retval);
+        
 		*buffZ = new Float2D(init_ylen, init_xlen, initZ);
 		*buffY = initY;
 		*buffX = initX;
-
-		assert(buffZ[10][15] == initZ[10][15]);
+		
+        for(int i = 0; i < bathymetry->getRows(); i++){
+		   assert(initX[i] == (*buffX)[i]);
+		}
+		for(int i = 0; i < bathymetry->getCols(); i++){
+		   assert(initY[i] == (*buffY)[i]);
+		}
+		for(int i = 0; i < bathymetry->getRows(); i++){
+		   for(int j = 0; j < bathymetry->getCols(); j++){
+		    assert(initZ[j][i] == buffZ[j][i]);
+		    }
+		}
 		
 #ifndef NDBUG
 		tools::Logger::logger.printString("File read");
@@ -134,30 +143,30 @@ public:
 	readNcFile("NetCDF_Input/displacement.nc", &displacement, &disY, &disX);   
 	tools::Logger::logger.printString("Succesfully read displacement. Rows: " + toString(displacement->getRows()) + toString(", Cols: ") + toString(displacement->getCols()));
 	tools::Logger::logger.printString("Setting displacement boundaries");
-	disTop = Array::max(disY, displacement->getRows());
-	disBot = Array::min(disY, displacement->getRows());
-	disLeft = Array::min(disX, displacement->getCols());
-	disRight = Array::max(disY, displacement->getCols());
+	disTop = Array::max(disY, displacement->getCols());
+	disBot = Array::min(disY, displacement->getCols());
+	disLeft = Array::min(disX, displacement->getRows());
+	disRight = Array::max(disX, displacement->getRows());
 	std::string comma = ", ";
 	tools::Logger::logger.printString(toString("Displacement boundaries set to: top, bot, left, right ") + toString(disTop) + comma + toString(disBot) + comma + toString(disLeft) + comma + toString(disRight));
-	boundTop = Array::max(bathY, bathymetry->getRows());
-	boundBot = Array::min(bathY, bathymetry->getRows());
-	boundLeft = Array::min(bathX, bathymetry->getCols());
-	boundRight = Array::max(bathX, bathymetry->getCols());
-	tools::Logger::logger.printString(toString("Bathymetry boundaries set to: top, bot, left, right ") + toString(boundTop) + comma + toString(boundBot) + comma + toString(boundLeft) + comma + toString(boundRight));
+	boundTop = Array::max(bathY, bathymetry->getCols());
+	boundBot = Array::min(bathY, bathymetry->getCols());
+	boundLeft = Array::min(bathX, bathymetry->getRows());
+	boundRight = Array::max(bathX, bathymetry->getRows());
+	tools::Logger::logger.printString(toString("Bathymetry boundaries set to: top, bot, left, right (divided by 1000)") + toString(boundTop/1000) + comma + toString(boundBot/1000) + comma + toString(boundLeft/1000) + comma + toString(boundRight));
 	tools::Logger::logger.printLine();
   };
 
   float getBathymetry(float x, float y) {
 	int bestXBath, bestYBath;
-	lookUp(y, bathymetry->getRows(), bathY, &bestYBath);
-	lookUp(x, bathymetry->getCols(), bathX, &bestXBath);
+	lookUp(y, bathymetry->getCols(), bathY, &bestYBath);
+	lookUp(x, bathymetry->getRows(), bathX, &bestXBath);
 	if(x < disLeft || x > disRight || y < disBot || y > disTop)
 		return (*bathymetry)[bestYBath][bestXBath];
 	
 	int bestXDis, bestYDis;
-	lookUp(y, displacement->getRows(), disX, &bestYDis);
-	lookUp(x, displacement->getCols(), disY, &bestXDis);
+	lookUp(y, displacement->getCols(), disX, &bestYDis);
+	lookUp(x, displacement->getRows(), disY, &bestXDis);
 
 	float result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
 	if(result < 0 && result > -20)
@@ -169,8 +178,8 @@ public:
 
   float getWaterHeight(float x, float y) { 
 	int bestX, bestY;
-	lookUp(y, bathymetry->getRows(), bathY, &bestY);
-	lookUp(x, bathymetry->getCols(), bathX, &bestX);
+	lookUp(y, bathymetry->getCols(), bathY, &bestY);
+	lookUp(x, bathymetry->getRows(), bathX, &bestX);
 	if((*bathymetry)[bestY][bestX] < 0)
 		return -(*bathymetry)[bestY][bestX];
 	else
