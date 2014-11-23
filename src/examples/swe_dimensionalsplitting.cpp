@@ -103,6 +103,12 @@ int main(int argc, char** argv){
 	tools::Logger::logger.printString("Preparing writer");
 
 #ifdef WRITENETCDF
+	int l_timeStepsPerCheckpoint = 10, l_cpCounter = 0;
+	size_t l_checkpoints = 0;
+    l_checkpoints = l_scenario->getCheckpointCount();
+    		
+		
+        cout << "\n\n" << l_checkpoints << "\n\n";
 	
 	float l_originx, l_originy;
 	
@@ -116,7 +122,7 @@ int main(int argc, char** argv){
 			l_dx, l_dy,
 			l_originx, l_originy,
 			0,
-			test_cp);
+			l_checkpoints * l_timeStepsPerCheckpoint);
 	
 	// Set up Checkpoint writer
 	std::string checkpointFile = "SWE_checkpoints";
@@ -130,7 +136,9 @@ int main(int argc, char** argv){
 				l_endOfSimulation,
 				l_nx, l_ny,
 				l_dx, l_dy,
-				l_originx, l_originy);
+				l_originx, l_originy,
+				0,
+				test_cp);
 
 #else
 	//set up VTKWriter
@@ -147,9 +155,6 @@ int main(int argc, char** argv){
                         l_dimensionalSplitting.getDischarge_hv(),
                         l_time);
 	
-#ifdef WRITENETCDF
-	int l_timeStepsPerCheckpoint = 10, l_cpCounter = 0;
-#endif
 	tools::Logger::logger.printLine();
 	tools::Logger::logger.printString("Starting simulation");
 

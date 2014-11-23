@@ -71,6 +71,8 @@ protected:
 
     virtual float endSimulation() { std::cout << "Base class Method" << std::endl; return 0.1f; };
     
+    virtual size_t getCheckpointCount() { return 0; }
+    
     virtual BoundaryType getBoundaryType(BoundaryEdge edge) { return WALL; };
     virtual float getBoundaryPos(BoundaryEdge edge) {
        if (edge==BND_LEFT || edge==BND_BOTTOM)

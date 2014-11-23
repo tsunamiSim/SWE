@@ -40,6 +40,7 @@ class SWE_CheckpointScenario : public SWE_Scenario {
   Float2D *bathymetry, *hu, *hv, *h;
   float endOfSimulation, *initX, *initY, initBt, initBb, initBr, initBl, startingTime;
   int  boundTop, boundBot, boundLeft, boundRight, boundary;
+  size_t time;
   
   void lookUp(float searchFor, int max, float* searchIn, int* best){
 		float disBest = abs(searchFor-searchIn[0]);
@@ -58,16 +59,17 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		int retval, ncid, dim, countVar,
 		    y_id,x_id,b_id,hu_id,hv_id, h_id, bound_id, bU_id, bD_id, bR_id, bL_id, eos_id, time_id;
 		float *initB, *initHu, *initHv, *initH;      
-		size_t init_ylen, init_xlen, time;
+		size_t init_ylen, init_xlen;
 
 		if(retval = nc_open("SWE_checkpoints.nc", NC_NOWRITE, &ncid)) ERR(retval);
 
 		if(retval = nc_inq(ncid, &dim, &countVar, NULL, NULL)) ERR(retval);
 		assert(dim == 3); 
-		assert(countVar == 12); 
+		assert(countVar == 12);
 
         //TODO
-		//char dimB, dimHu, dimHv, dimH, dimX, dimY;
+		//char dimB, dimHu, dimHv, dimH, dimX, dimY ,dimTime;
+		if(retval = nc_inq_dimid(ncid, "time", &time_id)) ERRM(retval, "get time id");
 		if(retval = nc_inq_dimid(ncid, "y" ,&y_id)) ERRM(retval, "get y id");
 		if(retval = nc_inq_dimid(ncid, "x" ,&x_id)) ERRM(retval, "get x id");
 		if(retval = nc_inq_varid(ncid, "b" ,&b_id)) ERRM(retval, "get b id");
@@ -131,7 +133,7 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		if(retval = nc_close(ncid)) ERR(retval);
 		tools::Logger::logger.printString("File closed");
 
-// Display sql: select DISTINCT value from initH
+/* Display sql: select DISTINCT value from initH
 		float temporary[init_xlen * init_ylen];
 		int j = 0;
 		for(int i = 0; i < init_xlen * init_ylen; i++) {
@@ -143,7 +145,7 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 				temporary[j++] = initH[i];
 		}
 		Array::print(temporary, j);
-
+*/
 		bathymetry = new Float2D(init_xlen, init_ylen, initB);
 		hu = new Float2D(init_xlen, init_ylen, initHu);
 		hv = new Float2D(init_xlen, init_ylen, initHv);
@@ -160,16 +162,21 @@ public:
 	tools::Logger::logger.printString("Starting to read");
 	readNcFile();
 	tools::Logger::logger.printString("Reading finished");
+	
+	//TODO check if necessary
 	cells_x = h->getCols();
 	cells_y = h->getRows();
+	
 	cout << Array::max(initX, bathymetry->getCols()) << "\n";
-	boundRight = Array::max(initX, bathymetry->getCols())*20/(cells_x-1);
-	boundLeft = Array::min(initX, bathymetry->getCols())*20/(cells_x-1);
-	boundTop = Array::max(initY, bathymetry->getRows())*20/(cells_y-1);
-	boundBot = Array::min(initY, bathymetry->getRows())*20/(cells_y-1);
+	boundRight = Array::max(initX, bathymetry->getCols())*cells_x/(cells_x-1);
+	boundLeft = Array::min(initX, bathymetry->getCols())*cells_x/(cells_x-1);
+	boundTop = Array::max(initY, bathymetry->getRows())*cells_y/(cells_y-1);
+	boundBot = Array::min(initY, bathymetry->getRows())*cells_y/(cells_y-1);
 	std::string comma = ", ";
 	tools::Logger::logger.printString(toString("Set boundaries to: left, right, top, bottom: ") + toString(boundLeft) + comma + toString(boundRight) + comma + toString(boundTop) + comma + toString(boundBot));
   };
+  
+  size_t getCheckpointCount(){ return time; }
 
   float getLastTime() { return startingTime; };
   
