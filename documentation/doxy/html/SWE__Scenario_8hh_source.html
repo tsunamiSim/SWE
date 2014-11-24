@@ -101,39 +101,50 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;} <a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a>;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classSWE__Scenario.html">   53</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSWE__Scenario.html">SWE_Scenario</a> {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> getWaterHeight(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) { <span class="keywordflow">return</span> 10.0f; };</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> getVeloc_u(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) { <span class="keywordflow">return</span> 0.0f; };</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> getVeloc_v(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) { <span class="keywordflow">return</span> 0.0f; };</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> getBathymetry(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) { <span class="keywordflow">return</span> 0.0f; };</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> waterHeightAtRest() { <span class="keywordflow">return</span> 10.0f; };</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> endSimulation() { <span class="keywordflow">return</span> 0.1f; };</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> boundType;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">int</span> cells_x, cells_y;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <a class="code" href="classSWE__Scenario.html">SWE_Scenario</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <a class="code" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> bounds = WALL) : boundType(bounds), cells_x(x), cells_y(y) { }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> getWaterHeight(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) { <span class="keywordflow">return</span> 10.0f; };</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> getVeloc_u(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) { <span class="keywordflow">return</span> 0.0f; };</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> getVeloc_v(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) { <span class="keywordflow">return</span> 0.0f; };</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> getBathymetry(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) { <span class="keywordflow">return</span> 0.0f; };</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> getBoundaryType(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge) { <span class="keywordflow">return</span> WALL; };</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> getBoundaryPos(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge) {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;       <span class="keywordflow">if</span> (edge==BND_LEFT || edge==BND_BOTTOM)</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;          <span class="keywordflow">return</span> 0.0f;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;       <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;          <span class="keywordflow">return</span> 1.0f; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> getCellsX() { <span class="keywordflow">return</span> cells_x; }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">int</span> getCellsY() { <span class="keywordflow">return</span> cells_y; }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> waterHeightAtRest() { <span class="keywordflow">return</span> 10.0f; };</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">float</span> getLastTime() { <span class="keywordflow">return</span> 0.f; };</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> endSimulation() { std::cout &lt;&lt; <span class="stringliteral">&quot;Base class Method&quot;</span> &lt;&lt; std::endl; <span class="keywordflow">return</span> 0.1f; };</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classSWE__Scenario.html">SWE_Scenario</a>() {};</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> getCheckpointCount() { <span class="keywordflow">return</span> 0; }</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> getBoundaryType(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge) { <span class="keywordflow">return</span> boundType; };</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> setBoundaryTypes(<a class="code" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> type) { boundType = type; };</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> getBoundaryPos(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;       <span class="keywordflow">if</span> (edge==BND_LEFT || edge==BND_BOTTOM)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;          <span class="keywordflow">return</span> 0.0f;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;       <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;          <span class="keywordflow">return</span> 1.0f; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    };</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classSWE__Scenario.html">SWE_Scenario</a>() {};</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="SWE__Scenario_8hh_html_af75d5dd7322fa39ed0af4e7839e600f8"><div class="ttname"><a href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a></div><div class="ttdeci">BoundaryType</div><div class="ttdef"><b>Definition:</b> SWE_Scenario.hh:33</div></div>
 <div class="ttc" id="classSWE__Scenario_html"><div class="ttname"><a href="classSWE__Scenario.html">SWE_Scenario</a></div><div class="ttdef"><b>Definition:</b> SWE_Scenario.hh:53</div></div>
 <div class="ttc" id="SWE__Scenario_8hh_html_aa5e01e3f7df312f7b9b0d02521141fcc"><div class="ttname"><a href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a></div><div class="ttdeci">BoundaryEdge</div><div class="ttdef"><b>Definition:</b> SWE_Scenario.hh:40</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2014 23:47:56 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -46,7 +46,8 @@
 #ifdef ASAGI
 #include "scenarios/SWE_AsagiScenario.hh"
 #else
-#include "scenarios/SWE_simple_scenarios.hh"
+//#include "scenarios/SWE_simple_scenarios.hh"
+#include "scenarios/SWE_ArtificialTsunamiScenario.hh"
 #endif
 
 #ifdef READXML
@@ -137,7 +138,8 @@ int main( int argc, char** argv ) {
                                 (float) 28800., simulationArea);
   #else
   // create a simple artificial scenario
-  SWE_RadialDamBreakScenario l_scenario;
+//  SWE_RadialDamBreakScenario l_scenario;
+  SWE_ArtificialTsunamiScenario l_scenario(l_nX, l_nY);
   #endif
 
   //! number of checkpoints for visualization (at each checkpoint in time, an output file is written).
@@ -262,6 +264,7 @@ int main( int argc, char** argv ) {
       progressBar.clear();
       tools::Logger::logger.printSimulationTime(l_t);
       progressBar.update(l_t);
+
     }
 
     // print current simulation time of the output
@@ -273,8 +276,7 @@ int main( int argc, char** argv ) {
     l_writer.writeTimeStep( l_wavePropgationBlock.getWaterHeight(),
                             l_wavePropgationBlock.getDischarge_hu(),
                             l_wavePropgationBlock.getDischarge_hv(),
-                            l_t);
-  }
+                            l_t);  }
 
   /**
    * Finalize.

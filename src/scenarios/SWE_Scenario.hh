@@ -52,11 +52,11 @@ typedef enum BoundaryEdge {
  */
 class SWE_Scenario {
 protected:
-
+	BoundaryType boundType;
 	int cells_x, cells_y;
 
  public:
-	SWE_Scenario(int x, int y) : cells_x(x), cells_y(y) { }
+	SWE_Scenario(int x, int y, BoundaryType bounds = WALL) : boundType(bounds), cells_x(x), cells_y(y) { }
 
     virtual float getWaterHeight(float x, float y) { return 10.0f; };
     virtual float getVeloc_u(float x, float y) { return 0.0f; };
@@ -72,8 +72,9 @@ protected:
     virtual float endSimulation() { std::cout << "Base class Method" << std::endl; return 0.1f; };
     
     virtual size_t getCheckpointCount() { return 0; }
-    
-    virtual BoundaryType getBoundaryType(BoundaryEdge edge) { return WALL; };
+
+    virtual BoundaryType getBoundaryType(BoundaryEdge edge) { return boundType; };
+    void setBoundaryTypes(BoundaryType type) { boundType = type; };
     virtual float getBoundaryPos(BoundaryEdge edge) {
        if (edge==BND_LEFT || edge==BND_BOTTOM)
           return 0.0f;

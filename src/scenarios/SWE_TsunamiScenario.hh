@@ -38,13 +38,21 @@
  * displacement in the middle of the domain  
  */
 class SWE_TsunamiScenario : public SWE_Scenario {
-  private: 
+
+  private:
   Float2D *bathymetry, *displacement;
   float *bathX, *bathY, *disX, *disY;
   float disTop, disBot, disLeft, disRight;
-	float boundLeft, boundRight, boundTop, boundBot;
-
+  float boundLeft, boundRight, boundTop, boundBot;
+  /**
+   * Looks up the closest value's index in a given array
+   * @param searchFor Reference value
+   * @param max The length of the array to search in
+   * @param searchIn The array to search in
+   * @param best The index of the closest element in the array
+   */
   void lookUp(float searchFor, int max, float* searchIn, int* best){
+
 		int disBest = abs(searchFor-searchIn[0]);
 		*best = 0;		
 		for(int i = 1; i < max; i++){
@@ -77,7 +85,7 @@ void readNcFile(const char* fileDir, Float2D** buffZ, float** buffY, float** buf
 		assert(dim == 2); 
 		assert(countVar == 3); 
 
-#ifndef NDBUG
+#ifndef NDEBUG
 		char dimZ, dimY, dimX;
 		//nc_type nc;
 		if(retval = nc_inq_dim(ncid, yid, &dimY, &init_ylen)) ERR(retval);
@@ -106,7 +114,7 @@ void readNcFile(const char* fileDir, Float2D** buffZ, float** buffY, float** buf
 		initX = new float[init_xlen];
 		memset(initX, 0, init_xlen);
         
-        if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
+		if(retval = nc_get_var_float(ncid, zid, initZ)) ERR(retval);
 		if(retval = nc_get_var_float(ncid, yid, initY)) ERR(retval);
 		if(retval = nc_get_var_float(ncid, xid, initX)) ERR(retval);
         
@@ -115,20 +123,23 @@ void readNcFile(const char* fileDir, Float2D** buffZ, float** buffY, float** buf
 		*buffZ = new Float2D(init_ylen, init_xlen, initZ);
 		*buffY = initY;
 		*buffX = initX;
-		
-        for(int i = 0; i < bathymetry->getRows(); i++){
+
+		for(int i = 0; i < bathymetry->getRows(); i++){
 		   assert(initX[i] == (*buffX)[i]);
 		}
 		for(int i = 0; i < bathymetry->getCols(); i++){
 		   assert(initY[i] == (*buffY)[i]);
 		}
-		for(int i = 0; i < bathymetry->getRows(); i++){
+		int rows = bathymetry->getRows();
+		float a, b;
+		for(int i = 0; i < rows; i++){
 		   for(int j = 0; j < bathymetry->getCols(); j++){
-		    assert(initZ[j][i] == buffZ[j][i]);
+			a = initZ[j + i * rows];
+			b = *(*buffZ)[j][i];
+		    	assert(a == b);
 		    }
 		}
-		
-#ifndef NDBUG
+#ifndef NDEBUG
 		tools::Logger::logger.printString("File read");
 #endif
   };
@@ -136,7 +147,12 @@ void readNcFile(const char* fileDir, Float2D** buffZ, float** buffY, float** buf
 
 public:
 
-  SWE_TsunamiScenario(int cellsX, int cellsY) : SWE_Scenario(cellsX, cellsY) {
+  /**
+   * Creates a new instance of the TsunamiScenario Class
+   * @param cellsX Cells in x dimension
+   * @param cellsY Cells in y dimension
+   */
+  SWE_TsunamiScenario(int cellsX, int cellsY) : SWE_Scenario(cellsX, cellsY, OUTFLOW) {
 	tools::Logger::logger.printLine();
 	readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
 	tools::Logger::logger.printString(toString("Succesfully read bathymetry. Rows: ") + toString(bathymetry->getRows()) + toString(", Cols: ") + toString(bathymetry->getCols()));
@@ -157,13 +173,18 @@ public:
 	tools::Logger::logger.printLine();
   };
 
+  /**
+   * The bathymetry at a requested location
+   * @param x The x-Value of the location
+   * @param y The y-Value of the location
+   */
   float getBathymetry(float x, float y) {
 	int bestXBath, bestYBath;
 	lookUp(y, bathymetry->getCols(), bathY, &bestYBath);
 	lookUp(x, bathymetry->getRows(), bathX, &bestXBath);
 	if(x < disLeft || x > disRight || y < disBot || y > disTop)
 		return (*bathymetry)[bestYBath][bestXBath];
-	
+
 	int bestXDis, bestYDis;
 	lookUp(y, displacement->getCols(), disX, &bestYDis);
 	lookUp(x, displacement->getRows(), disY, &bestXDis);
@@ -176,6 +197,11 @@ public:
 	return result;
   };
 
+  /**
+   * The water height at a requested location
+   * @param x The x-Value of the location
+   * @param y The y-Value of the location
+   */
   float getWaterHeight(float x, float y) { 
 	int bestX, bestY;
 	lookUp(y, bathymetry->getCols(), bathY, &bestY);
@@ -186,9 +212,10 @@ public:
 		return 0;
   };
 
+  /**
+   * Returns the time of the end of the simulation
+   */
   virtual float endSimulation() { return (float) 100; };
-
-  virtual BoundaryType getBoundaryType(BoundaryEdge edge) { return OUTFLOW; };
 
   /** Get the boundary positions
    *

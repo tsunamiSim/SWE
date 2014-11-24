@@ -86,6 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">help.hh File Reference</div>  </div>
@@ -95,6 +96,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;fstream&gt;</code><br/>
 <code>#include &lt;sstream&gt;</code><br/>
+<code>#include &lt;assert.h&gt;</code><br/>
+<code>#include &lt;netcdf.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="Logger_8hh_source.html">tools/Logger.hh</a>&quot;</code><br/>
 </div>
 <p><a href="help_8hh_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -104,6 +108,14 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFloat2D.html">Float2D</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArray.html">Array</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a588357de2986fdf4c1380190f7ae9f37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a588357de2986fdf4c1380190f7ae9f37"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERR</b>(e)&#160;&#160;&#160;{printf(&quot;Error: %s\n&quot;, nc_strerror(e)); assert(false);}</td></tr>
+<tr class="separator:a588357de2986fdf4c1380190f7ae9f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -117,6 +129,11 @@ Functions</h2></td></tr>
 <tr class="separator:a7dc37444a6b7771aefff04a38e74e086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a427928180ec14bf889c55e5cc51d8e36"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="help_8hh.html#a427928180ec14bf889c55e5cc51d8e36">generateContainerFileName</a> (std::string baseName, int timeStep)</td></tr>
 <tr class="separator:a427928180ec14bf889c55e5cc51d8e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7824e0dc9a06a7ab03df4c0bd0ddcd83"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a7824e0dc9a06a7ab03df4c0bd0ddcd83"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="help_8hh.html#a7824e0dc9a06a7ab03df4c0bd0ddcd83">toString</a> (T input)</td></tr>
+<tr class="separator:a7824e0dc9a06a7ab03df4c0bd0ddcd83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3db4e4545e5a3f2655ff1a749ca0ed6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="help_8hh.html#a3db4e4545e5a3f2655ff1a749ca0ed6e">wait</a> (unsigned int seconds)</td></tr>
+<tr class="separator:a3db4e4545e5a3f2655ff1a749ca0ed6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file is part of SWE.</p>
@@ -365,10 +382,68 @@ DESCRIPTION</h1>
 
 </div>
 </div>
+<a class="anchor" id="a7824e0dc9a06a7ab03df4c0bd0ddcd83"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string toString </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Formats any input to string </p>
+
+</div>
+</div>
+<a class="anchor" id="a3db4e4545e5a3f2655ff1a749ca0ed6e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void wait </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>seconds</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Waits for a given amount of time</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">seconds</td><td>The amount of seconds to be waited </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2014 23:47:56 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

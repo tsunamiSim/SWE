@@ -10,7 +10,9 @@ Inheritance diagram for io\-:\-:Net\-Cdf\-Writer\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classio_1_1NetCdfWriter_aa700eb0fd5b7cc38a401da8e39ebd0c8}{Net\-Cdf\-Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, int i\-\_\-n\-X, int i\-\_\-n\-Y, float i\-\_\-d\-X, float i\-\_\-d\-Y, float i\-\_\-origin\-X=0., float i\-\_\-origin\-Y=0., unsigned int i\-\_\-flush=0)
+\hyperlink{classio_1_1NetCdfWriter_afb378e970e3f004612cfc36a0c171805}{Net\-Cdf\-Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, int i\-\_\-n\-X, int i\-\_\-n\-Y, float i\-\_\-d\-X, float i\-\_\-d\-Y, float i\-\_\-origin\-X=0., float i\-\_\-origin\-Y=0., unsigned int i\-\_\-flush=0, size\-\_\-t cont\-Timestep=0)
+\item 
+\hyperlink{classio_1_1NetCdfWriter_af9066dce4d7c62ef038a10e1244085b0}{Net\-Cdf\-Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Left, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Right, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Top, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Bottom, const float end\-Of\-Simulation, int i\-\_\-n\-X, int i\-\_\-n\-Y, float i\-\_\-d\-X, float i\-\_\-d\-Y, float i\-\_\-origin\-X=0., float i\-\_\-origin\-Y=0., unsigned int i\-\_\-flush=0, bool use\-Checkpoints=false)
 \item 
 virtual \hyperlink{classio_1_1NetCdfWriter_ace10f1b56bbb4a1b6c2092ed661a1a0d}{$\sim$\-Net\-Cdf\-Writer} ()
 \item 
@@ -20,7 +22,7 @@ void \hyperlink{classio_1_1NetCdfWriter_a8e49f21f16b1720a348de50485754b0c}{write
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classio_1_1NetCdfWriter_aa700eb0fd5b7cc38a401da8e39ebd0c8}{\index{io\-::\-Net\-Cdf\-Writer@{io\-::\-Net\-Cdf\-Writer}!Net\-Cdf\-Writer@{Net\-Cdf\-Writer}}
+\hypertarget{classio_1_1NetCdfWriter_afb378e970e3f004612cfc36a0c171805}{\index{io\-::\-Net\-Cdf\-Writer@{io\-::\-Net\-Cdf\-Writer}!Net\-Cdf\-Writer@{Net\-Cdf\-Writer}}
 \index{Net\-Cdf\-Writer@{Net\-Cdf\-Writer}!io::NetCdfWriter@{io\-::\-Net\-Cdf\-Writer}}
 \subsubsection[{Net\-Cdf\-Writer}]{\setlength{\rightskip}{0pt plus 5cm}io\-::\-Net\-Cdf\-Writer\-::\-Net\-Cdf\-Writer (
 \begin{DoxyParamCaption}
@@ -33,14 +35,70 @@ void \hyperlink{classio_1_1NetCdfWriter_a8e49f21f16b1720a348de50485754b0c}{write
 \item[{float}]{i\-\_\-d\-Y, }
 \item[{float}]{i\-\_\-origin\-X = {\ttfamily 0.}, }
 \item[{float}]{i\-\_\-origin\-Y = {\ttfamily 0.}, }
-\item[{unsigned int}]{i\-\_\-flush = {\ttfamily 0}}
+\item[{unsigned int}]{i\-\_\-flush = {\ttfamily 0}, }
+\item[{size\-\_\-t}]{cont\-Timestep = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)}}\label{classio_1_1NetCdfWriter_aa700eb0fd5b7cc38a401da8e39ebd0c8}
+)}}\label{classio_1_1NetCdfWriter_afb378e970e3f004612cfc36a0c171805}
 Create a net\-Cdf-\/file Any existing file will be replaced.
 
 
 \begin{DoxyParams}{Parameters}
 {\em i\-\_\-base\-Name} & base name of the net\-C\-D\-F-\/file to which the data will be written to. \\
+\hline
+{\em i\-\_\-n\-X} & number of cells in the horizontal direction. \\
+\hline
+{\em i\-\_\-n\-Y} & number of cells in the vertical direction. \\
+\hline
+{\em i\-\_\-d\-X} & cell size in x-\/direction. \\
+\hline
+{\em i\-\_\-d\-Y} & cell size in y-\/direction. \\
+\hline
+{\em i\-\_\-origin\-X} & \\
+\hline
+{\em i\-\_\-origin\-Y} & \\
+\hline
+{\em i\-\_\-flush} & If $>$ 0, flush data to disk every i\-\_\-flush write operation \\
+\hline
+{\em i\-\_\-dynamic\-Bathymetry} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{classio_1_1NetCdfWriter_af9066dce4d7c62ef038a10e1244085b0}{\index{io\-::\-Net\-Cdf\-Writer@{io\-::\-Net\-Cdf\-Writer}!Net\-Cdf\-Writer@{Net\-Cdf\-Writer}}
+\index{Net\-Cdf\-Writer@{Net\-Cdf\-Writer}!io::NetCdfWriter@{io\-::\-Net\-Cdf\-Writer}}
+\subsubsection[{Net\-Cdf\-Writer}]{\setlength{\rightskip}{0pt plus 5cm}io\-::\-Net\-Cdf\-Writer\-::\-Net\-Cdf\-Writer (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{i\-\_\-base\-Name, }
+\item[{const {\bf Float2\-D} \&}]{i\-\_\-b, }
+\item[{const {\bf Boundary\-Size} \&}]{i\-\_\-boundary\-Size, }
+\item[{const {\bf Boundary\-Type} \&}]{i\-\_\-boundary\-Type\-Left, }
+\item[{const {\bf Boundary\-Type} \&}]{i\-\_\-boundary\-Type\-Right, }
+\item[{const {\bf Boundary\-Type} \&}]{i\-\_\-boundary\-Type\-Top, }
+\item[{const {\bf Boundary\-Type} \&}]{i\-\_\-boundary\-Type\-Bottom, }
+\item[{const float}]{i\-\_\-end\-Of\-Simulation, }
+\item[{int}]{i\-\_\-n\-X, }
+\item[{int}]{i\-\_\-n\-Y, }
+\item[{float}]{i\-\_\-d\-X, }
+\item[{float}]{i\-\_\-d\-Y, }
+\item[{float}]{i\-\_\-origin\-X = {\ttfamily 0.}, }
+\item[{float}]{i\-\_\-origin\-Y = {\ttfamily 0.}, }
+\item[{unsigned int}]{i\-\_\-flush = {\ttfamily 0}, }
+\item[{bool}]{use\-Checkpoints = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}\label{classio_1_1NetCdfWriter_af9066dce4d7c62ef038a10e1244085b0}
+Create a net\-Cdf-\/file Any existing file will be replaced.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-base\-Name} & base name of the net\-C\-D\-F-\/file to which the data will be written to. \\
+\hline
+{\em i\-\_\-boundary\-Type\-Left} & The boundary type on the Left of the simulation domain \\
+\hline
+{\em i\-\_\-boundary\-Type\-Right} & The boundary type on the Right of the simulation domain \\
+\hline
+{\em i\-\_\-boundary\-Type\-Top} & The boundary type on the Top of the simulation domain \\
+\hline
+{\em i\-\_\-boundary\-Type\-Bottom} & The boundary type on the Bottom of the simulation domain \\
+\hline
+{\em i\-\_\-end\-Of\-Simulation} & The time when the simulation should end \\
 \hline
 {\em i\-\_\-n\-X} & number of cells in the horizontal direction. \\
 \hline

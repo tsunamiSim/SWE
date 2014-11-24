@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['netcdfwriter',['NetCdfWriter',['../classio_1_1NetCdfWriter.html#aa700eb0fd5b7cc38a401da8e39ebd0c8',1,'io::NetCdfWriter']]]
+  ['netcdfwriter',['NetCdfWriter',['../classio_1_1NetCdfWriter.html#afb378e970e3f004612cfc36a0c171805',1,'io::NetCdfWriter::NetCdfWriter(const std::string &amp;i_fileName, const Float2D &amp;i_b, const BoundarySize &amp;i_boundarySize, int i_nX, int i_nY, float i_dX, float i_dY, float i_originX=0., float i_originY=0., unsigned int i_flush=0, size_t contTimestep=0)'],['../classio_1_1NetCdfWriter.html#af9066dce4d7c62ef038a10e1244085b0',1,'io::NetCdfWriter::NetCdfWriter(const std::string &amp;i_fileName, const Float2D &amp;i_b, const BoundarySize &amp;i_boundarySize, const BoundaryType &amp;boundaryTypeLeft, const BoundaryType &amp;boundaryTypeRight, const BoundaryType &amp;boundaryTypeTop, const BoundaryType &amp;boundaryTypeBottom, const float endOfSimulation, int i_nX, int i_nY, float i_dX, float i_dY, float i_originX=0., float i_originY=0., unsigned int i_flush=0, bool useCheckpoints=false)']]]
 ];

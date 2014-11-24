@@ -1,0 +1,6 @@
+To start a new simulation use the terminal to go to SWE base folder, then run the link SWE there. The help (-h option) provides information about the command line parameters.
+
+To successfully run the simulation, you need to have the NetCDFInput folder in your SWE base folder and have a file initBathymetry.nc and displacement.nc in it, which describe the initial bathymetry and the displacement caused by an earthquake.
+The result will be stored to SWE_00.nc, and if the simulation fails and a file SWE_checkpoints.nc was created, the simulation can be contiued using the -r command line parameter.
+
+SCons: default scons call will build a netCDF writing application using the dimensional splitting scenario.

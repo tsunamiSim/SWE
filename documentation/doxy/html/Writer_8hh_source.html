@@ -128,31 +128,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classio_1_1Writer.html#aa21f3ee8a54cf9278d711fe4f454f45c">   77</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classio_1_1Writer.html#aa21f3ee8a54cf9278d711fe4f454f45c">timeStep</a>;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classio_1_1Writer.html#a6fe95f4a66e8b8ee1c9a52196ff3433f">   83</a></span>&#160;        <a class="code" href="classio_1_1Writer.html#a6fe95f4a66e8b8ee1c9a52196ff3433f">Writer</a>(<span class="keyword">const</span> std::string &amp;i_fileName,</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classio_1_1Writer.html#a05648cc3fcfaf3d7d4267a584685f6f3">   83</a></span>&#160;        <a class="code" href="classio_1_1Writer.html#a05648cc3fcfaf3d7d4267a584685f6f3">Writer</a>(<span class="keyword">const</span> std::string &amp;i_fileName,</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_b,</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keyword">const</span> <a class="code" href="structio_1_1BoundarySize.html">BoundarySize</a> &amp;i_boundarySize,</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordtype">int</span> i_nX, <span class="keywordtype">int</span> i_nY)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                : <a class="code" href="classio_1_1Writer.html#a93b978e8cbfc6bcf6dbfdc3f393d300a">fileName</a>(i_fileName),</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                  <a class="code" href="classio_1_1Writer.html#a1f5d4ab8728ae1c2ceba52c6c822d0bc">b</a>(i_b),</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                  <a class="code" href="classio_1_1Writer.html#a7cf701232192c20c41cbb4454601c219">boundarySize</a>(i_boundarySize),</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                  <a class="code" href="classio_1_1Writer.html#a080fc86da3b2d8ea130382917d96252d">nX</a>(i_nX), nY(i_nY),</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                  <a class="code" href="classio_1_1Writer.html#aa21f3ee8a54cf9278d711fe4f454f45c">timeStep</a>(0)</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classio_1_1Writer.html">Writer</a>() {}</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classio_1_1Writer.html#a9ac05caa91aca4e79094d6718a2da16c">writeTimeStep</a>(</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                        <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_h,</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_hu,</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_hv,</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordtype">float</span> i_time) = 0;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;};</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif // WRITER_HH_</span></div>
-<div class="ttc" id="classFloat2D_html"><div class="ttname"><a href="classFloat2D.html">Float2D</a></div><div class="ttdef"><b>Definition:</b> help.hh:88</div></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordtype">int</span> i_nX, <span class="keywordtype">int</span> i_nY,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <span class="keywordtype">size_t</span> i_timeStep = 0)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                : <a class="code" href="classio_1_1Writer.html#a93b978e8cbfc6bcf6dbfdc3f393d300a">fileName</a>(i_fileName),</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                  <a class="code" href="classio_1_1Writer.html#a1f5d4ab8728ae1c2ceba52c6c822d0bc">b</a>(i_b),</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                  <a class="code" href="classio_1_1Writer.html#a7cf701232192c20c41cbb4454601c219">boundarySize</a>(i_boundarySize),</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                  <a class="code" href="classio_1_1Writer.html#a080fc86da3b2d8ea130382917d96252d">nX</a>(i_nX), nY(i_nY),</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                  <a class="code" href="classio_1_1Writer.html#aa21f3ee8a54cf9278d711fe4f454f45c">timeStep</a>(i_timeStep)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classio_1_1Writer.html">Writer</a>() {}</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classio_1_1Writer.html#a9ac05caa91aca4e79094d6718a2da16c">writeTimeStep</a>(</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                        <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_h,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_hu,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_hv,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordtype">float</span> i_time) = 0;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#endif // WRITER_HH_</span></div>
+<div class="ttc" id="classio_1_1Writer_html_a05648cc3fcfaf3d7d4267a584685f6f3"><div class="ttname"><a href="classio_1_1Writer.html#a05648cc3fcfaf3d7d4267a584685f6f3">io::Writer::Writer</a></div><div class="ttdeci">Writer(const std::string &amp;i_fileName, const Float2D &amp;i_b, const BoundarySize &amp;i_boundarySize, int i_nX, int i_nY, size_t i_timeStep=0)</div><div class="ttdef"><b>Definition:</b> Writer.hh:83</div></div>
+<div class="ttc" id="classFloat2D_html"><div class="ttname"><a href="classFloat2D.html">Float2D</a></div><div class="ttdef"><b>Definition:</b> help.hh:100</div></div>
 <div class="ttc" id="structio_1_1BoundarySize_html"><div class="ttname"><a href="structio_1_1BoundarySize.html">io::BoundarySize</a></div><div class="ttdef"><b>Definition:</b> Writer.hh:40</div></div>
-<div class="ttc" id="classio_1_1Writer_html_a6fe95f4a66e8b8ee1c9a52196ff3433f"><div class="ttname"><a href="classio_1_1Writer.html#a6fe95f4a66e8b8ee1c9a52196ff3433f">io::Writer::Writer</a></div><div class="ttdeci">Writer(const std::string &amp;i_fileName, const Float2D &amp;i_b, const BoundarySize &amp;i_boundarySize, int i_nX, int i_nY)</div><div class="ttdef"><b>Definition:</b> Writer.hh:83</div></div>
 <div class="ttc" id="structio_1_1BoundarySize_html_ae1ac1aecc0b840076b68948dc2ceba8a"><div class="ttname"><a href="structio_1_1BoundarySize.html#ae1ac1aecc0b840076b68948dc2ceba8a">io::BoundarySize::boundarySize</a></div><div class="ttdeci">int boundarySize[4]</div><div class="ttdef"><b>Definition:</b> Writer.hh:48</div></div>
 <div class="ttc" id="classio_1_1Writer_html_a9ac05caa91aca4e79094d6718a2da16c"><div class="ttname"><a href="classio_1_1Writer.html#a9ac05caa91aca4e79094d6718a2da16c">io::Writer::writeTimeStep</a></div><div class="ttdeci">virtual void writeTimeStep(const Float2D &amp;i_h, const Float2D &amp;i_hu, const Float2D &amp;i_hv, float i_time)=0</div></div>
 <div class="ttc" id="classio_1_1Writer_html_a7cf701232192c20c41cbb4454601c219"><div class="ttname"><a href="classio_1_1Writer.html#a7cf701232192c20c41cbb4454601c219">io::Writer::boundarySize</a></div><div class="ttdeci">const BoundarySize boundarySize</div><div class="ttdoc">Boundary layer size. </div><div class="ttdef"><b>Definition:</b> Writer.hh:71</div></div>
@@ -165,7 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2014 23:47:56 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

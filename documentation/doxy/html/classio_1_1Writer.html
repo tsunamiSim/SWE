@@ -107,8 +107,8 @@ Inheritance diagram for io::Writer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6fe95f4a66e8b8ee1c9a52196ff3433f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classio_1_1Writer.html#a6fe95f4a66e8b8ee1c9a52196ff3433f">Writer</a> (const std::string &amp;i_fileName, const <a class="el" href="classFloat2D.html">Float2D</a> &amp;i_b, const <a class="el" href="structio_1_1BoundarySize.html">BoundarySize</a> &amp;i_boundarySize, int i_nX, int i_nY)</td></tr>
-<tr class="separator:a6fe95f4a66e8b8ee1c9a52196ff3433f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05648cc3fcfaf3d7d4267a584685f6f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classio_1_1Writer.html#a05648cc3fcfaf3d7d4267a584685f6f3">Writer</a> (const std::string &amp;i_fileName, const <a class="el" href="classFloat2D.html">Float2D</a> &amp;i_b, const <a class="el" href="structio_1_1BoundarySize.html">BoundarySize</a> &amp;i_boundarySize, int i_nX, int i_nY, size_t i_timeStep=0)</td></tr>
+<tr class="separator:a05648cc3fcfaf3d7d4267a584685f6f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ac05caa91aca4e79094d6718a2da16c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classio_1_1Writer.html#a9ac05caa91aca4e79094d6718a2da16c">writeTimeStep</a> (const <a class="el" href="classFloat2D.html">Float2D</a> &amp;i_h, const <a class="el" href="classFloat2D.html">Float2D</a> &amp;i_hu, const <a class="el" href="classFloat2D.html">Float2D</a> &amp;i_hv, float i_time)=0</td></tr>
 <tr class="separator:a9ac05caa91aca4e79094d6718a2da16c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -139,7 +139,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 <tr class="separator:aa21f3ee8a54cf9278d711fe4f454f45c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a6fe95f4a66e8b8ee1c9a52196ff3433f"></a>
+<a class="anchor" id="a05648cc3fcfaf3d7d4267a584685f6f3"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -174,7 +174,13 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i_nY</em>&#160;</td>
+          <td class="paramname"><em>i_nY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i_timeStep</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -262,7 +268,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2014 23:47:57 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

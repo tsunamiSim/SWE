@@ -91,14 +91,14 @@ void SWE_Block::initScenario( float _offsetX, float _offsetY,
 							  SWE_Scenario &i_scenario,
                               const bool i_multipleBlocks ) {
 
-#ifndef NDBUG
+#ifndef NDEBUG
 	std::cout << "Called SWE_Block::initScenario(" << _offsetX << ", " << _offsetY << ", " << "scenario" << ", " << i_multipleBlocks << ")" << std::endl;
 	std::cout << "Currently there are " << nx << " cells in x-Dimension and " << ny << " cells in y-Dimension" << std::endl;
 #endif
 	offsetX = _offsetX;
 	offsetY = _offsetY;
 
-#ifndef NDBUG
+#ifndef NDEBUG
 	std::cout << "Starting with water height and momentum values" << std::endl;
 #endif
   // initialize water height and discharge
@@ -111,7 +111,7 @@ void SWE_Block::initScenario( float _offsetX, float _offsetY,
       hv[i][j] = i_scenario.getVeloc_v(x,y) * h[i][j]; 
     };
 
-#ifndef NDBUG
+#ifndef NDEBUG
 	std::cout << "Starting with bathymetry" << std::endl;
 #endif
   // initialize bathymetry

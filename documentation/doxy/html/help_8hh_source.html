@@ -96,172 +96,265 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classFloat1D.html">   48</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFloat1D.html">Float1D</a></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="classFloat1D.html">Float1D</a>(<span class="keywordtype">float</span>* _elem, <span class="keywordtype">int</span> _rows, <span class="keywordtype">int</span> _stride = 1) </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        : rows(_rows),stride(_stride),elem(_elem)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        ~<a class="code" href="classFloat1D.html">Float1D</a>()</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span>&amp; operator[](<span class="keywordtype">int</span> i) { </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keywordflow">return</span> elem[i*stride]; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; operator[](<span class="keywordtype">int</span> i)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="keywordflow">return</span> elem[i*stride]; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifdef __linux__</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#elif __WINDOWS__</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &lt;windows.h&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &lt;netcdf.h&gt;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Logger_8hh.html">tools/Logger.hh</a>&quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#define ERR(e) {printf(&quot;Error: %s\n&quot;, nc_strerror(e)); assert(false);}</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classFloat1D.html">   60</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFloat1D.html">Float1D</a></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <a class="code" href="classFloat1D.html">Float1D</a>(<span class="keywordtype">float</span>* _elem, <span class="keywordtype">int</span> _rows, <span class="keywordtype">int</span> _stride = 1) </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        : rows(_rows),stride(_stride),elem(_elem)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        {</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span>* elemVector() {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <span class="keywordflow">return</span> elem;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        ~<a class="code" href="classFloat1D.html">Float1D</a>()</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        {</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> getSize()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> rows; }; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">int</span> rows;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">int</span> stride;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">float</span>* elem;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span>&amp; operator[](<span class="keywordtype">int</span> i) { </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keywordflow">return</span> elem[i*stride]; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; operator[](<span class="keywordtype">int</span> i)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="keywordflow">return</span> elem[i*stride]; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classFloat2D.html">   88</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFloat2D.html">Float2D</a> {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classFloat2D.html#aceac75782e5db5cb644a893de73f7933">   97</a></span>&#160;    <a class="code" href="classFloat2D.html#aceac75782e5db5cb644a893de73f7933">Float2D</a>(<span class="keywordtype">int</span> _cols, <span class="keywordtype">int</span> _rows, <span class="keywordtype">bool</span> _allocateMemory = <span class="keyword">true</span>):</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      rows(_rows),</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      cols(_cols),</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      allocateMemory(_allocateMemory) {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      <span class="keywordflow">if</span> (_allocateMemory) {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        elem = <span class="keyword">new</span> <span class="keywordtype">float</span>[rows*cols];</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;          }</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classFloat2D.html#a51ccca3defa8be28c89f63f1768a79b0">  115</a></span>&#160;    <a class="code" href="classFloat2D.html#a51ccca3defa8be28c89f63f1768a79b0">Float2D</a>(<span class="keywordtype">int</span> _cols, <span class="keywordtype">int</span> _rows, <span class="keywordtype">float</span>* _elem):</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      rows(_rows),</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      cols(_cols),</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      allocateMemory(false) {</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                  elem = _elem;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;          }</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
-<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="classFloat2D.html#aa4c91cf3f61da6180d2d3e92699d7c92">  132</a></span>&#160;    <a class="code" href="classFloat2D.html#aa4c91cf3f61da6180d2d3e92699d7c92">Float2D</a>(<a class="code" href="classFloat2D.html">Float2D</a>&amp; _elem, <span class="keywordtype">bool</span> shallowCopy):</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;      rows(_elem.rows),</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;      cols(_elem.cols),</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      allocateMemory(!shallowCopy) {</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;      <span class="keywordflow">if</span> (shallowCopy) {</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        elem = _elem.elem;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        allocateMemory = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      }</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;      <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        elem = <span class="keyword">new</span> <span class="keywordtype">float</span>[rows*cols];</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;rows*cols; i++) {</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;          elem[i] = _elem.elem[i];</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        }</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        allocateMemory = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;      }</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    }</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;          ~<a class="code" href="classFloat2D.html">Float2D</a>() {</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                  <span class="keywordflow">if</span> (allocateMemory) {</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                    <span class="keyword">delete</span>[] elem;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                  }</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        }</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;          <span class="keyword">inline</span> <span class="keywordtype">float</span>* operator[](<span class="keywordtype">int</span> i) {</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                <span class="keywordflow">return</span> (elem + (rows * i));</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        }</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;          <span class="keyword">inline</span> <span class="keywordtype">float</span> <span class="keyword">const</span>* operator[](<span class="keywordtype">int</span> i)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                <span class="keywordflow">return</span> (elem + (rows * i));</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        }</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span>* elemVector() {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                <span class="keywordflow">return</span> elem;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span>* elemVector() {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="keywordflow">return</span> elem;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> getSize()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> rows; }; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">int</span> rows;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">int</span> stride;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">float</span>* elem;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classFloat2D.html">  100</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFloat2D.html">Float2D</a> {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classFloat2D.html#aceac75782e5db5cb644a893de73f7933">  109</a></span>&#160;    <a class="code" href="classFloat2D.html#aceac75782e5db5cb644a893de73f7933">Float2D</a>(<span class="keywordtype">int</span> _cols, <span class="keywordtype">int</span> _rows, <span class="keywordtype">bool</span> _allocateMemory = <span class="keyword">true</span>):</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      rows(_rows),</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      cols(_cols),</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      allocateMemory(_allocateMemory) {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      <span class="keywordflow">if</span> (_allocateMemory) {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        elem = <span class="keyword">new</span> <span class="keywordtype">float</span>[rows*cols];</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;          }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classFloat2D.html#a51ccca3defa8be28c89f63f1768a79b0">  127</a></span>&#160;    <a class="code" href="classFloat2D.html#a51ccca3defa8be28c89f63f1768a79b0">Float2D</a>(<span class="keywordtype">int</span> _cols, <span class="keywordtype">int</span> _rows, <span class="keywordtype">float</span>* _elem):</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;      rows(_rows),</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      cols(_cols),</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;      allocateMemory(false) {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                  elem = _elem;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;          }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classFloat2D.html#aa4c91cf3f61da6180d2d3e92699d7c92">  144</a></span>&#160;    <a class="code" href="classFloat2D.html#aa4c91cf3f61da6180d2d3e92699d7c92">Float2D</a>(<a class="code" href="classFloat2D.html">Float2D</a>&amp; _elem, <span class="keywordtype">bool</span> shallowCopy):</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;      rows(_elem.rows),</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;      cols(_elem.cols),</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;      allocateMemory(!shallowCopy) {</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      <span class="keywordflow">if</span> (shallowCopy) {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        elem = _elem.elem;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        allocateMemory = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      }</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        elem = <span class="keyword">new</span> <span class="keywordtype">float</span>[rows*cols];</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;rows*cols; i++) {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;          elem[i] = _elem.elem[i];</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        allocateMemory = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;      }</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;          ~<a class="code" href="classFloat2D.html">Float2D</a>() {</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                  <span class="keywordflow">if</span> (allocateMemory) {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                    <span class="keyword">delete</span>[] elem;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                  }</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        }</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> getRows()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> rows; }; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> getCols()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cols; }; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keyword">inline</span> <a class="code" href="classFloat1D.html">Float1D</a> getColProxy(<span class="keywordtype">int</span> i) {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                <span class="comment">// subarray elem[i][*]:</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                <span class="comment">// starting at elem[i][0] with rows elements and unit stride</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classFloat1D.html">Float1D</a>(elem + (rows * i), rows);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        };</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keyword">inline</span> <a class="code" href="classFloat1D.html">Float1D</a> getRowProxy(<span class="keywordtype">int</span> j) {</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                <span class="comment">// subarray elem[*][j]</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                <span class="comment">// starting at elem[0][j] with cols elements and stride rows</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classFloat1D.html">Float1D</a>(elem + j, cols, rows);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        };</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;          <span class="keyword">inline</span> <span class="keywordtype">float</span>* operator[](<span class="keywordtype">int</span> i) {</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                <span class="keywordflow">return</span> (elem + (rows * i));</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        }</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;          <span class="keyword">inline</span> <span class="keywordtype">float</span> <span class="keyword">const</span>* operator[](<span class="keywordtype">int</span> i)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                <span class="keywordflow">return</span> (elem + (rows * i));</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">float</span>* elemVector() {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                <span class="keywordflow">return</span> elem;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        }</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> getRows()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> rows; }; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> getCols()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cols; }; </div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordtype">int</span> rows;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordtype">int</span> cols;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordtype">float</span>* elem;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keywordtype">bool</span> allocateMemory;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;};</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">//-------- Methods for Visualistion of Results --------</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;</div>
-<div class="line"><a name="l00198"></a><span class="lineno"><a class="line" href="help_8hh.html#aa10dc278c6ac60f9cd49955cbe16fbcb">  198</a></span>&#160;<span class="keyword">inline</span> std::string <a class="code" href="help_8hh.html#aa10dc278c6ac60f9cd49955cbe16fbcb">generateFileName</a>(std::string baseName, <span class="keywordtype">int</span> timeStep) {</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        std::ostringstream FileName;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        FileName &lt;&lt; baseName &lt;&lt;timeStep&lt;&lt;<span class="stringliteral">&quot;.vtk&quot;</span>;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <span class="keywordflow">return</span> FileName.str();</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;};</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="help_8hh.html#a206f33ce37fa47f8635d02a1cfc9881f">  216</a></span>&#160;<span class="keyword">inline</span> std::string <a class="code" href="help_8hh.html#aa10dc278c6ac60f9cd49955cbe16fbcb">generateFileName</a>( std::string i_baseName,</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                                     <span class="keywordtype">int</span> i_blockPositionX, <span class="keywordtype">int</span> i_blockPositionY,</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                                     std::string i_fileExtension=<span class="stringliteral">&quot;.nc&quot;</span> ) {</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  std::ostringstream l_fileName;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  l_fileName &lt;&lt; i_baseName &lt;&lt; <span class="stringliteral">&quot;_&quot;</span> &lt;&lt; i_blockPositionX &lt;&lt; i_blockPositionY &lt;&lt; i_fileExtension;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  <span class="keywordflow">return</span> l_fileName.str();</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;};</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
-<div class="line"><a name="l00234"></a><span class="lineno"><a class="line" href="help_8hh.html#ab05bce4e4d30d0b9fb85f81668f98f79">  234</a></span>&#160;<span class="keyword">inline</span> std::string <a class="code" href="help_8hh.html#aa10dc278c6ac60f9cd49955cbe16fbcb">generateFileName</a>(std::string baseName, <span class="keywordtype">int</span> timeStep, <span class="keywordtype">int</span> block_X, <span class="keywordtype">int</span> block_Y, std::string i_fileExtension=<span class="stringliteral">&quot;.vts&quot;</span>) {</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        std::ostringstream FileName;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        FileName &lt;&lt; baseName &lt;&lt;<span class="stringliteral">&quot;_&quot;</span>&lt;&lt; block_X&lt;&lt;<span class="stringliteral">&quot;_&quot;</span>&lt;&lt;block_Y&lt;&lt;<span class="stringliteral">&quot;_&quot;</span>&lt;&lt;timeStep&lt;&lt;i_fileExtension;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="keywordflow">return</span> FileName.str();</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;};</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="keyword">inline</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno"><a class="line" href="help_8hh.html#a7dc37444a6b7771aefff04a38e74e086">  251</a></span>&#160;std::string <a class="code" href="help_8hh.html#a7dc37444a6b7771aefff04a38e74e086">generateBaseFileName</a>(std::string &amp;i_baseName, <span class="keywordtype">int</span> i_blockPositionX , <span class="keywordtype">int</span> i_blockPositionY)</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;{</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;          std::ostringstream l_fileName;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;          l_fileName &lt;&lt; i_baseName &lt;&lt; <span class="stringliteral">&quot;_&quot;</span> &lt;&lt; i_blockPositionX &lt;&lt; i_blockPositionY;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;          <span class="keywordflow">return</span> l_fileName.str();</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;}</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
-<div class="line"><a name="l00263"></a><span class="lineno"><a class="line" href="help_8hh.html#a427928180ec14bf889c55e5cc51d8e36">  263</a></span>&#160;<span class="keyword">inline</span> std::string <a class="code" href="help_8hh.html#a427928180ec14bf889c55e5cc51d8e36">generateContainerFileName</a>(std::string baseName, <span class="keywordtype">int</span> timeStep) {</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        std::ostringstream FileName;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        FileName &lt;&lt; baseName&lt;&lt;<span class="stringliteral">&quot;_&quot;</span>&lt;&lt;timeStep&lt;&lt;<span class="stringliteral">&quot;.pvts&quot;</span>;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keywordflow">return</span> FileName.str();</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;};</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keyword">inline</span> <a class="code" href="classFloat1D.html">Float1D</a> getColProxy(<span class="keywordtype">int</span> i) {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                <span class="comment">// subarray elem[i][*]:</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                <span class="comment">// starting at elem[i][0] with rows elements and unit stride</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classFloat1D.html">Float1D</a>(elem + (rows * i), rows);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        };</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keyword">inline</span> <a class="code" href="classFloat1D.html">Float1D</a> getRowProxy(<span class="keywordtype">int</span> j) {</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                <span class="comment">// subarray elem[*][j]</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                <span class="comment">// starting at elem[0][j] with cols elements and stride rows</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="classFloat1D.html">Float1D</a>(elem + j, cols, rows);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        };</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordtype">int</span> rows;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordtype">int</span> cols;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordtype">float</span>* elem;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <span class="keywordtype">bool</span> allocateMemory;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;};</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">//-------- Methods for Visualistion of Results --------</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;</div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="help_8hh.html#aa10dc278c6ac60f9cd49955cbe16fbcb">  210</a></span>&#160;<span class="keyword">inline</span> std::string <a class="code" href="help_8hh.html#aa10dc278c6ac60f9cd49955cbe16fbcb">generateFileName</a>(std::string baseName, <span class="keywordtype">int</span> timeStep) {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        std::ostringstream FileName;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        FileName &lt;&lt; baseName &lt;&lt;timeStep&lt;&lt;<span class="stringliteral">&quot;.vtk&quot;</span>;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="keywordflow">return</span> FileName.str();</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;};</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;</div>
+<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="help_8hh.html#a206f33ce37fa47f8635d02a1cfc9881f">  228</a></span>&#160;<span class="keyword">inline</span> std::string <a class="code" href="help_8hh.html#aa10dc278c6ac60f9cd49955cbe16fbcb">generateFileName</a>( std::string i_baseName,</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                                     <span class="keywordtype">int</span> i_blockPositionX, <span class="keywordtype">int</span> i_blockPositionY,</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                                     std::string i_fileExtension=<span class="stringliteral">&quot;.nc&quot;</span> ) {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  std::ostringstream l_fileName;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  l_fileName &lt;&lt; i_baseName &lt;&lt; <span class="stringliteral">&quot;_&quot;</span> &lt;&lt; i_blockPositionX &lt;&lt; i_blockPositionY &lt;&lt; i_fileExtension;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  <span class="keywordflow">return</span> l_fileName.str();</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;};</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;</div>
+<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="help_8hh.html#ab05bce4e4d30d0b9fb85f81668f98f79">  246</a></span>&#160;<span class="keyword">inline</span> std::string <a class="code" href="help_8hh.html#aa10dc278c6ac60f9cd49955cbe16fbcb">generateFileName</a>(std::string baseName, <span class="keywordtype">int</span> timeStep, <span class="keywordtype">int</span> block_X, <span class="keywordtype">int</span> block_Y, std::string i_fileExtension=<span class="stringliteral">&quot;.vts&quot;</span>) {</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        std::ostringstream FileName;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        FileName &lt;&lt; baseName &lt;&lt;<span class="stringliteral">&quot;_&quot;</span>&lt;&lt; block_X&lt;&lt;<span class="stringliteral">&quot;_&quot;</span>&lt;&lt;block_Y&lt;&lt;<span class="stringliteral">&quot;_&quot;</span>&lt;&lt;timeStep&lt;&lt;i_fileExtension;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        <span class="keywordflow">return</span> FileName.str();</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;};</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="keyword">inline</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno"><a class="line" href="help_8hh.html#a7dc37444a6b7771aefff04a38e74e086">  263</a></span>&#160;std::string <a class="code" href="help_8hh.html#a7dc37444a6b7771aefff04a38e74e086">generateBaseFileName</a>(std::string &amp;i_baseName, <span class="keywordtype">int</span> i_blockPositionX , <span class="keywordtype">int</span> i_blockPositionY)</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;{</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;          std::ostringstream l_fileName;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;          l_fileName &lt;&lt; i_baseName &lt;&lt; <span class="stringliteral">&quot;_&quot;</span> &lt;&lt; i_blockPositionX &lt;&lt; i_blockPositionY;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;          <span class="keywordflow">return</span> l_fileName.str();</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;}</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="preprocessor"></span></div>
-<div class="ttc" id="classFloat2D_html_a51ccca3defa8be28c89f63f1768a79b0"><div class="ttname"><a href="classFloat2D.html#a51ccca3defa8be28c89f63f1768a79b0">Float2D::Float2D</a></div><div class="ttdeci">Float2D(int _cols, int _rows, float *_elem)</div><div class="ttdef"><b>Definition:</b> help.hh:115</div></div>
-<div class="ttc" id="classFloat2D_html"><div class="ttname"><a href="classFloat2D.html">Float2D</a></div><div class="ttdef"><b>Definition:</b> help.hh:88</div></div>
-<div class="ttc" id="classFloat2D_html_aceac75782e5db5cb644a893de73f7933"><div class="ttname"><a href="classFloat2D.html#aceac75782e5db5cb644a893de73f7933">Float2D::Float2D</a></div><div class="ttdeci">Float2D(int _cols, int _rows, bool _allocateMemory=true)</div><div class="ttdef"><b>Definition:</b> help.hh:97</div></div>
-<div class="ttc" id="help_8hh_html_aa10dc278c6ac60f9cd49955cbe16fbcb"><div class="ttname"><a href="help_8hh.html#aa10dc278c6ac60f9cd49955cbe16fbcb">generateFileName</a></div><div class="ttdeci">std::string generateFileName(std::string baseName, int timeStep)</div><div class="ttdef"><b>Definition:</b> help.hh:198</div></div>
-<div class="ttc" id="classFloat1D_html"><div class="ttname"><a href="classFloat1D.html">Float1D</a></div><div class="ttdef"><b>Definition:</b> help.hh:48</div></div>
-<div class="ttc" id="help_8hh_html_a7dc37444a6b7771aefff04a38e74e086"><div class="ttname"><a href="help_8hh.html#a7dc37444a6b7771aefff04a38e74e086">generateBaseFileName</a></div><div class="ttdeci">std::string generateBaseFileName(std::string &amp;i_baseName, int i_blockPositionX, int i_blockPositionY)</div><div class="ttdef"><b>Definition:</b> help.hh:251</div></div>
-<div class="ttc" id="classFloat2D_html_aa4c91cf3f61da6180d2d3e92699d7c92"><div class="ttname"><a href="classFloat2D.html#aa4c91cf3f61da6180d2d3e92699d7c92">Float2D::Float2D</a></div><div class="ttdeci">Float2D(Float2D &amp;_elem, bool shallowCopy)</div><div class="ttdef"><b>Definition:</b> help.hh:132</div></div>
-<div class="ttc" id="help_8hh_html_a427928180ec14bf889c55e5cc51d8e36"><div class="ttname"><a href="help_8hh.html#a427928180ec14bf889c55e5cc51d8e36">generateContainerFileName</a></div><div class="ttdeci">std::string generateContainerFileName(std::string baseName, int timeStep)</div><div class="ttdef"><b>Definition:</b> help.hh:263</div></div>
+<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="help_8hh.html#a427928180ec14bf889c55e5cc51d8e36">  275</a></span>&#160;<span class="keyword">inline</span> std::string <a class="code" href="help_8hh.html#a427928180ec14bf889c55e5cc51d8e36">generateContainerFileName</a>(std::string baseName, <span class="keywordtype">int</span> timeStep) {</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        std::ostringstream FileName;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        FileName &lt;&lt; baseName&lt;&lt;<span class="stringliteral">&quot;_&quot;</span>&lt;&lt;timeStep&lt;&lt;<span class="stringliteral">&quot;.pvts&quot;</span>;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keywordflow">return</span> FileName.str();</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;};</div>
+<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="classArray.html">  284</a></span>&#160;<span class="keyword">class </span><a class="code" href="classArray.html">Array</a> {</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="classArray.html#a2afa60e8e491ae59d37001a569014e41">  291</a></span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">static</span> <span class="keyword">inline</span> T <a class="code" href="classArray.html#a2afa60e8e491ae59d37001a569014e41">min</a>(T* array, <span class="keywordtype">int</span> length) {</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                T temp;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="preprocessor">#ifndef NDEBUG </span><span class="comment">/*</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">                std::cout &lt;&lt; &quot;Array with the size &quot; &lt;&lt; length &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">                for(int i = 0; i &lt; length; i++)</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">                        std::cout &lt;&lt; array[i];</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">                std::cout &lt;&lt; std::endl &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">                std::cout &lt;&lt; std::endl &lt;&lt; std::endl;*/</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="preprocessor"></span>                <span class="keywordflow">if</span>(length == 0) <span class="keywordflow">return</span> 0; <span class="keywordflow">else</span> temp = array[0];</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 1; i &lt; length; i++) {</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                        <span class="keywordflow">if</span>(temp &gt; array[i])</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                                temp = array[i];</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                        }</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="preprocessor">#ifndef NDEBUG // temp must not be NaN (NaN comparison ALWAYS is false)</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="preprocessor"></span>                <span class="keywordflow">if</span>(temp != temp)</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                        print(array, legnth);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="preprocessor"></span>                assert(temp == temp);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="preprocessor"></span>                <span class="keywordflow">return</span> temp;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        }</div>
+<div class="line"><a name="l00318"></a><span class="lineno"><a class="line" href="classArray.html#a08b9fad689eb5fc9484cd63507aabb5f">  318</a></span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">static</span> <span class="keyword">inline</span> T <a class="code" href="classArray.html#a08b9fad689eb5fc9484cd63507aabb5f">max</a>(T* array, <span class="keywordtype">int</span> length) {</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                T temp;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="preprocessor">#ifndef NDEBUG </span><span class="comment">/*</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">                std::cout &lt;&lt; &quot;Array with the size &quot; &lt;&lt; length &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">                for(int i = 0; i &lt; length; i++)</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">                        std::cout &lt;&lt; array[i];</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">                std::cout &lt;&lt; std::endl &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">                std::cout &lt;&lt; std::endl &lt;&lt; std::endl; */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="preprocessor"></span>                <span class="keywordflow">if</span>(length == 0) <span class="keywordflow">return</span> 0; <span class="keywordflow">else</span> temp = array[0];</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 1; i &lt; length; i++) {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                        <span class="keywordflow">if</span>(temp &lt; array[i])</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                                temp = array[i];</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                        }</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;<span class="preprocessor">#ifndef NDEBUG // temp must not be NaN (NaN comparison ALWAYS is false)</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="preprocessor"></span>                <span class="keywordflow">if</span>(temp != temp)</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                        print(array, legnth);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="preprocessor"></span>                assert(temp == temp);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="preprocessor"></span>                <span class="keywordflow">if</span>(temp != temp)</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                        print(array, length);</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                <span class="keywordflow">return</span> temp;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        }</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        </div>
+<div class="line"><a name="l00349"></a><span class="lineno"><a class="line" href="classArray.html#aba3d93624f3b23b89923f7a82b5babac">  349</a></span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classArray.html#aba3d93624f3b23b89923f7a82b5babac">print</a>(T* array, <span class="keywordtype">int</span> length, std::string name = <span class="stringliteral">&quot;Array&quot;</span>) {</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                cout &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot;: &quot;</span>;</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; length; i++)</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                        cout &lt;&lt; array[i] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                cout &lt;&lt; endl;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;};</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00361"></a><span class="lineno"><a class="line" href="help_8hh.html#a7824e0dc9a06a7ab03df4c0bd0ddcd83">  361</a></span>&#160;<span class="keyword">inline</span> std::string <a class="code" href="help_8hh.html#a7824e0dc9a06a7ab03df4c0bd0ddcd83">toString</a>(T input) {</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        std::ostringstream buff;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        buff &lt;&lt; input;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        <span class="keywordflow">return</span> buff.str();</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;};</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;</div>
+<div class="line"><a name="l00372"></a><span class="lineno"><a class="line" href="help_8hh.html#a3db4e4545e5a3f2655ff1a749ca0ed6e">  372</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="help_8hh.html#a3db4e4545e5a3f2655ff1a749ca0ed6e">wait</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seconds) {</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        <a class="code" href="classtools_1_1Logger.html#a341eaab3865b60362db6736c2e2b7c68">tools::Logger::logger</a>.<a class="code" href="classtools_1_1Logger.html#a9642689522ece27ca9c908f24f290134">printString</a>(<a class="code" href="help_8hh.html#a7824e0dc9a06a7ab03df4c0bd0ddcd83">toString</a>(<span class="stringliteral">&quot;Waiting for &quot;</span>) + <a class="code" href="help_8hh.html#a7824e0dc9a06a7ab03df4c0bd0ddcd83">toString</a>(seconds) + <a class="code" href="help_8hh.html#a7824e0dc9a06a7ab03df4c0bd0ddcd83">toString</a>(<span class="stringliteral">&quot; seconds&quot;</span>));</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="preprocessor">#ifdef __linux__</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="preprocessor"></span>        sleep(seconds); <span class="comment">// Seconds for Linux</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="preprocessor">#elif __WINDOWS__</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="preprocessor"></span>        sleep(seconds * 1000); <span class="comment">// Milliseconds for windows</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="preprocessor"></span>};</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="preprocessor"></span></div>
+<div class="ttc" id="classFloat2D_html_a51ccca3defa8be28c89f63f1768a79b0"><div class="ttname"><a href="classFloat2D.html#a51ccca3defa8be28c89f63f1768a79b0">Float2D::Float2D</a></div><div class="ttdeci">Float2D(int _cols, int _rows, float *_elem)</div><div class="ttdef"><b>Definition:</b> help.hh:127</div></div>
+<div class="ttc" id="classFloat2D_html"><div class="ttname"><a href="classFloat2D.html">Float2D</a></div><div class="ttdef"><b>Definition:</b> help.hh:100</div></div>
+<div class="ttc" id="classFloat2D_html_aceac75782e5db5cb644a893de73f7933"><div class="ttname"><a href="classFloat2D.html#aceac75782e5db5cb644a893de73f7933">Float2D::Float2D</a></div><div class="ttdeci">Float2D(int _cols, int _rows, bool _allocateMemory=true)</div><div class="ttdef"><b>Definition:</b> help.hh:109</div></div>
+<div class="ttc" id="classArray_html_aba3d93624f3b23b89923f7a82b5babac"><div class="ttname"><a href="classArray.html#aba3d93624f3b23b89923f7a82b5babac">Array::print</a></div><div class="ttdeci">static void print(T *array, int length, std::string name=&quot;Array&quot;)</div><div class="ttdef"><b>Definition:</b> help.hh:349</div></div>
+<div class="ttc" id="classArray_html_a08b9fad689eb5fc9484cd63507aabb5f"><div class="ttname"><a href="classArray.html#a08b9fad689eb5fc9484cd63507aabb5f">Array::max</a></div><div class="ttdeci">static T max(T *array, int length)</div><div class="ttdef"><b>Definition:</b> help.hh:318</div></div>
+<div class="ttc" id="help_8hh_html_a7824e0dc9a06a7ab03df4c0bd0ddcd83"><div class="ttname"><a href="help_8hh.html#a7824e0dc9a06a7ab03df4c0bd0ddcd83">toString</a></div><div class="ttdeci">std::string toString(T input)</div><div class="ttdef"><b>Definition:</b> help.hh:361</div></div>
+<div class="ttc" id="classtools_1_1Logger_html_a9642689522ece27ca9c908f24f290134"><div class="ttname"><a href="classtools_1_1Logger.html#a9642689522ece27ca9c908f24f290134">tools::Logger::printString</a></div><div class="ttdeci">void printString(const std::string i_string)</div><div class="ttdef"><b>Definition:</b> Logger.hh:241</div></div>
+<div class="ttc" id="help_8hh_html_aa10dc278c6ac60f9cd49955cbe16fbcb"><div class="ttname"><a href="help_8hh.html#aa10dc278c6ac60f9cd49955cbe16fbcb">generateFileName</a></div><div class="ttdeci">std::string generateFileName(std::string baseName, int timeStep)</div><div class="ttdef"><b>Definition:</b> help.hh:210</div></div>
+<div class="ttc" id="Logger_8hh_html"><div class="ttname"><a href="Logger_8hh.html">Logger.hh</a></div></div>
+<div class="ttc" id="classFloat1D_html"><div class="ttname"><a href="classFloat1D.html">Float1D</a></div><div class="ttdef"><b>Definition:</b> help.hh:60</div></div>
+<div class="ttc" id="help_8hh_html_a7dc37444a6b7771aefff04a38e74e086"><div class="ttname"><a href="help_8hh.html#a7dc37444a6b7771aefff04a38e74e086">generateBaseFileName</a></div><div class="ttdeci">std::string generateBaseFileName(std::string &amp;i_baseName, int i_blockPositionX, int i_blockPositionY)</div><div class="ttdef"><b>Definition:</b> help.hh:263</div></div>
+<div class="ttc" id="classArray_html"><div class="ttname"><a href="classArray.html">Array</a></div><div class="ttdef"><b>Definition:</b> help.hh:284</div></div>
+<div class="ttc" id="classFloat2D_html_aa4c91cf3f61da6180d2d3e92699d7c92"><div class="ttname"><a href="classFloat2D.html#aa4c91cf3f61da6180d2d3e92699d7c92">Float2D::Float2D</a></div><div class="ttdeci">Float2D(Float2D &amp;_elem, bool shallowCopy)</div><div class="ttdef"><b>Definition:</b> help.hh:144</div></div>
+<div class="ttc" id="help_8hh_html_a427928180ec14bf889c55e5cc51d8e36"><div class="ttname"><a href="help_8hh.html#a427928180ec14bf889c55e5cc51d8e36">generateContainerFileName</a></div><div class="ttdeci">std::string generateContainerFileName(std::string baseName, int timeStep)</div><div class="ttdef"><b>Definition:</b> help.hh:275</div></div>
+<div class="ttc" id="help_8hh_html_a3db4e4545e5a3f2655ff1a749ca0ed6e"><div class="ttname"><a href="help_8hh.html#a3db4e4545e5a3f2655ff1a749ca0ed6e">wait</a></div><div class="ttdeci">void wait(unsigned int seconds)</div><div class="ttdef"><b>Definition:</b> help.hh:372</div></div>
+<div class="ttc" id="classArray_html_a2afa60e8e491ae59d37001a569014e41"><div class="ttname"><a href="classArray.html#a2afa60e8e491ae59d37001a569014e41">Array::min</a></div><div class="ttdeci">static T min(T *array, int length)</div><div class="ttdef"><b>Definition:</b> help.hh:291</div></div>
+<div class="ttc" id="classtools_1_1Logger_html_a341eaab3865b60362db6736c2e2b7c68"><div class="ttname"><a href="classtools_1_1Logger.html#a341eaab3865b60362db6736c2e2b7c68">tools::Logger::logger</a></div><div class="ttdeci">static Logger logger</div><div class="ttdef"><b>Definition:</b> Logger.hh:514</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2014 23:47:56 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -5,12 +5,23 @@
 {\ttfamily \#include $<$iostream$>$}\\*
 {\ttfamily \#include $<$fstream$>$}\\*
 {\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$assert.\-h$>$}\\*
+{\ttfamily \#include $<$netcdf.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}tools/\-Logger.\-hh\char`\"{}}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classFloat1D}{Float1\-D}
 \item 
 class \hyperlink{classFloat2D}{Float2\-D}
+\item 
+class \hyperlink{classArray}{Array}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{help_8hh_a588357de2986fdf4c1380190f7ae9f37}{\#define {\bfseries E\-R\-R}(e)~\{printf(\char`\"{}Error\-: \%s\textbackslash{}n\char`\"{}, nc\-\_\-strerror(e)); assert(false);\}}\label{help_8hh_a588357de2986fdf4c1380190f7ae9f37}
+
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -24,6 +35,10 @@ std\-::string \hyperlink{help_8hh_ab05bce4e4d30d0b9fb85f81668f98f79}{generate\-F
 std\-::string \hyperlink{help_8hh_a7dc37444a6b7771aefff04a38e74e086}{generate\-Base\-File\-Name} (std\-::string \&i\-\_\-base\-Name, int i\-\_\-block\-Position\-X, int i\-\_\-block\-Position\-Y)
 \item 
 std\-::string \hyperlink{help_8hh_a427928180ec14bf889c55e5cc51d8e36}{generate\-Container\-File\-Name} (std\-::string base\-Name, int time\-Step)
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\-::string \hyperlink{help_8hh_a7824e0dc9a06a7ab03df4c0bd0ddcd83}{to\-String} (T input)
+\item 
+void \hyperlink{help_8hh_a3db4e4545e5a3f2655ff1a749ca0ed6e}{wait} (unsigned int seconds)
 \end{DoxyCompactItemize}
 
 
@@ -130,3 +145,24 @@ generate output filename for the multiple-\/\-S\-W\-E\-\_\-\-Block version (for 
 
 \begin{DoxyRefDesc}{Deprecated}
 \item[\hyperlink{deprecated__deprecated000003}{Deprecated}]\end{DoxyRefDesc}
+\hypertarget{help_8hh_a7824e0dc9a06a7ab03df4c0bd0ddcd83}{\index{help.\-hh@{help.\-hh}!to\-String@{to\-String}}
+\index{to\-String@{to\-String}!help.hh@{help.\-hh}}
+\subsubsection[{to\-String}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::string to\-String (
+\begin{DoxyParamCaption}
+\item[{T}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{help_8hh_a7824e0dc9a06a7ab03df4c0bd0ddcd83}
+Formats any input to string \hypertarget{help_8hh_a3db4e4545e5a3f2655ff1a749ca0ed6e}{\index{help.\-hh@{help.\-hh}!wait@{wait}}
+\index{wait@{wait}!help.hh@{help.\-hh}}
+\subsubsection[{wait}]{\setlength{\rightskip}{0pt plus 5cm}void wait (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{seconds}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{help_8hh_a3db4e4545e5a3f2655ff1a749ca0ed6e}
+Waits for a given amount of time
+
+
+\begin{DoxyParams}{Parameters}
+{\em seconds} & The amount of seconds to be waited \\
+\hline
+\end{DoxyParams}

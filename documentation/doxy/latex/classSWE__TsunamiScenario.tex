@@ -1,0 +1,126 @@
+\hypertarget{classSWE__TsunamiScenario}{\section{S\-W\-E\-\_\-\-Tsunami\-Scenario Class Reference}
+\label{classSWE__TsunamiScenario}\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Tsunami\-Scenario.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Tsunami\-Scenario\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSWE__TsunamiScenario}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__TsunamiScenario_ae14887eeebe3d8b6e89ac9924eb6615b}{S\-W\-E\-\_\-\-Tsunami\-Scenario} (int cells\-X, int cells\-Y)
+\item 
+float \hyperlink{classSWE__TsunamiScenario_aa2d2b0be8c3bc1d84ded47e075b5d433}{get\-Bathymetry} (float x, float y)
+\item 
+float \hyperlink{classSWE__TsunamiScenario_a134b99facf6169d2ef1edf0e5199b736}{get\-Water\-Height} (float x, float y)
+\item 
+virtual float \hyperlink{classSWE__TsunamiScenario_a0576923dc02b543dc34cec7de6e451a4}{end\-Simulation} ()
+\item 
+float \hyperlink{classSWE__TsunamiScenario_a701145868edb572d5958bbd739b80e0d}{get\-Boundary\-Pos} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} i\-\_\-edge)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Scenario \char`\"{}\-Artificial Tsunami Scenario\char`\"{}\-: displacement in the middle of the domain 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__TsunamiScenario_ae14887eeebe3d8b6e89ac9924eb6615b}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!SWE_TsunamiScenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\subsubsection[{S\-W\-E\-\_\-\-Tsunami\-Scenario}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Tsunami\-Scenario\-::\-S\-W\-E\-\_\-\-Tsunami\-Scenario (
+\begin{DoxyParamCaption}
+\item[{int}]{cells\-X, }
+\item[{int}]{cells\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__TsunamiScenario_ae14887eeebe3d8b6e89ac9924eb6615b}
+Creates a new instance of the Tsunami\-Scenario Class 
+\begin{DoxyParams}{Parameters}
+{\em cells\-X} & Cells in x dimension \\
+\hline
+{\em cells\-Y} & Cells in y dimension \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__TsunamiScenario_a0576923dc02b543dc34cec7de6e451a4}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!end\-Simulation@{end\-Simulation}}
+\index{end\-Simulation@{end\-Simulation}!SWE_TsunamiScenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\subsubsection[{end\-Simulation}]{\setlength{\rightskip}{0pt plus 5cm}virtual float S\-W\-E\-\_\-\-Tsunami\-Scenario\-::end\-Simulation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__TsunamiScenario_a0576923dc02b543dc34cec7de6e451a4}
+Returns the time of the end of the simulation 
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__TsunamiScenario_aa2d2b0be8c3bc1d84ded47e075b5d433}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!get\-Bathymetry@{get\-Bathymetry}}
+\index{get\-Bathymetry@{get\-Bathymetry}!SWE_TsunamiScenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\subsubsection[{get\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Tsunami\-Scenario\-::get\-Bathymetry (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__TsunamiScenario_aa2d2b0be8c3bc1d84ded47e075b5d433}
+The bathymetry at a requested location 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/\-Value of the location \\
+\hline
+{\em y} & The y-\/\-Value of the location \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__TsunamiScenario_a701145868edb572d5958bbd739b80e0d}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!get\-Boundary\-Pos@{get\-Boundary\-Pos}}
+\index{get\-Boundary\-Pos@{get\-Boundary\-Pos}!SWE_TsunamiScenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\subsubsection[{get\-Boundary\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Tsunami\-Scenario\-::get\-Boundary\-Pos (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{i\-\_\-edge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__TsunamiScenario_a701145868edb572d5958bbd739b80e0d}
+Get the boundary positions
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-edge} & which edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value in the corresponding dimension 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__TsunamiScenario_a134b99facf6169d2ef1edf0e5199b736}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!get\-Water\-Height@{get\-Water\-Height}}
+\index{get\-Water\-Height@{get\-Water\-Height}!SWE_TsunamiScenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\subsubsection[{get\-Water\-Height}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Tsunami\-Scenario\-::get\-Water\-Height (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__TsunamiScenario_a134b99facf6169d2ef1edf0e5199b736}
+The water height at a requested location 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/\-Value of the location \\
+\hline
+{\em y} & The y-\/\-Value of the location \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/scenarios/\hyperlink{SWE__TsunamiScenario_8hh}{S\-W\-E\-\_\-\-Tsunami\-Scenario.\-hh}\end{DoxyCompactItemize}

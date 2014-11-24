@@ -278,43 +278,74 @@ inline std::string generateContainerFileName(std::string baseName, int timeStep)
 	FileName << baseName<<"_"<<timeStep<<".pvts";
 	return FileName.str();
 };
-
+/**
+ * Collection of helper methods for arrays
+ */
 class Array {
 public:
+	/**
+	 * Finds the minimum of an array
+	 * @param array The array to search in
+	 * @param length The array's length
+	 */
 	template<typename T> static inline T min(T* array, int length) {
 		T temp;
-#ifndef NDBUG /*
+#ifndef NDEBUG /*
 		std::cout << "Array with the size " << length << std::endl;
 		for(int i = 0; i < length; i++)
 			std::cout << array[i];
 		std::cout << std::endl << std::endl;
 		std::cout << std::endl << std::endl;*/
 #endif
-		if(length == 0) return 0;
-		for(int i = 0; i < length; i++) {
+		if(length == 0) return 0; else temp = array[0];
+		for(int i = 1; i < length; i++) {
 			if(temp > array[i])
 				temp = array[i];
 			}
+#ifndef NDEBUG // temp must not be NaN (NaN comparison ALWAYS is false)
+		if(temp != temp)
+			print(array, legnth);
+#else
+		assert(temp == temp);
+#endif
 		return temp;
 	}
-
+	/**
+	 * Finds the maximum of an array
+	 * @param array The array to search in
+	 * @param length The array's length
+	 */
 	template<typename T> static inline T max(T* array, int length) {
 		T temp;
-#ifndef NDBUG /*
+#ifndef NDEBUG /*
 		std::cout << "Array with the size " << length << std::endl;
 		for(int i = 0; i < length; i++)
 			std::cout << array[i];
 		std::cout << std::endl << std::endl;
 		std::cout << std::endl << std::endl; */
 #endif
-		if(length == 0) return 0;
-		for(int i = 0; i < length; i++) {
+		if(length == 0) return 0; else temp = array[0];
+		for(int i = 1; i < length; i++) {
 			if(temp < array[i])
 				temp = array[i];
 			}
+#ifndef NDEBUG // temp must not be NaN (NaN comparison ALWAYS is false)
+		if(temp != temp)
+			print(array, legnth);
+#else
+		assert(temp == temp);
+#endif
+		if(temp != temp)
+			print(array, length);
 		return temp;
 	}
-
+	
+	/**
+	 * Prints an array to the standard output
+	 * @param array the array to be printed
+	 * @param length The array's length
+	 * @param name The array's name (by default "Array")
+	 */
 	template<typename T> static void print(T* array, int length, std::string name = "Array") {
 		cout << name << ": ";
 		for(int i = 0; i < length; i++)
@@ -323,6 +354,9 @@ public:
 	}
 };
 
+/**
+ * Formats any input to string
+ */
 template<typename T>
 inline std::string toString(T input) {
 	std::ostringstream buff;
@@ -330,6 +364,11 @@ inline std::string toString(T input) {
 	return buff.str();
 };
 
+/**
+ * Waits for a given amount of time
+ *
+ * @param seconds The amount of seconds to be waited
+ */
 inline void wait(unsigned int seconds) {
 	tools::Logger::logger.printString(toString("Waiting for ") + toString(seconds) + toString(" seconds"));
 #ifdef __linux__

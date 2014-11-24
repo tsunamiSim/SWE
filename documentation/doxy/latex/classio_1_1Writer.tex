@@ -10,7 +10,7 @@ Inheritance diagram for io\-:\-:Writer\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classio_1_1Writer_a6fe95f4a66e8b8ee1c9a52196ff3433f}{Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, int i\-\_\-n\-X, int i\-\_\-n\-Y)
+\hyperlink{classio_1_1Writer_a05648cc3fcfaf3d7d4267a584685f6f3}{Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, int i\-\_\-n\-X, int i\-\_\-n\-Y, size\-\_\-t i\-\_\-time\-Step=0)
 \item 
 virtual void \hyperlink{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{write\-Time\-Step} (const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-h, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hu, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hv, float i\-\_\-time)=0
 \end{DoxyCompactItemize}
@@ -38,7 +38,7 @@ virtual void \hyperlink{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{wri
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classio_1_1Writer_a6fe95f4a66e8b8ee1c9a52196ff3433f}{\index{io\-::\-Writer@{io\-::\-Writer}!Writer@{Writer}}
+\hypertarget{classio_1_1Writer_a05648cc3fcfaf3d7d4267a584685f6f3}{\index{io\-::\-Writer@{io\-::\-Writer}!Writer@{Writer}}
 \index{Writer@{Writer}!io::Writer@{io\-::\-Writer}}
 \subsubsection[{Writer}]{\setlength{\rightskip}{0pt plus 5cm}io\-::\-Writer\-::\-Writer (
 \begin{DoxyParamCaption}
@@ -46,9 +46,10 @@ virtual void \hyperlink{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{wri
 \item[{const {\bf Float2\-D} \&}]{i\-\_\-b, }
 \item[{const {\bf Boundary\-Size} \&}]{i\-\_\-boundary\-Size, }
 \item[{int}]{i\-\_\-n\-X, }
-\item[{int}]{i\-\_\-n\-Y}
+\item[{int}]{i\-\_\-n\-Y, }
+\item[{size\-\_\-t}]{i\-\_\-time\-Step = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classio_1_1Writer_a6fe95f4a66e8b8ee1c9a52196ff3433f}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classio_1_1Writer_a05648cc3fcfaf3d7d4267a584685f6f3}
 
 \begin{DoxyParams}{Parameters}
 {\em i\-\_\-boundary\-Size} & size of the boundaries. \\

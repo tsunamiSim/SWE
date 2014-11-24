@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include "tools/args.hh"
@@ -23,7 +22,7 @@ int main(int argc, char** argv){
 	args.addOption("size_y", 'y', "Number of cells in y direction", tools::Args::Required, false);
 	args.addOption("use_checkpoint_file", 'r', "Use this option to continue a previously failing run", tools::Args::No, false);
 	args.addOption("end_of_simulation", 'e' , "Sets the end of the simulation", tools::Args::Required, false);
-	args.addOption("boundary_condition", 'b', "Sets the type of boundary condition. Use '1' for Wall or '0' for OUTFLOW", tools::Args::Required, false); 
+	args.addOption("boundary_conditions", 'b', "Sets the boundary conditions, where 0 is Wall and 1 is Outflow", tools::Args::Required, false);
 	
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
@@ -66,14 +65,29 @@ int main(int argc, char** argv){
 		l_scenario = new SWE_TsunamiScenario(l_nx, l_ny);
 		tools::Logger::logger.printString(toString("Read cell domain from command line: (x, y) = ") + toString(l_nx) + toString(", ") + toString(l_ny));
 	}
+
+	BoundaryType boundTypes[2];
+	boundTypes[0] = WALL;
+	boundTypes[1] = OUTFLOW;
+	if(args.isSet("boundary_conditions")) {
+		int l_boundIndex = args.getArgument<int>("boundary_conditions");
+		if(l_boundIndex < 1 || l_boundIndex > 2) {
+			cout << "Boundary conditions not set properly (see help)" << endl;
+			return 1;
+		}
+		l_scenario->setBoundaryTypes(boundTypes[l_boundIndex - 1]);
+	}
     
     
 	// Set step size
 	float l_dx, l_dy;
   	l_dx = (l_scenario->getBoundaryPos(BND_RIGHT) - l_scenario->getBoundaryPos(BND_LEFT) )/l_nx;
   	l_dy = (l_scenario->getBoundaryPos(BND_TOP) - l_scenario->getBoundaryPos(BND_BOTTOM) )/l_ny;
+
+#ifndef NDEBUG
 	cout << "Calulated step size d_x (divided by 1000): (" << (double)l_scenario->getBoundaryPos(BND_RIGHT)/1000 << " - " << (double)l_scenario->getBoundaryPos(BND_LEFT)/1000 << ") / " << (double)l_nx << " = " << (double)l_dx/1000 << endl;
 	cout << "Calulated step size d_y (divided by 1000): (" << (double)l_scenario->getBoundaryPos(BND_TOP)/1000 << " - " << (double)l_scenario->getBoundaryPos(BND_BOTTOM)/1000 << ") / " << (double)l_ny << " = " << (double)l_dy/1000 << endl;
+#endif
 
 	tools::Logger::logger.printLine();
 	tools::Logger::logger.printString("Preparing simulation class");
@@ -129,7 +143,7 @@ int main(int argc, char** argv){
 #ifdef WRITENETCDF
 	int l_timeStepsPerCheckpoint = 10, l_cpCounter = 0;
 	size_t l_checkpoints = 0;
-    l_checkpoints = l_scenario->getCheckpointCount();
+	l_checkpoints = l_scenario->getCheckpointCount();
 	
 	float l_originx, l_originy;
 	
@@ -179,13 +193,11 @@ int main(int argc, char** argv){
 	tools::Logger::logger.printLine();
 	tools::Logger::logger.printString("Starting simulation");
 
-#ifndef NDBUG
+#ifndef NDEBUG
 	tools::Logger::logger.printString(toString("Start Time: ") + toString(l_time));
 #endif
 	std::string time = "Time: ";
-
-	l_scenario->getBoundaryPos(BND_TOP);
-	
+int ix = 0;
 	// Loop over timesteps
 	while(l_time < l_endOfSimulation)
 	{
@@ -197,7 +209,7 @@ int main(int argc, char** argv){
 	
 		// increment time
 		l_time += l_dimensionalSplitting.getMaxTimestep();
-
+if(ix++ % 10 == 0)
 		// write timestep
 		l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
                 	l_dimensionalSplitting.getDischarge_hu(),

@@ -418,9 +418,11 @@ void io::NetCdfWriter::writeTimeStep( const Float2D &i_h,
 		nc_sync(dataFile);
 
 	nc_sync(dataFile);
+#ifndef NDEBUG
 	std:string text = "Wrote to file ";
 	
 	std::ostringstream buff;
    		buff << dataFile;
 	tools::Logger::logger.printString(text + buff.str());
+#endif
 }

@@ -84,6 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classSWE__Scenario-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">SWE_Scenario Class Reference</div>  </div>
@@ -97,17 +98,24 @@ Inheritance diagram for SWE_Scenario:</div>
  <div class="center">
   <img src="classSWE__Scenario.png" usemap="#SWE_Scenario_map" alt=""/>
   <map id="SWE_Scenario_map" name="SWE_Scenario_map">
-<area href="classSWE__AsagiScenario.html" alt="SWE_AsagiScenario" shape="rect" coords="0,56,218,80"/>
-<area href="classSWE__BathymetryDamBreakScenario.html" alt="SWE_BathymetryDamBreakScenario" shape="rect" coords="228,56,446,80"/>
-<area href="classSWE__RadialDamBreakScenario.html" alt="SWE_RadialDamBreakScenario" shape="rect" coords="456,56,674,80"/>
-<area href="classSWE__SeaAtRestScenario.html" alt="SWE_SeaAtRestScenario" shape="rect" coords="684,56,902,80"/>
-<area href="classSWE__SplashingConeScenario.html" alt="SWE_SplashingConeScenario" shape="rect" coords="912,56,1130,80"/>
-<area href="classSWE__SplashingPoolScenario.html" alt="SWE_SplashingPoolScenario" shape="rect" coords="1140,56,1358,80"/>
+<area href="classSWE__ArtificialTsunamiScenario.html" alt="SWE_ArtificialTsunamiScenario" shape="rect" coords="228,56,446,80"/>
+<area href="classSWE__AsagiScenario.html" alt="SWE_AsagiScenario" shape="rect" coords="228,112,446,136"/>
+<area href="classSWE__BathymetryDamBreakScenario.html" alt="SWE_BathymetryDamBreakScenario" shape="rect" coords="228,168,446,192"/>
+<area href="classSWE__CheckpointScenario.html" alt="SWE_CheckpointScenario" shape="rect" coords="228,224,446,248"/>
+<area href="classSWE__ObstacleDamBreakScenario.html" alt="SWE_ObstacleDamBreakScenario" shape="rect" coords="228,280,446,304"/>
+<area href="classSWE__RadialDamBreakScenario.html" alt="SWE_RadialDamBreakScenario" shape="rect" coords="228,336,446,360"/>
+<area href="classSWE__SeaAtRestScenario.html" alt="SWE_SeaAtRestScenario" shape="rect" coords="228,392,446,416"/>
+<area href="classSWE__SplashingConeScenario.html" alt="SWE_SplashingConeScenario" shape="rect" coords="228,448,446,472"/>
+<area href="classSWE__SplashingPoolScenario.html" alt="SWE_SplashingPoolScenario" shape="rect" coords="228,504,446,528"/>
+<area href="classSWE__TsunamiScenario.html" alt="SWE_TsunamiScenario" shape="rect" coords="228,560,446,584"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a8b7fa4a4a64128d4f37330bb1ff6b26a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b7fa4a4a64128d4f37330bb1ff6b26a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SWE_Scenario</b> (int x, int y, <a class="el" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> bounds=WALL)</td></tr>
+<tr class="separator:a8b7fa4a4a64128d4f37330bb1ff6b26a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade6f356d60b1402c034611266462b88b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade6f356d60b1402c034611266462b88b"></a>
 virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>getWaterHeight</b> (float x, float y)</td></tr>
 <tr class="separator:ade6f356d60b1402c034611266462b88b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,18 +128,45 @@ virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>getVeloc_v</
 <tr class="memitem:afe09a1ba63304800651f25873570a348"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe09a1ba63304800651f25873570a348"></a>
 virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>getBathymetry</b> (float x, float y)</td></tr>
 <tr class="separator:afe09a1ba63304800651f25873570a348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86f33e15398c7e3de715c4d80e719e7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86f33e15398c7e3de715c4d80e719e7e"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>getCellsX</b> ()</td></tr>
+<tr class="separator:a86f33e15398c7e3de715c4d80e719e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf002b0277bff080b82583b6012c2632"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf002b0277bff080b82583b6012c2632"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>getCellsY</b> ()</td></tr>
+<tr class="separator:abf002b0277bff080b82583b6012c2632"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9de0f0f9fcc34dfe00c522b10c343d91"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9de0f0f9fcc34dfe00c522b10c343d91"></a>
 virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>waterHeightAtRest</b> ()</td></tr>
 <tr class="separator:a9de0f0f9fcc34dfe00c522b10c343d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c4d192d17691191acdde72170d53b7f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c4d192d17691191acdde72170d53b7f"></a>
+virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>getLastTime</b> ()</td></tr>
+<tr class="separator:a7c4d192d17691191acdde72170d53b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7ed72f584069e9885c33c4ca83f3ff5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7ed72f584069e9885c33c4ca83f3ff5"></a>
 virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>endSimulation</b> ()</td></tr>
 <tr class="separator:ae7ed72f584069e9885c33c4ca83f3ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c36b8d2bc8d1fc42af68309f958817a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c36b8d2bc8d1fc42af68309f958817a"></a>
+virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getCheckpointCount</b> ()</td></tr>
+<tr class="separator:a0c36b8d2bc8d1fc42af68309f958817a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8fe7ce15d7758fb0c4e0e3887b34a5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab8fe7ce15d7758fb0c4e0e3887b34a5d"></a>
 virtual <a class="el" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getBoundaryType</b> (<a class="el" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge)</td></tr>
 <tr class="separator:ab8fe7ce15d7758fb0c4e0e3887b34a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef7a53a5d791bee0545488735381c6a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef7a53a5d791bee0545488735381c6a2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setBoundaryTypes</b> (<a class="el" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> type)</td></tr>
+<tr class="separator:aef7a53a5d791bee0545488735381c6a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b01e953c2079b64f527c9bc5a0c86d7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b01e953c2079b64f527c9bc5a0c86d7"></a>
 virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>getBoundaryPos</b> (<a class="el" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge)</td></tr>
 <tr class="separator:a1b01e953c2079b64f527c9bc5a0c86d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:abe1a2cbf009889f9330091b9d28833f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe1a2cbf009889f9330091b9d28833f0"></a>
+<a class="el" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boundType</b></td></tr>
+<tr class="separator:abe1a2cbf009889f9330091b9d28833f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa6dda8b7b69dc1514b26b8de5fa321b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa6dda8b7b69dc1514b26b8de5fa321b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>cells_x</b></td></tr>
+<tr class="separator:afa6dda8b7b69dc1514b26b8de5fa321b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cd13fca6b6ab5290426b55b5dd755ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4cd13fca6b6ab5290426b55b5dd755ff"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>cells_y</b></td></tr>
+<tr class="separator:a4cd13fca6b6ab5290426b55b5dd755ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classSWE__Scenario.html">SWE_Scenario</a> defines an interface to initialise the unknowns of a shallow water simulation - i.e. to initialise water height, velocities, and bathymatry according to certain scenarios. <a class="el" href="classSWE__Scenario.html">SWE_Scenario</a> can act as stand-alone scenario class, providing a very basic scenario (all functions are constant); however, the idea is to provide derived classes that implement the <a class="el" href="classSWE__Scenario.html">SWE_Scenario</a> interface for more interesting scenarios. </p>
@@ -141,7 +176,7 @@ virtual float&#160;</td><td class="memItemRight" valign="bottom"><b>getBoundaryP
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2014 23:47:57 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

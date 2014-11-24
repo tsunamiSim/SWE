@@ -9,3 +9,11 @@ build/SWE_*
 .project
 .cproject
 .pydevproject
+
+*.cdl
+*.nc.*
+
+SCENARIO_*
+
+SWE_00.nc
+SWE_checkpoints.nc

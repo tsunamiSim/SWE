@@ -22,7 +22,7 @@
  *
  * @section DESCRIPTION
  *
- * loads NetCDF-Defined Scenario
+ * loads NetCDF-Defined crashed Scenario
  */
 #ifndef __SWE_CHECKPOINT_SCENARIO_H
 #define __SWE_CHECKPOINT_SCENARIO_H
@@ -42,6 +42,13 @@ class SWE_CheckpointScenario : public SWE_Scenario {
   int  boundTop, boundBot, boundLeft, boundRight, boundary;
   size_t time;
   
+  /**
+   * Looks up the closest value's index in a given array
+   * @param searchFor Reference value
+   * @param max The length of the array to search in
+   * @param searchIn The array to search in
+   * @param best The index of the closest element in the array
+   */
   void lookUp(float searchFor, int max, float* searchIn, int* best){
 		float disBest = abs(searchFor-searchIn[0]);
 		*best = 0;		
@@ -55,6 +62,9 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		} 
 	};
   
+  /**
+   * Reads the file at the relative location "SWE_checkpoints.nc"
+   */
   void readNcFile(){
 		int retval, ncid, dim, countVar,
 		    y_id,x_id,b_id,hu_id,hv_id, h_id, bound_id, bU_id, bD_id, bR_id, bL_id, eos_id, time_id;
@@ -151,13 +161,16 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		hv = new Float2D(init_xlen, init_ylen, initHv);
 		h = new Float2D(init_xlen, init_ylen, initH);
 		
-#ifndef NDBUG
+#ifndef NDEBUG
 		tools::Logger::logger.printString("File read");
 #endif
   };
 
 public:
 
+  /**
+   * Creates a new instance of the SWE_CheckpointScenario class
+   */
   SWE_CheckpointScenario() : SWE_Scenario(0, 0){
 	tools::Logger::logger.printString("Starting to read");
 	readNcFile();
@@ -176,10 +189,21 @@ public:
 	tools::Logger::logger.printString(toString("Set boundaries to: left, right, top, bottom: ") + toString(boundLeft) + comma + toString(boundRight) + comma + toString(boundTop) + comma + toString(boundBot));
   };
   
+  /**
+   * Returns the amount of checkpoints
+   */
   size_t getCheckpointCount(){ return time; }
 
+  /**
+   * Returns the time, at which the last simulation crashed
+   */
   float getLastTime() { return startingTime; };
-  
+
+  /**
+   * The bathymetry at a requested location
+   * @param x The x-Value of the location
+   * @param y The y-Value of the location
+   */
   float getBathymetry(float x, float y) {
 	int bestX, bestY;
 	lookUp(y, bathymetry->getRows(), initY, &bestY);
@@ -187,6 +211,11 @@ public:
 	return (*bathymetry)[bestY][bestX];
   };
 
+  /**
+   * The water height at a requested location
+   * @param x The x-Value of the location
+   * @param y The y-Value of the location
+   */
   float getWaterHeight(float x, float y) { 
 	int bestX, bestY;
 	lookUp(y, h->getRows(), initY, &bestY);
@@ -194,6 +223,11 @@ public:
 	return (*h)[bestY][bestX];
   };
   
+  /**
+   * The velocity (not momentum!) at a requested location in u direction
+   * @param x The x-Value of the location
+   * @param y The y-Value of the location
+   */
   float getVeloc_u(float x, float y){
     int bestX, bestY;
 	lookUp(y, hu->getRows(), initY, &bestY);
@@ -201,6 +235,11 @@ public:
 	return (*hu)[bestY][bestX] / (*h)[bestY][bestX];
   };
   
+  /**
+   * The velocity (not momentum!) at a requested location in v direction
+   * @param x The x-Value of the location
+   * @param y The y-Value of the location
+   */
   float getVeloc_v(float x, float y){
     int bestX, bestY;
 	lookUp(y, hv->getRows(), initY, &bestY);
@@ -208,6 +247,9 @@ public:
 	return (*hv)[bestY][bestX] / (*h)[bestY][bestX];
   };  
   
+  /**
+   * Sets the boundaries
+   */
   void getBoundaries(float* u, float* d, float* r, float* l){
     *u= initBt;
     *d= initBb;
@@ -224,7 +266,7 @@ public:
 				tmp = initBl; break;
 			case BND_RIGHT:
 				tmp = initBr; break;
-			case BND_TOP:
+			case BND_TOP:	
 				tmp = initBt; break;
 			case BND_BOTTOM:
 				tmp = initBb; break;
