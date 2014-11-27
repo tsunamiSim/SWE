@@ -4,6 +4,9 @@
 #include <cstdlib>
 #include <cmath>
 
+#ifndef SOLVER_FWAVE_H_
+#define SOLVER_FWAVE_H_
+
 using namespace std;
 
 namespace solver { 
@@ -182,4 +185,4 @@ public:
 };
 }
 
-
+#endif

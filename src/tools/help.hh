@@ -304,7 +304,7 @@ public:
 			}
 #ifndef NDEBUG // temp must not be NaN (NaN comparison ALWAYS is false)
 		if(temp != temp)
-			print(array, legnth);
+			print(array, length);
 #else
 		assert(temp == temp);
 #endif
@@ -331,7 +331,7 @@ public:
 			}
 #ifndef NDEBUG // temp must not be NaN (NaN comparison ALWAYS is false)
 		if(temp != temp)
-			print(array, legnth);
+			print(array, length);
 #else
 		assert(temp == temp);
 #endif

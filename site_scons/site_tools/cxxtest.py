@@ -280,6 +280,7 @@ def generate(env, **kwargs):
     env.AppendUnique( CXXTEST_CPPPATH = [findCxxTestHeaders(env)]  )
     
     cxxtest = env['CXXTEST']
+	
     if cxxtest:
         #
         # Create the Builder (only if we have a valid cxxtestgen!)

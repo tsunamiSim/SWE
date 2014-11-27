@@ -1,6 +1,7 @@
 build/build_SWE_*
-build/SWE_*
+build/*
 
+*.o
 *.pyc
 .sconsign.dblite
 *~

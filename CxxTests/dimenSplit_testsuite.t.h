@@ -1,6 +1,6 @@
 #include <cxxtest/TestSuite.h>
-#include "./../src/solvers/FWave.hpp"
-#include "./../src/blocks/SWE_DimensionalSplitting"
+#include "solvers/FWave.hpp"
+#include "blocks/SWE_DimensionalSplitting.hpp"
 
 class DimenSplitTest : public CxxTest::TestSuite
 {
@@ -10,7 +10,9 @@ private:
 
 public:
 	
-
+	void testAddition() {
+		TS_ASSERT(1 + 1 > 1);
+	}
 
 
 };
