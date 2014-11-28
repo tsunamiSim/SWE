@@ -64,12 +64,13 @@ public:
 	*/
 	FWave()
 	{
-	gravity = 9.81;
+	    gravity = 9.81f;
+	    m_useOutflow = false;
 	}
 
 	FWave(bool useOutflow)
 	{
-		gravity = 9.81;
+		gravity = 9.81f;
 		m_useOutflow = useOutflow;
 	}
 
@@ -109,7 +110,7 @@ public:
 	if(!m_useOutflow)
 	{
 		if(h_l == 0) 
-		{
+		{   
 			h_l = h_r;
 			hu_l = -hu_r;
 			b_l = b_r;
@@ -160,23 +161,34 @@ public:
 		}
 	else if(lambda_roe1 >= 0 && lambda_roe2 >= 0)
 		{
-		o_hu_l = 0.0;
+		o_hu_l = 0.0f;
 		o_hu_r = lambda_roe1 * eigen_coeff1 + lambda_roe2 * eigen_coeff2;
 		o_h_r = eigen_coeff1 + eigen_coeff2;
-		o_h_l = 0.0;
+		o_h_l = 0.0f;
 		}
 	else if(lambda_roe1 <= 0 && lambda_roe2 <= 0)
 		{
-		o_hu_r = 0.0;
+		o_hu_r = 0.0f;
 		o_hu_l = lambda_roe1 * eigen_coeff1 + lambda_roe2 * eigen_coeff2;	
 		o_h_l = eigen_coeff1 + eigen_coeff2;
-		o_h_r = 0.0;
+		o_h_r = 0.0f;
 		}
 	else
 	{
-	
 		assert(0);
 	}
+	
+	/*dry states should stay dry ????
+	if(i_h_l = 0){
+	    if(o_h_l != 0)cout << "l" ;
+	    o_hu_l = 0;
+	    o_h_l = 0;
+	}if(i_h_r = 0){
+	    if(o_h_r != 0)cout << "r" ;
+	    o_hu_r = 0;
+	    o_h_r = 0;
+	}*/
+	    
 
 	// set the maximum wavespeed
 	o_max_ws = max(abs(lambda_roe1), abs(lambda_roe2));

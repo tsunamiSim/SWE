@@ -180,21 +180,25 @@ public:
    */
   float getBathymetry(float x, float y) {
 	int bestXBath, bestYBath;
+	float result;
 	lookUp(y, bathymetry->getCols(), bathY, &bestYBath);
 	lookUp(x, bathymetry->getRows(), bathX, &bestXBath);
-	if(x < disLeft || x > disRight || y < disBot || y > disTop)
-		return (*bathymetry)[bestYBath][bestXBath];
-
+	if(x < disLeft || x > disRight || y < disBot || y > disTop){
+		result = (*bathymetry)[bestYBath][bestXBath];
+	}
+    else{
 	int bestXDis, bestYDis;
 	lookUp(y, displacement->getCols(), disX, &bestYDis);
 	lookUp(x, displacement->getRows(), disY, &bestXDis);
 
-	float result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
-	if(result < 0 && result > -20)
+	result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
+	}
+	if(result < 0.f && result > -20.f)
 		return -20.f;
-	else if(result > 0 && result < 20)
+	else if(result > 0.f && result < 20.f)
 		return 20.f;
-	return result;
+	else 
+	    return result;
   };
 
   /**
@@ -206,16 +210,16 @@ public:
 	int bestX, bestY;
 	lookUp(y, bathymetry->getCols(), bathY, &bestY);
 	lookUp(x, bathymetry->getRows(), bathX, &bestX);
-	if((*bathymetry)[bestY][bestX] < 0)
+	if((*bathymetry)[bestY][bestX] < 0.f)
 		return -(*bathymetry)[bestY][bestX];
 	else
-		return 0;
+		return 0.f;
   };
 
   /**
    * Returns the time of the end of the simulation
    */
-  virtual float endSimulation() { return (float) 100; };
+  virtual float endSimulation() { return 100.f; };
 
   /** Get the boundary positions
    *
