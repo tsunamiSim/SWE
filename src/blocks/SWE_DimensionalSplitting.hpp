@@ -98,6 +98,10 @@ public :
 		hvNetUpdatesBelow (l_nx, l_ny + 1),
 		hvNetUpdatesAbove (l_nx, l_ny + 1)
 {
+	assert(l_nx > 0);
+	assert(l_ny > 0);
+	assert(l_dx > 0);
+	assert(l_dy > 0);
 }
 	
 	/**
