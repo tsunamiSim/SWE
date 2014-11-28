@@ -63,9 +63,9 @@ int main(int argc, char** argv){
 		l_nx = args.getArgument<int>("size_x");
 		l_ny = args.getArgument<int>("size_y");	
 		l_scenario = new SWE_TsunamiScenario(l_nx, l_ny);
-		tools::Logger::logger.printString(toString("Read cell domain from command line: (x, y) = ") + toString(l_nx) + toString(", ") + toString(l_ny));
+		tools::Logger::logger.printString(toString("Read cell domain from command line: (x, y) = ") + toString(l_nx) + toString(", ") + toString(l_ny));	
 	}
-
+   
 	BoundaryType boundTypes[2];
 	boundTypes[0] = WALL;
 	boundTypes[1] = OUTFLOW;
@@ -197,7 +197,8 @@ int main(int argc, char** argv){
 	tools::Logger::logger.printString(toString("Start Time: ") + toString(l_time));
 #endif
 	std::string time = "Time: ";
-int ix = 0;
+int ix = 0; 
+
 	// Loop over timesteps
 	while(l_time < l_endOfSimulation)
 	{
@@ -209,7 +210,7 @@ int ix = 0;
 	
 		// increment time
 		l_time += l_dimensionalSplitting.getMaxTimestep();
-if(ix++ % 10 == 0)
+//if(ix++ % 10 == 0)
 		// write timestep
 		l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
                 	l_dimensionalSplitting.getDischarge_hu(),
@@ -221,6 +222,22 @@ if(ix++ % 10 == 0)
 		// write time to console
 		tools::Logger::logger.printString(time + buff.str());
 
+ //'DEBUG 
+/*
+        int c = 0, d=0;        
+        const Float2D *b = &(l_dimensionalSplitting.getBathymetry()), *h = &(l_dimensionalSplitting.getWaterHeight());
+        for(int i = 0; i < b->getRows(); i++){
+            for(int j = 0; j < b->getRows(); j++){
+                if((*h)[j][i] > 0.f && (*b)[j][i] > 0.f) {
+                c++;
+                cout << i << " " << j << "\n";
+                }
+                if((*bi)[j][i] != (*b)[j][i] ) d++;
+            }
+        }
+         cout << c << "dry cells went wet\n" << d << "\n" ;        
+*/
+        
 #ifdef WRITENETCDF	
 		if(++l_cpCounter % l_timeStepsPerCheckpoint == 0)
 			l_checkpointWriter.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),

@@ -184,12 +184,19 @@ public :
 		{
 			for(unsigned int x = 1; x < nx+1; x++)
 			{
-				h[x][y] -= dt / dx * (hNetUpdatesRight[x - 1][y - 1] + hNetUpdatesLeft[x][y - 1]) + 
-						dt / dy * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
-				hu[x][y] -= dt / dx * (huNetUpdatesRight[x - 1][y - 1] + huNetUpdatesLeft[x][y - 1]);
-				hv[x][y] -= dt / dy * (hvNetUpdatesAbove[x - 1][y - 1] + hvNetUpdatesBelow[x - 1][y]);
-				// wet states should stay wet
-				assert(h[x][y] > 0);
+				h[x][y] -= (dt / dx) * (hNetUpdatesRight[x - 1][y - 1] + hNetUpdatesLeft[x][y - 1]) + 
+						(dt / dy) * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
+				hu[x][y] -= (dt / dx) * (huNetUpdatesRight[x - 1][y - 1] + huNetUpdatesLeft[x][y - 1]);
+				hv[x][y] -= (dt / dy) * (hvNetUpdatesAbove[x - 1][y - 1] + hvNetUpdatesBelow[x - 1][y]);
+				// dry states should stay dry
+				if(b[x][y] > 0 && h[x][y] > 0){
+				    h[x][y] = 0;
+				    hu[x][y] = 0;
+				    hv[x][y] = 0;
+				    if(hNetUpdatesRight[x - 1][y - 1] != 0 ||  hNetUpdatesLeft[x][y - 1] != 0 || hNetUpdatesAbove[x - 1][y - 1] != 0 || hNetUpdatesBelow[x - 1][y] != 0){
+				        //cout << x << " " <<y << " " <<hNetUpdatesRight[x - 1][y - 1] << " " <<hNetUpdatesLeft[x][y - 1] << " " <<hNetUpdatesAbove[x - 1][y - 1] << " " <<hNetUpdatesBelow[x - 1][y]<<"DimenSplit\n" ;
+				    }
+				} 
 			}
 		}
 	}
