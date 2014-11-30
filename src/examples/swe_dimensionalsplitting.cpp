@@ -221,6 +221,7 @@ int ix = 0;
     		buff << l_time;
 		// write time to console
 		tools::Logger::logger.printString(time + buff.str());        
+
         
 #ifdef WRITENETCDF	
 		if(++l_cpCounter % l_timeStepsPerCheckpoint == 0)

@@ -36,7 +36,7 @@
  * loads a checkkpoint of a simulation from a NC File    
  */
 class SWE_CheckpointScenario : public SWE_Scenario {
-  private: 
+  public:
   Float2D *bathymetry, *hu, *hv, *h;
   float endOfSimulation, *initX, *initY, initBt, initBb, initBr, initBl, startingTime;
   int  boundTop, boundBot, boundLeft, boundRight, boundary;
@@ -53,8 +53,7 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		float disBest = abs(searchFor-searchIn[0]);
 		*best = 0;		
 		for(int i = 1; i < max; i++){
-			int dis = abs(searchFor-searchIn[i]);
-			//cout << best << " " ;
+			float dis = abs(searchFor-searchIn[i]);
 			if(disBest > dis) {
 				disBest = dis;
 				*best = i;
@@ -65,13 +64,13 @@ class SWE_CheckpointScenario : public SWE_Scenario {
   /**
    * Reads the file at the relative location "SWE_checkpoints.nc"
    */
-  void readNcFile(){
+  void readNcFile(const char *file){
 		int retval, ncid, dim, countVar,
 		    y_id,x_id,b_id,hu_id,hv_id, h_id, bound_id, bU_id, bD_id, bR_id, bL_id, eos_id, time_id;
 		float *initB, *initHu, *initHv, *initH;      
 		size_t init_ylen, init_xlen;
 
-		if(retval = nc_open("SWE_checkpoints.nc", NC_NOWRITE, &ncid)) ERR(retval);
+		if(retval = nc_open(file, NC_NOWRITE, &ncid)) ERR(retval);
 
 		if(retval = nc_inq(ncid, &dim, &countVar, NULL, NULL)) ERR(retval);
 		assert(dim == 3); 
@@ -112,7 +111,6 @@ class SWE_CheckpointScenario : public SWE_Scenario {
 		initH = new float[init_ylen * init_xlen];
 		initY = new float[init_ylen];
 		initX = new float[init_xlen];
-		cout << "Timesteps found: " << time << endl;
 		size_t start[3] = { time - 1, 0, 0 }, length[3] = { 1, init_xlen, init_ylen }; 
 
 		if(retval = nc_get_var_float(ncid, b_id, initB)) ERRM(retval, "get b values");
@@ -171,9 +169,9 @@ public:
   /**
    * Creates a new instance of the SWE_CheckpointScenario class
    */
-  SWE_CheckpointScenario() : SWE_Scenario(0, 0){
+  SWE_CheckpointScenario(const char *filename = "SWE_checkpoints.nc") : SWE_Scenario(0, 0){
 	tools::Logger::logger.printString("Starting to read");
-	readNcFile();
+	readNcFile(filename);
 	tools::Logger::logger.printString("Reading finished");
 	
 	//TODO check if necessary
@@ -232,7 +230,11 @@ public:
     int bestX, bestY;
 	lookUp(y, hu->getRows(), initY, &bestY);
 	lookUp(x, hu->getCols(), initX, &bestX);
-	return (*hu)[bestY][bestX] / (*h)[bestY][bestX];
+	float result = (*hu)[bestY][bestX] / (*h)[bestY][bestX];
+	if(result != result)
+		return 0;
+	else
+		return result;
   };
   
   /**
@@ -244,7 +246,11 @@ public:
     int bestX, bestY;
 	lookUp(y, hv->getRows(), initY, &bestY);
 	lookUp(x, hv->getCols(), initX, &bestX);
-	return (*hv)[bestY][bestX] / (*h)[bestY][bestX];
+	float result = (*hv)[bestY][bestX] / (*h)[bestY][bestX];
+	if(result != result)
+		return 0;
+	else
+		return result;
   };  
   
   /**

@@ -39,7 +39,8 @@
  */
 class SWE_TsunamiScenario : public SWE_Scenario {
 
-  private:
+public:
+
   Float2D *bathymetry, *displacement;
   float *bathX, *bathY, *disX, *disY;
   float disTop, disBot, disLeft, disRight;
@@ -52,12 +53,10 @@ class SWE_TsunamiScenario : public SWE_Scenario {
    * @param best The index of the closest element in the array
    */
   void lookUp(float searchFor, int max, float* searchIn, int* best){
-
-		int disBest = abs(searchFor-searchIn[0]);
+		float disBest = abs(searchFor-searchIn[0]);
 		*best = 0;		
 		for(int i = 1; i < max; i++){
-			int dis = abs(searchFor-searchIn[i]);
-			//cout << best << " " ;
+			float dis = abs(searchFor-searchIn[i]);
 			if(disBest > dis) {
 				disBest = dis;
 				*best = i;
@@ -152,11 +151,11 @@ public:
    * @param cellsX Cells in x dimension
    * @param cellsY Cells in y dimension
    */
-  SWE_TsunamiScenario(int cellsX, int cellsY) : SWE_Scenario(cellsX, cellsY, OUTFLOW) {
+  SWE_TsunamiScenario(int cellsX, int cellsY, const char *bathymetryFile = "NetCDF_Input/initBathymetry.nc", const char *displacementFile = "NetCDF_Input/displacement.nc") : SWE_Scenario(cellsX, cellsY, OUTFLOW) {
 	tools::Logger::logger.printLine();
-	readNcFile("NetCDF_Input/initBathymetry.nc", &bathymetry, &bathY, &bathX);
+	readNcFile(bathymetryFile, &bathymetry, &bathY, &bathX);
 	tools::Logger::logger.printString(toString("Succesfully read bathymetry. Rows: ") + toString(bathymetry->getRows()) + toString(", Cols: ") + toString(bathymetry->getCols()));
-	readNcFile("NetCDF_Input/displacement.nc", &displacement, &disY, &disX);   
+	readNcFile(displacementFile, &displacement, &disY, &disX);   
 	tools::Logger::logger.printString("Succesfully read displacement. Rows: " + toString(displacement->getRows()) + toString(", Cols: ") + toString(displacement->getCols()));
 	tools::Logger::logger.printString("Setting displacement boundaries");
 	disTop = Array::max(disY, displacement->getCols());
@@ -172,6 +171,8 @@ public:
 	tools::Logger::logger.printString(toString("Bathymetry boundaries set to: top, bot, left, right (divided by 1000)") + toString(boundTop/1000) + comma + toString(boundBot/1000) + comma + toString(boundLeft/1000) + comma + toString(boundRight));
 	tools::Logger::logger.printLine();
   };
+  /** Dummy constructor for cxx tests only */
+  SWE_TsunamiScenario() : SWE_Scenario(0, 0, OUTFLOW) { }
 
   /**
    * The bathymetry at a requested location
@@ -186,12 +187,12 @@ public:
 	if(x < disLeft || x > disRight || y < disBot || y > disTop){
 		result = (*bathymetry)[bestYBath][bestXBath];
 	}
-    else{
-	int bestXDis, bestYDis;
-	lookUp(y, displacement->getCols(), disX, &bestYDis);
-	lookUp(x, displacement->getRows(), disY, &bestXDis);
+	else{
+		int bestXDis, bestYDis;
+		lookUp(y, displacement->getCols(), disX, &bestYDis);
+		lookUp(x, displacement->getRows(), disY, &bestXDis);
 
-	result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
+		result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
 	}
 	if(result < 0.f && result > -20.f)
 		return -20.f;
@@ -210,8 +211,10 @@ public:
 	int bestX, bestY;
 	lookUp(y, bathymetry->getCols(), bathY, &bestY);
 	lookUp(x, bathymetry->getRows(), bathX, &bestX);
-	if((*bathymetry)[bestY][bestX] < 0.f)
+	if((*bathymetry)[bestY][bestX] < -20)
 		return -(*bathymetry)[bestY][bestX];
+	else if((*bathymetry)[bestY][bestX] < 0)
+		return 20;
 	else
 		return 0.f;
   };
