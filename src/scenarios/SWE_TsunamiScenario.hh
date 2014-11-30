@@ -123,22 +123,23 @@ void readNcFile(const char* fileDir, Float2D** buffZ, float** buffY, float** buf
 		*buffY = initY;
 		*buffX = initX;
 
+#ifndef NDEBUG
 		for(int i = 0; i < bathymetry->getRows(); i++){
 		   assert(initX[i] == (*buffX)[i]);
 		}
 		for(int i = 0; i < bathymetry->getCols(); i++){
 		   assert(initY[i] == (*buffY)[i]);
 		}
-		int rows = bathymetry->getRows();
+		int rows = (*buffZ)->getRows(), cols = (*buffZ)->getCols();
 		float a, b;
 		for(int i = 0; i < rows; i++){
-		   for(int j = 0; j < bathymetry->getCols(); j++){
-			a = initZ[j + i * rows];
-			b = *(*buffZ)[j][i];
+		   for(int j = 0; j < cols; j++){
+			a = initZ[j * rows + i];
+			b = (**buffZ)[j][i];
 		    	assert(a == b);
 		    }
 		}
-#ifndef NDEBUG
+		
 		tools::Logger::logger.printString("File read");
 #endif
   };
