@@ -178,17 +178,14 @@ public:
 		assert(0);
 	}
 	
-	/*dry states should stay dry ????
-	if(i_h_l = 0){
-	    if(o_h_l != 0)cout << "l" ;
+	//dry states should stay dry
+	if(i_h_l == 0){
 	    o_hu_l = 0;
 	    o_h_l = 0;
-	}if(i_h_r = 0){
-	    if(o_h_r != 0)cout << "r" ;
+	}if(i_h_r == 0){
 	    o_hu_r = 0;
 	    o_h_r = 0;
-	}*/
-	    
+	}  
 
 	// set the maximum wavespeed
 	o_max_ws = max(abs(lambda_roe1), abs(lambda_roe2));

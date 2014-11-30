@@ -220,22 +220,7 @@ int ix = 0;
  		std::ostringstream buff;
     		buff << l_time;
 		// write time to console
-		tools::Logger::logger.printString(time + buff.str());
-
- //'DEBUG 
-        int c = 0, d=0;        
-        const Float2D *b = &(l_dimensionalSplitting.getBathymetry()), *h = &(l_dimensionalSplitting.getWaterHeight());
-        for(int i = 0; i < b->getRows(); i++){
-            for(int j = 0; j < b->getRows(); j++){
-                if((*h)[j][i] > 0.f && (*b)[j][i] > 0.f) {
-                c++;
-                cout << i << " " << j << "\n";
-                }
-                if((*bi)[j][i] != (*b)[j][i] ) d++;
-            }
-        }
-         cout << c << "dry cells went wet\n" << d << "\n" ;        
-        
+		tools::Logger::logger.printString(time + buff.str());        
         
 #ifdef WRITENETCDF	
 		if(++l_cpCounter % l_timeStepsPerCheckpoint == 0)

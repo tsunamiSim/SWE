@@ -118,7 +118,7 @@ class SWE_ArtificialTsunamiScenario : public SWE_Scenario {
 
     float getBathymetry(float x, float y) {
 	if(x < -500 || x > 500 || y < -500 || y > 500) return -100;       
-	float result = -100-5*sin((x/500 +1)*M_PI)*(y*y/250000 +1);
+	float result = -100+5*sin((x/500 +1)*M_PI)*(y*y/250000 +1);
 	if(result < 20 && result >= 0) result = 20;
 	if(result > -20 && result <= 0) result = -20;
 	return result;

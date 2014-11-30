@@ -57,7 +57,7 @@ public:
   float getBathymetry(float x, float y) {
 	if(x < -500 || x > 500 || y < -500 || y > 500)
 		return -100;
-	return - 5.f * sin( (x / 500.f + 1) * M_PI) * (y * y / 250000 + 1) - 100;
+	return  5.f * sin( (x / 500.f + 1) * M_PI) * (y * y / 250000 + 1) - 100;
   };
 
   /**
