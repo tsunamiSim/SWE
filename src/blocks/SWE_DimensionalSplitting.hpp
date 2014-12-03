@@ -141,7 +141,9 @@ public :
 			for(unsigned int x = 1; x < nx+1; x++)
 			{
 				h[x][y] -= (maxTimestep / dx) * (hNetUpdatesRight[x - 1][y - 1] + hNetUpdatesLeft[x][y - 1]); 
-				hu[x][y] -= (maxTimestep / dx) * (huNetUpdatesRight[x - 1][y - 1] + huNetUpdatesLeft[x][y - 1]);				
+				hu[x][y] -= (maxTimestep / dx) * (huNetUpdatesRight[x - 1][y - 1] + huNetUpdatesLeft[x][y - 1]);
+				if(h[x][y] < 0)
+				    h[x][y] = hu[x][y] = 0;				
 			}
 		}
 	
@@ -186,7 +188,8 @@ public :
 			{
 				h[x][y] -=	(maxTimestep / dy) * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
 				hv[x][y] -= (maxTimestep / dy) * (hvNetUpdatesAbove[x - 1][y - 1] + hvNetUpdatesBelow[x - 1][y]);
-				
+				if(h[x][y] < 0)
+				    h[x][y] = hv[x][y] = 0;
 			}
 		}
 	}

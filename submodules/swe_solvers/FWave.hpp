@@ -169,10 +169,9 @@ public:
     
 	// set the maximum wavespeed
 	o_max_ws = max(abs(lambda_roe1), abs(lambda_roe2));
-	if(o_max_ws != o_max_ws){
-	    o_max_ws = 0;
-	    cout << "falsch \n";
-	}
+	
+	assert(o_max_ws == o_max_ws);
+	
 	}
 
 };
