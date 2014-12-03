@@ -13,8 +13,8 @@ build/*
 
 *.cdl
 *.nc*
+!test*.nc
 
 SCENARIO_*
 
-SWE_00.nc
-SWE_checkpoints.nc
+*testsuite.cpp

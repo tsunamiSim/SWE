@@ -23,6 +23,7 @@ int main(int argc, char** argv){
 	args.addOption("use_checkpoint_file", 'r', "Use this option to continue a previously failing run", tools::Args::No, false);
 	args.addOption("end_of_simulation", 'e' , "Sets the end of the simulation", tools::Args::Required, false);
 	args.addOption("boundary_conditions", 'b', "Sets the boundary conditions, where 0 is Wall and 1 is Outflow", tools::Args::Required, false);
+	args.addOption("input_folder", 'i', "Folder containing the input nc files", tools::Args::Required, false);
 	
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
@@ -43,6 +44,8 @@ int main(int argc, char** argv){
 			return 1;
 		}
 	}
+
+	
 	
 	// Read simulation domain
 	int l_nx, l_ny; 
@@ -62,7 +65,14 @@ int main(int argc, char** argv){
 	{
 		l_nx = args.getArgument<int>("size_x");
 		l_ny = args.getArgument<int>("size_y");	
-		l_scenario = new SWE_TsunamiScenario(l_nx, l_ny);
+		if(args.isSet("input_folder")) {
+			std::string sfolder = args.getArgument<std::string>("input_folder");
+			std::string sbath = sfolder + (std::string) "/initBathymetry.nc", sdisp = sfolder + (std::string) "/displacement.nc";
+			l_scenario = new SWE_TsunamiScenario(l_nx, l_ny, sbath.c_str(), sdisp.c_str());
+			
+		}
+		else
+			l_scenario = new SWE_TsunamiScenario(l_nx, l_ny);
 		tools::Logger::logger.printString(toString("Read cell domain from command line: (x, y) = ") + toString(l_nx) + toString(", ") + toString(l_ny));	
 	}
    
@@ -231,5 +241,6 @@ int ix = 0;
                         l_time);
 #endif
 	}
+	delete l_scenario;
 	return 0;
 }
