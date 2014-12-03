@@ -136,6 +136,7 @@ public :
 		// approximate timestep by slow down maxTimestep 
 		maxTimestep = 0.4 * dx / maxTimestep;
 		updateUnknowns(maxTimestep);
+		setGhostLayer();
 	
 #ifndef NDEBUG
 		float maxTimestepY = 0.f;

@@ -23,8 +23,6 @@ private:
 	h_l, hu_l, h_r, hu_r, gravity, lambda_inv,
 	b_l, b_r;
 
-	bool m_useOutflow;
-
 	// computes the flux-function --> results in delta_f(1/2)
 	void _delta_flux()
 	{
@@ -65,13 +63,6 @@ public:
 	FWave()
 	{
 	    gravity = 9.81f;
-	    m_useOutflow = false;
-	}
-
-	FWave(bool useOutflow)
-	{
-		gravity = 9.81f;
-		m_useOutflow = useOutflow;
 	}
 
 
@@ -94,7 +85,14 @@ public:
 	void computeNetUpdates(T i_h_l, T i_h_r, T i_hu_l, T i_hu_r, T i_b_l, T i_b_r,
 			T& o_h_l, T& o_h_r, T& o_hu_l, T& o_hu_r, T& o_max_ws)
 	{
-	
+	if(i_h_l == 0 && i_h_r == 0){
+	    o_h_l == i_h_l;
+	    o_h_r == i_h_r;
+	    o_hu_l == i_hu_l;
+	    o_hu_r == i_hu_r;
+	    o_max_ws = 0;
+	    return;
+	}
 	assert(i_h_l > 0 || i_h_r > 0);
 
 	h_l = i_h_l;
@@ -106,36 +104,18 @@ public:
 
 //	cout << "computeNetUpdates call with i_h_l: " << h_l << ", i_h_r: " << h_r << ", i_hu_l: " << hu_l << ", i_hu_r: " << hu_r << ", i_b_l: " << b_l << ", i_b_r: " << b_r << std::endl;
 	
-	// Boundary condidtions: if the left cell is the left boundary cell, give it negative momentum of the right one and the same bathymetry and height
-	if(!m_useOutflow)
-	{
-		if(h_l == 0) 
-		{   
+	// Boundary condidtions: if the left cell is the left boundary cell, give it negative momentum of the right one and the same bathymetry and height	
+	if(h_l == 0) 
+	{   
 			h_l = h_r;
 			hu_l = -hu_r;
 			b_l = b_r;
-		}else if(h_r == 0) 
+	}else if(h_r == 0) 
 		// Else if the right cell is the right boundary cell, do the same the other way around
-		{
+	{
 			h_r = h_l;
 			hu_r = -hu_l;
 			b_r = b_l;
-		}
-	}
-	else
-	{
-		if(h_l == 0)
-		{
-			h_l = h_r;
-			hu_l = hu_r;
-			b_l = b_r;
-		}
-		else if(h_r == 0)
-		{
-			h_r = h_l;
-			hu_r = hu_l;
-			b_r = b_l;
-		}
 	}
 	
 	// compute the FWave-solution 
@@ -185,10 +165,13 @@ public:
 	}if(i_h_r == 0){
 	    o_hu_r = 0;
 	    o_h_r = 0;
-	}  
-
+	}    
+    
 	// set the maximum wavespeed
 	o_max_ws = max(abs(lambda_roe1), abs(lambda_roe2));
+	if(o_max_ws != o_max_ws){
+	    cout << "falsch \n";
+	}
 	}
 
 };
