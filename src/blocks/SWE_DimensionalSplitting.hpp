@@ -128,15 +128,22 @@ public :
 		}
 		
 		// set vertical updates to zero (for updateUnknowns necessarry)
-		setZero(hNetUpdatesBelow, nx, ny + 1);
-		setZero(hNetUpdatesAbove, nx, ny + 1);
-		setZero(hvNetUpdatesAbove, nx, ny + 1);
-		setZero(hvNetUpdatesBelow, nx, ny + 1);
+		//setZero(hNetUpdatesBelow, nx, ny + 1);
+		//setZero(hNetUpdatesAbove, nx, ny + 1);
+		//setZero(hvNetUpdatesAbove, nx, ny + 1);
+		//setZero(hvNetUpdatesBelow, nx, ny + 1);
 		
 		// approximate timestep by slow down maxTimestep 
 		maxTimestep = 0.4 * dx / maxTimestep;
-		updateUnknowns(maxTimestep);
-		setGhostLayer();
+		//updateUnknowns(maxTimestep);
+		for(unsigned int y = 1; y < ny+1; y++)
+		{
+			for(unsigned int x = 1; x < nx+1; x++)
+			{
+				h[x][y] -= (maxTimestep / dx) * (hNetUpdatesRight[x - 1][y - 1] + hNetUpdatesLeft[x][y - 1]); 
+				hu[x][y] -= (maxTimestep / dx) * (huNetUpdatesRight[x - 1][y - 1] + huNetUpdatesLeft[x][y - 1]);				
+			}
+		}
 	
 #ifndef NDEBUG
 		float maxTimestepY = 0.f;
@@ -167,13 +174,21 @@ public :
 #endif //NDEBUG
 
 		// set horizontal updates to zero (for updateUnknowns necessarry)
-		setZero(hNetUpdatesLeft, nx + 1, ny);
-		setZero(hNetUpdatesRight, nx + 1, ny);
-		setZero(huNetUpdatesLeft, nx + 1, ny);
-		setZero(huNetUpdatesRight, nx + 1, ny);
+		//setZero(hNetUpdatesLeft, nx + 1, ny);
+		//setZero(hNetUpdatesRight, nx + 1, ny);
+		//setZero(huNetUpdatesLeft, nx + 1, ny);
+		//setZero(huNetUpdatesRight, nx + 1, ny);
 
-		updateUnknowns(maxTimestep);
-			
+		//updateUnknowns(maxTimestep);		
+		for(unsigned int y = 1; y < ny+1; y++)
+		{
+			for(unsigned int x = 1; x < nx+1; x++)
+			{
+				h[x][y] -=	(maxTimestep / dy) * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
+				hv[x][y] -= (maxTimestep / dy) * (hvNetUpdatesAbove[x - 1][y - 1] + hvNetUpdatesBelow[x - 1][y]);
+				
+			}
+		}
 	}
 
 	/**
@@ -181,16 +196,18 @@ public :
 	*/
 	void updateUnknowns(float dt)
 	{
-		for(unsigned int y = 1; y < ny+1; y++)
+	    cout << "\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!Warning!!!: dont use updateUnknowns() in SWE_DimensionalSplitting.hpp, cumputeNumericalFluxes() already does the netupdate\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+		/*for(unsigned int y = 1; y < ny; y++)
 		{
-			for(unsigned int x = 1; x < nx+1; x++)
+			for(unsigned int x = 1; x < nx; x++)
 			{
 				h[x][y] -= (dt / dx) * (hNetUpdatesRight[x - 1][y - 1] + hNetUpdatesLeft[x][y - 1]) + 
 						(dt / dy) * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
 				hu[x][y] -= (dt / dx) * (huNetUpdatesRight[x - 1][y - 1] + huNetUpdatesLeft[x][y - 1]);
 				hv[x][y] -= (dt / dy) * (hvNetUpdatesAbove[x - 1][y - 1] + hvNetUpdatesBelow[x - 1][y]);
+				
 			}
-		}
+		}*/
 	}
 };
 #endif

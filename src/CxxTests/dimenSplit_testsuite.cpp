@@ -19,7 +19,7 @@ int main( int argc, char *argv[] ) {
     return status;
 }
 bool suite_DimenSplitTest_init = false;
-#include "/home/sascha/Dokumente/Projects/TsunSim/SWE/src/CxxTests/dimenSplit_testsuite.t.h"
+#include "/home/ludwig/SWE/src/CxxTests/dimenSplit_testsuite.t.h"
 
 static DimenSplitTest suite_DimenSplitTest;
 

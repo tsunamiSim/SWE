@@ -181,7 +181,6 @@ public:
    * @param y The y-Value of the location
    */
   float getBathymetry(float x, float y) {
-    //return x < 100000 ? -20 : -20;
 	int bestXBath, bestYBath;
 	float result;
 	lookUp(y, bathymetry->getCols(), bathY, &bestYBath);
@@ -195,6 +194,7 @@ public:
 		lookUp(x, displacement->getRows(), disY, &bestXDis);
 
 		result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
+		//result = (*displacement)[bestYDis][bestXDis];
 	}
 	if(result < 0.f && result > -20.f)
 		return -20.f;
@@ -209,15 +209,14 @@ public:
    * @param x The x-Value of the location
    * @param y The y-Value of the location
    */
-  float getWaterHeight(float x, float y) { 
-	//return x < 0 ? 5 : (x < 100000 ? 2 : (x < 200000 ? 0 : 5));
+  float getWaterHeight(float x, float y) {
 	int bestX, bestY;
 	lookUp(y, bathymetry->getCols(), bathY, &bestY);
 	lookUp(x, bathymetry->getRows(), bathX, &bestX);
-	if((*bathymetry)[bestY][bestX] < -20)
+	if((*bathymetry)[bestY][bestX] < -20.f)
 		return -(*bathymetry)[bestY][bestX];
-	else if((*bathymetry)[bestY][bestX] < 0)
-		return 20;
+	else if((*bathymetry)[bestY][bestX] < 0.f)
+		return 20.f;
 	else
 		return 0.f;
   };
