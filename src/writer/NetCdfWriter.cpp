@@ -60,6 +60,7 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 		//const bool  &i_dynamicBathymetry) : //!TODO
   io::Writer(i_baseName + ".nc", i_b, i_boundarySize, i_nX, i_nY, contTimestep),
   flush(i_flush) {
+return;
 	int status;
 	if(contTimestep)
 	{
@@ -183,7 +184,7 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 		bool useCheckpoints) :
 	io::Writer(i_baseName + ".nc", i_b, i_boundarySize, i_nX, i_nY),
 	flush(i_flush) {
-
+return;
 	int retVal;
 
 	if(useCheckpoints)
@@ -311,6 +312,7 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
  * Destructor of a netCDF-writer.
  */
 io::NetCdfWriter::~NetCdfWriter() {
+return;
 	nc_close(dataFile);
 }
 
@@ -328,6 +330,7 @@ io::NetCdfWriter::~NetCdfWriter() {
  */
 void io::NetCdfWriter::writeVarTimeDependent( const Float2D &i_matrix,
                                               int i_ncVariable ) {
+return;
 	//write col wise, necessary to get rid of the boundary
 	//storage in Float2D is col wise
 	//read carefully, the dimensions are confusing
@@ -354,6 +357,7 @@ void io::NetCdfWriter::writeVarTimeDependent( const Float2D &i_matrix,
  */
 void io::NetCdfWriter::writeVarTimeIndependent( const Float2D &i_matrix,
                                                 int i_ncVariable ) {
+return;
 	//write col wise, necessary to get rid of the boundary
 	//storage in Float2D is col wise
 	//read carefully, the dimensions are confusing
@@ -384,7 +388,7 @@ void io::NetCdfWriter::writeTimeStep( const Float2D &i_h,
                                       const Float2D &i_hu,
                                       const Float2D &i_hv,
                                       float i_time) {
-
+	return;
 	/*
 	 * Prints the arrays
 	for(int row = 0; row < i_h.getRows(); row++)
