@@ -207,8 +207,7 @@ int main(int argc, char** argv){
 	tools::Logger::logger.printString(toString("Start Time: ") + toString(l_time));
 #endif
 	std::string time = "Time: ";
-int ix = 0; 
-
+int ix = 0;
 	// Loop over timesteps
 	while(l_time < l_endOfSimulation)
 	{
@@ -230,7 +229,7 @@ int ix = 0;
  		std::ostringstream buff;
     		buff << l_time;
 		// write time to console
-		tools::Logger::logger.printString(time + buff.str());        
+		//tools::Logger::logger.printString(time + buff.str());        
 
         
 #ifdef WRITENETCDF	
@@ -241,6 +240,8 @@ int ix = 0;
                         l_time);
 #endif
 	}
+
+	tools::Logger::logger.printString("End of simulation");
 	delete l_scenario;
 	return 0;
 }

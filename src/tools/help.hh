@@ -352,6 +352,51 @@ public:
 			cout << array[i] << ", ";
 		cout << endl;
 	}
+
+
+  	/**
+	 * Looks up the closest value's index in a given array
+	 * @param searchFor Reference value
+	 * @param max The length of the array to search in
+	 * @param searchIn The array to search in
+	 * @param best The index of the closest element in the array
+	 */
+	static void lookUp(float searchFor, int max, float* searchIn, int* best){
+		int min = 0;
+		max = max - 1;
+		int current;
+
+		while(max - min > 1)
+		{
+			current = (max + min) / 2;
+			if(searchIn[current] == searchFor) {
+				*best = current;
+				return;
+			} else if(searchIn[current] > searchFor)
+				max = current;
+			else
+				min = current;
+		}
+		if(searchIn[max] - searchFor < searchFor - searchIn[min])
+			*best = max;
+		else
+			*best = min; 
+
+		/* old implementation (way slower)
+
+		float disBest = abs(searchFor-searchIn[0]);
+		*best = 0;		
+		for(int i = 1; i < max; i++){
+			float dis = abs(searchFor-searchIn[i]);
+			if(disBest > dis) {
+				disBest = dis;
+				*best = i;
+			}				 
+		} 
+
+		*/
+	};
+
 };
 
 /**
