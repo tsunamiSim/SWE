@@ -172,7 +172,7 @@ public :
 
 #ifndef NDEBUG
 			if(maxTimestep >= 0.5f * dy / maxTimestepY)
-				std::cerr << "Used timestep was to big! Used/In X-DIR computed: " << maxTimestep << "; In Y-DIR computed: " << (0.5f * dy / maxTimestepY) << std::endl;			
+				std::cerr << "Used timestep was too big! Used/In X-DIR computed: " << maxTimestep << "; In Y-DIR computed: " << (0.5f * dy / maxTimestepY) << std::endl;			
 #endif //NDEBUG
 
 		// set horizontal updates to zero (for updateUnknowns necessarry)

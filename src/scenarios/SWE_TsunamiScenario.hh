@@ -45,24 +45,6 @@ public:
   float *bathX, *bathY, *disX, *disY;
   float disTop, disBot, disLeft, disRight;
   float boundLeft, boundRight, boundTop, boundBot;
-  /**
-   * Looks up the closest value's index in a given array
-   * @param searchFor Reference value
-   * @param max The length of the array to search in
-   * @param searchIn The array to search in
-   * @param best The index of the closest element in the array
-   */
-  void lookUp(float searchFor, int max, float* searchIn, int* best){
-		float disBest = abs(searchFor-searchIn[0]);
-		*best = 0;		
-		for(int i = 1; i < max; i++){
-			float dis = abs(searchFor-searchIn[i]);
-			if(disBest > dis) {
-				disBest = dis;
-				*best = i;
-			}				 
-		} 
-	};
 	
 /**
  * Opens a nc-file and reads the content. File must contain the dimension values for x on index 0, y on 1 and the bathymetry values as z on index 2
@@ -183,15 +165,15 @@ public:
   float getBathymetry(float x, float y) {
 	int bestXBath, bestYBath;
 	float result;
-	lookUp(y, bathymetry->getCols(), bathY, &bestYBath);
-	lookUp(x, bathymetry->getRows(), bathX, &bestXBath);
+	Array::lookUp(y, bathymetry->getCols(), bathY, &bestYBath);
+	Array::lookUp(x, bathymetry->getRows(), bathX, &bestXBath);
 	if(x < disLeft || x > disRight || y < disBot || y > disTop){
 		result = (*bathymetry)[bestYBath][bestXBath];
 	}
 	else{
 		int bestXDis, bestYDis;
-		lookUp(y, displacement->getCols(), disX, &bestYDis);
-		lookUp(x, displacement->getRows(), disY, &bestXDis);
+		Array::lookUp(y, displacement->getCols(), disX, &bestYDis);
+		Array::lookUp(x, displacement->getRows(), disY, &bestXDis);
 
 		result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
 		//result = (*displacement)[bestYDis][bestXDis];
@@ -200,7 +182,7 @@ public:
 		return -20.f;
 	else if(result > 0.f && result < 20.f)
 		return 20.f;
-	else 
+	else
 	    return result;
   };
 
@@ -211,8 +193,8 @@ public:
    */
   float getWaterHeight(float x, float y) {
 	int bestX, bestY;
-	lookUp(y, bathymetry->getCols(), bathY, &bestY);
-	lookUp(x, bathymetry->getRows(), bathX, &bestX);
+	Array::lookUp(y, bathymetry->getCols(), bathY, &bestY);
+	Array::lookUp(x, bathymetry->getRows(), bathX, &bestX);
 	if((*bathymetry)[bestY][bestX] < -20.f)
 		return -(*bathymetry)[bestY][bestX];
 	else if((*bathymetry)[bestY][bestX] < 0.f)

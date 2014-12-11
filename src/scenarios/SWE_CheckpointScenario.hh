@@ -43,25 +43,6 @@ class SWE_CheckpointScenario : public SWE_Scenario {
   size_t time;
   
   /**
-   * Looks up the closest value's index in a given array
-   * @param searchFor Reference value
-   * @param max The length of the array to search in
-   * @param searchIn The array to search in
-   * @param best The index of the closest element in the array
-   */
-  void lookUp(float searchFor, int max, float* searchIn, int* best){
-		float disBest = abs(searchFor-searchIn[0]);
-		*best = 0;		
-		for(int i = 1; i < max; i++){
-			float dis = abs(searchFor-searchIn[i]);
-			if(disBest > dis) {
-				disBest = dis;
-				*best = i;
-			}				 
-		} 
-	};
-  
-  /**
    * Reads the file at the relative location "SWE_checkpoints.nc"
    */
   void readNcFile(const char *file){
@@ -204,8 +185,8 @@ public:
    */
   float getBathymetry(float x, float y) {
 	int bestX, bestY;
-	lookUp(y, bathymetry->getRows(), initY, &bestY);
-	lookUp(x, bathymetry->getCols(), initX, &bestX);
+	Array::lookUp(y, bathymetry->getRows(), initY, &bestY);
+	Array::lookUp(x, bathymetry->getCols(), initX, &bestX);
 	return (*bathymetry)[bestY][bestX];
   };
 
@@ -216,8 +197,8 @@ public:
    */
   float getWaterHeight(float x, float y) { 
 	int bestX, bestY;
-	lookUp(y, h->getRows(), initY, &bestY);
-	lookUp(x, h->getCols(), initX, &bestX);
+	Array::lookUp(y, h->getRows(), initY, &bestY);
+	Array::lookUp(x, h->getCols(), initX, &bestX);
 	return (*h)[bestY][bestX];
   };
   
@@ -228,8 +209,8 @@ public:
    */
   float getVeloc_u(float x, float y){
     int bestX, bestY;
-	lookUp(y, hu->getRows(), initY, &bestY);
-	lookUp(x, hu->getCols(), initX, &bestX);
+	Array::lookUp(y, hu->getRows(), initY, &bestY);
+	Array::lookUp(x, hu->getCols(), initX, &bestX);
 	float result = (*hu)[bestY][bestX] / (*h)[bestY][bestX];
 	if(result != result)
 		return 0;
@@ -244,8 +225,8 @@ public:
    */
   float getVeloc_v(float x, float y){
     int bestX, bestY;
-	lookUp(y, hv->getRows(), initY, &bestY);
-	lookUp(x, hv->getCols(), initX, &bestX);
+	Array::lookUp(y, hv->getRows(), initY, &bestY);
+	Array::lookUp(x, hv->getCols(), initX, &bestX);
 	float result = (*hv)[bestY][bestX] / (*h)[bestY][bestX];
 	if(result != result)
 		return 0;
