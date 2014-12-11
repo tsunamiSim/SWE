@@ -129,7 +129,7 @@ vars.AddVariables(
 )
 
 # set environment
-env = Environment(ENV = {'PATH': os.environ['PATH']},
+env = Environment(ENV = {'PATH': os.environ['PATH'], 'INTEL_LICENSE_FILE': os.environ['INTEL_LICENSE_FILE']},
         variables=vars)#, tools = ['default', ('cxxtest', { 'CXXTEST_CPPPATH':'src'})])
 
 # generate help text
@@ -214,7 +214,7 @@ elif env['compileMode'] == 'release':
     env.Append(CCFLAGS=['-O3','-mtune=native'])
 
   elif env['compiler'] == 'intel':
-    env.Append(CCFLAGS=['-O2'])
+    env.Append(CCFLAGS=['-O2', '-fast'])
 
   else: # especially for env['compiler'] == 'cray'
     env.Append(CCFLAGS=['-O3'])
