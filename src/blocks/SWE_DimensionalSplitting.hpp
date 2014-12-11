@@ -33,6 +33,7 @@
 #include "solvers/FWave.hpp"
 #include "tools/help.hh"
 #include <iostream>
+#include <omp.h>
 
 #ifndef NDEBUG
 	//#define NDEBUG
@@ -110,8 +111,10 @@ public :
 	void computeNumericalFluxes()
 	{
 		// compute horizontal updates
+		
 		for(unsigned int y = 0; y < ny; y++)
 		{	
+		    #pragma omp parallel for //firstprivate(y, hNetUpdatesLeft, hNetUpdatesRight, huNetUpdatesLeft, huNetUpdatesRight, h,hu,b), shared (maxTimestep)
 			for(unsigned int x = 0; x < nx+1; x++) 
 			{
 				float maxEdgeSpeed;
@@ -120,7 +123,10 @@ public :
 								huNetUpdatesLeft[x][y], huNetUpdatesRight[x][y],
 								maxEdgeSpeed
 							);
-				maxTimestep = std::max(maxEdgeSpeed, maxTimestep);
+				#pragma omp critical
+				{
+				    maxTimestep = std::max(maxEdgeSpeed, maxTimestep) + 0;
+				}
 				// no negative timesteps
 				assert(maxTimestep > 0);
 
