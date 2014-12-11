@@ -33,6 +33,7 @@
 #include "solvers/FWave.hpp"
 #include "tools/help.hh"
 #include <iostream>
+#include <omp.h>
 
 #ifndef NDEBUG
 	//#define NDEBUG
@@ -110,9 +111,11 @@ public :
 	void computeNumericalFluxes()
 	{
 		// compute horizontal updates
+		
 		for(unsigned int y = 0; y < ny; y++)
 		{	
-			for(unsigned int x = 0; x < nx+1; x++) 
+		    #pragma omp parallel for 
+		    for(unsigned int x = 0; x < nx+1; x++) 
 			{
 				float maxEdgeSpeed;
 				solver.computeNetUpdates(h[x][y+1], h[x+1][y+1], hu[x][y+1], hu[x+1][y+1], b[x][y+1], b[x+1][y+1],
@@ -120,7 +123,10 @@ public :
 								huNetUpdatesLeft[x][y], huNetUpdatesRight[x][y],
 								maxEdgeSpeed
 							);
-				maxTimestep = std::max(maxEdgeSpeed, maxTimestep);
+				#pragma omp critical
+				{
+				    maxTimestep = std::max(maxEdgeSpeed, maxTimestep) + 0;
+				}
 				// no negative timesteps
 				assert(maxTimestep > 0);
 
@@ -138,6 +144,7 @@ public :
 		//updateUnknowns(maxTimestep);
 		for(unsigned int y = 1; y < ny+1; y++)
 		{
+		    #pragma omp parallel for 
 			for(unsigned int x = 1; x < nx+1; x++)
 			{
 				h[x][y] -= (maxTimestep / dx) * (hNetUpdatesRight[x - 1][y - 1] + hNetUpdatesLeft[x][y - 1]); 
@@ -154,6 +161,7 @@ public :
 		// compute vertical updates
 		for(unsigned int y = 0; y < ny+1; y++)
 		{	
+		    #pragma omp parallel for 
 			for(unsigned int x = 0; x < nx; x++) 
 			{
 				float maxEdgeSpeed;
@@ -164,6 +172,7 @@ public :
 							);
 //TODO DEBUG
 #ifndef NDEBUG
+                    #pragma omp critical
 					maxTimestepY = std::max(maxEdgeSpeed, maxTimestepY);
 #endif //NDEBUG
 						
@@ -172,7 +181,7 @@ public :
 
 #ifndef NDEBUG
 			if(maxTimestep >= 0.5f * dy / maxTimestepY)
-				std::cerr << "Used timestep was to big! Used/In X-DIR computed: " << maxTimestep << "; In Y-DIR computed: " << (0.5f * dy / maxTimestepY) << std::endl;			
+				std::cerr << "Used timestep was too big! Used/In X-DIR computed: " << maxTimestep << "; In Y-DIR computed: " << (0.5f * dy / maxTimestepY) << std::endl;			
 #endif //NDEBUG
 
 		// set horizontal updates to zero (for updateUnknowns necessarry)
@@ -184,6 +193,7 @@ public :
 		//updateUnknowns(maxTimestep);		
 		for(unsigned int y = 1; y < ny+1; y++)
 		{
+		    #pragma omp parallel for 
 			for(unsigned int x = 1; x < nx+1; x++)
 			{
 				h[x][y] -=	(maxTimestep / dy) * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
