@@ -129,8 +129,12 @@ vars.AddVariables(
 )
 
 # set environment
-env = Environment(ENV = {'PATH': os.environ['PATH'], 'INTEL_LICENSE_FILE': os.environ['INTEL_LICENSE_FILE']},
+env = Environment(ENV = {'PATH': os.environ['PATH']},#, 'INTEL_LICENSE_FILE': os.environ['INTEL_LICENSE_FILE']},
         variables=vars)#, tools = ['default', ('cxxtest', { 'CXXTEST_CPPPATH':'src'})])
+
+# set compiler license file
+if env['compiler'] == 'intel':
+	env.Append(ENV = {'INTEL_LICENSE_FILE': os.environ['INTEL_LICENSE_FILE']})
 
 # generate help text
 Help(vars.GenerateHelpText(env))
