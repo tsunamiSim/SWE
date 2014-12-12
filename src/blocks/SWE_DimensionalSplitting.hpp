@@ -114,8 +114,8 @@ public :
 		
 		for(unsigned int y = 0; y < ny; y++)
 		{	
-		    #pragma omp parallel for //firstprivate(y, hNetUpdatesLeft, hNetUpdatesRight, huNetUpdatesLeft, huNetUpdatesRight, h,hu,b), shared (maxTimestep)
-			for(unsigned int x = 0; x < nx+1; x++) 
+		    #pragma omp parallel for 
+		    for(unsigned int x = 0; x < nx+1; x++) 
 			{
 				float maxEdgeSpeed;
 				solver.computeNetUpdates(h[x][y+1], h[x+1][y+1], hu[x][y+1], hu[x+1][y+1], b[x][y+1], b[x+1][y+1],
@@ -144,6 +144,7 @@ public :
 		//updateUnknowns(maxTimestep);
 		for(unsigned int y = 1; y < ny+1; y++)
 		{
+		    #pragma omp parallel for 
 			for(unsigned int x = 1; x < nx+1; x++)
 			{
 				h[x][y] -= (maxTimestep / dx) * (hNetUpdatesRight[x - 1][y - 1] + hNetUpdatesLeft[x][y - 1]); 
@@ -160,6 +161,7 @@ public :
 		// compute vertical updates
 		for(unsigned int y = 0; y < ny+1; y++)
 		{	
+		    #pragma omp parallel for 
 			for(unsigned int x = 0; x < nx; x++) 
 			{
 				float maxEdgeSpeed;
@@ -170,6 +172,7 @@ public :
 							);
 //TODO DEBUG
 #ifndef NDEBUG
+                    #pragma omp critical
 					maxTimestepY = std::max(maxEdgeSpeed, maxTimestepY);
 #endif //NDEBUG
 						
@@ -190,6 +193,7 @@ public :
 		//updateUnknowns(maxTimestep);		
 		for(unsigned int y = 1; y < ny+1; y++)
 		{
+		    #pragma omp parallel for 
 			for(unsigned int x = 1; x < nx+1; x++)
 			{
 				h[x][y] -=	(maxTimestep / dy) * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);

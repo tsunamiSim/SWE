@@ -397,7 +397,8 @@ SConscript('src/SConscript', variant_dir=build_dir, duplicate=0)
 Import('env')
 
 # Build cxxtests
-#env.CxxTest(build_dir + '/CxxTests/DimenSplitTest', ['#src/CxxTests/dimenSplit_testsuite.t.h', build_dir +'/blocks/SWE_Block.o', build_dir +'/tools/Logger.o'])
+#env.CxxTest(build_dir + '/CxxTests/DimenSplitTest', ['#src/CxxTests/dimenSplit_testsuite.t.h', build_dir +'/blocks/SWE_Block.o', build_dir 
+#+'/tools/Logger.o'])
 
 # build the program
 env.Program('build/'+program_name, env.src_files)
