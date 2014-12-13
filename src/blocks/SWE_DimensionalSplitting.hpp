@@ -124,9 +124,7 @@ public :
 								maxEdgeSpeed
 							);
 				#pragma omp critical
-				{
-				    maxTimestep = std::max(maxEdgeSpeed, maxTimestep) + 0;
-				}
+				    maxTimestep = std::max(maxEdgeSpeed, maxTimestep);
 				// no negative timesteps
 				assert(maxTimestep > 0);
 
@@ -161,7 +159,7 @@ public :
 		// compute vertical updates
 		for(unsigned int y = 0; y < ny+1; y++)
 		{	
-		    #pragma omp parallel for 
+			#pragma omp parallel for 
 			for(unsigned int x = 0; x < nx; x++) 
 			{
 				float maxEdgeSpeed;
@@ -172,7 +170,7 @@ public :
 							);
 //TODO DEBUG
 #ifndef NDEBUG
-                    #pragma omp critical
+				#pragma omp critical
 					maxTimestepY = std::max(maxEdgeSpeed, maxTimestepY);
 #endif //NDEBUG
 						

@@ -31,9 +31,19 @@
 #include <vector>
 #include <iostream>
 #include <cassert>
-
+#include <math.h>
+#include "tools/help.hh"
 
 #define ERR(e) {printf("Error: %s\n", nc_strerror(e)); assert(false);}
+
+inline void adjust(unsigned int &nx, unsigned int &ny, float &dx, float &dy, int compression) {
+		float width = dx * nx;
+		float height = dy * ny;
+		nx = ceil(nx / (float) compression);
+		ny = ceil(ny / (float) compression);
+		dx = width / nx;
+		dy = height / ny;
+}
 
 /**
  * Create a netCdf-file
@@ -56,10 +66,11 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 		float i_dX, float i_dY,
 		float i_originX, float i_originY,
 		unsigned int i_flush,
-		size_t contTimestep) :
+		size_t contTimestep,
+		unsigned int compression) :
 		//const bool  &i_dynamicBathymetry) : //!TODO
   io::Writer(i_baseName + ".nc", i_b, i_boundarySize, i_nX, i_nY, contTimestep),
-  flush(i_flush) {
+  flush(i_flush), compress(compression) {
 	int status;
 	if(contTimestep)
 	{
@@ -89,6 +100,10 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 			assert(false);
 			return;
 		}
+
+//		std::cout << "i_nX, i_nY, i_dX, i_dY: " << nX << ", " << nY << ", " << i_dX << ", " << i_dY << std::endl;
+		adjust(nX, nY, i_dX, i_dY, compress);
+//		std::cout << "i_nX, i_nY, i_dX, i_dY: " << nX << ", " << nY << ", " << i_dX << ", " << i_dY << std::endl;
 
 #ifdef PRINT_NETCDFWRITER_INFORMATION
 		std::cout << "   *** io::NetCdfWriter::createNetCdfFile" << std::endl;
@@ -131,10 +146,11 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 		ncPutAttText(NC_GLOBAL, "comment", "SWE is free software and licensed under the GNU General Public License. Remark: In general this does not hold for the used input data.");
 	
 		//setup grid size
+		
 		float gridPosition = i_originX + (float).5 * i_dX;
 		for(size_t i = 0; i < nX; i++) {
 			nc_put_var1_float(dataFile, l_xVar, &i, &gridPosition);
-	
+
 			gridPosition += i_dX;
 		}
 	
@@ -180,9 +196,10 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 		float i_dX, float i_dY,
 		float i_originX, float i_originY,
 		unsigned int i_flush,
-		bool useCheckpoints) :
+		bool useCheckpoints,
+		unsigned int compression) :
 	io::Writer(i_baseName + ".nc", i_b, i_boundarySize, i_nX, i_nY),
-	flush(i_flush) {
+	flush(i_flush), compress(compression) {
 	int retVal;
 
 	if(useCheckpoints)
@@ -213,6 +230,10 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 			assert(false);
 			return;
 		}
+
+//		std::cout << "i_nX, i_nY, i_dX, i_dY: " << nX << ", " << nY << ", " << i_dX << ", " << i_dY << std::endl;
+		adjust(nX, nY, i_dX, i_dY, compress);
+//		std::cout << "i_nX, i_nY, i_dX, i_dY: " << nX << ", " << nY << ", " << i_dX << ", " << i_dY << std::endl;
 
 	    //create a netCDF-file, an existing file will be replaced
 	    /*int status = nc_create(fileName.c_str(), NC_NETCDF4, &dataFile);
@@ -327,16 +348,17 @@ io::NetCdfWriter::~NetCdfWriter() {
  */
 void io::NetCdfWriter::writeVarTimeDependent( const Float2D &i_matrix,
                                               int i_ncVariable ) {
+	Float2D tmp = Float2D::compress(i_matrix, compress, boundarySize[0], boundarySize[1], boundarySize[2], boundarySize[3]);
 	//write col wise, necessary to get rid of the boundary
 	//storage in Float2D is col wise
 	//read carefully, the dimensions are confusing
 	size_t start[] = {timeStep, 0, 0};
 	size_t count[] = {1, nY, 1};
-	for(unsigned int col = 0; col < nX; col++) {
+	for(int col = 0; col < nX; col++) {
 		start[2] = col; //select col (dim "x")
 		nc_put_vara_float(dataFile, i_ncVariable, start, count,
-				&i_matrix[col+boundarySize[0]][boundarySize[2]]); //write col
-  }
+				&tmp[col][0]); //write col
+	}
 }
 
 /**
@@ -353,16 +375,17 @@ void io::NetCdfWriter::writeVarTimeDependent( const Float2D &i_matrix,
  */
 void io::NetCdfWriter::writeVarTimeIndependent( const Float2D &i_matrix,
                                                 int i_ncVariable ) {
-	//write col wise, necessary to get rid of the boundary
+	Float2D tmp = Float2D::compress(i_matrix, compress, boundarySize[0], boundarySize[1], boundarySize[2], boundarySize[3]);
+	//write col wise, necessary to get rid of the boundary2
 	//storage in Float2D is col wise
 	//read carefully, the dimensions are confusing
 	size_t start[] = {0, 0};
-	size_t count[] = {nY, 1};
-	for(unsigned int col = 0; col < nX; col++) {
+	size_t count[] = {nY, 1 };
+	for(int col = 0; col < nX; col++) {
 		start[1] = col; //select col (dim "x")
 		nc_put_vara_float(dataFile, i_ncVariable, start, count,
-				&i_matrix[col+boundarySize[0]][boundarySize[2]]); //write col
-  }
+				&tmp[col][0]); //write col
+	}
 }
 
 /**
