@@ -63,6 +63,9 @@ private:
     /** Flush after every x write operation? */
     unsigned int flush;
 
+    /** Writer will make a [m/compress]x[n/compress] out of a [m]x[n] domain */
+    unsigned int compress;
+
     // writer time dependent variables.
     void writeVarTimeDependent( const Float2D &i_matrix,
                                 int i_ncVariable);
@@ -80,7 +83,8 @@ private:
 					float i_dX, float i_dY,
 					float i_originX = 0., float i_originY = 0.,
 					unsigned int i_flush = 0,
-					size_t contTimestep = 0);
+					size_t contTimestep = 0,
+					unsigned int compression = 1);
 
 	NetCdfWriter(const std::string &i_fileName,
 					const Float2D &i_b,
@@ -94,7 +98,8 @@ private:
 					float i_dX, float i_dY,
 					float i_originX = 0., float i_originY = 0.,
 					unsigned int i_flush = 0,
-					bool useCheckpoints = false);
+					bool useCheckpoints = false,
+					unsigned int compression = 1);
     virtual ~NetCdfWriter();
 
     // writes the unknowns at a given time step to the netCDF-file.

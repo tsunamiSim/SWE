@@ -24,6 +24,7 @@ int main(int argc, char** argv){
 	args.addOption("end_of_simulation", 'e' , "Sets the end of the simulation", tools::Args::Required, false);
 	args.addOption("boundary_conditions", 'b', "Sets the boundary conditions, where 0 is Wall and 1 is Outflow", tools::Args::Required, false);
 	args.addOption("input_folder", 'i', "Folder containing the input nc files", tools::Args::Required, false);
+	args.addOption("compression", 'c', "Compression value. Simulation calculated with [x]x[y] domain and written [x/c]x[y/c] domain", tools::Args::Required, false);
 	
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
@@ -91,8 +92,8 @@ int main(int argc, char** argv){
     
 	// Set step size
 	float l_dx, l_dy;
-  	l_dx = (l_scenario->getBoundaryPos(BND_RIGHT) - l_scenario->getBoundaryPos(BND_LEFT) )/l_nx;
-  	l_dy = (l_scenario->getBoundaryPos(BND_TOP) - l_scenario->getBoundaryPos(BND_BOTTOM) )/l_ny;
+  	l_dx = (l_scenario->getBoundaryPos(BND_RIGHT) - l_scenario->getBoundaryPos(BND_LEFT))/l_nx;
+  	l_dy = (l_scenario->getBoundaryPos(BND_TOP) - l_scenario->getBoundaryPos(BND_BOTTOM))/l_ny;
 
 #ifndef NDEBUG
 	cout << "Calulated step size d_x (divided by 1000): (" << (double)l_scenario->getBoundaryPos(BND_RIGHT)/1000 << " - " << (double)l_scenario->getBoundaryPos(BND_LEFT)/1000 << ") / " << (double)l_nx << " = " << (double)l_dx/1000 << endl;
@@ -156,6 +157,11 @@ int main(int argc, char** argv){
 	l_checkpoints = l_scenario->getCheckpointCount();
 	
 	float l_originx, l_originy;
+	int compression = 1;
+
+	if(args.isSet("compression") && !args.isSet("use_checkpoints_file")) {
+		compression = args.getArgument<int>("compression");
+	}
 	
 	l_originx = l_scenario->getBoundaryPos(BND_LEFT);
 	l_originy = l_scenario->getBoundaryPos(BND_BOTTOM);
@@ -167,7 +173,8 @@ int main(int argc, char** argv){
 			l_dx, l_dy,
 			l_originx, l_originy,
 			0,
-			l_checkpoints * l_timeStepsPerCheckpoint);
+			l_checkpoints * l_timeStepsPerCheckpoint,
+			compression);
 	
 	// Set up Checkpoint writer
 	std::string checkpointFile = "SWE_checkpoints";
@@ -183,8 +190,8 @@ int main(int argc, char** argv){
 				l_dx, l_dy,
 				l_originx, l_originy,
 				0,
-				test_cp);
-
+				test_cp,
+				compression);
 #else
 	//set up VTKWriter
 	io::VtkWriter l_writer( l_fileName,

@@ -29,6 +29,7 @@
 #ifndef __HELP_HH
 #define __HELP_HH
 
+#include <math.h>
 #include <cstring>
 #include <iostream>
 #include <fstream>
@@ -190,6 +191,51 @@ class Float2D {
                 // starting at elem[0][j] with cols elements and stride rows
 		return Float1D(elem + j, cols, rows);
 	};
+
+	static Float2D compress(const Float2D &input, int compress, int cutColsLeft, int cutColsRight, int cutRowsBot, int cutRowsTop) {
+	
+		// Create temporary matrix to store compressed data to
+//		std::cout << "writing with compression " << compress << std::endl;
+		Float2D tmp((int) ceil((input.getCols() - cutColsLeft - cutColsRight) / (float) compress), (int) ceil((input.getRows() - cutRowsBot - cutRowsTop) / (float) compress));
+//		std::cout << "matrix cols: " << input.getCols() << ", matrix rows: " << input.getRows() << ", compressed cols: " << tmp.getCols() << ", compressed rows: " << tmp.getRows() << std::endl;
+		// Define variables for building average over one block average
+		float currentValue;
+		int div;
+		// Fill each cell of the compressed matrix
+		for(int _x = 0; _x < tmp.getCols(); _x++) {
+			for(int _y = 0; _y < tmp.getRows(); _y++) {
+//				std::cout << "writing at cell [" << _x << ", " << _y << "]: ";
+				// Initialize average variables
+				currentValue = 0;
+				div = 0;
+				// Iterate over the initial matrix' compression blocks
+				for(int _orig_x = _x * compress;
+					// compression boundary
+					_orig_x < (_x + 1) * compress &&
+					// for the last block make sure to not iterate out of the original matrix
+					_orig_x < input.getCols() - cutColsLeft - cutColsRight;
+					_orig_x++) {
+					for(int _orig_y = _y * compress;
+						// compression boundary
+						_orig_y < (_y + 1) * compress &&
+						// original boundary
+						_orig_y < input.getRows() - cutRowsBot - cutRowsTop;
+						_orig_y++) {
+						// Add the original value to the currentValue buffer and increase the amount of values in this block by one
+						currentValue += input[_orig_x + cutColsLeft][_orig_y + cutRowsBot];
+						div++;
+//						std::cout << "[" << _orig_x + cutColsLeft << ", " <<
+//							_orig_y + cutRowsBot << "]: " <<
+//							input[_orig_x + cutColsLeft][_orig_y + cutRowsBot] << ", ";
+					}
+				}
+//				std::cout << "=> " << currentValue << "/" << div << "=" << (currentValue / div) << std::endl;
+				// write calculated average to compressed matrix
+				tmp[_x][_y] = currentValue / div;
+			}
+		}
+		return tmp;
+	}
 
   private:
     int rows;

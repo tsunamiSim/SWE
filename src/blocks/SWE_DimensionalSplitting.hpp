@@ -167,8 +167,8 @@ public :
 		for(unsigned int y = 0; y < ny+1; y++)
 		{
 		solver::FWave<float> solver_t = solver;
-		    #pragma omp parallel for private(solver_t), default(shared) 
-			for(unsigned int x = 0; x < nx; x++) 
+		    #pragma omp parallel for private(solver_t), default(shared)
+		    for(unsigned int x = 0; x < nx; x++) 
 			{
 				float maxEdgeSpeed;
 				solver_t.computeNetUpdates(h[x+1][y],h[x+1][y+1], hv[x+1][y], hv[x+1][y+1], b[x+1][y], b[x+1][y+1],

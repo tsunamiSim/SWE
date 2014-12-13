@@ -71,7 +71,7 @@ protected:
 	const BoundarySize boundarySize;
 
     //! dimensions of the grid in x- and y-direction.
-    const unsigned int nX, nY;
+    unsigned int nX, nY;
 
     //! current time step
     size_t timeStep;
