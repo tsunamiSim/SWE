@@ -132,6 +132,10 @@ vars.AddVariables(
 env = Environment(ENV = {'PATH': os.environ['PATH']}, #'INTEL_LICENSE_FILE': os.environ['INTEL_LICENSE_FILE']},
         variables=vars)#, tools = ['default', ('cxxtest', { 'CXXTEST_CPPPATH':'src'})])
 
+# set compiler license file
+if env['compiler'] == 'intel':
+	env.Append(ENV = {'INTEL_LICENSE_FILE': os.environ['INTEL_LICENSE_FILE']})
+
 # generate help text
 Help(vars.GenerateHelpText(env))
 
@@ -393,8 +397,15 @@ SConscript('src/SConscript', variant_dir=build_dir, duplicate=0)
 Import('env')
 
 # Build cxxtests
-#env.CxxTest(build_dir + '/CxxTests/DimenSplitTest', ['#src/CxxTests/dimenSplit_testsuite.t.h', build_dir +'/blocks/SWE_Block.o', build_dir +'/tools/Logger.o'])
+#env.CxxTest(build_dir + '/CxxTests/DimenSplitTest', ['#src/CxxTests/dimenSplit_testsuite.t.h', build_dir +'/blocks/SWE_Block.o', build_dir 
+#+'/tools/Logger.o'])
 
 # build the program
-env.Program('build/'+program_name, env.src_files, parse_flags='-fopenmp')
+if env['openmp']:
+	if env['compiler'] == 'intel':
+		env.Program('build/'+program_name, env.src_files, parse_flags='-openmp')
+	else:
+		env.Program('build/'+program_name, env.src_files, parse_flags='-fopenmp')
+else:
+	env.Program('build/'+program_name, env.src_files)
 
