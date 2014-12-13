@@ -129,7 +129,7 @@ vars.AddVariables(
 )
 
 # set environment
-env = Environment(ENV = {'PATH': os.environ['PATH'], 'INTEL_LICENSE_FILE': os.environ['INTEL_LICENSE_FILE']},
+env = Environment(ENV = {'PATH': os.environ['PATH']}, #'INTEL_LICENSE_FILE': os.environ['INTEL_LICENSE_FILE']},
         variables=vars)#, tools = ['default', ('cxxtest', { 'CXXTEST_CPPPATH':'src'})])
 
 # generate help text
@@ -396,5 +396,5 @@ Import('env')
 #env.CxxTest(build_dir + '/CxxTests/DimenSplitTest', ['#src/CxxTests/dimenSplit_testsuite.t.h', build_dir +'/blocks/SWE_Block.o', build_dir +'/tools/Logger.o'])
 
 # build the program
-env.Program('build/'+program_name, env.src_files)
+env.Program('build/'+program_name, env.src_files, parse_flags='-fopenmp')
 
