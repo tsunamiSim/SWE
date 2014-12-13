@@ -401,5 +401,11 @@ Import('env')
 #+'/tools/Logger.o'])
 
 # build the program
-env.Program('build/'+program_name, env.src_files)
+if env['openmp']:
+	if env['compiler'] == 'intel':
+		env.Program('build/'+program_name, env.src_files, parse_flags='-openmp')
+	else:
+		env.Program('build/'+program_name, env.src_files, parse_flags='-fopenmp')
+else:
+	env.Program('build/'+program_name, env.src_files)
 
