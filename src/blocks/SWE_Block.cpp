@@ -103,6 +103,7 @@ void SWE_Block::initScenario( float _offsetX, float _offsetY,
 #endif
   // initialize water height and discharge
   for(int i=1; i<=nx; i++)
+    //#pragma omp parallel for private(i)
     for(int j=1; j<=ny; j++) {
       float x = offsetX + (i-0.5f)*dx;
       float y = offsetY + (j-0.5f)*dy;
@@ -116,6 +117,7 @@ void SWE_Block::initScenario( float _offsetX, float _offsetY,
 #endif
   // initialize bathymetry
   for(int i=0; i<=nx+1; i++) {
+    //#pragma omp parallel for private(i)
     for(int j=0; j<=ny+1; j++) {
       b[i][j] = i_scenario.getBathymetry( offsetX + (i-0.5f)*dx,
                                           offsetY + (j-0.5f)*dy );
@@ -143,6 +145,7 @@ void SWE_Block::initScenario( float _offsetX, float _offsetY,
 void SWE_Block::setWaterHeight(float (*_h)(float, float)) {
 
   for(int i=1; i<=nx; i++)
+    #pragma omp parallel for
     for(int j=1; j<=ny; j++) {
       h[i][j] =  _h(offsetX + (i-0.5f)*dx, offsetY + (j-0.5f)*dy);
     };
@@ -158,6 +161,7 @@ void SWE_Block::setWaterHeight(float (*_h)(float, float)) {
 void SWE_Block::setDischarge(float (*_u)(float, float), float (*_v)(float, float)) {
 
   for(int i=1; i<=nx; i++)
+    #pragma omp parallel for
     for(int j=1; j<=ny; j++) {
       float x = offsetX + (i-0.5f)*dx;
       float y = offsetY + (j-0.5f)*dy;
@@ -176,6 +180,7 @@ void SWE_Block::setDischarge(float (*_u)(float, float), float (*_v)(float, float
 void SWE_Block::setBathymetry(float _b) {
 
   for(int i=0; i<=nx+1; i++)
+    #pragma omp parallel for 
     for(int j=0; j<=ny+1; j++)
       b[i][j] = _b;
 
@@ -190,6 +195,7 @@ void SWE_Block::setBathymetry(float _b) {
 void SWE_Block::setBathymetry(float (*_b)(float, float)) {
 
   for(int i=0; i<=nx+1; i++)
+    #pragma omp parallel for 
     for(int j=0; j<=ny+1; j++)
       b[i][j] = _b(offsetX + (i-0.5f)*dx, offsetY + (j-0.5f)*dy);
 

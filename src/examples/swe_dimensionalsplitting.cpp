@@ -236,7 +236,7 @@ int ix = 0;
  		std::ostringstream buff;
     		buff << l_time;
 		// write time to console
-		//tools::Logger::logger.printString(time + buff.str());        
+		tools::Logger::logger.printString(time + buff.str());        
 
         
 #ifdef WRITENETCDF	
