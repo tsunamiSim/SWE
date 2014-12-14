@@ -86,10 +86,10 @@ public:
 			T& o_h_l, T& o_h_r, T& o_hu_l, T& o_hu_r, T& o_max_ws)
 	{
 	if(i_h_l == 0 && i_h_r == 0){
-	    o_h_l == i_h_l;
-	    o_h_r == i_h_r;
-	    o_hu_l == i_hu_l;
-	    o_hu_r == i_hu_r;
+	    o_h_l = i_h_l;
+	    o_h_r = i_h_r;
+	    o_hu_l = i_hu_l;
+	    o_hu_r = i_hu_r;
 	    o_max_ws = 0;
 	    return;
 	}

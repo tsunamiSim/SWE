@@ -25,6 +25,7 @@ int main(int argc, char** argv){
 	args.addOption("boundary_conditions", 'b', "Sets the boundary conditions, where 0 is Wall and 1 is Outflow", tools::Args::Required, false);
 	args.addOption("input_folder", 'i', "Folder containing the input nc files", tools::Args::Required, false);
 	args.addOption("compression", 'c', "Compression value. Simulation calculated with [x]x[y] domain and written [x/c]x[y/c] domain", tools::Args::Required, false);
+	args.addOption("percentage_logging_steps", 'l', "Logs a message telling about the progress with the given stepsize", tools::Args::Required, false);
 	
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
@@ -201,24 +202,35 @@ int main(int argc, char** argv){
 			l_dx, l_dy,
 			test_cp );
 #endif
-	//Print initial state
-	l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
-                        l_dimensionalSplitting.getDischarge_hu(),
-                        l_dimensionalSplitting.getDischarge_hv(),
-                        l_time);
-	
-	tools::Logger::logger.printLine();
-	tools::Logger::logger.printString("Starting simulation");
 
 #ifndef NDEBUG
 	tools::Logger::logger.printString(toString("Start Time: ") + toString(l_time));
 #endif
 	std::string time = "Time: ";
-int ix = 0;
+	float progress = 0; // progress in percent;
+	float percStep = 0.1f;
+	if(args.isSet("percentage_logging_steps"))
+		percStep = args.getArgument<float>("percentage_logging_steps") / 100.0f;
+	if(percStep < 0.01f)
+		percStep = 0.01f;
+	unsigned int loggedAmount = 1;
+
+#ifdef _OPENMP
+	tools::Logger::logger.printString(toString("Using openMP paralization with ") + toString(omp_get_max_threads()) + " threads");
+#endif
+	
+	tools::Logger::logger.printLine();
+	tools::Logger::logger.printString("Starting simulation");
+
+	//Print initial state
+	l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
+                        l_dimensionalSplitting.getDischarge_hu(),
+                        l_dimensionalSplitting.getDischarge_hv(),
+                        l_time);
+
 	// Loop over timesteps
 	while(l_time < l_endOfSimulation)
 	{
-	    
 		l_dimensionalSplitting.setGhostLayer();
 		
 		// compute one timestep
@@ -226,7 +238,6 @@ int ix = 0;
 	
 		// increment time
 		l_time += l_dimensionalSplitting.getMaxTimestep();
-//if(ix++ % 10 == 0)
 		// write timestep
 		l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
                 	l_dimensionalSplitting.getDischarge_hu(),
@@ -238,6 +249,11 @@ int ix = 0;
 		// write time to console
 //		tools::Logger::logger.printString(time + buff.str());        
 
+		progress = l_time / l_endOfSimulation;
+		if(progress > percStep * loggedAmount) {
+			tools::Logger::logger.printString(toString("Progress: ") + toString((int) (100 * progress)) + toString("%"));
+			loggedAmount = progress / percStep + 1;
+		}
         
 #ifdef WRITENETCDF	
 		if(++l_cpCounter % l_timeStepsPerCheckpoint == 0)

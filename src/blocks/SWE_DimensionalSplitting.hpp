@@ -29,6 +29,7 @@
 #ifndef __SWE_DIMSPLIT_HPP
 #define __SWE_DIMSPLIT_HPP
 
+
 #include "blocks/SWE_Block.hh"
 #include "solvers/FWave.hpp"
 #include "tools/help.hh"
@@ -110,17 +111,23 @@ public :
 	*/
 	void computeNumericalFluxes()
 	{
-	
-
-  
+		maxTimestep = 0;
+		solver::FWave<float> solver_t = solver;
+#ifdef _OPENMP
+#ifndef NDEBUG
+		cout << "Starting OpenMP initializing block" << endl;
+#endif
+		int numThreads = 1, tId = 0;
+		numThreads = omp_get_max_threads();
+		float maxTimestep_t[numThreads];
+		for(int i = 0; i < numThreads; i++)
+			maxTimestep_t[i] = 0;
+#endif
 		// compute horizontal updates
-		
 		for(unsigned int y = 0; y < ny; y++)
-		{	
-		    solver::FWave<float> solver_t = solver;
-		    float maxTimestep_t[nx];
-		    #pragma omp parallel for private(solver_t), default(shared)
-		    for(unsigned int x = 0; x < nx+1; x++) 
+		{
+			#pragma omp parallel for private(solver_t, tId), default(shared)
+			for(unsigned int x = 0; x < nx+1; x++) 
 			{			
 				float maxEdgeSpeed;
 				solver_t.computeNetUpdates(h[x][y+1], h[x+1][y+1], hu[x][y+1], hu[x+1][y+1], b[x][y+1], b[x+1][y+1],
@@ -128,15 +135,23 @@ public :
 								huNetUpdatesLeft[x][y], huNetUpdatesRight[x][y],
 								maxEdgeSpeed
 							);
-				maxTimestep_t[x] = maxEdgeSpeed;
+#ifdef _OPENMP
+				tId = omp_get_thread_num();
+				maxTimestep_t[tId] = max(maxTimestep_t[tId], maxEdgeSpeed);
 				// no negative timesteps
-				assert(maxTimestep[x] > 0);
+				assert(maxTimestep_t[tId] > 0);
+#else
+				maxTimestep = max(maxTimestep, maxEdgeSpeed);
+				assert(maxTimestep > 0);
+#endif
 
 			}
-		    for(unsigned int x = 0; x < nx+1; x++){
-                        maxTimestep = std::max(maxTimestep_t[x], maxTimestep);
-			}
 		}
+#ifdef _OPENMP
+		for(unsigned int x = 0; x < numThreads; x++){
+        		maxTimestep = std::max(maxTimestep_t[x], maxTimestep);
+		}
+#endif
 		
 		// set vertical updates to zero (for updateUnknowns necessarry)
 		//setZero(hNetUpdatesBelow, nx, ny + 1);
@@ -146,6 +161,9 @@ public :
 		
 		// approximate timestep by slow down maxTimestep 
 		maxTimestep = 0.4 * dx / maxTimestep;
+#ifndef NDEBUG
+		cout << "MaxTimestep: " << maxTimestep << endl;
+#endif
 		//updateUnknowns(maxTimestep);
 		for(unsigned int y = 1; y < ny+1; y++)
 		{
@@ -166,9 +184,9 @@ public :
 		// compute vertical updates
 		for(unsigned int y = 0; y < ny+1; y++)
 		{
-		solver::FWave<float> solver_t = solver;
-		    #pragma omp parallel for private(solver_t), default(shared)
-		    for(unsigned int x = 0; x < nx; x++) 
+			solver::FWave<float> solver_t = solver;
+			#pragma omp parallel for private(solver_t), default(shared)
+			for(unsigned int x = 0; x < nx; x++) 
 			{
 				float maxEdgeSpeed;
 				solver_t.computeNetUpdates(h[x+1][y],h[x+1][y+1], hv[x+1][y], hv[x+1][y+1], b[x+1][y], b[x+1][y+1],
@@ -178,10 +196,10 @@ public :
 							);
 //TODO DEBUG
 #ifndef NDEBUG
-                   #pragma omp critical
-			{
-			    maxTimestepY = std::max(maxEdgeSpeed, maxTimestepY);
-			}
+				#pragma omp critical
+				{
+				    maxTimestepY = std::max(maxEdgeSpeed, maxTimestepY);
+				}
 #endif //NDEBUG
 						
 			}
@@ -201,7 +219,7 @@ public :
 		//updateUnknowns(maxTimestep);		
 		for(unsigned int y = 1; y < ny+1; y++)
 		{
-		    #pragma omp parallel for default(shared)
+			#pragma omp parallel for default(shared)
 			for(unsigned int x = 1; x < nx+1; x++)
 			{
 				h[x][y] -=	(maxTimestep / dy) * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
