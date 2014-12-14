@@ -22,7 +22,7 @@ int main(int argc, char** argv){
 	args.addOption("size_y", 'y', "Number of cells in y direction", tools::Args::Required, false);
 	args.addOption("use_checkpoint_file", 'r', "Use this option to continue a previously failing run", tools::Args::No, false);
 	args.addOption("end_of_simulation", 'e' , "Sets the end of the simulation", tools::Args::Required, false);
-	args.addOption("boundary_conditions", 'b', "Sets the boundary conditions, where 0 is Wall and 1 is Outflow", tools::Args::Required, false);
+	args.addOption("boundary_conditions", 'b', "Sets the boundary conditions, where 1 is Wall and 2 is Outflow", tools::Args::Required, false);
 	args.addOption("input_folder", 'i', "Folder containing the input nc files", tools::Args::Required, false);
 	args.addOption("compression", 'c', "Compression value. Simulation calculated with [x]x[y] domain and written [x/c]x[y/c] domain", tools::Args::Required, false);
 	args.addOption("percentage_logging_steps", 'l', "Logs a message telling about the progress with the given stepsize", tools::Args::Required, false);

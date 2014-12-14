@@ -222,7 +222,7 @@ public :
 			#pragma omp parallel for default(shared)
 			for(unsigned int x = 1; x < nx+1; x++)
 			{
-				h[x][y] -=	(maxTimestep / dy) * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
+				h[x][y] -= (maxTimestep / dy) * (hNetUpdatesAbove[x - 1][y - 1] + hNetUpdatesBelow[x - 1][y]);
 				hv[x][y] -= (maxTimestep / dy) * (hvNetUpdatesAbove[x - 1][y - 1] + hvNetUpdatesBelow[x - 1][y]);
 				if(h[x][y] < 0)
 				    h[x][y] = hv[x][y] = 0;
