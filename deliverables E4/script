@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH -o
+/scratch/t1221/lu26xan/jobout.out
+#SBATCH -D
+/scratch/t1221/lu26xan/SWE/
+#SBATCH -J SWE_Amplifier
+
+#SBATCH --get-user-env
+#SBATCH --mail-type=end
+#SBATCH --mail-user=abinsmaier@gmail.com
+#SBATCH --export=NONE
+#SBATCH --time=01:00:00
+#SBATCH --partition=snb2
+source /etc/profile.d/modules.sh
+module load amplifier_xe
+amplxe-cl -collect hotspots build/SWE_gnu_release_none_fwave -x 100 -y 100 -i SCENARIO_Chile/ -e 1000
