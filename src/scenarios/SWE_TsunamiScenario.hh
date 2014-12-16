@@ -157,25 +157,38 @@ public:
   /** Dummy constructor for cxx tests only */
   SWE_TsunamiScenario() : SWE_Scenario(0, 0, OUTFLOW) { }
 
+
   /**
    * The bathymetry at a requested location
    * @param x The x-Value of the location
    * @param y The y-Value of the location
    */
   float getBathymetry(float x, float y) {
+	return getBathymetry(x, y, false);
+  }
+
+  /**
+   * The bathymetry at a requested location
+   * @param x The x-Value of the location
+   * @param y The y-Value of the location
+   * @param IgnoreDisplacement True if you just want to get the bathymetry value
+   */
+  float getBathymetry(float x, float y, bool IgnoreDisplacement) {
 	int bestXBath, bestYBath;
 	float result;
 	Array::lookUp(y, bathymetry->getCols(), bathY, &bestYBath);
 	Array::lookUp(x, bathymetry->getRows(), bathX, &bestXBath);
-	if(x < disLeft || x > disRight || y < disBot || y > disTop){
+	if(x < disLeft || x > disRight || y < disBot || y > disTop || IgnoreDisplacement){
 		result = (*bathymetry)[bestYBath][bestXBath];
 	}
 	else{
 		int bestXDis, bestYDis;
-		Array::lookUp(y, displacement->getCols(), disX, &bestYDis);
-		Array::lookUp(x, displacement->getRows(), disY, &bestXDis);
+		Array::lookUp(y, displacement->getCols(), disY, &bestYDis);
+		Array::lookUp(x, displacement->getRows(), disX, &bestXDis);
 
 		result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
+
+//		std::printf("Given: (%i, %i) => Disp(%i, %i), Bath(%i, %i)\n", (int)x / 1000, (int)y / 1000, (int)disX[bestXDis] / 1000, (int)disY[bestYDis] / 1000, (int)bathX[bestXBath] / 1000, (int)bathY[bestYBath] / 1000);
 		//result = (*displacement)[bestYDis][bestXDis];
 	}
 	if(result < 0.f && result > -20.f)
@@ -186,12 +199,20 @@ public:
 	    return result;
   };
 
+  void setBathymetry(float value) {
+	int xMax = bathymetry->getCols(), yMax = bathymetry->getRows();
+	#pragma omp parallel for
+	for(int x = 0; x < xMax; x++) for(int y = 0; y < yMax; y++)
+		(*bathymetry)[x][y] = value;
+  };
+
   /**
    * The water height at a requested location
    * @param x The x-Value of the location
    * @param y The y-Value of the location
    */
   float getWaterHeight(float x, float y) {
+	return max(-getBathymetry(x, y, true), 0.f);
 	int bestX, bestY;
 	Array::lookUp(y, bathymetry->getCols(), bathY, &bestY);
 	Array::lookUp(x, bathymetry->getRows(), bathX, &bestX);

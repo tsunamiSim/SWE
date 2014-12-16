@@ -81,6 +81,8 @@ protected:
        else
           return 1.0f; 
     };
+
+    virtual void setBathymetry(float value) { };
     
     virtual ~SWE_Scenario() {};
 

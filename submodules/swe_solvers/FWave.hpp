@@ -168,12 +168,16 @@ public:
 	}    
     
 	// set the maximum wavespeed
-	o_max_ws = max(abs(lambda_roe1), abs(lambda_roe2));
+    if(lambda_roe1 < 0 && lambda_roe2 < 0)
+        o_max_ws = -lambda_roe1;
+    else if(lambda_roe1 > 0 && lambda_roe2 > 0)
+        o_max_ws = lambda_roe2;
+    else
+	    o_max_ws = max(abs(lambda_roe1), abs(lambda_roe2));
 	
 	assert(o_max_ws == o_max_ws);
 	
 	}
-
 };
 }
 

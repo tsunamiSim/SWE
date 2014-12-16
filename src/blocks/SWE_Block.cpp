@@ -179,8 +179,8 @@ void SWE_Block::setDischarge(float (*_u)(float, float), float (*_v)(float, float
  */
 void SWE_Block::setBathymetry(float _b) {
 
-  for(int i=0; i<=nx+1; i++)
     #pragma omp parallel for 
+  for(int i=0; i<=nx+1; i++)
     for(int j=0; j<=ny+1; j++)
       b[i][j] = _b;
 

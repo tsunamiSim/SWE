@@ -408,6 +408,7 @@ public:
 	 * @param best The index of the closest element in the array
 	 */
 	static void lookUp(float searchFor, int max, float* searchIn, int* best){
+//std::printf("Entering lookup with searched value=%f\n", searchFor);
 		int min = 0;
 		max = max - 1;
 		int current;
@@ -423,10 +424,12 @@ public:
 			else
 				min = current;
 		}
+//std::printf("End of search. upper boundary: %f, lower boundary: %f\n", searchIn[max], searchIn[min]);
 		if(searchIn[max] - searchFor < searchFor - searchIn[min])
 			*best = max;
 		else
-			*best = min; 
+			*best = min;
+//std::printf("Return index %i (value: %f)\n", *best, searchIn[*best]);
 
 		/* old implementation (way slower)
 

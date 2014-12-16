@@ -26,6 +26,7 @@ int main(int argc, char** argv){
 	args.addOption("input_folder", 'i', "Folder containing the input nc files", tools::Args::Required, false);
 	args.addOption("compression", 'c', "Compression value. Simulation calculated with [x]x[y] domain and written [x/c]x[y/c] domain", tools::Args::Required, false);
 	args.addOption("percentage_logging_steps", 'l', "Logs a message telling about the progress with the given stepsize", tools::Args::Required, false);
+	args.addOption("static_bathymetry", 'q', "Sets the bathymetry to the negative of the given value in each cell", tools::Args::Required, false);
 	
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
@@ -89,7 +90,8 @@ int main(int argc, char** argv){
 		}
 		l_scenario->setBoundaryTypes(boundTypes[l_boundIndex - 1]);
 	}
-    
+//    l_scenario->getBathymetry(0, 0);
+//exit(2);
     
 	// Set step size
 	float l_dx, l_dy;
@@ -100,6 +102,10 @@ int main(int argc, char** argv){
 	cout << "Calulated step size d_x (divided by 1000): (" << (double)l_scenario->getBoundaryPos(BND_RIGHT)/1000 << " - " << (double)l_scenario->getBoundaryPos(BND_LEFT)/1000 << ") / " << (double)l_nx << " = " << (double)l_dx/1000 << endl;
 	cout << "Calulated step size d_y (divided by 1000): (" << (double)l_scenario->getBoundaryPos(BND_TOP)/1000 << " - " << (double)l_scenario->getBoundaryPos(BND_BOTTOM)/1000 << ") / " << (double)l_ny << " = " << (double)l_dy/1000 << endl;
 #endif
+	if(args.isSet("static_bathymetry")) {
+		tools::Logger::logger.printString(toString("Setting bathymetry values to -") + toString(args.getArgument<float>("static_bathymetry")));
+		l_scenario->setBathymetry(-args.getArgument<float>("static_bathymetry"));
+	}
 
 	tools::Logger::logger.printLine();
 	tools::Logger::logger.printString("Preparing simulation class");
