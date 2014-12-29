@@ -25,6 +25,7 @@
 #define ARG_TOP "top"
 #define ARG_SEISMOLOGYPATH "seismological_data"
 #define ARG_CONSTBATHYMETRY "constant_bathymetry"
+#define ARG_INTERPOLATION "interpolation_max_time"
 
 /**
 * Main program for the simulation using dimensional splitting
@@ -47,12 +48,13 @@ int main(int argc, char** argv){
   args.addOption(ARG_TOP, 0, "Sets the maximum coordinate value in y direction. If one boundary is set, all others must be set too!", tools::Args::Required, false);
   args.addOption(ARG_SEISMOLOGYPATH, 's', "Path to the seismological data", tools::Args::Required, false);
   args.addOption(ARG_CONSTBATHYMETRY, 0, "Setting the bathymetry to the negative of the given value", tools::Args::Required, false);
+  args.addOption(ARG_INTERPOLATION, 'p', "Setting the maximum time of the displacement interpolation", tools::Args::Required, false);
 	
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
 	
 	int test_cp = args.isSet(ARG_CP),
-    test_size = args.isSet("size_x") && args.isSet(ARG_SIZE_Y),
+    test_size = args.isSet(ARG_SIZE_X) && args.isSet(ARG_SIZE_Y),
     test_eos = args.isSet(ARG_EOS),
     test_boundary = args.isSet(ARG_BOUND),
     test_seis = args.isSet(ARG_SEISMOLOGYPATH);
@@ -87,6 +89,11 @@ int main(int argc, char** argv){
       + toString(l_top));
   }
 
+  bool use_interpolation = args.isSet(ARG_INTERPOLATION);
+  float max_interpolation_time = 0;
+  if(use_interpolation)
+    max_interpolation_time = args.getArgument<float>(ARG_INTERPOLATION);
+
 	// If parsing failed, break the program (if help was asked for and granted, execution did not fail though)
 
 	if(parseResult != tools::Args::Success)
@@ -119,7 +126,7 @@ int main(int argc, char** argv){
 	}
 	else
 	{
-		l_nx = args.getArgument<int>("size_x");
+		l_nx = args.getArgument<int>(ARG_SIZE_X);
 		l_ny = args.getArgument<int>(ARG_SIZE_Y);	
 		if(args.isSet(ARG_INPUT)) {
 			std::string sfolder = args.getArgument<std::string>(ARG_INPUT);
@@ -271,7 +278,7 @@ int main(int argc, char** argv){
 	float l_originx, l_originy;
 	int compression = 1;
 
-	if(args.isSet(ARG_COMPRESSION) && !args.isSet("use_checkpoints_file")) {
+	if(args.isSet(ARG_COMPRESSION) && !args.isSet(ARG_CP)) {
 		compression = args.getArgument<int>(ARG_COMPRESSION);
 	}
 	
@@ -307,11 +314,11 @@ int main(int argc, char** argv){
 #else
 	//set up VTKWriter
 	io::VtkWriter l_writer( l_fileName,
-		  	l_dimensionalSplitting.getBathymetry(),
-			l_boundarySize,
-			l_nx, l_ny,
-			l_dx, l_dy,
-			test_cp );
+    l_dimensionalSplitting.getBathymetry(),
+    l_boundarySize,
+    l_nx, l_ny,
+    l_dx, l_dy,
+    test_cp );
 #endif
 
 #ifndef NDEBUG
@@ -340,6 +347,7 @@ int main(int argc, char** argv){
 	l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
                         l_dimensionalSplitting.getDischarge_hu(),
                         l_dimensionalSplitting.getDischarge_hv(),
+                        l_dimensionalSplitting.getBathymetry(),
                         l_time);
 
 	// Loop over timesteps
@@ -354,9 +362,10 @@ int main(int argc, char** argv){
 		l_time += l_dimensionalSplitting.getMaxTimestep();
 		// write timestep
 		l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
-                	l_dimensionalSplitting.getDischarge_hu(),
-			l_dimensionalSplitting.getDischarge_hv(),
-                        l_time);
+    	l_dimensionalSplitting.getDischarge_hu(),
+      l_dimensionalSplitting.getDischarge_hv(),
+      l_dimensionalSplitting.getBathymetry(),
+      l_time);
 		
  		std::ostringstream buff;
     		buff << l_time;
@@ -376,6 +385,7 @@ int main(int argc, char** argv){
 			l_checkpointWriter.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
         l_dimensionalSplitting.getDischarge_hu(),
         l_dimensionalSplitting.getDischarge_hv(),
+        l_dimensionalSplitting.getBathymetry(),
         l_time);
 #endif
 	}

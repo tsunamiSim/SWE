@@ -134,7 +134,7 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 		nc_def_var(dataFile, "h",  NC_FLOAT, 3, dims, &hVar);
 		nc_def_var(dataFile, "hu", NC_FLOAT, 3, dims, &huVar);
 		nc_def_var(dataFile, "hv", NC_FLOAT, 3, dims, &hvVar);
-		nc_def_var(dataFile, "b",  NC_FLOAT, 2, &dims[1], &bVar);
+		nc_def_var(dataFile, "b",  NC_FLOAT, 3, dims, &bVar);
 	
 		//set attributes to match CF-1.5 convention
 		ncPutAttText(NC_GLOBAL, "Conventions", "CF-1.5");
@@ -297,7 +297,7 @@ io::NetCdfWriter::NetCdfWriter( const std::string &i_baseName,
 	    nc_def_var(dataFile, "h",  NC_FLOAT, 3, dims, &hVar);
 	    nc_def_var(dataFile, "hu", NC_FLOAT, 3, dims, &huVar);
 	    nc_def_var(dataFile, "hv", NC_FLOAT, 3, dims, &hvVar);
-	    nc_def_var(dataFile, "b",  NC_FLOAT, 2, &dims[1], &bVar);
+	    nc_def_var(dataFile, "b",  NC_FLOAT, 3, dims, &bVar);
 
 	    //set attributes to match CF-1.5 convention
 	    ncPutAttText(NC_GLOBAL, "Conventions", "CF-1.5");
@@ -453,8 +453,33 @@ void io::NetCdfWriter::writeTimeStep( const Float2D &i_h,
                                       const Float2D &i_hv,
                                       const Float2D &i_b,
                                       float i_time) {
-	//write bathymetry height
+	//write i_time
+	nc_put_var1_float(dataFile, timeVar, &timeStep, &i_time);
+
+	//write water height
+	writeVarTimeDependent(i_h, hVar);
+
+	//write momentum in x-direction
+	writeVarTimeDependent(i_hu, huVar);
+
+	//write momentum in y-direction
+	writeVarTimeDependent(i_hv, hvVar);
+
+	//write bathymetry
 	writeVarTimeDependent(i_b, bVar);
 
-  writeTimeStep(i_h, i_hu, i_hv, i_time, false);
+	// Increment timeStep for next call
+	timeStep++;
+
+	if (flush > 0 && timeStep % flush == 0)
+		nc_sync(dataFile);
+
+	nc_sync(dataFile);
+#ifndef NDEBUG
+	std:string text = "Wrote to file ";
+	
+	std::ostringstream buff;
+   		buff << dataFile;
+	tools::Logger::logger.printString(text + buff.str());
+#endif
 }

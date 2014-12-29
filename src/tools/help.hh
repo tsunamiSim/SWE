@@ -247,7 +247,7 @@ class Float2D {
 		return tmp;
 	}
 
-  std::string ToString() {
+  std::string ToString() const {
     std::string result = "Rows: " + toString(getRows()) + " Cols: " + toString(getCols()) + ": ";
     int cols = getCols(), rows = getRows();
     for(int c = 0; c < cols; c++) for(int r = 0; r < rows; r++)
