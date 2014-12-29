@@ -88,18 +88,18 @@ SWE_Block::~SWE_Block() {
  * @param i_multipleBlocks are the multiple SWE_blocks?
  */
 void SWE_Block::initScenario( float _offsetX, float _offsetY,
-							  SWE_Scenario &i_scenario,
+                              SWE_Scenario &i_scenario,
                               const bool i_multipleBlocks ) {
 
 #ifndef NDEBUG
-	std::cout << "Called SWE_Block::initScenario(" << _offsetX << ", " << _offsetY << ", " << "scenario" << ", " << i_multipleBlocks << ")" << std::endl;
-	std::cout << "Currently there are " << nx << " cells in x-Dimension and " << ny << " cells in y-Dimension" << std::endl;
+  std::cout << "Called SWE_Block::initScenario(" << _offsetX << ", " << _offsetY << ", " << "scenario" << ", " << i_multipleBlocks << ")" << std::endl;
+  std::cout << "Currently there are " << nx << " cells in x-Dimension and " << ny << " cells in y-Dimension" << std::endl;
 #endif
-	offsetX = _offsetX;
-	offsetY = _offsetY;
+  offsetX = _offsetX;
+  offsetY = _offsetY;
 
 #ifndef NDEBUG
-	std::cout << "Starting with water height and momentum values" << std::endl;
+  std::cout << "Starting with water height and momentum values" << std::endl;
 #endif
   // initialize water height and discharge
   for(int i=1; i<=nx; i++)

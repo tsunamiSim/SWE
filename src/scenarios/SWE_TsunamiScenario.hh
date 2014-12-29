@@ -128,6 +128,17 @@ void readNcFile(const char* fileDir, Float2D** buffZ, float** buffY, float** buf
 
 
 public:
+  SWE_TsunamiScenario(int cellsX, int cellsY, float minX, float maxX, float minY, float maxY, const char *bathymetryFile = "NetCDF_Input/initBathymetry.nc", const char *displacementFile = "NetCDF_Input/displacement.nc") : SWE_Scenario(cellsX, cellsY, OUTFLOW) {
+	  tools::Logger::logger.printLine();
+	  readNcFile(bathymetryFile, &bathymetry, &bathY, &bathX);
+	  tools::Logger::logger.printString("Succesfully read bathymetry");
+	  readNcFile(displacementFile, &displacement, &disY, &disX);   
+	  tools::Logger::logger.printString("Succesfully read displacement");
+
+    clip(minX, maxX, minY, maxY);
+
+    applyBoundaries();
+  }
 
   /**
    * Creates a new instance of the TsunamiScenario Class
@@ -135,24 +146,13 @@ public:
    * @param cellsY Cells in y dimension
    */
   SWE_TsunamiScenario(int cellsX, int cellsY, const char *bathymetryFile = "NetCDF_Input/initBathymetry.nc", const char *displacementFile = "NetCDF_Input/displacement.nc") : SWE_Scenario(cellsX, cellsY, OUTFLOW) {
-	tools::Logger::logger.printLine();
-	readNcFile(bathymetryFile, &bathymetry, &bathY, &bathX);
-	tools::Logger::logger.printString(toString("Succesfully read bathymetry. Rows: ") + toString(bathymetry->getRows()) + toString(", Cols: ") + toString(bathymetry->getCols()));
-	readNcFile(displacementFile, &displacement, &disY, &disX);   
-	tools::Logger::logger.printString("Succesfully read displacement. Rows: " + toString(displacement->getRows()) + toString(", Cols: ") + toString(displacement->getCols()));
-	tools::Logger::logger.printString("Setting displacement boundaries");
-	disTop = Array::max(disY, displacement->getCols());
-	disBot = Array::min(disY, displacement->getCols());
-	disLeft = Array::min(disX, displacement->getRows());
-	disRight = Array::max(disX, displacement->getRows());
-	std::string comma = ", ";
-	tools::Logger::logger.printString(toString("Displacement boundaries set to: top, bot, left, right ") + toString(disTop) + comma + toString(disBot) + comma + toString(disLeft) + comma + toString(disRight));
-	boundTop = Array::max(bathY, bathymetry->getCols());
-	boundBot = Array::min(bathY, bathymetry->getCols());
-	boundLeft = Array::min(bathX, bathymetry->getRows());
-	boundRight = Array::max(bathX, bathymetry->getRows());
-	tools::Logger::logger.printString(toString("Bathymetry boundaries set to: top, bot, left, right (divided by 1000)") + toString(boundTop/1000) + comma + toString(boundBot/1000) + comma + toString(boundLeft/1000) + comma + toString(boundRight));
-	tools::Logger::logger.printLine();
+	  tools::Logger::logger.printLine();
+	  readNcFile(bathymetryFile, &bathymetry, &bathY, &bathX);
+	  tools::Logger::logger.printString(toString("Succesfully read bathymetry. Rows: ") + toString(bathymetry->getRows()) + toString(", Cols: ") + toString(bathymetry->getCols()));
+	  readNcFile(displacementFile, &displacement, &disY, &disX);   
+	  tools::Logger::logger.printString("Succesfully read displacement. Rows: " + toString(displacement->getRows()) + toString(", Cols: ") + toString(displacement->getCols()));
+
+	  applyBoundaries();
   };
   /** Dummy constructor for cxx tests only */
   SWE_TsunamiScenario() : SWE_Scenario(0, 0, OUTFLOW) { }
@@ -174,29 +174,30 @@ public:
    * @param IgnoreDisplacement True if you just want to get the bathymetry value
    */
   float getBathymetry(float x, float y, bool IgnoreDisplacement) {
-	int bestXBath, bestYBath;
-	float result;
-	Array::lookUp(y, bathymetry->getCols(), bathY, &bestYBath);
-	Array::lookUp(x, bathymetry->getRows(), bathX, &bestXBath);
-	if(x < disLeft || x > disRight || y < disBot || y > disTop || IgnoreDisplacement){
-		result = (*bathymetry)[bestYBath][bestXBath];
-	}
-	else{
-		int bestXDis, bestYDis;
-		Array::lookUp(y, displacement->getCols(), disY, &bestYDis);
-		Array::lookUp(x, displacement->getRows(), disX, &bestXDis);
+//	IgnoreDisplacement = true; // Uncomment that line to ignore displacement
+	  int bestXBath, bestYBath;
+	  float result;
+	  Array::lookUp(y, bathymetry->getCols(), bathY, &bestYBath);
+	  Array::lookUp(x, bathymetry->getRows(), bathX, &bestXBath);
+	  if(x < disLeft || x > disRight || y < disBot || y > disTop || IgnoreDisplacement){
+		  result = (*bathymetry)[bestYBath][bestXBath];
+	  }
+	  else{
+		  int bestXDis, bestYDis;
+		  Array::lookUp(y, displacement->getCols(), disY, &bestYDis);
+		  Array::lookUp(x, displacement->getRows(), disX, &bestXDis);
 
-		result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
+		  result = (*bathymetry)[bestYBath][bestXBath] + (*displacement)[bestYDis][bestXDis];
 
 //		std::printf("Given: (%i, %i) => Disp(%i, %i), Bath(%i, %i)\n", (int)x / 1000, (int)y / 1000, (int)disX[bestXDis] / 1000, (int)disY[bestYDis] / 1000, (int)bathX[bestXBath] / 1000, (int)bathY[bestYBath] / 1000);
 		//result = (*displacement)[bestYDis][bestXDis];
 	}
-	if(result < 0.f && result > -20.f)
-		return -20.f;
-	else if(result > 0.f && result < 20.f)
-		return 20.f;
-	else
-	    return result;
+    if(result < 0.f && result > -20.f)
+  	  return -20.f;
+    else if(result > 0.f && result < 20.f)
+  	  return 20.f;
+    else
+      return result;
   };
 
   void setBathymetry(float value) {
@@ -213,15 +214,6 @@ public:
    */
   float getWaterHeight(float x, float y) {
 	return max(-getBathymetry(x, y, true), 0.f);
-	int bestX, bestY;
-	Array::lookUp(y, bathymetry->getCols(), bathY, &bestY);
-	Array::lookUp(x, bathymetry->getRows(), bathX, &bestX);
-	if((*bathymetry)[bestY][bestX] < -20.f)
-		return -(*bathymetry)[bestY][bestX];
-	else if((*bathymetry)[bestY][bestX] < 0.f)
-		return 20.f;
-	else
-		return 0.f;
   };
 
   /**
@@ -248,8 +240,73 @@ public:
 		return boundTop;
 	}
   };
-	
 
+//private:
+
+  void applyBoundaries(){
+  	tools::Logger::logger.printString("Setting displacement boundaries");
+	  disTop = Array::max(disY, displacement->getCols());
+	  disBot = Array::min(disY, displacement->getCols());
+	  disLeft = Array::min(disX, displacement->getRows());
+	  disRight = Array::max(disX, displacement->getRows());
+	  std::string comma = ", ";
+	  tools::Logger::logger.printString(toString("Displacement boundaries set to: left, right, bottom, top (divided by 1000): ") + toString(disLeft/1000) + comma + toString(disRight/1000) + comma + toString(disBot/1000) + comma + toString(disTop/1000));
+  	tools::Logger::logger.printString("Setting bathymetry boundaries");
+	  boundTop = Array::max(bathY, bathymetry->getCols());
+	  boundBot = Array::min(bathY, bathymetry->getCols());
+	  boundLeft = Array::min(bathX, bathymetry->getRows());
+	  boundRight = Array::max(bathX, bathymetry->getRows());
+	  tools::Logger::logger.printString(toString("Bathymetry boundaries set to: left, right, bottom, top (divided by 1000): ") + toString(boundLeft/1000) + comma + toString(boundRight/1000) + comma + toString(boundBot/1000) + comma + toString(boundTop/1000));
+	  tools::Logger::logger.printLine();
+  }
+	
+  void clip(float minX, float maxX, float minY, float maxY) {
+    int minIndex_disp_x = 0, maxIndex_disp_x = 0,
+      minIndex_disp_y = 0, maxIndex_disp_y = 0,
+      minIndex_bath_x = 0, maxIndex_bath_x = 0,
+      minIndex_bath_y = 0, maxIndex_bath_y = 0,
+      cols = 0, rows = 0;
+
+    // Displacement
+    clip(minX, maxX, &disX, displacement->getRows(), &minIndex_disp_x, &maxIndex_disp_x);
+//    tools::Logger::logger.printString("Displacement x values clipped: minIndex: " + toString(minIndex_disp_x) + " maxIndex: " + toString(maxIndex_disp_x));
+//    Array::print(disX, maxIndex_disp_x - minIndex_disp_x + 1, "Displacement X values");
+    clip(minY, maxY, &disY, displacement->getCols(), &minIndex_disp_y, &maxIndex_disp_y);
+//    tools::Logger::logger.printString("Displacement y values clipped: minIndex: " + toString(minIndex_disp_y) + " maxIndex: " + toString(maxIndex_disp_y));
+//    Array::print(disY, maxIndex_disp_y - minIndex_disp_y + 1, "Displacement Y values");
+
+//    cout << "before" << endl;
+//    cout << displacement->ToString() << endl;
+
+    Float2D *newDisp = new Float2D(maxIndex_disp_y - minIndex_disp_y + 1, maxIndex_disp_x - minIndex_disp_x + 1);
+//    cout << "New rows: " << newDisp->getRows() << ", new cols: " << newDisp->getCols() << endl;
+    cols = newDisp->getCols();
+    rows = newDisp->getRows();
+    for(int col = 0; col < cols; col++) for(int row = 0; row < rows; row++)
+      (*newDisp)[col][row] = (*displacement)[col + minIndex_disp_y][row + minIndex_disp_x];
+    delete displacement;
+    displacement = newDisp;
+//    cout << "after" << endl;
+//    cout << displacement->ToString() << endl;
+
+    // Bathymetry
+    clip(minX, maxX, &bathX, bathymetry->getRows(), &minIndex_bath_x, &maxIndex_bath_x);
+    clip(minY, maxY, &bathY, bathymetry->getCols(), &minIndex_bath_y, &maxIndex_bath_y);
+    Float2D *newBath = new Float2D(maxIndex_bath_y - minIndex_bath_y + 1, maxIndex_bath_x, minIndex_bath_x + 1);
+    cols = newBath->getCols();
+    rows = newBath->getRows();
+    for(int col = 0; col < cols; col++) for(int row = 0; row < rows; row++)
+      (*newBath)[col][row] = (*bathymetry)[col + minIndex_bath_y][row + minIndex_bath_x];
+    delete bathymetry;
+    bathymetry = newBath;
+  }
+
+  void clip(float min, float max, float** array, int length, int* minIndex, int* maxIndex) {
+    Array::lookUp(min, length, *array, minIndex);
+    Array::lookUp(max, length, *array, maxIndex);
+    int mini = *minIndex, maxi = *maxIndex;
+    Array::cut(&*array, mini, maxi - mini + 1);
+  }
 };
 
 #endif

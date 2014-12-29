@@ -106,6 +106,14 @@ private:
     void writeTimeStep( const Float2D &i_h,
                         const Float2D &i_hu,
                         const Float2D &i_hv,
+                        float i_time,
+                        bool i_writeBathymetry = true);
+
+    // writes the unknowns at a given time step to the netCDF-file.
+    void writeTimeStep( const Float2D &i_h,
+                        const Float2D &i_hu,
+                        const Float2D &i_hv,
+                        const Float2D &i_b,
                         float i_time);
 
   private:

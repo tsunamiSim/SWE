@@ -58,7 +58,7 @@ void io::VtkWriter::writeTimeStep(
 		const Float2D &i_h,
         const Float2D &i_hu,
         const Float2D &i_hv,
-        float i_time)
+        float i_time, bool i_writeBathymetry)
 {
 	std::ofstream vtkFile(generateFileName().c_str());
 	assert(vtkFile.good());

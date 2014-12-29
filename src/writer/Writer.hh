@@ -107,7 +107,16 @@ public:
 			const Float2D &i_h,
             const Float2D &i_hu,
             const Float2D &i_hv,
-            float i_time) = 0;
+            float i_time, bool i_writeBathymetry = true) = 0;
+
+  virtual void writeTimeStep(
+    const Float2D &i_h,
+    const Float2D &i_hu,
+    const Float2D &i_hv,
+    const Float2D &i_b,
+    float i_time) {
+    writeTimeStep(i_h, i_hu, i_hv, i_time);
+  }
 };
 
 #endif // WRITER_HH_

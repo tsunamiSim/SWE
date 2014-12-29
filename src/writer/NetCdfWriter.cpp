@@ -405,7 +405,7 @@ void io::NetCdfWriter::writeVarTimeIndependent( const Float2D &i_matrix,
 void io::NetCdfWriter::writeTimeStep( const Float2D &i_h,
                                       const Float2D &i_hu,
                                       const Float2D &i_hv,
-                                      float i_time) {
+                                      float i_time, bool i_writeBathymetry) {
 	/*
 	 * Prints the arrays
 	for(int row = 0; row < i_h.getRows(); row++)
@@ -416,7 +416,7 @@ void io::NetCdfWriter::writeTimeStep( const Float2D &i_h,
 			}
 	*/
 
-	if (timeStep == 0)
+	if (timeStep == 0 && i_writeBathymetry)
 		// Write bathymetry
 		writeVarTimeIndependent(b, bVar);
 
@@ -446,4 +446,15 @@ void io::NetCdfWriter::writeTimeStep( const Float2D &i_h,
    		buff << dataFile;
 	tools::Logger::logger.printString(text + buff.str());
 #endif
+}
+
+void io::NetCdfWriter::writeTimeStep( const Float2D &i_h,
+                                      const Float2D &i_hu,
+                                      const Float2D &i_hv,
+                                      const Float2D &i_b,
+                                      float i_time) {
+	//write bathymetry height
+	writeVarTimeDependent(i_b, bVar);
+
+  writeTimeStep(i_h, i_hu, i_hv, i_time, false);
 }

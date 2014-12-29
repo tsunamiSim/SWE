@@ -48,6 +48,16 @@ using namespace std;
 #define ERR(e) {printf("Error: %s\n", nc_strerror(e)); assert(false);}
 
 /**
+ * Formats any input to string
+ */
+template<typename T>
+inline std::string toString(T input) {
+	std::ostringstream buff;
+    	buff << input;
+	return buff.str();
+};
+
+/**
  * class Float1D is a proxy class that can represent, for example, 
  * a column or row vector of a Float2D array, where row (sub-)arrays 
  * are stored with a respective stride. 
@@ -236,6 +246,14 @@ class Float2D {
 		}
 		return tmp;
 	}
+
+  std::string ToString() {
+    std::string result = "Rows: " + toString(getRows()) + " Cols: " + toString(getCols()) + ": ";
+    int cols = getCols(), rows = getRows();
+    for(int c = 0; c < cols; c++) for(int r = 0; r < rows; r++)
+      result += "[" + toString(c) + "," + toString(r) + "]=" + toString((*this)[c][r]) + ", ";
+    return result;
+  }
 
   private:
     int rows;
@@ -446,16 +464,14 @@ public:
 		*/
 	};
 
-};
+  template<typename T> static void cut(T** inputArray, int startIndex, int length) {
+    T* result = new T[length];
+    for(int i = 0; i < length; i++) {
+      result[i] = (*inputArray)[startIndex + i];
+    }
+    *inputArray = result;
+  }
 
-/**
- * Formats any input to string
- */
-template<typename T>
-inline std::string toString(T input) {
-	std::ostringstream buff;
-    	buff << input;
-	return buff.str();
 };
 
 /**
