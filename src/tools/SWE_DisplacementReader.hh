@@ -147,17 +147,24 @@ public:
       }
     }
 
+#ifndef NDEBUG
     tools::Logger::logger.printLine();
     tools::Logger::logger.printString("Seismological Data Reader read the following Data:");
     printBathymetryData();
     printDisplacementData();
     tools::Logger::logger.printString("Seismological Data Reader initialized");
     tools::Logger::logger.printLine();
+#endif
   };
 
   float getBathymetry(float i_time, float i_x, float i_y) {
+#ifndef NDEBUG
+  cout << "requesting bathymetry at time " << i_time << ", location (" << i_x << ", " << i_y << ")" << endl;
+#endif
     int interpolatedIndex;
     float interpolatedValue;
+
+    // Look up timestep
     if(i_time <= m_dt[0]) {
       interpolatedIndex = 0;
       interpolatedValue = 0;
@@ -165,14 +172,44 @@ public:
       interpolatedIndex = m_dt.getSize() - 2;
       interpolatedValue = 1;
     } else {
-      for(int i = 0; i < m_dt.getSize(); i++) {
-        if(m_dt[i] >= i_time) {
-          interpolatedIndex = i - 1;
-          interpolatedValue = (i_time - m_dt[interpolatedIndex]) / (m_dt[interpolatedIndex + 1] - m_dt[interpolatedIndex]);
-          break;
-        }
-      }
+      Array::lookUp(i_time, m_dt.getSize(), m_dt.elemVector(), &interpolatedIndex);
+      if(interpolatedIndex > 0 && i_time <= m_dt[interpolatedIndex])
+        interpolatedIndex--;
+      interpolatedValue = (i_time - m_dt[interpolatedIndex]) / (m_dt[interpolatedIndex + 1] - m_dt[interpolatedIndex]);
     }
+#ifndef NDEBUG
+  cout << "time interpolation finished. Found left left timestep " << m_dt[interpolatedIndex] << "s and inteprolation factor " << interpolatedValue << endl;
+#endif
+
+    float result, dsp;
+    int l_bxi, l_byi, l_dxi, l_dyi;
+
+    // Look up bathymetry
+    Array::lookUp(i_x, m_bx.getSize(), m_bx.elemVector(), &l_bxi);
+    Array::lookUp(i_y, m_by.getSize(), m_by.elemVector(), &l_byi);
+    result = m_bz[l_byi][l_bxi];
+
+#ifndef NDEBUG
+  cout << "bathymetry value at location. Found x index " << l_bxi << ", y index " << l_byi << endl << "Value: " << result << endl;
+#endif
+    
+    // Look up displacement
+    Array::lookUp(i_x, m_dx.getSize(), m_dx.elemVector(), &l_dxi);
+    Array::lookUp(i_y, m_dy.getSize(), m_dy.elemVector(), &l_dyi);
+
+    dsp = m_dz[interpolatedIndex][l_dyi][l_dxi] * (1 - interpolatedValue) + m_dz[interpolatedIndex + 1][l_dyi][l_dxi] * interpolatedValue;
+
+#ifndef NDEBUG
+  cout << "displacement value at location. Found x index " << l_dxi << ", y index " << l_dyi << endl << "Index: " << interpolatedIndex << ", Value: " << dsp << endl;
+#endif
+
+    // Apply displacement
+    result += dsp;
+
+#ifndef NDEBUG
+  cout << "result: " << result << endl;
+#endif
+    return result;
   };
 
   void printBathymetryData() {
