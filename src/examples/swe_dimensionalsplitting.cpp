@@ -7,7 +7,7 @@
 #include "writer/NetCdfWriter.hh"
 #include "scenarios/SWE_TsunamiScenario.hh"
 #include "scenarios/SWE_CheckpointScenario.hh"
-#include "tools/SWE_DisplacementReader.hh"
+#include "seismology/SWE_DisplacementReader.hh"
 #else
 #include "writer/VtkWriter.hh"
 #endif

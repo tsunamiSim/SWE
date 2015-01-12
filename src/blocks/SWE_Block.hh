@@ -193,6 +193,14 @@ class SWE_Block {
     int getNx() { return nx; }
     /// returns #ny, i.e. the grid size in y-direction 
     int getNy() { return ny; }
+    /// returns #dx, i.e. the cell size in x-direction
+    float getDx() { return dx; }
+    /// returns #dy, i.e. the cell size in y-direction
+    float getDY() { return dy; }
+    /// return #offsetX, i.e. the x-origin of the coordinate system
+    float getOffx() { return offsetX; }
+    /// return #offsetY, i.e. the y-origin of the coordinate system
+    float getOffy() { return offsetY; }
 
   // Konstanten:
     /// static variable that holds the gravity constant (g = 9.81 m/s^2):
