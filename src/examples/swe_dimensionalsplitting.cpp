@@ -86,19 +86,17 @@ int main(int argc, char** argv){
       + toString(l_bot)
       + ", top="
       + toString(l_top));
-  }
+  } // if(test_left)
 
 	// If parsing failed, break the program (if help was asked for and granted, execution did not fail though)
-	if(parseResult != tools::Args::Success)
-	{
+	if(parseResult != tools::Args::Success)	{
 		if(parseResult == tools::Args::Help)
 			return 0;
-		else
-		{
+		else {
 			tools::Logger::logger.printString("Something went wrong!");
 			return 1;
-		}
-	}
+		} // else
+	} // if(parseResult != tools::Args::Success)
 	
 	// Read simulation domain
 	int l_nx, l_ny; 
@@ -107,8 +105,7 @@ int main(int argc, char** argv){
   tools::Logger::logger.printString("Preparing scenario");
   //Prepare scenario
   SWE_Scenario* l_scenario;
-	if(test_cp)
-	{
+	if(test_cp)	{
     l_scenario = new SWE_CheckpointScenario();
     l_nx = l_scenario->getCellsX();
     l_ny = l_scenario->getCellsY();
@@ -116,9 +113,8 @@ int main(int argc, char** argv){
       + toString(l_nx)
       + toString(", ")
       + toString(l_ny));
-	}
-	else
-	{
+	} // if(test_cp)
+	else {
 		l_nx = args.getArgument<int>(ARG_SIZE_X);
 		l_ny = args.getArgument<int>(ARG_SIZE_Y);	
 		if(args.isSet(ARG_INPUT)) {
@@ -135,7 +131,7 @@ int main(int argc, char** argv){
       else
   			l_scenario = new SWE_TsunamiScenario(l_nx, l_ny, sbath.c_str(), sdisp.c_str());
 			
-		}
+		} // if(args.isSet(ARG_INPUT))
 		else if(test_left)
         l_scenario = new SWE_TsunamiScenario(l_nx, l_ny,
                       l_left,
@@ -148,7 +144,7 @@ int main(int argc, char** argv){
       + toString(l_nx)
       + toString(", ")
       + toString(l_ny));	
-	}
+	} // else
    
 	BoundaryType boundTypes[2];
 	boundTypes[0] = WALL;
@@ -158,14 +154,14 @@ int main(int argc, char** argv){
 		if(l_boundIndex < 1 || l_boundIndex > 2) {
 			cout << "Boundary conditions not set properly (see help)" << endl;
 			return 1;
-		}
+		} // if(l_boundIndex < 1 || l_boundIndex > 2)
 		l_scenario->setBoundaryTypes(boundTypes[l_boundIndex - 1]);
-	}
+	} // if(test_boundary)
     
 	// Set step size
 	float l_dx, l_dy;
-  	l_dx = (l_scenario->getBoundaryPos(BND_RIGHT) - l_scenario->getBoundaryPos(BND_LEFT))/l_nx;
-  	l_dy = (l_scenario->getBoundaryPos(BND_TOP) - l_scenario->getBoundaryPos(BND_BOTTOM))/l_ny;
+  l_dx = (l_scenario->getBoundaryPos(BND_RIGHT) - l_scenario->getBoundaryPos(BND_LEFT))/l_nx;
+  l_dy = (l_scenario->getBoundaryPos(BND_TOP) - l_scenario->getBoundaryPos(BND_BOTTOM))/l_ny;
 
 #ifndef NDEBUG
 	cout << "Calulated step size d_x (divided by 1000): ("
@@ -191,7 +187,7 @@ int main(int argc, char** argv){
 		tools::Logger::logger.printString(toString("Setting bathymetry values to -")
       + toString(args.getArgument<float>(ARG_CONSTBATHYMETRY)));
 		l_scenario->setBathymetry(-args.getArgument<float>(ARG_CONSTBATHYMETRY));
-	}
+	} // if(args.isSet(ARG_CONSTBATHYMETRY))
 
 	tools::Logger::logger.printLine();
 	tools::Logger::logger.printString("Preparing simulation class");
@@ -206,7 +202,7 @@ int main(int argc, char** argv){
     *l_scenario);
 	
 	// set the type of all four boundaries if set via comandline
-	if(test_boundary){
+	if(test_boundary) {
 	     switch(args.getArgument<int>(ARG_BOUND)){
 	        case 1:
               l_dimensionalSplitting.setBoundaryType(BND_LEFT, WALL);
@@ -225,8 +221,8 @@ int main(int argc, char** argv){
 	        default:  
 	            tools::Logger::logger.printString("Unable to parse boundary condition from comandline, used default!");
 	            break;
-	     }
-    }
+	     } // switch(args.getArgument<int>(ARG_BOUND))
+    } // if(test_boundary)
 
   // set the displacement reader class
 
@@ -252,6 +248,7 @@ int main(int argc, char** argv){
 	std::string basename = "SWE";
 	if(args.isSet(ARG_INPUT))
 		basename += toString("_") + args.getArgument<std::string>(ARG_INPUT);
+
 	std::string l_fileName = basename
     + toString("_x")
     + toString(l_nx)
@@ -259,6 +256,7 @@ int main(int argc, char** argv){
     + toString(l_ny)
     + toString("_t")
     + toString(l_endOfSimulation);
+
 	l_fileName.erase(
     std::remove(l_fileName.begin(),
       l_fileName.end(),
@@ -280,9 +278,8 @@ int main(int argc, char** argv){
 	float l_originx, l_originy;
 	int compression = 1;
 
-	if(args.isSet(ARG_COMPRESSION) && !args.isSet(ARG_CP)) {
+	if(args.isSet(ARG_COMPRESSION) && !args.isSet(ARG_CP))
 		compression = args.getArgument<int>(ARG_COMPRESSION);
-	}
 	
 	l_originx = l_scenario->getBoundaryPos(BND_LEFT);
 	l_originy = l_scenario->getBoundaryPos(BND_BOTTOM);
@@ -332,8 +329,10 @@ int main(int argc, char** argv){
 	float percStep = 0.1f;
 	if(args.isSet(ARG_LOGGINGSTEPS))
 		percStep = args.getArgument<float>(ARG_LOGGINGSTEPS) / 100.0f;
+
 	if(percStep < 0.01f)
 		percStep = 0.01f;
+
 	unsigned int loggedAmount = 1;
 
 #ifdef _OPENMP
@@ -352,9 +351,8 @@ int main(int argc, char** argv){
                         l_dimensionalSplitting.getBathymetry(),
                         l_time);
 
-	// Loop over timesteps
-	while(l_time < l_endOfSimulation)
-	{
+	// Loop over timesteps *************************************************************************************
+	while(l_time < l_endOfSimulation)	{
 		l_dimensionalSplitting.setGhostLayer();
 		
 		// compute one timestep
@@ -381,7 +379,7 @@ int main(int argc, char** argv){
         + toString((int) (100 * progress))
         + toString("%"));
 			loggedAmount = progress / percStep + 1;
-		}
+		} // if(progress > percStep * loggedAmount)
         
 #ifdef WRITENETCDF	
 		if(++l_cpCounter % l_timeStepsPerCheckpoint == 0)
@@ -391,9 +389,9 @@ int main(int argc, char** argv){
         l_dimensionalSplitting.getBathymetry(),
         l_time);
 #endif
-	}
+	} // while(l_time < l_endOfSimulation)
 
 	tools::Logger::logger.printString("End of simulation");
 	delete l_scenario;
 	return 0;
-}
+} // main

@@ -80,6 +80,12 @@ class Float1D
 	{
 	}
 
+  std::string ToString() {
+    std::string result = toString("Size: ") + toString(rows) + toString("\n");
+    for(int i = 0; i < rows; i++)
+      result += toString("[") + toString(i) + toString("]=") + toString(elem[i*stride]) + toString(", ");
+  }
+
 	inline float& operator[](int i) { 
 		return elem[i*stride]; 
 	}
@@ -92,7 +98,7 @@ class Float1D
 		return elem;
 	}
 
-        inline int getSize() const { return rows; }; 
+  inline int getSize() const { return rows; }; 
 
   private:
     int rows;

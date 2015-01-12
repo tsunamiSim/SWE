@@ -45,7 +45,6 @@ private:
   std::vector<vector<float> > m_bz;
   std::vector<vector<vector<float> > > m_dz;
   Float1D m_bx, m_by, m_dx, m_dy, m_dt;
-  int m_bnx, m_bny, m_dnx, m_dny, m_dnt;
   float *result;
 
 public:
@@ -100,7 +99,8 @@ public:
     for(int y_ = 0; y_ < BLenY; y_++) {
       m_bz.push_back(vector<float>());
       for(int x_ = 0; x_ < BLenX; x_++)
-        m_b[y_].push_back(BZVals[x_ + y_ * BLenX]);
+        m_bz[y_].push_back(BZVals[x_ + y_ * BLenX]);
+    }
     //Close bathymetry file
     nc_close(BFileID);
     
@@ -147,38 +147,12 @@ public:
       }
     }
 
-#ifndef NDEBUG
-    tools::Logger::logger.printString("Seismological data reader read the following data:");
-    cout << "BX (" << m_bx.getSize() << "): ";
-    for(int i = 0; i < m_bx.getSize(); i++)
-      cout << m_bx[i] << ", ";
-    cout << endl << "BY (" << m_by.getSize() << "): ";
-    for(int i = 0; i < m_by.getSize(); i++)
-      cout << m_by[i] << ", ";
-    cout << endl << "BZ: ";
-    for(int i = 0; i < m_bz.size(); i++) for(int j = 0; j < m_bz[i].size(); j++)
-      cout << m_bz[i][j] << ", " <<;
-    cout << endl;
-
-    cout << endl << "DX (" << m_dx.getSize() << "): ";
-    for(int i = 0; i < m_dx.getSize(); i++)
-      cout << m_dx[i] << ", ";
-    cout << endl << "DY (" << m_dy.getSize() << "): ";
-    for(int i = 0; i < m_dy.getSize(); i++)
-      cout << m_dy[i] << ", ";
-    cout << endl << "DT (" << m_dt.getSize() << "): ";
-    for(int i = 0; i < m_dt.getSize(); i++)
-      cout << m_dt[i] << ", ";
-    for(int i = 0; i < m_dz.size(); i++) {
-      cout << endl << "DZ (" << m_dt[i] << "): ";
-      for(int j = 0; j < m_dz[i].size(); j++) for(int k = 0; k < m_dz[i][j].size(); k++)
-        cout << m_dz[i][j][k] << ", ";
-    }
-    cout << endl << "End Reader" << endl;
-#endif
-  };
-
-  ~SWE_DisplacementReader() {
+    tools::Logger::logger.printLine();
+    tools::Logger::logger.printString("Seismological Data Reader read the following Data:");
+    printBathymetryData();
+    printDisplacementData();
+    tools::Logger::logger.printString("Seismological Data Reader initialized");
+    tools::Logger::logger.printLine();
   };
 
   float getBathymetry(float i_time, float i_x, float i_y) {
@@ -199,39 +173,56 @@ public:
         }
       }
     }
+  };
 
-
-    
- /*
-    Float2D l_result(m_bz, false);
-    Float2D l_d(m_dz[0].getRows(), m_dz[0].getCols());
-
-    int index;
-    float interpolate;
-    if(i_time <= m_dt[0]) {
-      index = 0;
-      interpolate = 0;
+  void printBathymetryData() {
+    printBathymetryXDimension();
+    printBathymetryYDimension();
+    printBathymetryValues();
+  };
+  void printBathymetryXDimension() {
+    Array::print(m_bx.elemVector(), m_bx.getSize(), "Bathymetry x dimension");
+  };
+  void printBathymetryYDimension() {
+    Array::print(m_by.elemVector(), m_by.getSize(), "Bathymetry y dimension");
+  };
+  void printBathymetryValues() {
+    cout << "Bathymetry Values: " << endl;
+    for(int i = 0; i < m_bz.size(); i++) {
+      for(int j = 0; j < m_bz[i].size(); j++)
+        cout << "[" << i << "][" << j << "]=" << m_bz[i][j] << ", ";
+      cout << endl;
     }
-    else if(i_time >= m_dt[m_dt.getSize() - 1]) {
-      index = m_dt.getSize() - 2;
-      interpolate = 1;
-    }
-    else
-      for(int i = 0; i < m_dt.getSize(); i++)
-        if(m_dt[i] >= i_time) {
-          index = i - 1;
-          interpolate = (i_time - m_dt[index]) / (m_dt[index + 1] - m_dt[index]);
-          break;
+  };
+
+  void printDisplacementData() {
+    printDisplacementXDimension();
+    printDisplacementYDimension();
+    printDisplacementTDimension();
+    printDisplacementValues();
+  };
+
+  void printDisplacementXDimension() {
+    Array::print(m_dx.elemVector(), m_dx.getSize(), "Displacement x dimension");
+  };
+  void printDisplacementYDimension() {
+    Array::print(m_dy.elemVector(), m_dy.getSize(), "Displacement y dimension");
+  };
+  void printDisplacementTDimension() {
+    Array::print(m_dt.elemVector(), m_dt.getSize(), "Displacement time dimension");
+  };
+  void printDisplacementValues() {
+    cout << "Displacement Values: " << endl;
+    for(int t = 0; t < m_dz.size(); t++) {
+      for(int i = 0; i < m_dz[t].size(); i++) {
+        for(int j = 0; j < m_dz[t][i].size(); j++) {
+          cout << "[" << t << "][" << i << "][" << j << "]=" << m_dz[t][i][j] << ", ";
         }
-
-    int l_nx = m_dx.getSize(), l_ny = m_dy.getSize(), l_bnx = m_bx.getSize(), l_bny = m_by.getSize(),
-      m_x, m_y;
-    for(int x = 0; x < l_nx; x++) for(int y = 0; y < l_ny; y++) {
-      Array::lookUp(m_dx[x], l_bnx, m_bx.elemVector(), &m_x);
-      Array::lookUp(m_dy[y], l_bny, m_by.elemVector(), &m_y);
-      l_result[m_x][m_y] += (1 - interpolate) * m_dz[index][x][y] + interpolate * m_dz[index + 1][x][y];
+        if( i < m_dz[t].size() - 1)
+          cout << endl;
+      }
+      cout << endl;
     }
-    return l_result;***/
   };
 };
 #endif
