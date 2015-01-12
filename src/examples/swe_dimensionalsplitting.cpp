@@ -7,6 +7,7 @@
 #include "writer/NetCdfWriter.hh"
 #include "scenarios/SWE_TsunamiScenario.hh"
 #include "scenarios/SWE_CheckpointScenario.hh"
+#include "tools/SWE_DisplacementReader.hh"
 #else
 #include "writer/VtkWriter.hh"
 #endif
@@ -25,7 +26,6 @@
 #define ARG_TOP "top"
 #define ARG_SEISMOLOGYPATH "seismological_data"
 #define ARG_CONSTBATHYMETRY "constant_bathymetry"
-#define ARG_INTERPOLATION "interpolation_max_time"
 
 /**
 * Main program for the simulation using dimensional splitting
@@ -48,19 +48,18 @@ int main(int argc, char** argv){
   args.addOption(ARG_TOP, 0, "Sets the maximum coordinate value in y direction. If one boundary is set, all others must be set too!", tools::Args::Required, false);
   args.addOption(ARG_SEISMOLOGYPATH, 's', "Path to the seismological data", tools::Args::Required, false);
   args.addOption(ARG_CONSTBATHYMETRY, 0, "Setting the bathymetry to the negative of the given value", tools::Args::Required, false);
-  args.addOption(ARG_INTERPOLATION, 'p', "Setting the maximum time of the displacement interpolation", tools::Args::Required, false);
-	
+
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
 	
-	int test_cp = args.isSet(ARG_CP),
+	bool test_cp = args.isSet(ARG_CP),
     test_size = args.isSet(ARG_SIZE_X) && args.isSet(ARG_SIZE_Y),
     test_eos = args.isSet(ARG_EOS),
     test_boundary = args.isSet(ARG_BOUND),
-    test_seis = args.isSet(ARG_SEISMOLOGYPATH);
-  std::string l_bPath = "";
+    test_seis = args.isSet(ARG_SEISMOLOGYPATH) && !test_cp;
+  std::string l_seisPath = "";
   if(test_seis)
-    l_bPath = args.getArgument<std::string>(ARG_SEISMOLOGYPATH);
+    l_seisPath = args.getArgument<std::string>(ARG_SEISMOLOGYPATH);
 	if(!test_cp && !test_size)
 		parseResult = tools::Args::Error;
 
@@ -89,13 +88,7 @@ int main(int argc, char** argv){
       + toString(l_top));
   }
 
-  bool use_interpolation = args.isSet(ARG_INTERPOLATION);
-  float max_interpolation_time = 0;
-  if(use_interpolation)
-    max_interpolation_time = args.getArgument<float>(ARG_INTERPOLATION);
-
 	// If parsing failed, break the program (if help was asked for and granted, execution did not fail though)
-
 	if(parseResult != tools::Args::Success)
 	{
 		if(parseResult == tools::Args::Help)
@@ -168,8 +161,6 @@ int main(int argc, char** argv){
 		}
 		l_scenario->setBoundaryTypes(boundTypes[l_boundIndex - 1]);
 	}
-//    l_scenario->getBathymetry(0, 0);
-//exit(2);
     
 	// Set step size
 	float l_dx, l_dy;
@@ -236,6 +227,17 @@ int main(int argc, char** argv){
 	            break;
 	     }
     }
+
+  // set the displacement reader class
+
+#ifdef WRITENETCDF
+  tools::Logger::logger.printString("Preparing displacement reader");
+  
+  std::string l_tmpPath = "NetCDFInput";  
+  if(args.isSet(ARG_INPUT))
+    l_tmpPath = args.getArgument<std::string>(ARG_INPUT);
+  SWE_DisplacementReader l_displacementReader(l_seisPath, l_tmpPath + "/initBathymetry.nc", !test_seis);
+#endif
 
 	tools::Logger::logger.printString("Reading time domain from scenario");
 	// set time and end of simulation
@@ -360,6 +362,7 @@ int main(int argc, char** argv){
 	
 		// increment time
 		l_time += l_dimensionalSplitting.getMaxTimestep();
+
 		// write timestep
 		l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
     	l_dimensionalSplitting.getDischarge_hu(),
@@ -370,7 +373,7 @@ int main(int argc, char** argv){
  		std::ostringstream buff;
     		buff << l_time;
 		// write time to console
-//		tools::Logger::logger.printString(time + buff.str());        
+    tools::Logger::logger.printString(time + buff.str());        
 
 		progress = l_time / l_endOfSimulation;
 		if(progress > percStep * loggedAmount) {
