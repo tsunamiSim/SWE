@@ -202,35 +202,35 @@ void SWE_Block::setBathymetry(float (*_b)(float, float)) {
   synchBathymetryAfterWrite();
 }
 
-// /** 
-// 	Restores values for h, v, and u from file data
-// 	@param _b		array holding b-values in sequence
-// */
-// void SWE_Block::setBathymetry(float* _b) {
-// 	// Set all inner cells to the value available
-// 	int i, j;	
-// 	for(int k=0; k<nx*ny; k++) {
-// 		i = (k % ny) + 1;
-// 		j = (k / ny) + 1;
-// 		b[i][j] = _b[k];
-// 	};
-// 
-// 	// Set ghost cells values such that normals = 0
-// 	// Boundaries
-// 	for(int i=1; i<=nx; i++) {
-// 		b[0][i] = b[1][i];
-// 		b[nx+1][i] = b[nx][i];
-// 		b[i][0] = b[i][1];
-// 		b[i][nx+1] = b[i][nx];
-// 	}
-// 	// Corners
-// 	b[0][0] = b[1][1];
-// 	b[0][ny+1] = b[1][ny];
-// 	b[nx+1][0] = b[nx][1];
-// 	b[nx+1][ny+1] = b[nx][ny];
-// 
-// 	synchBathymetryAfterWrite();
-// }
+ /** 
+ 	Restores values for h, v, and u from file data
+ 	@param _b		array holding b-values in sequence
+ */
+ void SWE_Block::setBathymetry(float* _b) {
+ 	// Set all inner cells to the value available
+ 	int i, j;	
+ 	for(int k=0; k<nx*ny; k++) {
+ 		i = (k % ny) + 1;
+ 		j = (k / ny) + 1;
+ 		b[i][j] = _b[k];
+ 	};
+ 
+ 	// Set ghost cells values such that normals = 0
+ 	// Boundaries
+ 	for(int i=1; i<=nx; i++) {
+ 		b[0][i] = b[1][i];
+ 		b[nx+1][i] = b[nx][i];
+ 		b[i][0] = b[i][1];
+ 		b[i][nx+1] = b[i][nx];
+ 	}
+ 	// Corners
+ 	b[0][0] = b[1][1];
+ 	b[0][ny+1] = b[1][ny];
+ 	b[nx+1][0] = b[nx][1];
+ 	b[nx+1][ny+1] = b[nx][ny];
+ 
+ 	synchBathymetryAfterWrite();
+ }
 
 /**
  * return reference to water height unknown h

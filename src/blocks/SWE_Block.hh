@@ -126,6 +126,8 @@ class SWE_Block {
     void setBathymetry(float _b);
     /// set the bathymetry according to a given function
     void setBathymetry(float (*_b)(float, float));
+    /// set the whole bathymetry matrix
+    void setBathymetry(float *_b);
     
     // read access to arrays of unknowns
     /// provides read access to the water height array 
