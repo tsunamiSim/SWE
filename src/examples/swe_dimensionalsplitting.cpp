@@ -8,6 +8,7 @@
 #include "scenarios/SWE_TsunamiScenario.hh"
 #include "scenarios/SWE_CheckpointScenario.hh"
 #include "seismology/SWE_DisplacementReader.hh"
+#include "seismology/SWE_Updater.hh"
 #else
 #include "writer/VtkWriter.hh"
 #endif
@@ -162,6 +163,7 @@ int main(int argc, char** argv){
 	float l_dx, l_dy;
   l_dx = (l_scenario->getBoundaryPos(BND_RIGHT) - l_scenario->getBoundaryPos(BND_LEFT))/l_nx;
   l_dy = (l_scenario->getBoundaryPos(BND_TOP) - l_scenario->getBoundaryPos(BND_BOTTOM))/l_ny;
+  cout << l_dx << ", " << l_dy << endl;
 
 #ifndef NDEBUG
 	cout << "Calulated step size d_x (divided by 1000): ("
@@ -233,6 +235,10 @@ int main(int argc, char** argv){
   if(args.isSet(ARG_INPUT))
     l_tmpPath = args.getArgument<std::string>(ARG_INPUT);
   SWE_DisplacementReader l_displacementReader(l_seisPath, l_tmpPath + "/initBathymetry.nc", !test_seis);
+
+  SWE_Updater l_updater;
+  if(test_seis)
+    l_updater = SWE_Updater(&l_dimensionalSplitting, &l_displacementReader);
 #endif
 
 	tools::Logger::logger.printString("Reading time domain from scenario");
@@ -344,6 +350,10 @@ int main(int argc, char** argv){
 	tools::Logger::logger.printLine();
 	tools::Logger::logger.printString("Starting simulation");
 
+#ifdef WRITENETCDF
+  l_updater.performUpdate(l_time);
+#endif
+
 	//Print initial state
 	l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
                         l_dimensionalSplitting.getDischarge_hu(),
@@ -353,6 +363,11 @@ int main(int argc, char** argv){
 
 	// Loop over timesteps *************************************************************************************
 	while(l_time < l_endOfSimulation)	{
+
+#ifdef WRITENETCDF
+    l_updater.performUpdate(l_time);
+#endif
+
 		l_dimensionalSplitting.setGhostLayer();
 		
 		// compute one timestep

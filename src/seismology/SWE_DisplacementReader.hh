@@ -39,6 +39,10 @@
 using namespace std;
 using namespace tools;
 
+bool between(float min, float max, float val) {
+  return min <= val && max >= val;
+};
+
 class SWE_DisplacementReader {
 
 private:
@@ -192,20 +196,20 @@ public:
 #ifndef NDEBUG
   cout << "bathymetry value at location. Found x index " << l_bxi << ", y index " << l_byi << endl << "Value: " << result << endl;
 #endif
-    
-    // Look up displacement
-    Array::lookUp(i_x, m_dx.getSize(), m_dx.elemVector(), &l_dxi);
-    Array::lookUp(i_y, m_dy.getSize(), m_dy.elemVector(), &l_dyi);
+    if(between(m_dx[0], m_dx[m_dx.getSize() - 1], i_x) && between(m_dy[0], m_dy[m_dy.getSize() - 1], i_y)) {
+      // Look up displacement
+      Array::lookUp(i_x, m_dx.getSize(), m_dx.elemVector(), &l_dxi);
+      Array::lookUp(i_y, m_dy.getSize(), m_dy.elemVector(), &l_dyi);
 
-    dsp = m_dz[interpolatedIndex][l_dyi][l_dxi] * (1 - interpolatedValue) + m_dz[interpolatedIndex + 1][l_dyi][l_dxi] * interpolatedValue;
+      dsp = m_dz[interpolatedIndex][l_dyi][l_dxi] * (1 - interpolatedValue) + m_dz[interpolatedIndex + 1][l_dyi][l_dxi] * interpolatedValue;
 
 #ifndef NDEBUG
   cout << "displacement value at location. Found x index " << l_dxi << ", y index " << l_dyi << endl << "Index: " << interpolatedIndex << ", Value: " << dsp << endl;
 #endif
 
-    // Apply displacement
-    result += dsp;
-
+      // Apply displacement
+      result += dsp;
+    }
 #ifndef NDEBUG
   cout << "result: " << result << endl;
 #endif

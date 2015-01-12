@@ -128,6 +128,8 @@ class SWE_Block {
     void setBathymetry(float (*_b)(float, float));
     /// set the whole bathymetry matrix
     void setBathymetry(float *_b);
+    /// set one single cell's bathymetry value
+    void setBathymetry(int i_x, int i_y, float i_b);
     
     // read access to arrays of unknowns
     /// provides read access to the water height array 
@@ -196,7 +198,7 @@ class SWE_Block {
     /// returns #dx, i.e. the cell size in x-direction
     float getDx() { return dx; }
     /// returns #dy, i.e. the cell size in y-direction
-    float getDY() { return dy; }
+    float getDy() { return dy; }
     /// return #offsetX, i.e. the x-origin of the coordinate system
     float getOffx() { return offsetX; }
     /// return #offsetY, i.e. the y-origin of the coordinate system

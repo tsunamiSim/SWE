@@ -232,6 +232,18 @@ void SWE_Block::setBathymetry(float (*_b)(float, float)) {
  	synchBathymetryAfterWrite();
  }
 
+ /**
+  Sets the bathymetry value at one single cell
+
+  Assumption: User has no knowledge of ghost layer. if nx and ny were both zero, the only valid input for (i_x, i_y) would be (0, 0)
+  @param i_b new bathymetry value
+  @param i_x x-coordinate of the cell
+  @param i_y y-coordinate of the cell
+  */
+ void SWE_Block::setBathymetry(int i_x, int i_y, float i_b) {
+  b[i_x + 1][i_y + 1] = i_b;
+ }
+
 /**
  * return reference to water height unknown h
  */
