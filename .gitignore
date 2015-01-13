@@ -21,3 +21,4 @@ SCENARIO_*
 
 *.ogv
 openParaview.sh
+!*SwimmingPoolBathymetry.ogv
