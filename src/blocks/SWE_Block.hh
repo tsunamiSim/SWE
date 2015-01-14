@@ -31,6 +31,9 @@
 
 #include "tools/help.hh"
 #include "scenarios/SWE_Scenario.hh"
+#ifdef WRITENETCDF
+#include "scenarios/SWE_SeismologyScenario.hh"
+#endif
 
 #include <iostream>
 #include <fstream>
@@ -130,6 +133,10 @@ class SWE_Block {
     void setBathymetry(float *_b);
     /// set one single cell's bathymetry value
     void setBathymetry(int i_x, int i_y, float i_b);
+
+#ifdef WRITENETCDF
+    float updateBathymetry(float i_time, SWE_SeismologyScenario *i_scenario);
+#endif
     
     // read access to arrays of unknowns
     /// provides read access to the water height array 

@@ -7,8 +7,7 @@
 #include "writer/NetCdfWriter.hh"
 #include "scenarios/SWE_TsunamiScenario.hh"
 #include "scenarios/SWE_CheckpointScenario.hh"
-#include "seismology/SWE_DisplacementReader.hh"
-#include "seismology/SWE_Updater.hh"
+#include "scenarios/SWE_SeismologyScenario.hh"
 #else
 #include "writer/VtkWriter.hh"
 #endif
@@ -122,25 +121,34 @@ int main(int argc, char** argv){
 			std::string sfolder = args.getArgument<std::string>(ARG_INPUT);
 			std::string sbath = sfolder + (std::string) "/initBathymetry.nc",
         sdisp = sfolder + (std::string) "/displacement.nc";
-      if(test_left)
+      if(test_left && !test_seis)
         l_scenario = new SWE_TsunamiScenario(l_nx, l_ny,
                       l_left,
                       l_right,
                       l_bot,
                       l_top,
                       sbath.c_str(), sdisp.c_str());
-      else
+      else if(!test_seis)
   			l_scenario = new SWE_TsunamiScenario(l_nx, l_ny, sbath.c_str(), sdisp.c_str());
+      else if(test_left)
+        l_scenario = new SWE_SeismologyScenario(l_nx, l_ny, l_left, l_right, l_bot, l_top, sbath.c_str(), l_seisPath.c_str());
+      else
+        l_scenario = new SWE_SeismologyScenario(l_nx, l_ny, NAN, NAN, NAN, NAN, sbath.c_str(), l_seisPath.c_str());
 			
 		} // if(args.isSet(ARG_INPUT))
-		else if(test_left)
+		else if(test_left && !test_seis)
         l_scenario = new SWE_TsunamiScenario(l_nx, l_ny,
                       l_left,
                       l_right,
                       l_bot,
                       l_top);
-    else
+    else if(!test_seis)
   	  l_scenario = new SWE_TsunamiScenario(l_nx, l_ny);
+    else if(test_left)
+      l_scenario = new SWE_SeismologyScenario(l_nx, l_ny, l_left, l_right, l_bot, l_top);
+    else
+      l_scenario = new SWE_SeismologyScenario(l_nx, l_ny);
+
 		tools::Logger::logger.printString(toString("Read cell domain from command line: (x, y) = ")
       + toString(l_nx)
       + toString(", ")
@@ -226,21 +234,6 @@ int main(int argc, char** argv){
 	     } // switch(args.getArgument<int>(ARG_BOUND))
     } // if(test_boundary)
 
-  // set the displacement reader class
-
-#ifdef WRITENETCDF
-  tools::Logger::logger.printString("Preparing displacement reader");
-  
-  std::string l_tmpPath = "NetCDFInput";  
-  if(args.isSet(ARG_INPUT))
-    l_tmpPath = args.getArgument<std::string>(ARG_INPUT);
-  SWE_DisplacementReader l_displacementReader(l_seisPath, l_tmpPath + "/initBathymetry.nc", !test_seis);
-
-  SWE_Updater l_updater;
-  if(test_seis)
-    l_updater = SWE_Updater(&l_dimensionalSplitting, &l_displacementReader);
-#endif
-
 	tools::Logger::logger.printString("Reading time domain from scenario");
 	// set time and end of simulation
 	float l_time = l_scenario->getLastTime();
@@ -262,6 +255,8 @@ int main(int argc, char** argv){
     + toString(l_ny)
     + toString("_t")
     + toString(l_endOfSimulation);
+  if(test_seis)
+    l_fileName += "_seis";
 
 	l_fileName.erase(
     std::remove(l_fileName.begin(),
@@ -350,10 +345,6 @@ int main(int argc, char** argv){
 	tools::Logger::logger.printLine();
 	tools::Logger::logger.printString("Starting simulation");
 
-#ifdef WRITENETCDF
-  l_updater.performUpdate(l_time);
-#endif
-
 	//Print initial state
 	l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
                         l_dimensionalSplitting.getDischarge_hu(),
@@ -361,20 +352,28 @@ int main(int argc, char** argv){
                         l_dimensionalSplitting.getBathymetry(),
                         l_time);
 
+  float fixTimestep = 3, actTimestep;
+  bool useFix = false;
+
 	// Loop over timesteps *************************************************************************************
 	while(l_time < l_endOfSimulation)	{
 
 #ifdef WRITENETCDF
-    l_updater.performUpdate(l_time);
+    if(test_seis)
+      useFix = l_dimensionalSplitting.updateBathymetry(l_time, (SWE_SeismologyScenario*)l_scenario) > 0.01;
 #endif
 
 		l_dimensionalSplitting.setGhostLayer();
 		
 		// compute one timestep
 		l_dimensionalSplitting.computeNumericalFluxes();
-	
+
 		// increment time
-		l_time += l_dimensionalSplitting.getMaxTimestep();
+    actTimestep = l_dimensionalSplitting.getMaxTimestep();
+    if(useFix && fixTimestep < actTimestep)
+      l_time += fixTimestep;
+    else
+      l_time += actTimestep;
 
 		// write timestep
 		l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),

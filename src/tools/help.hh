@@ -98,6 +98,10 @@ class Float1D
 		return elem;
 	}
 
+  void forceSize(int newSize) {
+    rows = newSize;
+  }
+
   inline int getSize() const { return rows; }; 
 
   private:

@@ -138,6 +138,39 @@ void SWE_Block::initScenario( float _offsetX, float _offsetY,
 
 }
 
+#ifdef WRITENETCDF
+float SWE_Block::updateBathymetry(float i_time, SWE_SeismologyScenario *i_scenario) {
+
+#ifndef NDEBUG
+  std::cout << "Called SWE_Block::updateBathymetry" << std::endl;
+#endif
+  float maxDifference = 0, old;
+
+#ifndef NDEBUG
+	std::cout << "Starting with bathymetry" << std::endl;
+#endif
+  // initialize bathymetry
+  for(int i=0; i<=nx+1; i++) {
+    //#pragma omp parallel for private(i)
+    for(int j=0; j<=ny+1; j++) {
+      old = b[i][j];
+      b[i][j] = i_scenario->getBathymetry( i_time,
+                                          offsetX + (i-0.5f)*dx,
+                                          offsetY + (j-0.5f)*dy );
+      if(abs(b[i][j] - old) > maxDifference)
+        maxDifference = abs(b[i][j] - old);
+    }
+  }
+
+  setBoundaryBathymetry();
+
+  // perform update after external write to variables 
+  synchAfterWrite();
+
+  return maxDifference;
+}
+#endif
+
 /**
  * set water height h in all interior grid cells (i.e. except ghost layer) 
  * to values specified by parameter function _h
@@ -438,6 +471,7 @@ void SWE_Block::setGhostLayer() {
 #ifdef DBG
   cout << "Set simple boundary conditions " << endl << flush;
 #endif
+
   // call to virtual function to set ghost layer values 
   setBoundaryConditions();
 
