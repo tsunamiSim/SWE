@@ -171,7 +171,6 @@ int main(int argc, char** argv){
 	float l_dx, l_dy;
   l_dx = (l_scenario->getBoundaryPos(BND_RIGHT) - l_scenario->getBoundaryPos(BND_LEFT))/l_nx;
   l_dy = (l_scenario->getBoundaryPos(BND_TOP) - l_scenario->getBoundaryPos(BND_BOTTOM))/l_ny;
-  cout << l_dx << ", " << l_dy << endl;
 
 #ifndef NDEBUG
 	cout << "Calulated step size d_x (divided by 1000): ("
@@ -352,15 +351,20 @@ int main(int argc, char** argv){
                         l_dimensionalSplitting.getBathymetry(),
                         l_time);
 
-  float fixTimestep = 3, actTimestep;
-  bool useFix = false;
+  float fixTimestep = 3, actTimestep, bathymetryUpdateTime = 0;
+#ifdef WRITENETCDF
+  if(test_seis){
+    ((SWE_SeismologyScenario*)l_scenario)->getTimestepInformation(&bathymetryUpdateTime, &fixTimestep);
+    cout << "bathymetryUpdateTime: " << bathymetryUpdateTime << ", Timestep: " << fixTimestep << endl;
+  }
+#endif
 
 	// Loop over timesteps *************************************************************************************
 	while(l_time < l_endOfSimulation)	{
 
 #ifdef WRITENETCDF
     if(test_seis)
-      useFix = l_dimensionalSplitting.updateBathymetry(l_time, (SWE_SeismologyScenario*)l_scenario) > 0.01;
+      l_dimensionalSplitting.updateBathymetry(l_time, (SWE_SeismologyScenario*)l_scenario);
 #endif
 
 		l_dimensionalSplitting.setGhostLayer();
@@ -370,10 +374,10 @@ int main(int argc, char** argv){
 
 		// increment time
     actTimestep = l_dimensionalSplitting.getMaxTimestep();
-    if(useFix && fixTimestep < actTimestep)
-      l_time += fixTimestep;
+    if(l_time < bathymetryUpdateTime && fixTimestep < actTimestep)
+      l_time+=fixTimestep;
     else
-      l_time += actTimestep;
+      l_time+=actTimestep;
 
 		// write timestep
 		l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
@@ -382,10 +386,10 @@ int main(int argc, char** argv){
       l_dimensionalSplitting.getBathymetry(),
       l_time);
 		
- 		std::ostringstream buff;
-    		buff << l_time;
+ 		//std::ostringstream buff;
+    //		buff << l_time;
 		// write time to console
-    tools::Logger::logger.printString(time + buff.str());        
+    //tools::Logger::logger.printString(time + buff.str());        
 
 		progress = l_time / l_endOfSimulation;
 		if(progress > percStep * loggedAmount) {

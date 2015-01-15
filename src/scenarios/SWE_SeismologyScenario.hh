@@ -158,12 +158,22 @@ public:
     m_bx(NULL, 0), m_by(NULL, 0), m_dx(NULL, 0), m_dy(NULL, 0), m_dt(NULL, 0)  {
     tools::Logger::logger.printString("Running with seismological data");
 
+    tools::Logger::logger.printString("Reading files");
     readFiles(bathymetryFile, seismologyFile);
 
-    if(!isnan(maxX) && !isnan(maxY) && !isnan(minX) && !isnan(minY))
+    if(!isnan(maxX) && !isnan(maxY) && !isnan(minX) && !isnan(minY)){
+      tools::Logger::logger.printString("Clipping domain");
+      cout << "Before" << endl << "dz(" << m_dz.size() << "," << m_dz[0].size() << "," << m_dz[0][0].size() << ")" << endl;
+      cout << "bz(" << m_bz.size() << "," << m_bz[0].size() << ")" << endl;
       clip(minX, maxX, minY, maxY);
+      cout << "After" << endl << "dz(" << m_dz.size() << "," << m_dz[0].size() << "," << m_dz[0][0].size() << ")" << endl;
+      cout << "bz(" << m_bz.size() << "," << m_bz[0].size() << ")" << endl;
+    }
 
+    tools::Logger::logger.printString("Setting boundaries");
     applyBoundaries();
+    tools::Logger::logger.printString("Scenario initialized");
+    tools::Logger::logger.printLine();
   }
 
   /** Dummy constructor for cxx tests only */
@@ -278,6 +288,20 @@ public:
   }
 	
   void clip(float minX, float maxX, float minY, float maxY) {
+    tools::Logger::logger.printLine();
+    tools::Logger::logger.printString("Clipping not yet implemented for seismological data");
+    tools::Logger::logger.printLine();
+    return;
+
+    tools::Logger::logger.printString(
+      toString("Decreasing domain to x: ") +
+      toString(minX) + toString("->") +
+      toString(maxX) +
+      toString(" and y: ") +
+      toString(minY) +
+      toString("->") +
+      toString(maxY));
+
     int minIndex_disp_x = 0, maxIndex_disp_x = 0,
       minIndex_disp_y = 0, maxIndex_disp_y = 0,
       minIndex_bath_x = 0, maxIndex_bath_x = 0,
@@ -292,22 +316,34 @@ public:
 //    tools::Logger::logger.printString("Displacement y values clipped: minIndex: " + toString(minIndex_disp_y) + " maxIndex: " + toString(maxIndex_disp_y));
 //    Array::print(disY, maxIndex_disp_y - minIndex_disp_y + 1, "Displacement Y values");
 
-
     vector<vector<vector<float> > > newDisp;
     cols = maxIndex_disp_y - minIndex_disp_y + 1;
     rows = maxIndex_disp_x - minIndex_disp_x + 1;
-    for(int time = 0; time < m_dt.getSize(); time++) for(int col = 0; col < cols; col++) for(int row = 0; row < rows; row++)
-      newDisp[time][col][row] = m_dz[time][col + minIndex_disp_y][row + minIndex_disp_x];
+    cout << "dsp" << endl;
+    for(int time = 0; time < m_dt.getSize(); time++){
+      newDisp.push_back(vector<vector<float> >());
+      for(int col = 0; col < cols; col++){
+        newDisp[time].push_back(vector<float>());
+        for(int row = 0; row < rows; row++){
+          newDisp[time][col].push_back(m_dz[time][col + minIndex_disp_x][row + minIndex_disp_y]);
+          cout << "[" << time << "," << col << "," << row << "]=" << (int)(newDisp[time][col][row] * 100) / 100.0 << ", ";
+    }}cout << endl;}
+    
     m_dz = newDisp;
-
     // Bathymetry
     clip(minX, maxX, &m_bx, &minIndex_bath_x, &maxIndex_bath_x);
     clip(minY, maxY, &m_by, &minIndex_bath_y, &maxIndex_bath_y);
     vector<vector<float> > newBath;
     cols = maxIndex_bath_y - minIndex_bath_y + 1;
     rows = maxIndex_bath_x - minIndex_bath_x + 1;
-    for(int col = 0; col < cols; col++) for(int row = 0; row < rows; row++)
-      newBath[col][row] = m_bz[col + minIndex_bath_y][row + minIndex_bath_x];
+    cout << "bath" << endl;
+    for(int col = 0; col < cols; col++){
+      newBath.push_back(vector<float>());
+      for(int row = 0; row < rows; row++){
+        newBath[col].push_back(m_bz[col + minIndex_bath_y][row + minIndex_bath_x]);
+        cout << "[" << col << "," << row << "]=" << (int)(100 * newBath[col][row]) / 100.0 << ", ";
+    }}
+    cout << endl;
     m_bz = newBath;
   }
 
@@ -317,8 +353,14 @@ public:
     int mini = *minIndex, maxi = *maxIndex;
     float *arr = array->elemVector();
     Array::cut(&arr, mini, maxi - mini + 1);
-    delete array;
     array = new Float1D(arr, maxi - mini + 1);
+  }
+
+  float getTimestepInformation(float *maxTime, float *maxTimestep) {
+    *maxTime = m_dt[m_dt.getSize() - 1];
+    *maxTimestep = *maxTime;
+    for(int i = m_dt.getSize() - 1; i > 0; i--)
+      *maxTimestep = min(*maxTimestep, m_dt[i] - m_dt[i - 1]);
   }
 };
 

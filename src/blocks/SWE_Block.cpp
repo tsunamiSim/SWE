@@ -150,9 +150,9 @@ float SWE_Block::updateBathymetry(float i_time, SWE_SeismologyScenario *i_scenar
 	std::cout << "Starting with bathymetry" << std::endl;
 #endif
   // initialize bathymetry
-  for(int i=0; i<=nx+1; i++) {
+  for(int i=1; i<=nx; i++) {
     //#pragma omp parallel for private(i)
-    for(int j=0; j<=ny+1; j++) {
+    for(int j=1; j<=ny; j++) {
       old = b[i][j];
       b[i][j] = i_scenario->getBathymetry( i_time,
                                           offsetX + (i-0.5f)*dx,
