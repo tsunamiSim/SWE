@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>SWE: /home/sascha/Dokumente/Projects/TsunSim/SWE/src/writer/NetCdfWriter.cpp File Reference</title>
+<title>SWE: src/writer/NetCdfWriter.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -85,7 +85,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">NetCdfWriter.cpp File Reference</div>  </div>
 </div><!--header-->
@@ -95,12 +96,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;vector&gt;</code><br/>
 <code>#include &lt;iostream&gt;</code><br/>
 <code>#include &lt;cassert&gt;</code><br/>
+<code>#include &lt;math.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="help_8hh_source.html">tools/help.hh</a>&quot;</code><br/>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a588357de2986fdf4c1380190f7ae9f37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a588357de2986fdf4c1380190f7ae9f37"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>ERR</b>(e)&#160;&#160;&#160;{printf(&quot;Error: %s\n&quot;, nc_strerror(e)); assert(false);}</td></tr>
 <tr class="separator:a588357de2986fdf4c1380190f7ae9f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a9752e55c9cf48db215e5f860f8b057b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9752e55c9cf48db215e5f860f8b057b2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>adjust</b> (unsigned int &amp;nx, unsigned int &amp;ny, float &amp;dx, float &amp;dy, int compression)</td></tr>
+<tr class="separator:a9752e55c9cf48db215e5f860f8b057b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file is part of SWE.</p>
@@ -118,7 +127,7 @@ DESCRIPTION</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 19 2015 17:00:09 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -10,19 +10,22 @@ Inheritance diagram for io\-:\-:Net\-Cdf\-Writer\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classio_1_1NetCdfWriter_afb378e970e3f004612cfc36a0c171805}{Net\-Cdf\-Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, int i\-\_\-n\-X, int i\-\_\-n\-Y, float i\-\_\-d\-X, float i\-\_\-d\-Y, float i\-\_\-origin\-X=0., float i\-\_\-origin\-Y=0., unsigned int i\-\_\-flush=0, size\-\_\-t cont\-Timestep=0)
+\hyperlink{classio_1_1NetCdfWriter_a1d69705f56dbab2b7f7e40edf4c681de}{Net\-Cdf\-Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, int i\-\_\-n\-X, int i\-\_\-n\-Y, float i\-\_\-d\-X, float i\-\_\-d\-Y, float i\-\_\-origin\-X=0., float i\-\_\-origin\-Y=0., unsigned int i\-\_\-flush=0, size\-\_\-t cont\-Timestep=0, unsigned int compression=1)
 \item 
-\hyperlink{classio_1_1NetCdfWriter_af9066dce4d7c62ef038a10e1244085b0}{Net\-Cdf\-Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Left, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Right, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Top, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Bottom, const float end\-Of\-Simulation, int i\-\_\-n\-X, int i\-\_\-n\-Y, float i\-\_\-d\-X, float i\-\_\-d\-Y, float i\-\_\-origin\-X=0., float i\-\_\-origin\-Y=0., unsigned int i\-\_\-flush=0, bool use\-Checkpoints=false)
+\hyperlink{classio_1_1NetCdfWriter_a1cfba079bd92f3be84a4eb107ce30d8a}{Net\-Cdf\-Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Left, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Right, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Top, const \hyperlink{SWE__Scenario_8hh_af75d5dd7322fa39ed0af4e7839e600f8}{Boundary\-Type} \&boundary\-Type\-Bottom, const float end\-Of\-Simulation, int i\-\_\-n\-X, int i\-\_\-n\-Y, float i\-\_\-d\-X, float i\-\_\-d\-Y, float i\-\_\-origin\-X=0., float i\-\_\-origin\-Y=0., unsigned int i\-\_\-flush=0, bool use\-Checkpoints=false, unsigned int compression=1)
 \item 
 virtual \hyperlink{classio_1_1NetCdfWriter_ace10f1b56bbb4a1b6c2092ed661a1a0d}{$\sim$\-Net\-Cdf\-Writer} ()
 \item 
-void \hyperlink{classio_1_1NetCdfWriter_a8e49f21f16b1720a348de50485754b0c}{write\-Time\-Step} (const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-h, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hu, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hv, float i\-\_\-time)
+void \hyperlink{classio_1_1NetCdfWriter_ada737dce75704e08520ce7ac922302be}{write\-Time\-Step} (const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-h, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hu, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hv, float i\-\_\-time, bool i\-\_\-write\-Bathymetry=true)
+\item 
+\hypertarget{classio_1_1NetCdfWriter_a35a2e5df658e7e95afd3acea193b22a4}{void {\bfseries write\-Time\-Step} (const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-h, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hu, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hv, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, float i\-\_\-time)}\label{classio_1_1NetCdfWriter_a35a2e5df658e7e95afd3acea193b22a4}
+
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classio_1_1NetCdfWriter_afb378e970e3f004612cfc36a0c171805}{\index{io\-::\-Net\-Cdf\-Writer@{io\-::\-Net\-Cdf\-Writer}!Net\-Cdf\-Writer@{Net\-Cdf\-Writer}}
+\hypertarget{classio_1_1NetCdfWriter_a1d69705f56dbab2b7f7e40edf4c681de}{\index{io\-::\-Net\-Cdf\-Writer@{io\-::\-Net\-Cdf\-Writer}!Net\-Cdf\-Writer@{Net\-Cdf\-Writer}}
 \index{Net\-Cdf\-Writer@{Net\-Cdf\-Writer}!io::NetCdfWriter@{io\-::\-Net\-Cdf\-Writer}}
 \subsubsection[{Net\-Cdf\-Writer}]{\setlength{\rightskip}{0pt plus 5cm}io\-::\-Net\-Cdf\-Writer\-::\-Net\-Cdf\-Writer (
 \begin{DoxyParamCaption}
@@ -36,9 +39,10 @@ void \hyperlink{classio_1_1NetCdfWriter_a8e49f21f16b1720a348de50485754b0c}{write
 \item[{float}]{i\-\_\-origin\-X = {\ttfamily 0.}, }
 \item[{float}]{i\-\_\-origin\-Y = {\ttfamily 0.}, }
 \item[{unsigned int}]{i\-\_\-flush = {\ttfamily 0}, }
-\item[{size\-\_\-t}]{cont\-Timestep = {\ttfamily 0}}
+\item[{size\-\_\-t}]{cont\-Timestep = {\ttfamily 0}, }
+\item[{unsigned int}]{compression = {\ttfamily 1}}
 \end{DoxyParamCaption}
-)}}\label{classio_1_1NetCdfWriter_afb378e970e3f004612cfc36a0c171805}
+)}}\label{classio_1_1NetCdfWriter_a1d69705f56dbab2b7f7e40edf4c681de}
 Create a net\-Cdf-\/file Any existing file will be replaced.
 
 
@@ -62,7 +66,7 @@ Create a net\-Cdf-\/file Any existing file will be replaced.
 {\em i\-\_\-dynamic\-Bathymetry} & \\
 \hline
 \end{DoxyParams}
-\hypertarget{classio_1_1NetCdfWriter_af9066dce4d7c62ef038a10e1244085b0}{\index{io\-::\-Net\-Cdf\-Writer@{io\-::\-Net\-Cdf\-Writer}!Net\-Cdf\-Writer@{Net\-Cdf\-Writer}}
+\hypertarget{classio_1_1NetCdfWriter_a1cfba079bd92f3be84a4eb107ce30d8a}{\index{io\-::\-Net\-Cdf\-Writer@{io\-::\-Net\-Cdf\-Writer}!Net\-Cdf\-Writer@{Net\-Cdf\-Writer}}
 \index{Net\-Cdf\-Writer@{Net\-Cdf\-Writer}!io::NetCdfWriter@{io\-::\-Net\-Cdf\-Writer}}
 \subsubsection[{Net\-Cdf\-Writer}]{\setlength{\rightskip}{0pt plus 5cm}io\-::\-Net\-Cdf\-Writer\-::\-Net\-Cdf\-Writer (
 \begin{DoxyParamCaption}
@@ -81,9 +85,10 @@ Create a net\-Cdf-\/file Any existing file will be replaced.
 \item[{float}]{i\-\_\-origin\-X = {\ttfamily 0.}, }
 \item[{float}]{i\-\_\-origin\-Y = {\ttfamily 0.}, }
 \item[{unsigned int}]{i\-\_\-flush = {\ttfamily 0}, }
-\item[{bool}]{use\-Checkpoints = {\ttfamily false}}
+\item[{bool}]{use\-Checkpoints = {\ttfamily false}, }
+\item[{unsigned int}]{compression = {\ttfamily 1}}
 \end{DoxyParamCaption}
-)}}\label{classio_1_1NetCdfWriter_af9066dce4d7c62ef038a10e1244085b0}
+)}}\label{classio_1_1NetCdfWriter_a1cfba079bd92f3be84a4eb107ce30d8a}
 Create a net\-Cdf-\/file Any existing file will be replaced.
 
 
@@ -127,16 +132,17 @@ Create a net\-Cdf-\/file Any existing file will be replaced.
 Destructor of a net\-C\-D\-F-\/writer. 
 
 \subsection{Member Function Documentation}
-\hypertarget{classio_1_1NetCdfWriter_a8e49f21f16b1720a348de50485754b0c}{\index{io\-::\-Net\-Cdf\-Writer@{io\-::\-Net\-Cdf\-Writer}!write\-Time\-Step@{write\-Time\-Step}}
+\hypertarget{classio_1_1NetCdfWriter_ada737dce75704e08520ce7ac922302be}{\index{io\-::\-Net\-Cdf\-Writer@{io\-::\-Net\-Cdf\-Writer}!write\-Time\-Step@{write\-Time\-Step}}
 \index{write\-Time\-Step@{write\-Time\-Step}!io::NetCdfWriter@{io\-::\-Net\-Cdf\-Writer}}
 \subsubsection[{write\-Time\-Step}]{\setlength{\rightskip}{0pt plus 5cm}void io\-::\-Net\-Cdf\-Writer\-::write\-Time\-Step (
 \begin{DoxyParamCaption}
 \item[{const {\bf Float2\-D} \&}]{i\-\_\-h, }
 \item[{const {\bf Float2\-D} \&}]{i\-\_\-hu, }
 \item[{const {\bf Float2\-D} \&}]{i\-\_\-hv, }
-\item[{float}]{i\-\_\-time}
+\item[{float}]{i\-\_\-time, }
+\item[{bool}]{i\-\_\-write\-Bathymetry = {\ttfamily true}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classio_1_1NetCdfWriter_a8e49f21f16b1720a348de50485754b0c}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classio_1_1NetCdfWriter_ada737dce75704e08520ce7ac922302be}
 Writes the unknwons to a net\-C\-D\-F-\/file (-\/$>$ constructor) with respect to the boundary sizes.
 
 boundary\-Size\mbox{[}0\mbox{]} == left boundary\-Size\mbox{[}1\mbox{]} == right boundary\-Size\mbox{[}2\mbox{]} == bottom boundary\-Size\mbox{[}3\mbox{]} == top
@@ -156,11 +162,11 @@ boundary\-Size\mbox{[}0\mbox{]} == left boundary\-Size\mbox{[}1\mbox{]} == right
 \end{DoxyParams}
 
 
-Implements \hyperlink{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{io\-::\-Writer}.
+Implements \hyperlink{classio_1_1Writer_ac0d0cf6466fc05fba32acf22332a8e65}{io\-::\-Writer}.
 
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/writer/\hyperlink{NetCdfWriter_8hh}{Net\-Cdf\-Writer.\-hh}\item 
-/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/writer/\hyperlink{NetCdfWriter_8cpp}{Net\-Cdf\-Writer.\-cpp}\end{DoxyCompactItemize}
+src/writer/\hyperlink{NetCdfWriter_8hh}{Net\-Cdf\-Writer.\-hh}\item 
+src/writer/\hyperlink{NetCdfWriter_8cpp}{Net\-Cdf\-Writer.\-cpp}\end{DoxyCompactItemize}

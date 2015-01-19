@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['netcdfwriter',['NetCdfWriter',['../classio_1_1NetCdfWriter.html',1,'io']]]
+  ['logger',['Logger',['../classtools_1_1Logger.html',1,'tools']]]
 ];

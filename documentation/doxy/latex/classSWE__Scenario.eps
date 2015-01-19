@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 486.725664
+%%BoundingBox: 0 0 500 575.221239
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 1.027273 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 0.869231 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 11 def
+/rows 13 def
 /cols 2 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -175,12 +175,14 @@ boxfont setfont
 1 boundaspect scale
 (SWE_Scenario) cw
 (SWE_ArtificialTsunamiScenario) cw
+(SWE_ArtificialTsunamiScenario) cw
 (SWE_AsagiScenario) cw
 (SWE_BathymetryDamBreakScenario) cw
 (SWE_CheckpointScenario) cw
 (SWE_ObstacleDamBreakScenario) cw
 (SWE_RadialDamBreakScenario) cw
 (SWE_SeaAtRestScenario) cw
+(SWE_SeismologyScenario) cw
 (SWE_SplashingConeScenario) cw
 (SWE_SplashingPoolScenario) cw
 (SWE_TsunamiScenario) cw
@@ -195,14 +197,16 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (SWE_Scenario) 0.000000 10.000000 box
- (SWE_ArtificialTsunamiScenario) 1.000000 9.000000 box
- (SWE_AsagiScenario) 1.000000 8.000000 box
- (SWE_BathymetryDamBreakScenario) 1.000000 7.000000 box
- (SWE_CheckpointScenario) 1.000000 6.000000 box
- (SWE_ObstacleDamBreakScenario) 1.000000 5.000000 box
- (SWE_RadialDamBreakScenario) 1.000000 4.000000 box
- (SWE_SeaAtRestScenario) 1.000000 3.000000 box
+ (SWE_Scenario) 0.000000 12.000000 box
+ (SWE_ArtificialTsunamiScenario) 1.000000 11.000000 box
+ (SWE_ArtificialTsunamiScenario) 1.000000 10.000000 box
+ (SWE_AsagiScenario) 1.000000 9.000000 box
+ (SWE_BathymetryDamBreakScenario) 1.000000 8.000000 box
+ (SWE_CheckpointScenario) 1.000000 7.000000 box
+ (SWE_ObstacleDamBreakScenario) 1.000000 6.000000 box
+ (SWE_RadialDamBreakScenario) 1.000000 5.000000 box
+ (SWE_SeaAtRestScenario) 1.000000 4.000000 box
+ (SWE_SeismologyScenario) 1.000000 3.000000 box
  (SWE_SplashingConeScenario) 1.000000 2.000000 box
  (SWE_SplashingPoolScenario) 1.000000 1.000000 box
  (SWE_TsunamiScenario) 1.000000 0.000000 box
@@ -210,7 +214,11 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- relations -----
 
 solid
-1 0.000000 9.250000 out
+1 0.000000 11.250000 out
+solid
+0 0.000000 11.500000 hedge
+solid
+0 0.000000 10.500000 hedge
 solid
 0 0.000000 9.500000 hedge
 solid
@@ -232,4 +240,4 @@ solid
 solid
 0 0.000000 0.500000 hedge
 solid
-0.000000 10.000000 0.500000 vedge
+0.000000 12.000000 0.500000 vedge

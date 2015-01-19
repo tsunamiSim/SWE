@@ -1,0 +1,199 @@
+\hypertarget{classSWE__SeismologyScenario}{\section{S\-W\-E\-\_\-\-Seismology\-Scenario Class Reference}
+\label{classSWE__SeismologyScenario}\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+}
+
+
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Seismology\-Scenario.\-hh$>$}
+
+Inheritance diagram for S\-W\-E\-\_\-\-Seismology\-Scenario\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classSWE__SeismologyScenario}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__SeismologyScenario_a88e5d040e746317bd39535f437b299b9}{S\-W\-E\-\_\-\-Seismology\-Scenario} (int cells\-X, int cells\-Y, float min\-X=N\-A\-N, float max\-X=N\-A\-N, float min\-Y=N\-A\-N, float max\-Y=N\-A\-N, const char $\ast$bathymetry\-File=\char`\"{}Net\-C\-D\-F\-\_\-\-Input/init\-Bathymetry.\-nc\char`\"{}, const char $\ast$seismology\-File=\char`\"{}Net\-C\-D\-F\-\_\-\-Input/seis.\-nc\char`\"{})
+\item 
+\hyperlink{classSWE__SeismologyScenario_a2a541317288ae7fe5c9b1b75f8faaec4}{S\-W\-E\-\_\-\-Seismology\-Scenario} ()
+\item 
+float \hyperlink{classSWE__SeismologyScenario_a2cbfbb644689d1596be3b31b55547f98}{get\-Bathymetry} (float x, float y)
+\item 
+float \hyperlink{classSWE__SeismologyScenario_a4959bacdb08fcea5d9fde10362984dbb}{get\-Bathymetry} (float i\-\_\-time, float x, float y)
+\item 
+float \hyperlink{classSWE__SeismologyScenario_ad58eca7e1a6a04b8795e05b9c89791ad}{get\-Water\-Height} (float x, float y)
+\item 
+virtual float \hyperlink{classSWE__SeismologyScenario_a8dbcae5c46033d9ceb7414ded0af993c}{end\-Simulation} ()
+\item 
+float \hyperlink{classSWE__SeismologyScenario_a7b72a08127dd7f76a9d9dc9224ea2203}{get\-Boundary\-Pos} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} i\-\_\-edge)
+\item 
+\hypertarget{classSWE__SeismologyScenario_a93aa63711af3ee4b7c27c244b881df38}{void {\bfseries apply\-Boundaries} ()}\label{classSWE__SeismologyScenario_a93aa63711af3ee4b7c27c244b881df38}
+
+\item 
+\hypertarget{classSWE__SeismologyScenario_a2ae282b3726c0c05ea146d660ae5ef02}{void {\bfseries clip} (float min\-X, float max\-X, float min\-Y, float max\-Y)}\label{classSWE__SeismologyScenario_a2ae282b3726c0c05ea146d660ae5ef02}
+
+\item 
+\hypertarget{classSWE__SeismologyScenario_a3fb0f793e915ba77e905f07ca6448d34}{void {\bfseries clip} (float min, float max, \hyperlink{classFloat1D}{Float1\-D} $\ast$array, int $\ast$min\-Index, int $\ast$max\-Index)}\label{classSWE__SeismologyScenario_a3fb0f793e915ba77e905f07ca6448d34}
+
+\item 
+float \hyperlink{classSWE__SeismologyScenario_a08c816386b2549031b6d201a03928890}{get\-Timestep\-Information} (float $\ast$max\-Time, float $\ast$max\-Timestep)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Scenario \char`\"{}\-Artificial Tsunami Scenario\char`\"{}\-: displacement in the middle of the domain 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__SeismologyScenario_a88e5d040e746317bd39535f437b299b9}{\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}!S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}!SWE_SeismologyScenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+\subsubsection[{S\-W\-E\-\_\-\-Seismology\-Scenario}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Seismology\-Scenario\-::\-S\-W\-E\-\_\-\-Seismology\-Scenario (
+\begin{DoxyParamCaption}
+\item[{int}]{cells\-X, }
+\item[{int}]{cells\-Y, }
+\item[{float}]{min\-X = {\ttfamily NAN}, }
+\item[{float}]{max\-X = {\ttfamily NAN}, }
+\item[{float}]{min\-Y = {\ttfamily NAN}, }
+\item[{float}]{max\-Y = {\ttfamily NAN}, }
+\item[{const char $\ast$}]{bathymetry\-File = {\ttfamily \char`\"{}NetCDF\-\_\-Input/initBathymetry.nc\char`\"{}}, }
+\item[{const char $\ast$}]{seismology\-File = {\ttfamily \char`\"{}NetCDF\-\_\-Input/seis.nc\char`\"{}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__SeismologyScenario_a88e5d040e746317bd39535f437b299b9}
+Creates a new instance of the Seismology\-Scenario Class (clipping does not work at the current state) 
+\begin{DoxyParams}{Parameters}
+{\em cells\-X} & Cells in x dimension \\
+\hline
+{\em cells\-Y} & Cells in y dimension \\
+\hline
+{\em min\-X} & clipping minimum in x direction \\
+\hline
+{\em max\-X} & clipping maximum in x direction \\
+\hline
+{\em min\-Y} & clipping minimum in y direction \\
+\hline
+{\em max\-Y} & clipping maximum in y direction \\
+\hline
+{\em bathymetry\-File} & file with the initial bathymetry values \\
+\hline
+{\em seismology\-File} & file with the displacement values \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__SeismologyScenario_a2a541317288ae7fe5c9b1b75f8faaec4}{\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}!S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}!SWE_SeismologyScenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+\subsubsection[{S\-W\-E\-\_\-\-Seismology\-Scenario}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Seismology\-Scenario\-::\-S\-W\-E\-\_\-\-Seismology\-Scenario (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__SeismologyScenario_a2a541317288ae7fe5c9b1b75f8faaec4}
+Dummy constructor for cxx tests only 
+
+\subsection{Member Function Documentation}
+\hypertarget{classSWE__SeismologyScenario_a8dbcae5c46033d9ceb7414ded0af993c}{\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}!end\-Simulation@{end\-Simulation}}
+\index{end\-Simulation@{end\-Simulation}!SWE_SeismologyScenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+\subsubsection[{end\-Simulation}]{\setlength{\rightskip}{0pt plus 5cm}virtual float S\-W\-E\-\_\-\-Seismology\-Scenario\-::end\-Simulation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__SeismologyScenario_a8dbcae5c46033d9ceb7414ded0af993c}
+Returns the time of the end of the simulation 
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__SeismologyScenario_a2cbfbb644689d1596be3b31b55547f98}{\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}!get\-Bathymetry@{get\-Bathymetry}}
+\index{get\-Bathymetry@{get\-Bathymetry}!SWE_SeismologyScenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+\subsubsection[{get\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Seismology\-Scenario\-::get\-Bathymetry (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__SeismologyScenario_a2cbfbb644689d1596be3b31b55547f98}
+The bathymetry at a requested location 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/\-Value of the location \\
+\hline
+{\em y} & The y-\/\-Value of the location \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__SeismologyScenario_a4959bacdb08fcea5d9fde10362984dbb}{\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}!get\-Bathymetry@{get\-Bathymetry}}
+\index{get\-Bathymetry@{get\-Bathymetry}!SWE_SeismologyScenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+\subsubsection[{get\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Seismology\-Scenario\-::get\-Bathymetry (
+\begin{DoxyParamCaption}
+\item[{float}]{i\-\_\-time, }
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__SeismologyScenario_a4959bacdb08fcea5d9fde10362984dbb}
+The bathymetry at a requested location 
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-time} & The time at which the bathymetry value should be given \\
+\hline
+{\em x} & The x-\/\-Value of the location \\
+\hline
+{\em y} & The y-\/\-Value of the location \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__SeismologyScenario_a7b72a08127dd7f76a9d9dc9224ea2203}{\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}!get\-Boundary\-Pos@{get\-Boundary\-Pos}}
+\index{get\-Boundary\-Pos@{get\-Boundary\-Pos}!SWE_SeismologyScenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+\subsubsection[{get\-Boundary\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Seismology\-Scenario\-::get\-Boundary\-Pos (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{i\-\_\-edge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__SeismologyScenario_a7b72a08127dd7f76a9d9dc9224ea2203}
+Get the boundary positions
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-edge} & which edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value in the corresponding dimension 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__SeismologyScenario_a08c816386b2549031b6d201a03928890}{\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}!get\-Timestep\-Information@{get\-Timestep\-Information}}
+\index{get\-Timestep\-Information@{get\-Timestep\-Information}!SWE_SeismologyScenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+\subsubsection[{get\-Timestep\-Information}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Seismology\-Scenario\-::get\-Timestep\-Information (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{max\-Time, }
+\item[{float $\ast$}]{max\-Timestep}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__SeismologyScenario_a08c816386b2549031b6d201a03928890}
+Provides information about the maximum timestep allowed with the current displacement and also the time for which the earthquake affects the simulation and bathymetry must be updated 
+\begin{DoxyParams}{Parameters}
+{\em max\-Time} & the last timestep will be stored here \\
+\hline
+{\em max\-Timestep} & the maximum timestep will be stored here \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__SeismologyScenario_ad58eca7e1a6a04b8795e05b9c89791ad}{\index{S\-W\-E\-\_\-\-Seismology\-Scenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}!get\-Water\-Height@{get\-Water\-Height}}
+\index{get\-Water\-Height@{get\-Water\-Height}!SWE_SeismologyScenario@{S\-W\-E\-\_\-\-Seismology\-Scenario}}
+\subsubsection[{get\-Water\-Height}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Seismology\-Scenario\-::get\-Water\-Height (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__SeismologyScenario_ad58eca7e1a6a04b8795e05b9c89791ad}
+The water height at a requested location 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/\-Value of the location \\
+\hline
+{\em y} & The y-\/\-Value of the location \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/scenarios/\hyperlink{SWE__SeismologyScenario_8hh}{S\-W\-E\-\_\-\-Seismology\-Scenario.\-hh}\end{DoxyCompactItemize}

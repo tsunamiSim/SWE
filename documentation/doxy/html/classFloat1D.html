@@ -97,6 +97,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abac72fb922ec7c6d05818be856ede9a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abac72fb922ec7c6d05818be856ede9a2"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Float1D</b> (float *_elem, int _rows, int _stride=1)</td></tr>
 <tr class="separator:abac72fb922ec7c6d05818be856ede9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5c51078ce867170570f54f6fed7af7e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5c51078ce867170570f54f6fed7af7e"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>ToString</b> ()</td></tr>
+<tr class="separator:ab5c51078ce867170570f54f6fed7af7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4602b1598eaf2e130a55df93b9723e91"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4602b1598eaf2e130a55df93b9723e91"></a>
 float &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (int i)</td></tr>
 <tr class="separator:a4602b1598eaf2e130a55df93b9723e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,6 +109,9 @@ const float &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
 <tr class="memitem:a2e7889e514588f539a8dc47c75e70601"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e7889e514588f539a8dc47c75e70601"></a>
 float *&#160;</td><td class="memItemRight" valign="bottom"><b>elemVector</b> ()</td></tr>
 <tr class="separator:a2e7889e514588f539a8dc47c75e70601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8af61aafa38fdab2e9bdbeb7eba563c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8af61aafa38fdab2e9bdbeb7eba563c6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>forceSize</b> (int newSize)</td></tr>
+<tr class="separator:a8af61aafa38fdab2e9bdbeb7eba563c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a247a2e783f7300467c55fa2e7b19aa43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a247a2e783f7300467c55fa2e7b19aa43"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getSize</b> () const </td></tr>
 <tr class="separator:a247a2e783f7300467c55fa2e7b19aa43"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,12 +119,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>getSize</b> () const <
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>class <a class="el" href="classFloat1D.html">Float1D</a> is a proxy class that can represent, for example, a column or row vector of a <a class="el" href="classFloat2D.html">Float2D</a> array, where row (sub-)arrays are stored with a respective stride. Besides constructor/deconstructor, the class provides overloading of the []-operator, such that elements can be accessed as v[i] (independent of the stride). The class will never allocate separate memory for the vectors, but point to the interior data structure of <a class="el" href="classFloat2D.html">Float2D</a> (or other "host" data structures). </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/sascha/Dokumente/Projects/TsunSim/SWE/src/tools/<a class="el" href="help_8hh_source.html">help.hh</a></li>
+<li>src/tools/<a class="el" href="help_8hh_source.html">help.hh</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 19 2015 17:00:09 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

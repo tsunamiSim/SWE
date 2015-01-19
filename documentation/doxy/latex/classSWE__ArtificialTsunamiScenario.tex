@@ -3,7 +3,7 @@
 }
 
 
-{\ttfamily \#include $<$S\-W\-E\-\_\-simple\-\_\-scenarios.\-hh$>$}
+{\ttfamily \#include $<$S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario.\-hh$>$}
 
 Inheritance diagram for S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario\-:\begin{figure}[H]
 \begin{center}
@@ -13,6 +13,16 @@ Inheritance diagram for S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario\-:\begin{fi
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSWE__ArtificialTsunamiScenario_a6e180a52b20d3b1556c6c05bed61f6ab}{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario} (int cells\-X, int cells\-Y)
+\item 
+float \hyperlink{classSWE__ArtificialTsunamiScenario_acbc4c3127f531862d01c4661da144836}{get\-Bathymetry} (float x, float y)
+\item 
+float \hyperlink{classSWE__ArtificialTsunamiScenario_aef1c04137080ab89e437d5a912b85dcb}{get\-Water\-Height} (float x, float y)
+\item 
+virtual float \hyperlink{classSWE__ArtificialTsunamiScenario_ac402138d10edcbe7faec4a683de0ebdb}{end\-Simulation} ()
+\item 
+float \hyperlink{classSWE__ArtificialTsunamiScenario_ab61b4cb9598a368ef14c2f2a165fe56c}{get\-Boundary\-Pos} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} i\-\_\-edge)
 \item 
 \hypertarget{classSWE__ArtificialTsunamiScenario_acbc4c3127f531862d01c4661da144836}{float {\bfseries get\-Bathymetry} (float x, float y)}\label{classSWE__ArtificialTsunamiScenario_acbc4c3127f531862d01c4661da144836}
 
@@ -34,7 +44,55 @@ float \hyperlink{classSWE__ArtificialTsunamiScenario_ab61b4cb9598a368ef14c2f2a16
 \subsection{Detailed Description}
 Scenario \char`\"{}\-Artificial Tsunami Scenario\char`\"{}\-: displacement in the middle of the domain 
 
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSWE__ArtificialTsunamiScenario_a6e180a52b20d3b1556c6c05bed61f6ab}{\index{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}!S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}}
+\index{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}!SWE_ArtificialTsunamiScenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}}
+\subsubsection[{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario\-::\-S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario (
+\begin{DoxyParamCaption}
+\item[{int}]{cells\-X, }
+\item[{int}]{cells\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__ArtificialTsunamiScenario_a6e180a52b20d3b1556c6c05bed61f6ab}
+Creates a new instance of the Tsunami\-Scenario Class 
+\begin{DoxyParams}{Parameters}
+{\em cells\-X} & Cells in x dimension \\
+\hline
+{\em cells\-Y} & Cells in y dimension \\
+\hline
+\end{DoxyParams}
+
+
 \subsection{Member Function Documentation}
+\hypertarget{classSWE__ArtificialTsunamiScenario_ac402138d10edcbe7faec4a683de0ebdb}{\index{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}!end\-Simulation@{end\-Simulation}}
+\index{end\-Simulation@{end\-Simulation}!SWE_ArtificialTsunamiScenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}}
+\subsubsection[{end\-Simulation}]{\setlength{\rightskip}{0pt plus 5cm}virtual float S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario\-::end\-Simulation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__ArtificialTsunamiScenario_ac402138d10edcbe7faec4a683de0ebdb}
+Returns the time of the end of the simulation 
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__ArtificialTsunamiScenario_acbc4c3127f531862d01c4661da144836}{\index{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}!get\-Bathymetry@{get\-Bathymetry}}
+\index{get\-Bathymetry@{get\-Bathymetry}!SWE_ArtificialTsunamiScenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}}
+\subsubsection[{get\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario\-::get\-Bathymetry (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__ArtificialTsunamiScenario_acbc4c3127f531862d01c4661da144836}
+The bathymetry at a requested location 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/\-Value of the location \\
+\hline
+{\em y} & The y-\/\-Value of the location \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
 \hypertarget{classSWE__ArtificialTsunamiScenario_ab61b4cb9598a368ef14c2f2a165fe56c}{\index{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}!get\-Boundary\-Pos@{get\-Boundary\-Pos}}
 \index{get\-Boundary\-Pos@{get\-Boundary\-Pos}!SWE_ArtificialTsunamiScenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}}
 \subsubsection[{get\-Boundary\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario\-::get\-Boundary\-Pos (
@@ -56,8 +114,49 @@ value in the corresponding dimension
 
 Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
 
+\hypertarget{classSWE__ArtificialTsunamiScenario_ab61b4cb9598a368ef14c2f2a165fe56c}{\index{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}!get\-Boundary\-Pos@{get\-Boundary\-Pos}}
+\index{get\-Boundary\-Pos@{get\-Boundary\-Pos}!SWE_ArtificialTsunamiScenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}}
+\subsubsection[{get\-Boundary\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario\-::get\-Boundary\-Pos (
+\begin{DoxyParamCaption}
+\item[{{\bf Boundary\-Edge}}]{i\-\_\-edge}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__ArtificialTsunamiScenario_ab61b4cb9598a368ef14c2f2a165fe56c}
+Get the boundary positions
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-edge} & which edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value in the corresponding dimension 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+\hypertarget{classSWE__ArtificialTsunamiScenario_aef1c04137080ab89e437d5a912b85dcb}{\index{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}!get\-Water\-Height@{get\-Water\-Height}}
+\index{get\-Water\-Height@{get\-Water\-Height}!SWE_ArtificialTsunamiScenario@{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario}}
+\subsubsection[{get\-Water\-Height}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario\-::get\-Water\-Height (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classSWE__ArtificialTsunamiScenario_aef1c04137080ab89e437d5a912b85dcb}
+The water height at a requested location 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/\-Value of the location \\
+\hline
+{\em y} & The y-\/\-Value of the location \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/scenarios/\hyperlink{SWE__simple__scenarios_8hh}{S\-W\-E\-\_\-simple\-\_\-scenarios.\-hh}\end{DoxyCompactItemize}
+src/scenarios/\hyperlink{SWE__ArtificialTsunamiScenario_8hh}{S\-W\-E\-\_\-\-Artificial\-Tsunami\-Scenario.\-hh}\item 
+src/scenarios/\hyperlink{SWE__simple__scenarios_8hh}{S\-W\-E\-\_\-simple\-\_\-scenarios.\-hh}\end{DoxyCompactItemize}

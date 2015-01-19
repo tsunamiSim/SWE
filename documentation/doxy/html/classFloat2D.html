@@ -84,6 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classFloat2D-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Float2D Class Reference</div>  </div>
@@ -121,6 +122,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>getCols</b> () const <
 <tr class="memitem:a6c3329adba1854ea3e9589fd7271765b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c3329adba1854ea3e9589fd7271765b"></a>
 <a class="el" href="classFloat1D.html">Float1D</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getRowProxy</b> (int j)</td></tr>
 <tr class="separator:a6c3329adba1854ea3e9589fd7271765b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c9e36406c2cad64d759e9ce626fcdc5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c9e36406c2cad64d759e9ce626fcdc5"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>ToString</b> () const </td></tr>
+<tr class="separator:a4c9e36406c2cad64d759e9ce626fcdc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a7484b254a7c4206e3bc75572397c2d51"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7484b254a7c4206e3bc75572397c2d51"></a>
+static <a class="el" href="classFloat2D.html">Float2D</a>&#160;</td><td class="memItemRight" valign="bottom"><b>compress</b> (const <a class="el" href="classFloat2D.html">Float2D</a> &amp;input, int compress, int cutColsLeft, int cutColsRight, int cutRowsBot, int cutRowsTop)</td></tr>
+<tr class="separator:a7484b254a7c4206e3bc75572397c2d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>class <a class="el" href="classFloat2D.html">Float2D</a> is a very basic helper class to deal with 2D float arrays: indices represent columns (1st index, "horizontal"/x-coordinate) and rows (2nd index, "vertical"/y-coordinate) of a 2D grid; values are sequentially ordered in memory using "column major" order. Besides constructor/deconstructor, the class provides overloading of the []-operator, such that elements can be accessed as a[i][j]. </p>
@@ -266,12 +276,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>getCols</b> () const <
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/sascha/Dokumente/Projects/TsunSim/SWE/src/tools/<a class="el" href="help_8hh_source.html">help.hh</a></li>
+<li>src/tools/<a class="el" href="help_8hh_source.html">help.hh</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 19 2015 17:00:09 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

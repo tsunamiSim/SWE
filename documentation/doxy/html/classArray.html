@@ -103,10 +103,72 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aba3d93624f3b23b89923f7a82b5babac"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aba3d93624f3b23b89923f7a82b5babac"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classArray.html#aba3d93624f3b23b89923f7a82b5babac">print</a> (T *array, int length, std::string name=&quot;Array&quot;)</td></tr>
 <tr class="separator:aba3d93624f3b23b89923f7a82b5babac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4319c070eabef19232b53b5926fa6bed"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classArray.html#a4319c070eabef19232b53b5926fa6bed">lookUp</a> (float searchFor, int <a class="el" href="classArray.html#a08b9fad689eb5fc9484cd63507aabb5f">max</a>, float *searchIn, int *best)</td></tr>
+<tr class="separator:a4319c070eabef19232b53b5926fa6bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09ec3a135ecd687ebaa23408cc8940d2"><td class="memTemplParams" colspan="2"><a class="anchor" id="a09ec3a135ecd687ebaa23408cc8940d2"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a09ec3a135ecd687ebaa23408cc8940d2"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>cut</b> (T **inputArray, int startIndex, int length)</td></tr>
+<tr class="separator:a09ec3a135ecd687ebaa23408cc8940d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Collection of helper methods for arrays </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a4319c070eabef19232b53b5926fa6bed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Array::lookUp </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>searchFor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>searchIn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>best</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Looks up the closest value's index in a given array </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">searchFor</td><td>Reference value </td></tr>
+    <tr><td class="paramname">max</td><td>The length of the array to search in </td></tr>
+    <tr><td class="paramname">searchIn</td><td>The array to search in </td></tr>
+    <tr><td class="paramname">best</td><td>The index of the closest element in the array </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a08b9fad689eb5fc9484cd63507aabb5f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -247,12 +309,12 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/sascha/Dokumente/Projects/TsunSim/SWE/src/tools/<a class="el" href="help_8hh_source.html">help.hh</a></li>
+<li>src/tools/<a class="el" href="help_8hh_source.html">help.hh</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 19 2015 17:00:09 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

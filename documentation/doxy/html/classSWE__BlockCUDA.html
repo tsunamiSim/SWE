@@ -136,6 +136,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad4214fcfd102a4c167d274ad87d9dd90 inherit pub_methods_classSWE__Block"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__Block.html#ad4214fcfd102a4c167d274ad87d9dd90">setBathymetry</a> (float(*_b)(float, float))</td></tr>
 <tr class="memdesc:ad4214fcfd102a4c167d274ad87d9dd90 inherit pub_methods_classSWE__Block"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the bathymetry according to a given function  <a href="#ad4214fcfd102a4c167d274ad87d9dd90">More...</a><br/></td></tr>
 <tr class="separator:ad4214fcfd102a4c167d274ad87d9dd90 inherit pub_methods_classSWE__Block"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2e750bb5e8a952cd9f771054cb4e7b0 inherit pub_methods_classSWE__Block"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__Block.html#ab2e750bb5e8a952cd9f771054cb4e7b0">setBathymetry</a> (float *_b)</td></tr>
+<tr class="memdesc:ab2e750bb5e8a952cd9f771054cb4e7b0 inherit pub_methods_classSWE__Block"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the whole bathymetry matrix  <a href="#ab2e750bb5e8a952cd9f771054cb4e7b0">More...</a><br/></td></tr>
+<tr class="separator:ab2e750bb5e8a952cd9f771054cb4e7b0 inherit pub_methods_classSWE__Block"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d2adb939d59e064edd7316faae445f inherit pub_methods_classSWE__Block"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__Block.html#a54d2adb939d59e064edd7316faae445f">setBathymetry</a> (int i_x, int i_y, float i_b)</td></tr>
+<tr class="memdesc:a54d2adb939d59e064edd7316faae445f inherit pub_methods_classSWE__Block"><td class="mdescLeft">&#160;</td><td class="mdescRight">set one single cell's bathymetry value  <a href="#a54d2adb939d59e064edd7316faae445f">More...</a><br/></td></tr>
+<tr class="separator:a54d2adb939d59e064edd7316faae445f inherit pub_methods_classSWE__Block"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1aea4294403c194180c3dc107339fd7 inherit pub_methods_classSWE__Block"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classFloat2D.html">Float2D</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__Block.html#ab1aea4294403c194180c3dc107339fd7">getWaterHeight</a> ()</td></tr>
 <tr class="memdesc:ab1aea4294403c194180c3dc107339fd7 inherit pub_methods_classSWE__Block"><td class="mdescLeft">&#160;</td><td class="mdescRight">provides read access to the water height array  <a href="#ab1aea4294403c194180c3dc107339fd7">More...</a><br/></td></tr>
 <tr class="separator:ab1aea4294403c194180c3dc107339fd7 inherit pub_methods_classSWE__Block"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,6 +184,22 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__Block.html#a4b65557b6f73ffb6454dad3dbf86e9ad">getNy</a> ()</td></tr>
 <tr class="memdesc:a4b65557b6f73ffb6454dad3dbf86e9ad inherit pub_methods_classSWE__Block"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns <a class="el" href="classSWE__Block.html#a3f139630d12423eb4bd7df3e45c7f5da" title="size of Cartesian arrays in y-direction ">ny</a>, i.e. the grid size in y-direction <br/></td></tr>
 <tr class="separator:a4b65557b6f73ffb6454dad3dbf86e9ad inherit pub_methods_classSWE__Block"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d4b3b3a932f3895c4f013cd4bb319d3 inherit pub_methods_classSWE__Block"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d4b3b3a932f3895c4f013cd4bb319d3"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__Block.html#a2d4b3b3a932f3895c4f013cd4bb319d3">getDx</a> ()</td></tr>
+<tr class="memdesc:a2d4b3b3a932f3895c4f013cd4bb319d3 inherit pub_methods_classSWE__Block"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns <a class="el" href="classSWE__Block.html#af2262b1cce6834d939c5a2315dae49b1" title="mesh size of the Cartesian grid in x-direction ">dx</a>, i.e. the cell size in x-direction <br/></td></tr>
+<tr class="separator:a2d4b3b3a932f3895c4f013cd4bb319d3 inherit pub_methods_classSWE__Block"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add4edc5f146a02c00187a81d93f00fb7 inherit pub_methods_classSWE__Block"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add4edc5f146a02c00187a81d93f00fb7"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__Block.html#add4edc5f146a02c00187a81d93f00fb7">getDy</a> ()</td></tr>
+<tr class="memdesc:add4edc5f146a02c00187a81d93f00fb7 inherit pub_methods_classSWE__Block"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns <a class="el" href="classSWE__Block.html#a9feb988748d792bca0ca0508e43bd87f" title="mesh size of the Cartesian grid in y-direction ">dy</a>, i.e. the cell size in y-direction <br/></td></tr>
+<tr class="separator:add4edc5f146a02c00187a81d93f00fb7 inherit pub_methods_classSWE__Block"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f279d69697c335d5e9c9c4d3c54e3b8 inherit pub_methods_classSWE__Block"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5f279d69697c335d5e9c9c4d3c54e3b8"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__Block.html#a5f279d69697c335d5e9c9c4d3c54e3b8">getOffx</a> ()</td></tr>
+<tr class="memdesc:a5f279d69697c335d5e9c9c4d3c54e3b8 inherit pub_methods_classSWE__Block"><td class="mdescLeft">&#160;</td><td class="mdescRight">return <a class="el" href="classSWE__Block.html#aa9e9b1fa797c133c4989e4c54f09b542" title="x-coordinate of the origin (left-bottom corner) of the Cartesian grid ">offsetX</a>, i.e. the x-origin of the coordinate system <br/></td></tr>
+<tr class="separator:a5f279d69697c335d5e9c9c4d3c54e3b8 inherit pub_methods_classSWE__Block"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22364064412b824204dc8a79bf572893 inherit pub_methods_classSWE__Block"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22364064412b824204dc8a79bf572893"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__Block.html#a22364064412b824204dc8a79bf572893">getOffy</a> ()</td></tr>
+<tr class="memdesc:a22364064412b824204dc8a79bf572893 inherit pub_methods_classSWE__Block"><td class="mdescLeft">&#160;</td><td class="mdescRight">return <a class="el" href="classSWE__Block.html#aa05241101a66f0f0548eba6dbbaa1bbb" title="y-coordinate of the origin (left-bottom corner) of the Cartesian grid ">offsetY</a>, i.e. the y-origin of the coordinate system <br/></td></tr>
+<tr class="separator:a22364064412b824204dc8a79bf572893 inherit pub_methods_classSWE__Block"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -848,13 +870,13 @@ static const float&#160;</td><td class="memItemRight" valign="bottom"><a class="
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/sascha/Dokumente/Projects/TsunSim/SWE/src/blocks/cuda/<a class="el" href="SWE__BlockCUDA_8hh_source.html">SWE_BlockCUDA.hh</a></li>
-<li>/home/sascha/Dokumente/Projects/TsunSim/SWE/src/blocks/cuda/<a class="el" href="SWE__BlockCUDA_8cu.html">SWE_BlockCUDA.cu</a></li>
+<li>src/blocks/cuda/<a class="el" href="SWE__BlockCUDA_8hh_source.html">SWE_BlockCUDA.hh</a></li>
+<li>src/blocks/cuda/<a class="el" href="SWE__BlockCUDA_8cu.html">SWE_BlockCUDA.cu</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 19 2015 17:00:09 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

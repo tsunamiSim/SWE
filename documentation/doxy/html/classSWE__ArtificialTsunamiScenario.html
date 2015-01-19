@@ -90,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="SWE__simple__scenarios_8hh_source.html">SWE_simple_scenarios.hh</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="SWE__ArtificialTsunamiScenario_8hh_source.html">SWE_ArtificialTsunamiScenario.hh</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for SWE_ArtificialTsunamiScenario:</div>
 <div class="dyncontent">
@@ -98,11 +98,22 @@ Inheritance diagram for SWE_ArtificialTsunamiScenario:</div>
   <img src="classSWE__ArtificialTsunamiScenario.png" usemap="#SWE_ArtificialTsunamiScenario_map" alt=""/>
   <map id="SWE_ArtificialTsunamiScenario_map" name="SWE_ArtificialTsunamiScenario_map">
 <area href="classSWE__Scenario.html" alt="SWE_Scenario" shape="rect" coords="0,0,190,24"/>
+<area href="classSWE__Scenario.html" alt="SWE_Scenario" shape="rect" coords="200,0,390,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a6e180a52b20d3b1556c6c05bed61f6ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__ArtificialTsunamiScenario.html#a6e180a52b20d3b1556c6c05bed61f6ab">SWE_ArtificialTsunamiScenario</a> (int cellsX, int cellsY)</td></tr>
+<tr class="separator:a6e180a52b20d3b1556c6c05bed61f6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbc4c3127f531862d01c4661da144836"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__ArtificialTsunamiScenario.html#acbc4c3127f531862d01c4661da144836">getBathymetry</a> (float x, float y)</td></tr>
+<tr class="separator:acbc4c3127f531862d01c4661da144836"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef1c04137080ab89e437d5a912b85dcb"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__ArtificialTsunamiScenario.html#aef1c04137080ab89e437d5a912b85dcb">getWaterHeight</a> (float x, float y)</td></tr>
+<tr class="separator:aef1c04137080ab89e437d5a912b85dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac402138d10edcbe7faec4a683de0ebdb"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__ArtificialTsunamiScenario.html#ac402138d10edcbe7faec4a683de0ebdb">endSimulation</a> ()</td></tr>
+<tr class="separator:ac402138d10edcbe7faec4a683de0ebdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab61b4cb9598a368ef14c2f2a165fe56c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSWE__ArtificialTsunamiScenario.html#ab61b4cb9598a368ef14c2f2a165fe56c">getBoundaryPos</a> (<a class="el" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> i_edge)</td></tr>
+<tr class="separator:ab61b4cb9598a368ef14c2f2a165fe56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbc4c3127f531862d01c4661da144836"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbc4c3127f531862d01c4661da144836"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>getBathymetry</b> (float x, float y)</td></tr>
 <tr class="separator:acbc4c3127f531862d01c4661da144836"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,6 +156,9 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getCheckpoi
 <tr class="memitem:aef7a53a5d791bee0545488735381c6a2 inherit pub_methods_classSWE__Scenario"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef7a53a5d791bee0545488735381c6a2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setBoundaryTypes</b> (<a class="el" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> type)</td></tr>
 <tr class="separator:aef7a53a5d791bee0545488735381c6a2 inherit pub_methods_classSWE__Scenario"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe735c081530f2258a083de425cca9eb inherit pub_methods_classSWE__Scenario"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe735c081530f2258a083de425cca9eb"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setBathymetry</b> (float value)</td></tr>
+<tr class="separator:abe735c081530f2258a083de425cca9eb inherit pub_methods_classSWE__Scenario"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -161,7 +175,120 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>cells_y</b></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Scenario "Artificial Tsunami Scenario": displacement in the middle of the domain </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a6e180a52b20d3b1556c6c05bed61f6ab"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SWE_ArtificialTsunamiScenario::SWE_ArtificialTsunamiScenario </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cellsX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cellsY</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Creates a new instance of the TsunamiScenario Class </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cellsX</td><td>Cells in x dimension </td></tr>
+    <tr><td class="paramname">cellsY</td><td>Cells in y dimension </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ac402138d10edcbe7faec4a683de0ebdb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual float SWE_ArtificialTsunamiScenario::endSimulation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the time of the end of the simulation </p>
+
+<p>Reimplemented from <a class="el" href="classSWE__Scenario.html">SWE_Scenario</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acbc4c3127f531862d01c4661da144836"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float SWE_ArtificialTsunamiScenario::getBathymetry </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The bathymetry at a requested location </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x-Value of the location </td></tr>
+    <tr><td class="paramname">y</td><td>The y-Value of the location </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classSWE__Scenario.html">SWE_Scenario</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ab61b4cb9598a368ef14c2f2a165fe56c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -196,13 +323,92 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>cells_y</b></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/home/sascha/Dokumente/Projects/TsunSim/SWE/src/scenarios/<a class="el" href="SWE__simple__scenarios_8hh_source.html">SWE_simple_scenarios.hh</a></li>
+<a class="anchor" id="ab61b4cb9598a368ef14c2f2a165fe56c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float SWE_ArtificialTsunamiScenario::getBoundaryPos </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a>&#160;</td>
+          <td class="paramname"><em>i_edge</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Get the boundary positions</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i_edge</td><td>which edge </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>value in the corresponding dimension </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classSWE__Scenario.html">SWE_Scenario</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aef1c04137080ab89e437d5a912b85dcb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float SWE_ArtificialTsunamiScenario::getWaterHeight </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The water height at a requested location </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x-Value of the location </td></tr>
+    <tr><td class="paramname">y</td><td>The y-Value of the location </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classSWE__Scenario.html">SWE_Scenario</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/scenarios/<a class="el" href="SWE__ArtificialTsunamiScenario_8hh_source.html">SWE_ArtificialTsunamiScenario.hh</a></li>
+<li>src/scenarios/<a class="el" href="SWE__simple__scenarios_8hh_source.html">SWE_simple_scenarios.hh</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 19 2015 17:00:09 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

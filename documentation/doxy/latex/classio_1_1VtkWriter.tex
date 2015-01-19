@@ -12,7 +12,7 @@ Inheritance diagram for io\-:\-:Vtk\-Writer\-:\begin{figure}[H]
 \item 
 \hyperlink{classio_1_1VtkWriter_aaed37669d1c38bafaf3fc36169342720}{Vtk\-Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, int i\-\_\-n\-X, int i\-\_\-n\-Y, float i\-\_\-d\-X, float i\-\_\-d\-Y, int i\-\_\-offset\-X=0, int i\-\_\-offset\-Y=0)
 \item 
-void \hyperlink{classio_1_1VtkWriter_ad464e594a34f4cd94b02087a2fade7bf}{write\-Time\-Step} (const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-h, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hu, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hv, float i\-\_\-time)
+void \hyperlink{classio_1_1VtkWriter_a76a308d810ee45bf8260afcae20c4f6c}{write\-Time\-Step} (const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-h, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hu, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hv, float i\-\_\-time, bool i\-\_\-write\-Bathymetry=true)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -59,16 +59,17 @@ Creates a vtk file for each time step. Any existing file will be replaced.
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classio_1_1VtkWriter_ad464e594a34f4cd94b02087a2fade7bf}{\index{io\-::\-Vtk\-Writer@{io\-::\-Vtk\-Writer}!write\-Time\-Step@{write\-Time\-Step}}
+\hypertarget{classio_1_1VtkWriter_a76a308d810ee45bf8260afcae20c4f6c}{\index{io\-::\-Vtk\-Writer@{io\-::\-Vtk\-Writer}!write\-Time\-Step@{write\-Time\-Step}}
 \index{write\-Time\-Step@{write\-Time\-Step}!io::VtkWriter@{io\-::\-Vtk\-Writer}}
 \subsubsection[{write\-Time\-Step}]{\setlength{\rightskip}{0pt plus 5cm}void io\-::\-Vtk\-Writer\-::write\-Time\-Step (
 \begin{DoxyParamCaption}
 \item[{const {\bf Float2\-D} \&}]{i\-\_\-h, }
 \item[{const {\bf Float2\-D} \&}]{i\-\_\-hu, }
 \item[{const {\bf Float2\-D} \&}]{i\-\_\-hv, }
-\item[{float}]{i\-\_\-time}
+\item[{float}]{i\-\_\-time, }
+\item[{bool}]{i\-\_\-write\-Bathymetry = {\ttfamily true}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classio_1_1VtkWriter_ad464e594a34f4cd94b02087a2fade7bf}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classio_1_1VtkWriter_a76a308d810ee45bf8260afcae20c4f6c}
 Writes one time step
 
 
@@ -84,11 +85,11 @@ Writes one time step
 \end{DoxyParams}
 
 
-Implements \hyperlink{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{io\-::\-Writer}.
+Implements \hyperlink{classio_1_1Writer_ac0d0cf6466fc05fba32acf22332a8e65}{io\-::\-Writer}.
 
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/writer/\hyperlink{VtkWriter_8hh}{Vtk\-Writer.\-hh}\item 
-/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/writer/\hyperlink{VtkWriter_8cpp}{Vtk\-Writer.\-cpp}\end{DoxyCompactItemize}
+src/writer/\hyperlink{VtkWriter_8hh}{Vtk\-Writer.\-hh}\item 
+src/writer/\hyperlink{VtkWriter_8cpp}{Vtk\-Writer.\-cpp}\end{DoxyCompactItemize}

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>SWE: /home/sascha/Dokumente/Projects/TsunSim/SWE/src/writer/VtkWriter.hh Source File</title>
+<title>SWE: src/writer/VtkWriter.hh Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -115,10 +115,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                           <span class="keywordtype">int</span> i_offsetX = 0, <span class="keywordtype">int</span> i_offsetY = 0);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// writes the unknowns at a given time step to a vtk file</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_1_1VtkWriter.html#ad464e594a34f4cd94b02087a2fade7bf">writeTimeStep</a>( <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_h,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classio_1_1VtkWriter.html#a76a308d810ee45bf8260afcae20c4f6c">writeTimeStep</a>( <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_h,</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                        <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_hu,</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                        <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a> &amp;i_hv,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        <span class="keywordtype">float</span> i_time);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        <span class="keywordtype">float</span> i_time, <span class="keywordtype">bool</span> i_writeBathymetry = <span class="keyword">true</span>);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::string generateFileName()</div>
@@ -131,11 +131,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif // VTKWRITER_HH_</span></div>
-<div class="ttc" id="classFloat2D_html"><div class="ttname"><a href="classFloat2D.html">Float2D</a></div><div class="ttdef"><b>Definition:</b> help.hh:100</div></div>
+<div class="ttc" id="classFloat2D_html"><div class="ttname"><a href="classFloat2D.html">Float2D</a></div><div class="ttdef"><b>Definition:</b> help.hh:121</div></div>
 <div class="ttc" id="structio_1_1BoundarySize_html"><div class="ttname"><a href="structio_1_1BoundarySize.html">io::BoundarySize</a></div><div class="ttdef"><b>Definition:</b> Writer.hh:40</div></div>
 <div class="ttc" id="classio_1_1VtkWriter_html_aaed37669d1c38bafaf3fc36169342720"><div class="ttname"><a href="classio_1_1VtkWriter.html#aaed37669d1c38bafaf3fc36169342720">io::VtkWriter::VtkWriter</a></div><div class="ttdeci">VtkWriter(const std::string &amp;i_fileName, const Float2D &amp;i_b, const BoundarySize &amp;i_boundarySize, int i_nX, int i_nY, float i_dX, float i_dY, int i_offsetX=0, int i_offsetY=0)</div><div class="ttdef"><b>Definition:</b> VtkWriter.cpp:45</div></div>
-<div class="ttc" id="classio_1_1VtkWriter_html_ad464e594a34f4cd94b02087a2fade7bf"><div class="ttname"><a href="classio_1_1VtkWriter.html#ad464e594a34f4cd94b02087a2fade7bf">io::VtkWriter::writeTimeStep</a></div><div class="ttdeci">void writeTimeStep(const Float2D &amp;i_h, const Float2D &amp;i_hu, const Float2D &amp;i_hv, float i_time)</div><div class="ttdef"><b>Definition:</b> VtkWriter.cpp:57</div></div>
 <div class="ttc" id="classio_1_1Writer_html_a93b978e8cbfc6bcf6dbfdc3f393d300a"><div class="ttname"><a href="classio_1_1Writer.html#a93b978e8cbfc6bcf6dbfdc3f393d300a">io::Writer::fileName</a></div><div class="ttdeci">const std::string fileName</div><div class="ttdoc">file name of the data file </div><div class="ttdef"><b>Definition:</b> Writer.hh:65</div></div>
+<div class="ttc" id="classio_1_1VtkWriter_html_a76a308d810ee45bf8260afcae20c4f6c"><div class="ttname"><a href="classio_1_1VtkWriter.html#a76a308d810ee45bf8260afcae20c4f6c">io::VtkWriter::writeTimeStep</a></div><div class="ttdeci">void writeTimeStep(const Float2D &amp;i_h, const Float2D &amp;i_hu, const Float2D &amp;i_hv, float i_time, bool i_writeBathymetry=true)</div><div class="ttdef"><b>Definition:</b> VtkWriter.cpp:57</div></div>
 <div class="ttc" id="classio_1_1Writer_html_aa21f3ee8a54cf9278d711fe4f454f45c"><div class="ttname"><a href="classio_1_1Writer.html#aa21f3ee8a54cf9278d711fe4f454f45c">io::Writer::timeStep</a></div><div class="ttdeci">size_t timeStep</div><div class="ttdoc">current time step </div><div class="ttdef"><b>Definition:</b> Writer.hh:77</div></div>
 <div class="ttc" id="classio_1_1VtkWriter_html"><div class="ttname"><a href="classio_1_1VtkWriter.html">io::VtkWriter</a></div><div class="ttdef"><b>Definition:</b> VtkWriter.hh:36</div></div>
 <div class="ttc" id="classio_1_1Writer_html"><div class="ttname"><a href="classio_1_1Writer.html">io::Writer</a></div><div class="ttdef"><b>Definition:</b> Writer.hh:61</div></div>
@@ -143,7 +143,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 19 2015 17:00:09 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

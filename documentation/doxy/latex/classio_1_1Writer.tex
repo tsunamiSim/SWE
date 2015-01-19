@@ -12,7 +12,10 @@ Inheritance diagram for io\-:\-:Writer\-:\begin{figure}[H]
 \item 
 \hyperlink{classio_1_1Writer_a05648cc3fcfaf3d7d4267a584685f6f3}{Writer} (const std\-::string \&i\-\_\-file\-Name, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \&i\-\_\-boundary\-Size, int i\-\_\-n\-X, int i\-\_\-n\-Y, size\-\_\-t i\-\_\-time\-Step=0)
 \item 
-virtual void \hyperlink{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{write\-Time\-Step} (const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-h, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hu, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hv, float i\-\_\-time)=0
+virtual void \hyperlink{classio_1_1Writer_ac0d0cf6466fc05fba32acf22332a8e65}{write\-Time\-Step} (const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-h, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hu, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hv, float i\-\_\-time, bool i\-\_\-write\-Bathymetry=true)=0
+\item 
+\hypertarget{classio_1_1Writer_ada10f42d4e639895b4949c736cf3f328}{virtual void {\bfseries write\-Time\-Step} (const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-h, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hu, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-hv, const \hyperlink{classFloat2D}{Float2\-D} \&i\-\_\-b, float i\-\_\-time)}\label{classio_1_1Writer_ada10f42d4e639895b4949c736cf3f328}
+
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -26,10 +29,10 @@ virtual void \hyperlink{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{wri
 \hypertarget{classio_1_1Writer_a7cf701232192c20c41cbb4454601c219}{const \hyperlink{structio_1_1BoundarySize}{Boundary\-Size} \hyperlink{classio_1_1Writer_a7cf701232192c20c41cbb4454601c219}{boundary\-Size}}\label{classio_1_1Writer_a7cf701232192c20c41cbb4454601c219}
 
 \begin{DoxyCompactList}\small\item\em Boundary layer size. \end{DoxyCompactList}\item 
-\hypertarget{classio_1_1Writer_a080fc86da3b2d8ea130382917d96252d}{const unsigned int \hyperlink{classio_1_1Writer_a080fc86da3b2d8ea130382917d96252d}{n\-X}}\label{classio_1_1Writer_a080fc86da3b2d8ea130382917d96252d}
+\hypertarget{classio_1_1Writer_a3929ac486db236727ffe1c012d3ed765}{unsigned int \hyperlink{classio_1_1Writer_a3929ac486db236727ffe1c012d3ed765}{n\-X}}\label{classio_1_1Writer_a3929ac486db236727ffe1c012d3ed765}
 
 \begin{DoxyCompactList}\small\item\em dimensions of the grid in x-\/ and y-\/direction. \end{DoxyCompactList}\item 
-\hypertarget{classio_1_1Writer_a8c4ceaedd4b3e571cc4a5cacbcb21604}{const unsigned int {\bfseries n\-Y}}\label{classio_1_1Writer_a8c4ceaedd4b3e571cc4a5cacbcb21604}
+\hypertarget{classio_1_1Writer_ac1e4628c0f4ac2185cfb011588cec405}{unsigned int {\bfseries n\-Y}}\label{classio_1_1Writer_ac1e4628c0f4ac2185cfb011588cec405}
 
 \item 
 \hypertarget{classio_1_1Writer_aa21f3ee8a54cf9278d711fe4f454f45c}{size\-\_\-t \hyperlink{classio_1_1Writer_aa21f3ee8a54cf9278d711fe4f454f45c}{time\-Step}}\label{classio_1_1Writer_aa21f3ee8a54cf9278d711fe4f454f45c}
@@ -58,16 +61,17 @@ virtual void \hyperlink{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{wri
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}{\index{io\-::\-Writer@{io\-::\-Writer}!write\-Time\-Step@{write\-Time\-Step}}
+\hypertarget{classio_1_1Writer_ac0d0cf6466fc05fba32acf22332a8e65}{\index{io\-::\-Writer@{io\-::\-Writer}!write\-Time\-Step@{write\-Time\-Step}}
 \index{write\-Time\-Step@{write\-Time\-Step}!io::Writer@{io\-::\-Writer}}
 \subsubsection[{write\-Time\-Step}]{\setlength{\rightskip}{0pt plus 5cm}virtual void io\-::\-Writer\-::write\-Time\-Step (
 \begin{DoxyParamCaption}
 \item[{const {\bf Float2\-D} \&}]{i\-\_\-h, }
 \item[{const {\bf Float2\-D} \&}]{i\-\_\-hu, }
 \item[{const {\bf Float2\-D} \&}]{i\-\_\-hv, }
-\item[{float}]{i\-\_\-time}
+\item[{float}]{i\-\_\-time, }
+\item[{bool}]{i\-\_\-write\-Bathymetry = {\ttfamily true}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classio_1_1Writer_a9ac05caa91aca4e79094d6718a2da16c}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classio_1_1Writer_ac0d0cf6466fc05fba32acf22332a8e65}
 Writes one time step
 
 
@@ -83,10 +87,10 @@ Writes one time step
 \end{DoxyParams}
 
 
-Implemented in \hyperlink{classio_1_1NetCdfWriter_a8e49f21f16b1720a348de50485754b0c}{io\-::\-Net\-Cdf\-Writer}, and \hyperlink{classio_1_1VtkWriter_ad464e594a34f4cd94b02087a2fade7bf}{io\-::\-Vtk\-Writer}.
+Implemented in \hyperlink{classio_1_1NetCdfWriter_ada737dce75704e08520ce7ac922302be}{io\-::\-Net\-Cdf\-Writer}, and \hyperlink{classio_1_1VtkWriter_a76a308d810ee45bf8260afcae20c4f6c}{io\-::\-Vtk\-Writer}.
 
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/writer/\hyperlink{Writer_8hh}{Writer.\-hh}\end{DoxyCompactItemize}
+src/writer/\hyperlink{Writer_8hh}{Writer.\-hh}\end{DoxyCompactItemize}

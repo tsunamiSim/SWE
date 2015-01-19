@@ -14,15 +14,81 @@ Inheritance diagram for S\-W\-E\-\_\-\-Tsunami\-Scenario\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classSWE__TsunamiScenario_ae14887eeebe3d8b6e89ac9924eb6615b}{S\-W\-E\-\_\-\-Tsunami\-Scenario} (int cells\-X, int cells\-Y)
+void \hyperlink{classSWE__TsunamiScenario_ade0bbbe3c90140c9d0ebf0f3a98023db}{read\-Nc\-File} (const char $\ast$file\-Dir, \hyperlink{classFloat2D}{Float2\-D} $\ast$$\ast$buff\-Z, float $\ast$$\ast$buff\-Y, float $\ast$$\ast$buff\-X)
+\item 
+\hypertarget{classSWE__TsunamiScenario_af2b667ccaf7187372ad9f734e47af8f4}{{\bfseries S\-W\-E\-\_\-\-Tsunami\-Scenario} (int cells\-X, int cells\-Y, float min\-X, float max\-X, float min\-Y, float max\-Y, const char $\ast$bathymetry\-File=\char`\"{}Net\-C\-D\-F\-\_\-\-Input/init\-Bathymetry.\-nc\char`\"{}, const char $\ast$displacement\-File=\char`\"{}Net\-C\-D\-F\-\_\-\-Input/displacement.\-nc\char`\"{})}\label{classSWE__TsunamiScenario_af2b667ccaf7187372ad9f734e47af8f4}
+
+\item 
+\hyperlink{classSWE__TsunamiScenario_a21f13a49c8982555506a6be984456991}{S\-W\-E\-\_\-\-Tsunami\-Scenario} (int cells\-X, int cells\-Y, const char $\ast$bathymetry\-File=\char`\"{}Net\-C\-D\-F\-\_\-\-Input/init\-Bathymetry.\-nc\char`\"{}, const char $\ast$displacement\-File=\char`\"{}Net\-C\-D\-F\-\_\-\-Input/displacement.\-nc\char`\"{})
+\item 
+\hyperlink{classSWE__TsunamiScenario_a8c172272a69ceb49cdf56e5e9e7626af}{S\-W\-E\-\_\-\-Tsunami\-Scenario} ()
 \item 
 float \hyperlink{classSWE__TsunamiScenario_aa2d2b0be8c3bc1d84ded47e075b5d433}{get\-Bathymetry} (float x, float y)
+\item 
+float \hyperlink{classSWE__TsunamiScenario_a93477e7237a1159933ffdea9469512ae}{get\-Bathymetry} (float x, float y, bool Ignore\-Displacement)
+\item 
+\hypertarget{classSWE__TsunamiScenario_ae940299bb294013569143297be56d3f3}{void {\bfseries set\-Bathymetry} (float value)}\label{classSWE__TsunamiScenario_ae940299bb294013569143297be56d3f3}
+
 \item 
 float \hyperlink{classSWE__TsunamiScenario_a134b99facf6169d2ef1edf0e5199b736}{get\-Water\-Height} (float x, float y)
 \item 
 virtual float \hyperlink{classSWE__TsunamiScenario_a0576923dc02b543dc34cec7de6e451a4}{end\-Simulation} ()
 \item 
 float \hyperlink{classSWE__TsunamiScenario_a701145868edb572d5958bbd739b80e0d}{get\-Boundary\-Pos} (\hyperlink{SWE__Scenario_8hh_aa5e01e3f7df312f7b9b0d02521141fcc}{Boundary\-Edge} i\-\_\-edge)
+\item 
+\hypertarget{classSWE__TsunamiScenario_a5ead2d1563167aac3c2b89bf557a0d01}{void {\bfseries apply\-Boundaries} ()}\label{classSWE__TsunamiScenario_a5ead2d1563167aac3c2b89bf557a0d01}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_adba5fd0a38464051ffec4d388e97e85d}{void {\bfseries clip} (float min\-X, float max\-X, float min\-Y, float max\-Y)}\label{classSWE__TsunamiScenario_adba5fd0a38464051ffec4d388e97e85d}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_a39bddfedf0a8e2621cc4d0ed0a789304}{void {\bfseries clip} (float min, float max, float $\ast$$\ast$array, int length, int $\ast$min\-Index, int $\ast$max\-Index)}\label{classSWE__TsunamiScenario_a39bddfedf0a8e2621cc4d0ed0a789304}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classSWE__TsunamiScenario_a134064f40455335747de6851778a30b9}{\hyperlink{classFloat2D}{Float2\-D} $\ast$ {\bfseries bathymetry}}\label{classSWE__TsunamiScenario_a134064f40455335747de6851778a30b9}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_a75eda76cf336e1fd41079c8988e1728d}{\hyperlink{classFloat2D}{Float2\-D} $\ast$ {\bfseries displacement}}\label{classSWE__TsunamiScenario_a75eda76cf336e1fd41079c8988e1728d}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_af81657c4c678e5a22deacabd6af82fc3}{float $\ast$ {\bfseries bath\-X}}\label{classSWE__TsunamiScenario_af81657c4c678e5a22deacabd6af82fc3}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_a646eb606238a2cbdd876600723337032}{float $\ast$ {\bfseries bath\-Y}}\label{classSWE__TsunamiScenario_a646eb606238a2cbdd876600723337032}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_adc7a653f1d8249ba6ca2a3cb1e9fe1f9}{float $\ast$ {\bfseries dis\-X}}\label{classSWE__TsunamiScenario_adc7a653f1d8249ba6ca2a3cb1e9fe1f9}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_ae0ed5a9918158720b89e71c65a6a3cd4}{float $\ast$ {\bfseries dis\-Y}}\label{classSWE__TsunamiScenario_ae0ed5a9918158720b89e71c65a6a3cd4}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_a285a5fd7f13eff4bcf57548013a1d1cc}{float {\bfseries dis\-Top}}\label{classSWE__TsunamiScenario_a285a5fd7f13eff4bcf57548013a1d1cc}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_ae3ca0e69dd80cdc84218cde324f15d7b}{float {\bfseries dis\-Bot}}\label{classSWE__TsunamiScenario_ae3ca0e69dd80cdc84218cde324f15d7b}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_ad692177b424edad9dcff8754029ff36d}{float {\bfseries dis\-Left}}\label{classSWE__TsunamiScenario_ad692177b424edad9dcff8754029ff36d}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_a0142311fb59b0870a22ee4bce885073b}{float {\bfseries dis\-Right}}\label{classSWE__TsunamiScenario_a0142311fb59b0870a22ee4bce885073b}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_a37407bf93c1bec9831e1310e56b2e6ce}{float {\bfseries bound\-Left}}\label{classSWE__TsunamiScenario_a37407bf93c1bec9831e1310e56b2e6ce}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_a28d113f626aa4bad5eeb7118b421a797}{float {\bfseries bound\-Right}}\label{classSWE__TsunamiScenario_a28d113f626aa4bad5eeb7118b421a797}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_a3699f9cf07990269de1db072ec9d3d92}{float {\bfseries bound\-Top}}\label{classSWE__TsunamiScenario_a3699f9cf07990269de1db072ec9d3d92}
+
+\item 
+\hypertarget{classSWE__TsunamiScenario_ac2f354deabb9d24b994eea25e168eef0}{float {\bfseries bound\-Bot}}\label{classSWE__TsunamiScenario_ac2f354deabb9d24b994eea25e168eef0}
+
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -31,14 +97,16 @@ float \hyperlink{classSWE__TsunamiScenario_a701145868edb572d5958bbd739b80e0d}{ge
 Scenario \char`\"{}\-Artificial Tsunami Scenario\char`\"{}\-: displacement in the middle of the domain 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classSWE__TsunamiScenario_ae14887eeebe3d8b6e89ac9924eb6615b}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\hypertarget{classSWE__TsunamiScenario_a21f13a49c8982555506a6be984456991}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
 \index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!SWE_TsunamiScenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
 \subsubsection[{S\-W\-E\-\_\-\-Tsunami\-Scenario}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Tsunami\-Scenario\-::\-S\-W\-E\-\_\-\-Tsunami\-Scenario (
 \begin{DoxyParamCaption}
 \item[{int}]{cells\-X, }
-\item[{int}]{cells\-Y}
+\item[{int}]{cells\-Y, }
+\item[{const char $\ast$}]{bathymetry\-File = {\ttfamily \char`\"{}NetCDF\-\_\-Input/initBathymetry.nc\char`\"{}}, }
+\item[{const char $\ast$}]{displacement\-File = {\ttfamily \char`\"{}NetCDF\-\_\-Input/displacement.nc\char`\"{}}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__TsunamiScenario_ae14887eeebe3d8b6e89ac9924eb6615b}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__TsunamiScenario_a21f13a49c8982555506a6be984456991}
 Creates a new instance of the Tsunami\-Scenario Class 
 \begin{DoxyParams}{Parameters}
 {\em cells\-X} & Cells in x dimension \\
@@ -46,7 +114,14 @@ Creates a new instance of the Tsunami\-Scenario Class
 {\em cells\-Y} & Cells in y dimension \\
 \hline
 \end{DoxyParams}
-
+\hypertarget{classSWE__TsunamiScenario_a8c172272a69ceb49cdf56e5e9e7626af}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!SWE_TsunamiScenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\subsubsection[{S\-W\-E\-\_\-\-Tsunami\-Scenario}]{\setlength{\rightskip}{0pt plus 5cm}S\-W\-E\-\_\-\-Tsunami\-Scenario\-::\-S\-W\-E\-\_\-\-Tsunami\-Scenario (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__TsunamiScenario_a8c172272a69ceb49cdf56e5e9e7626af}
+Dummy constructor for cxx tests only 
 
 \subsection{Member Function Documentation}
 \hypertarget{classSWE__TsunamiScenario_a0576923dc02b543dc34cec7de6e451a4}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!end\-Simulation@{end\-Simulation}}
@@ -79,6 +154,24 @@ The bathymetry at a requested location
 
 Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
 
+\hypertarget{classSWE__TsunamiScenario_a93477e7237a1159933ffdea9469512ae}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!get\-Bathymetry@{get\-Bathymetry}}
+\index{get\-Bathymetry@{get\-Bathymetry}!SWE_TsunamiScenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\subsubsection[{get\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Tsunami\-Scenario\-::get\-Bathymetry (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y, }
+\item[{bool}]{Ignore\-Displacement}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__TsunamiScenario_a93477e7237a1159933ffdea9469512ae}
+The bathymetry at a requested location 
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/\-Value of the location \\
+\hline
+{\em y} & The y-\/\-Value of the location \\
+\hline
+{\em Ignore\-Displacement} & True if you just want to get the bathymetry value \\
+\hline
+\end{DoxyParams}
 \hypertarget{classSWE__TsunamiScenario_a701145868edb572d5958bbd739b80e0d}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!get\-Boundary\-Pos@{get\-Boundary\-Pos}}
 \index{get\-Boundary\-Pos@{get\-Boundary\-Pos}!SWE_TsunamiScenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
 \subsubsection[{get\-Boundary\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}float S\-W\-E\-\_\-\-Tsunami\-Scenario\-::get\-Boundary\-Pos (
@@ -119,8 +212,31 @@ The water height at a requested location
 
 Reimplemented from \hyperlink{classSWE__Scenario}{S\-W\-E\-\_\-\-Scenario}.
 
+\hypertarget{classSWE__TsunamiScenario_ade0bbbe3c90140c9d0ebf0f3a98023db}{\index{S\-W\-E\-\_\-\-Tsunami\-Scenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}!read\-Nc\-File@{read\-Nc\-File}}
+\index{read\-Nc\-File@{read\-Nc\-File}!SWE_TsunamiScenario@{S\-W\-E\-\_\-\-Tsunami\-Scenario}}
+\subsubsection[{read\-Nc\-File}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Tsunami\-Scenario\-::read\-Nc\-File (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file\-Dir, }
+\item[{{\bf Float2\-D} $\ast$$\ast$}]{buff\-Z, }
+\item[{float $\ast$$\ast$}]{buff\-Y, }
+\item[{float $\ast$$\ast$}]{buff\-X}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classSWE__TsunamiScenario_ade0bbbe3c90140c9d0ebf0f3a98023db}
+Opens a nc-\/file and reads the content. File must contain the dimension values for x on index 0, y on 1 and the bathymetry values as z on index 2
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\-Dir} & The path to the file (relative or absolute) \\
+\hline
+{\em buff\-Z} & The buffer for the bathymetry values \\
+\hline
+{\em buff\-Y} & The buffer for the Y-\/\-Values \\
+\hline
+{\em buff\-X} & The buffer for the X-\/\-Values \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/scenarios/\hyperlink{SWE__TsunamiScenario_8hh}{S\-W\-E\-\_\-\-Tsunami\-Scenario.\-hh}\end{DoxyCompactItemize}
+src/scenarios/\hyperlink{SWE__TsunamiScenario_8hh}{S\-W\-E\-\_\-\-Tsunami\-Scenario.\-hh}\end{DoxyCompactItemize}

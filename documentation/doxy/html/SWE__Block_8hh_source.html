@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>SWE: /home/sascha/Dokumente/Projects/TsunSim/SWE/src/blocks/SWE_Block.hh Source File</title>
+<title>SWE: src/blocks/SWE_Block.hh Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -94,157 +94,176 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="help_8hh.html">tools/help.hh</a>&quot;</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="SWE__Scenario_8hh.html">scenarios/SWE_Scenario.hh</a>&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// forward declaration</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">class </span><a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#ifdef WRITENETCDF</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="SWE__SeismologyScenario_8hh.html">scenarios/SWE_SeismologyScenario.hh</a>&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">using namespace </span>std;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classSWE__Block.html">  113</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSWE__Block.html">SWE_Block</a> {</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="comment">// object methods</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> initScenario(<span class="keywordtype">float</span> _offsetX, <span class="keywordtype">float</span> _offsetY,</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                <a class="code" href="classSWE__Scenario.html">SWE_Scenario</a> &amp;i_scenario, <span class="keyword">const</span> <span class="keywordtype">bool</span> i_multipleBlocks = <span class="keyword">false</span> );</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="comment">// set unknowns</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> setWaterHeight(<span class="keywordtype">float</span> (*_h)(<span class="keywordtype">float</span>, <span class="keywordtype">float</span>));</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">void</span> setDischarge(<span class="keywordtype">float</span> (*_u)(<span class="keywordtype">float</span>, <span class="keywordtype">float</span>), <span class="keywordtype">float</span> (*_v)(<span class="keywordtype">float</span>, <span class="keywordtype">float</span>));</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">void</span> setBathymetry(<span class="keywordtype">float</span> _b);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordtype">void</span> setBathymetry(<span class="keywordtype">float</span> (*_b)(<span class="keywordtype">float</span>, <span class="keywordtype">float</span>));</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="comment">// read access to arrays of unknowns</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a>&amp; getWaterHeight();</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a>&amp; getDischarge_hu();</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a>&amp; getDischarge_hv();</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a>&amp; getBathymetry();</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="comment">// defining boundary conditions</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> setBoundaryType(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge, <a class="code" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> boundtype, </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                         <span class="keyword">const</span> <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>* inflow = NULL);</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">//     void connectBoundaries(BoundaryEdge edge, SWE_Block &amp;neighbour, BoundaryEdge neighEdge);</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>* registerCopyLayer(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>* grabGhostLayer(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">void</span> setGhostLayer();</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
-<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a74da1eb712e639e47b5b848081b2afad">  158</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a74da1eb712e639e47b5b848081b2afad">getMaxTimestep</a>() { <span class="keywordflow">return</span> maxTimestep; };</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="comment">// compute the largest allowed time step for the current grid block</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordtype">void</span> computeMaxTimestep( <span class="keyword">const</span> <span class="keywordtype">float</span> i_dryTol = 0.1, <span class="keyword">const</span> <span class="keywordtype">float</span> i_cflNumber = 0.4 );</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> simulateTimestep(<span class="keywordtype">float</span> dt);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> simulate(<span class="keywordtype">float</span> tStart, <span class="keywordtype">float</span> tEnd);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> computeNumericalFluxes() = 0;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> updateUnknowns(<span class="keywordtype">float</span> dt) = 0;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="comment">// access methods to grid sizes</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno"><a class="line" href="classSWE__Block.html#aa27028fa4bc13bb2d9251b09e0fdfce6">  191</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">int</span> <a class="code" href="classSWE__Block.html#aa27028fa4bc13bb2d9251b09e0fdfce6">getNx</a>() { <span class="keywordflow">return</span> nx; }</div>
-<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a4b65557b6f73ffb6454dad3dbf86e9ad">  193</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classSWE__Block.html#a4b65557b6f73ffb6454dad3dbf86e9ad">getNy</a>() { <span class="keywordflow">return</span> ny; }</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="comment">// Konstanten:</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a073ca743ff4077a7e456906be704958f">  197</a></span>&#160;<span class="comment"></span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a073ca743ff4077a7e456906be704958f">g</a>;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="comment">// Constructor und Destructor</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <a class="code" href="classSWE__Block.html">SWE_Block</a>(<span class="keywordtype">int</span> l_nx, <span class="keywordtype">int</span> l_ny,</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                <span class="keywordtype">float</span> l_dx, <span class="keywordtype">float</span> l_dy);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classSWE__Block.html">SWE_Block</a>();</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="comment">// Sets the bathymetry on outflow and wall boundaries</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordtype">void</span> setBoundaryBathymetry();</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="comment">// synchronization Methods</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchAfterWrite();</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchWaterHeightAfterWrite();</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchDischargeAfterWrite();</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchBathymetryAfterWrite();</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchGhostLayerAfterWrite();</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchBeforeRead();</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchWaterHeightBeforeRead();</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchDischargeBeforeRead();</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchBathymetryBeforeRead();</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchCopyLayerBeforeRead();</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBoundaryConditions();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// forward declaration</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">class </span><a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classSWE__Block.html">  116</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSWE__Block.html">SWE_Block</a> {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="comment">// object methods</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> initScenario(<span class="keywordtype">float</span> _offsetX, <span class="keywordtype">float</span> _offsetY,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                <a class="code" href="classSWE__Scenario.html">SWE_Scenario</a> &amp;i_scenario, <span class="keyword">const</span> <span class="keywordtype">bool</span> i_multipleBlocks = <span class="keyword">false</span> );</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="comment">// set unknowns</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> setWaterHeight(<span class="keywordtype">float</span> (*_h)(<span class="keywordtype">float</span>, <span class="keywordtype">float</span>));</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">void</span> setDischarge(<span class="keywordtype">float</span> (*_u)(<span class="keywordtype">float</span>, <span class="keywordtype">float</span>), <span class="keywordtype">float</span> (*_v)(<span class="keywordtype">float</span>, <span class="keywordtype">float</span>));</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">void</span> setBathymetry(<span class="keywordtype">float</span> _b);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">void</span> setBathymetry(<span class="keywordtype">float</span> (*_b)(<span class="keywordtype">float</span>, <span class="keywordtype">float</span>));</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordtype">void</span> setBathymetry(<span class="keywordtype">float</span> *_b);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordtype">void</span> setBathymetry(<span class="keywordtype">int</span> i_x, <span class="keywordtype">int</span> i_y, <span class="keywordtype">float</span> i_b);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">#ifdef WRITENETCDF</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor"></span>    <span class="keywordtype">float</span> updateBathymetry(<span class="keywordtype">float</span> i_time, <a class="code" href="classSWE__SeismologyScenario.html">SWE_SeismologyScenario</a> *i_scenario);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor"></span>    </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="comment">// read access to arrays of unknowns</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment"></span>    <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a>&amp; getWaterHeight();</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a>&amp; getDischarge_hu();</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a>&amp; getDischarge_hv();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keyword">const</span> <a class="code" href="classFloat2D.html">Float2D</a>&amp; getBathymetry();</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="comment">// defining boundary conditions</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> setBoundaryType(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge, <a class="code" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> boundtype, </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                         <span class="keyword">const</span> <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>* inflow = NULL);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">//     void connectBoundaries(BoundaryEdge edge, SWE_Block &amp;neighbour, BoundaryEdge neighEdge);</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>* registerCopyLayer(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>* grabGhostLayer(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordtype">void</span> setGhostLayer();</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a74da1eb712e639e47b5b848081b2afad">  169</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a74da1eb712e639e47b5b848081b2afad">getMaxTimestep</a>() { <span class="keywordflow">return</span> maxTimestep; };</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="comment">// compute the largest allowed time step for the current grid block</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordtype">void</span> computeMaxTimestep( <span class="keyword">const</span> <span class="keywordtype">float</span> i_dryTol = 0.1, <span class="keyword">const</span> <span class="keywordtype">float</span> i_cflNumber = 0.4 );</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> simulateTimestep(<span class="keywordtype">float</span> dt);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> simulate(<span class="keywordtype">float</span> tStart, <span class="keywordtype">float</span> tEnd);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> computeNumericalFluxes() = 0;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> updateUnknowns(<span class="keywordtype">float</span> dt) = 0;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="comment">// access methods to grid sizes</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="classSWE__Block.html#aa27028fa4bc13bb2d9251b09e0fdfce6">  202</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">int</span> <a class="code" href="classSWE__Block.html#aa27028fa4bc13bb2d9251b09e0fdfce6">getNx</a>() { <span class="keywordflow">return</span> nx; }</div>
+<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a4b65557b6f73ffb6454dad3dbf86e9ad">  204</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classSWE__Block.html#a4b65557b6f73ffb6454dad3dbf86e9ad">getNy</a>() { <span class="keywordflow">return</span> ny; }</div>
+<div class="line"><a name="l00206"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a2d4b3b3a932f3895c4f013cd4bb319d3">  206</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a2d4b3b3a932f3895c4f013cd4bb319d3">getDx</a>() { <span class="keywordflow">return</span> dx; }</div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="classSWE__Block.html#add4edc5f146a02c00187a81d93f00fb7">  208</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#add4edc5f146a02c00187a81d93f00fb7">getDy</a>() { <span class="keywordflow">return</span> dy; }</div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a5f279d69697c335d5e9c9c4d3c54e3b8">  210</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a5f279d69697c335d5e9c9c4d3c54e3b8">getOffx</a>() { <span class="keywordflow">return</span> offsetX; }</div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a22364064412b824204dc8a79bf572893">  212</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a22364064412b824204dc8a79bf572893">getOffy</a>() { <span class="keywordflow">return</span> offsetY; }</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="comment">// Konstanten:</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a073ca743ff4077a7e456906be704958f">  216</a></span>&#160;<span class="comment"></span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a073ca743ff4077a7e456906be704958f">g</a>;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="comment">// Constructor und Destructor</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <a class="code" href="classSWE__Block.html">SWE_Block</a>(<span class="keywordtype">int</span> l_nx, <span class="keywordtype">int</span> l_ny,</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                <span class="keywordtype">float</span> l_dx, <span class="keywordtype">float</span> l_dy);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classSWE__Block.html">SWE_Block</a>();</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="comment">// grid size: number of cells (incl. ghost layer in x and y direction:</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a46ec0dc1157997bd255fb39924f1e2bb">  225</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classSWE__Block.html#a46ec0dc1157997bd255fb39924f1e2bb">nx</a>;     </div>
-<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a3f139630d12423eb4bd7df3e45c7f5da">  226</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classSWE__Block.html#a3f139630d12423eb4bd7df3e45c7f5da">ny</a>;     </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="comment">// mesh size dx and dy:</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="classSWE__Block.html#af2262b1cce6834d939c5a2315dae49b1">  228</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#af2262b1cce6834d939c5a2315dae49b1">dx</a>;   </div>
-<div class="line"><a name="l00229"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a9feb988748d792bca0ca0508e43bd87f">  229</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a9feb988748d792bca0ca0508e43bd87f">dy</a>;   </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="comment">// define arrays for unknowns: </span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="comment">// h (water level) and u,v (velocity in x and y direction)</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="comment">// hd, ud, and vd are respective CUDA arrays on GPU</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a64a0f8f437f38b5f3b8ec5b4abdb864e">  234</a></span>&#160;    <a class="code" href="classFloat2D.html">Float2D</a> <a class="code" href="classSWE__Block.html#a64a0f8f437f38b5f3b8ec5b4abdb864e">h</a>;  </div>
-<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="classSWE__Block.html#aec2c1278fdb23f083216d8d397f26060">  235</a></span>&#160;    <a class="code" href="classFloat2D.html">Float2D</a> <a class="code" href="classSWE__Block.html#aec2c1278fdb23f083216d8d397f26060">hu</a>; </div>
-<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a0897aa3c2d78749f209c95e08196d831">  236</a></span>&#160;    <a class="code" href="classFloat2D.html">Float2D</a> <a class="code" href="classSWE__Block.html#a0897aa3c2d78749f209c95e08196d831">hv</a>; </div>
-<div class="line"><a name="l00237"></a><span class="lineno"><a class="line" href="classSWE__Block.html#af7487209129f40b26ea171762754a261">  237</a></span>&#160;    <a class="code" href="classFloat2D.html">Float2D</a> <a class="code" href="classSWE__Block.html#af7487209129f40b26ea171762754a261">b</a>;  </div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    </div>
-<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a0e56d0cad169abd4f5de95d9f96c7a73">  240</a></span>&#160;    <a class="code" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> boundary[4];</div>
-<div class="line"><a name="l00242"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a5ea4ea4815af9eb66c51de9ad9b8d148">  242</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>* neighbour[4];</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
-<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a05cbc9b40e0483bf73dbc2bdeae7dee3">  249</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a05cbc9b40e0483bf73dbc2bdeae7dee3">maxTimestep</a>;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="comment">// offset of current block</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno"><a class="line" href="classSWE__Block.html#aa9e9b1fa797c133c4989e4c54f09b542">  252</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#aa9e9b1fa797c133c4989e4c54f09b542">offsetX</a>;      </div>
-<div class="line"><a name="l00253"></a><span class="lineno"><a class="line" href="classSWE__Block.html#aa05241101a66f0f0548eba6dbbaa1bbb">  253</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#aa05241101a66f0f0548eba6dbbaa1bbb">offsetY</a>;      </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;};</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
-<div class="line"><a name="l00263"></a><span class="lineno"><a class="line" href="structSWE__Block1D.html">  263</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structSWE__Block1D.html">SWE_Block1D</a> {</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>(<span class="keyword">const</span> <a class="code" href="classFloat1D.html">Float1D</a>&amp; _h, <span class="keyword">const</span> <a class="code" href="classFloat1D.html">Float1D</a>&amp; _hu, <span class="keyword">const</span> <a class="code" href="classFloat1D.html">Float1D</a>&amp; _hv)</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    : h(_h), hu(_hu), hv(_hv) {};</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>(<span class="keywordtype">float</span>* _h, <span class="keywordtype">float</span>* _hu, <span class="keywordtype">float</span>* _hv, <span class="keywordtype">int</span> _size, <span class="keywordtype">int</span> _stride=1)</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    : h(_h,_size,_stride), hu(_hu,_size,_stride), hv(_hv,_size,_stride) {};</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;   </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <a class="code" href="classFloat1D.html">Float1D</a> h;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <a class="code" href="classFloat1D.html">Float1D</a> hu;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <a class="code" href="classFloat1D.html">Float1D</a> hv;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;};</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="comment">// Sets the bathymetry on outflow and wall boundaries</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordtype">void</span> setBoundaryBathymetry();</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="comment">// synchronization Methods</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchAfterWrite();</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchWaterHeightAfterWrite();</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchDischargeAfterWrite();</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchBathymetryAfterWrite();</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchGhostLayerAfterWrite();</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchBeforeRead();</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchWaterHeightBeforeRead();</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchDischargeBeforeRead();</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchBathymetryBeforeRead();</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> synchCopyLayerBeforeRead();</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> setBoundaryConditions();</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="comment">// grid size: number of cells (incl. ghost layer in x and y direction:</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a46ec0dc1157997bd255fb39924f1e2bb">  244</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classSWE__Block.html#a46ec0dc1157997bd255fb39924f1e2bb">nx</a>;     </div>
+<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a3f139630d12423eb4bd7df3e45c7f5da">  245</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classSWE__Block.html#a3f139630d12423eb4bd7df3e45c7f5da">ny</a>;     </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="comment">// mesh size dx and dy:</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno"><a class="line" href="classSWE__Block.html#af2262b1cce6834d939c5a2315dae49b1">  247</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#af2262b1cce6834d939c5a2315dae49b1">dx</a>;   </div>
+<div class="line"><a name="l00248"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a9feb988748d792bca0ca0508e43bd87f">  248</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a9feb988748d792bca0ca0508e43bd87f">dy</a>;   </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="comment">// define arrays for unknowns: </span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="comment">// h (water level) and u,v (velocity in x and y direction)</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="comment">// hd, ud, and vd are respective CUDA arrays on GPU</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a64a0f8f437f38b5f3b8ec5b4abdb864e">  253</a></span>&#160;    <a class="code" href="classFloat2D.html">Float2D</a> <a class="code" href="classSWE__Block.html#a64a0f8f437f38b5f3b8ec5b4abdb864e">h</a>;  </div>
+<div class="line"><a name="l00254"></a><span class="lineno"><a class="line" href="classSWE__Block.html#aec2c1278fdb23f083216d8d397f26060">  254</a></span>&#160;    <a class="code" href="classFloat2D.html">Float2D</a> <a class="code" href="classSWE__Block.html#aec2c1278fdb23f083216d8d397f26060">hu</a>; </div>
+<div class="line"><a name="l00255"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a0897aa3c2d78749f209c95e08196d831">  255</a></span>&#160;    <a class="code" href="classFloat2D.html">Float2D</a> <a class="code" href="classSWE__Block.html#a0897aa3c2d78749f209c95e08196d831">hv</a>; </div>
+<div class="line"><a name="l00256"></a><span class="lineno"><a class="line" href="classSWE__Block.html#af7487209129f40b26ea171762754a261">  256</a></span>&#160;    <a class="code" href="classFloat2D.html">Float2D</a> <a class="code" href="classSWE__Block.html#af7487209129f40b26ea171762754a261">b</a>;  </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    </div>
+<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a0e56d0cad169abd4f5de95d9f96c7a73">  259</a></span>&#160;    <a class="code" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> boundary[4];</div>
+<div class="line"><a name="l00261"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a5ea4ea4815af9eb66c51de9ad9b8d148">  261</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>* neighbour[4];</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
+<div class="line"><a name="l00268"></a><span class="lineno"><a class="line" href="classSWE__Block.html#a05cbc9b40e0483bf73dbc2bdeae7dee3">  268</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#a05cbc9b40e0483bf73dbc2bdeae7dee3">maxTimestep</a>;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="comment">// offset of current block</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno"><a class="line" href="classSWE__Block.html#aa9e9b1fa797c133c4989e4c54f09b542">  271</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#aa9e9b1fa797c133c4989e4c54f09b542">offsetX</a>;      </div>
+<div class="line"><a name="l00272"></a><span class="lineno"><a class="line" href="classSWE__Block.html#aa05241101a66f0f0548eba6dbbaa1bbb">  272</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__Block.html#aa05241101a66f0f0548eba6dbbaa1bbb">offsetY</a>;      </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;};</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="classSWE__Block_html_a073ca743ff4077a7e456906be704958f"><div class="ttname"><a href="classSWE__Block.html#a073ca743ff4077a7e456906be704958f">SWE_Block::g</a></div><div class="ttdeci">static const float g</div><div class="ttdoc">static variable that holds the gravity constant (g = 9.81 m/s^2): </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:197</div></div>
-<div class="ttc" id="classSWE__Block_html_a64a0f8f437f38b5f3b8ec5b4abdb864e"><div class="ttname"><a href="classSWE__Block.html#a64a0f8f437f38b5f3b8ec5b4abdb864e">SWE_Block::h</a></div><div class="ttdeci">Float2D h</div><div class="ttdoc">array that holds the water height for each element </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:234</div></div>
-<div class="ttc" id="classSWE__Block_html"><div class="ttname"><a href="classSWE__Block.html">SWE_Block</a></div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:113</div></div>
-<div class="ttc" id="classFloat2D_html"><div class="ttname"><a href="classFloat2D.html">Float2D</a></div><div class="ttdef"><b>Definition:</b> help.hh:100</div></div>
-<div class="ttc" id="classSWE__Block_html_af2262b1cce6834d939c5a2315dae49b1"><div class="ttname"><a href="classSWE__Block.html#af2262b1cce6834d939c5a2315dae49b1">SWE_Block::dx</a></div><div class="ttdeci">float dx</div><div class="ttdoc">mesh size of the Cartesian grid in x-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:228</div></div>
-<div class="ttc" id="classSWE__Block_html_aa05241101a66f0f0548eba6dbbaa1bbb"><div class="ttname"><a href="classSWE__Block.html#aa05241101a66f0f0548eba6dbbaa1bbb">SWE_Block::offsetY</a></div><div class="ttdeci">float offsetY</div><div class="ttdoc">y-coordinate of the origin (left-bottom corner) of the Cartesian grid </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:253</div></div>
+<div class="line"><a name="l00282"></a><span class="lineno"><a class="line" href="structSWE__Block1D.html">  282</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structSWE__Block1D.html">SWE_Block1D</a> {</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>(<span class="keyword">const</span> <a class="code" href="classFloat1D.html">Float1D</a>&amp; _h, <span class="keyword">const</span> <a class="code" href="classFloat1D.html">Float1D</a>&amp; _hu, <span class="keyword">const</span> <a class="code" href="classFloat1D.html">Float1D</a>&amp; _hv)</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    : h(_h), hu(_hu), hv(_hv) {};</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <a class="code" href="structSWE__Block1D.html">SWE_Block1D</a>(<span class="keywordtype">float</span>* _h, <span class="keywordtype">float</span>* _hu, <span class="keywordtype">float</span>* _hv, <span class="keywordtype">int</span> _size, <span class="keywordtype">int</span> _stride=1)</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    : h(_h,_size,_stride), hu(_hu,_size,_stride), hv(_hv,_size,_stride) {};</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;   </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <a class="code" href="classFloat1D.html">Float1D</a> h;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <a class="code" href="classFloat1D.html">Float1D</a> hu;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <a class="code" href="classFloat1D.html">Float1D</a> hv;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;};</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classSWE__Block_html_a073ca743ff4077a7e456906be704958f"><div class="ttname"><a href="classSWE__Block.html#a073ca743ff4077a7e456906be704958f">SWE_Block::g</a></div><div class="ttdeci">static const float g</div><div class="ttdoc">static variable that holds the gravity constant (g = 9.81 m/s^2): </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:216</div></div>
+<div class="ttc" id="classSWE__Block_html_a64a0f8f437f38b5f3b8ec5b4abdb864e"><div class="ttname"><a href="classSWE__Block.html#a64a0f8f437f38b5f3b8ec5b4abdb864e">SWE_Block::h</a></div><div class="ttdeci">Float2D h</div><div class="ttdoc">array that holds the water height for each element </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:253</div></div>
+<div class="ttc" id="classSWE__Block_html"><div class="ttname"><a href="classSWE__Block.html">SWE_Block</a></div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:116</div></div>
+<div class="ttc" id="classFloat2D_html"><div class="ttname"><a href="classFloat2D.html">Float2D</a></div><div class="ttdef"><b>Definition:</b> help.hh:121</div></div>
+<div class="ttc" id="classSWE__Block_html_af2262b1cce6834d939c5a2315dae49b1"><div class="ttname"><a href="classSWE__Block.html#af2262b1cce6834d939c5a2315dae49b1">SWE_Block::dx</a></div><div class="ttdeci">float dx</div><div class="ttdoc">mesh size of the Cartesian grid in x-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:247</div></div>
+<div class="ttc" id="classSWE__Block_html_aa05241101a66f0f0548eba6dbbaa1bbb"><div class="ttname"><a href="classSWE__Block.html#aa05241101a66f0f0548eba6dbbaa1bbb">SWE_Block::offsetY</a></div><div class="ttdeci">float offsetY</div><div class="ttdoc">y-coordinate of the origin (left-bottom corner) of the Cartesian grid </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:272</div></div>
+<div class="ttc" id="classSWE__SeismologyScenario_html"><div class="ttname"><a href="classSWE__SeismologyScenario.html">SWE_SeismologyScenario</a></div><div class="ttdef"><b>Definition:</b> SWE_SeismologyScenario.hh:43</div></div>
+<div class="ttc" id="classSWE__Block_html_a2d4b3b3a932f3895c4f013cd4bb319d3"><div class="ttname"><a href="classSWE__Block.html#a2d4b3b3a932f3895c4f013cd4bb319d3">SWE_Block::getDx</a></div><div class="ttdeci">float getDx()</div><div class="ttdoc">returns dx, i.e. the cell size in x-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:206</div></div>
 <div class="ttc" id="SWE__Scenario_8hh_html_af75d5dd7322fa39ed0af4e7839e600f8"><div class="ttname"><a href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a></div><div class="ttdeci">BoundaryType</div><div class="ttdef"><b>Definition:</b> SWE_Scenario.hh:33</div></div>
 <div class="ttc" id="classSWE__Scenario_html"><div class="ttname"><a href="classSWE__Scenario.html">SWE_Scenario</a></div><div class="ttdef"><b>Definition:</b> SWE_Scenario.hh:53</div></div>
-<div class="ttc" id="classSWE__Block_html_a4b65557b6f73ffb6454dad3dbf86e9ad"><div class="ttname"><a href="classSWE__Block.html#a4b65557b6f73ffb6454dad3dbf86e9ad">SWE_Block::getNy</a></div><div class="ttdeci">int getNy()</div><div class="ttdoc">returns ny, i.e. the grid size in y-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:193</div></div>
-<div class="ttc" id="classSWE__Block_html_a0897aa3c2d78749f209c95e08196d831"><div class="ttname"><a href="classSWE__Block.html#a0897aa3c2d78749f209c95e08196d831">SWE_Block::hv</a></div><div class="ttdeci">Float2D hv</div><div class="ttdoc">array that holds the y-component of the momentum for each element (water height h multiplied by veloc...</div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:236</div></div>
-<div class="ttc" id="classSWE__Block_html_aa27028fa4bc13bb2d9251b09e0fdfce6"><div class="ttname"><a href="classSWE__Block.html#aa27028fa4bc13bb2d9251b09e0fdfce6">SWE_Block::getNx</a></div><div class="ttdeci">int getNx()</div><div class="ttdoc">returns nx, i.e. the grid size in x-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:191</div></div>
-<div class="ttc" id="classSWE__Block_html_a9feb988748d792bca0ca0508e43bd87f"><div class="ttname"><a href="classSWE__Block.html#a9feb988748d792bca0ca0508e43bd87f">SWE_Block::dy</a></div><div class="ttdeci">float dy</div><div class="ttdoc">mesh size of the Cartesian grid in y-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:229</div></div>
-<div class="ttc" id="classSWE__Block_html_aec2c1278fdb23f083216d8d397f26060"><div class="ttname"><a href="classSWE__Block.html#aec2c1278fdb23f083216d8d397f26060">SWE_Block::hu</a></div><div class="ttdeci">Float2D hu</div><div class="ttdoc">array that holds the x-component of the momentum for each element (water height h multiplied by veloc...</div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:235</div></div>
-<div class="ttc" id="classSWE__Block_html_aa9e9b1fa797c133c4989e4c54f09b542"><div class="ttname"><a href="classSWE__Block.html#aa9e9b1fa797c133c4989e4c54f09b542">SWE_Block::offsetX</a></div><div class="ttdeci">float offsetX</div><div class="ttdoc">x-coordinate of the origin (left-bottom corner) of the Cartesian grid </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:252</div></div>
-<div class="ttc" id="classSWE__Block_html_a3f139630d12423eb4bd7df3e45c7f5da"><div class="ttname"><a href="classSWE__Block.html#a3f139630d12423eb4bd7df3e45c7f5da">SWE_Block::ny</a></div><div class="ttdeci">int ny</div><div class="ttdoc">size of Cartesian arrays in y-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:226</div></div>
-<div class="ttc" id="classSWE__Block_html_a74da1eb712e639e47b5b848081b2afad"><div class="ttname"><a href="classSWE__Block.html#a74da1eb712e639e47b5b848081b2afad">SWE_Block::getMaxTimestep</a></div><div class="ttdeci">float getMaxTimestep()</div><div class="ttdoc">return maximum size of the time step to ensure stability of the method </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:158</div></div>
-<div class="ttc" id="classFloat1D_html"><div class="ttname"><a href="classFloat1D.html">Float1D</a></div><div class="ttdef"><b>Definition:</b> help.hh:60</div></div>
-<div class="ttc" id="classSWE__Block_html_a05cbc9b40e0483bf73dbc2bdeae7dee3"><div class="ttname"><a href="classSWE__Block.html#a05cbc9b40e0483bf73dbc2bdeae7dee3">SWE_Block::maxTimestep</a></div><div class="ttdeci">float maxTimestep</div><div class="ttdoc">maximum time step allowed to ensure stability of the method </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:249</div></div>
+<div class="ttc" id="classSWE__Block_html_add4edc5f146a02c00187a81d93f00fb7"><div class="ttname"><a href="classSWE__Block.html#add4edc5f146a02c00187a81d93f00fb7">SWE_Block::getDy</a></div><div class="ttdeci">float getDy()</div><div class="ttdoc">returns dy, i.e. the cell size in y-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:208</div></div>
+<div class="ttc" id="classSWE__Block_html_a5f279d69697c335d5e9c9c4d3c54e3b8"><div class="ttname"><a href="classSWE__Block.html#a5f279d69697c335d5e9c9c4d3c54e3b8">SWE_Block::getOffx</a></div><div class="ttdeci">float getOffx()</div><div class="ttdoc">return offsetX, i.e. the x-origin of the coordinate system </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:210</div></div>
+<div class="ttc" id="classSWE__Block_html_a4b65557b6f73ffb6454dad3dbf86e9ad"><div class="ttname"><a href="classSWE__Block.html#a4b65557b6f73ffb6454dad3dbf86e9ad">SWE_Block::getNy</a></div><div class="ttdeci">int getNy()</div><div class="ttdoc">returns ny, i.e. the grid size in y-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:204</div></div>
+<div class="ttc" id="classSWE__Block_html_a0897aa3c2d78749f209c95e08196d831"><div class="ttname"><a href="classSWE__Block.html#a0897aa3c2d78749f209c95e08196d831">SWE_Block::hv</a></div><div class="ttdeci">Float2D hv</div><div class="ttdoc">array that holds the y-component of the momentum for each element (water height h multiplied by veloc...</div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:255</div></div>
+<div class="ttc" id="classSWE__Block_html_aa27028fa4bc13bb2d9251b09e0fdfce6"><div class="ttname"><a href="classSWE__Block.html#aa27028fa4bc13bb2d9251b09e0fdfce6">SWE_Block::getNx</a></div><div class="ttdeci">int getNx()</div><div class="ttdoc">returns nx, i.e. the grid size in x-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:202</div></div>
+<div class="ttc" id="classSWE__Block_html_a9feb988748d792bca0ca0508e43bd87f"><div class="ttname"><a href="classSWE__Block.html#a9feb988748d792bca0ca0508e43bd87f">SWE_Block::dy</a></div><div class="ttdeci">float dy</div><div class="ttdoc">mesh size of the Cartesian grid in y-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:248</div></div>
+<div class="ttc" id="classSWE__Block_html_a22364064412b824204dc8a79bf572893"><div class="ttname"><a href="classSWE__Block.html#a22364064412b824204dc8a79bf572893">SWE_Block::getOffy</a></div><div class="ttdeci">float getOffy()</div><div class="ttdoc">return offsetY, i.e. the y-origin of the coordinate system </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:212</div></div>
+<div class="ttc" id="classSWE__Block_html_aec2c1278fdb23f083216d8d397f26060"><div class="ttname"><a href="classSWE__Block.html#aec2c1278fdb23f083216d8d397f26060">SWE_Block::hu</a></div><div class="ttdeci">Float2D hu</div><div class="ttdoc">array that holds the x-component of the momentum for each element (water height h multiplied by veloc...</div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:254</div></div>
+<div class="ttc" id="classSWE__Block_html_aa9e9b1fa797c133c4989e4c54f09b542"><div class="ttname"><a href="classSWE__Block.html#aa9e9b1fa797c133c4989e4c54f09b542">SWE_Block::offsetX</a></div><div class="ttdeci">float offsetX</div><div class="ttdoc">x-coordinate of the origin (left-bottom corner) of the Cartesian grid </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:271</div></div>
+<div class="ttc" id="SWE__SeismologyScenario_8hh_html"><div class="ttname"><a href="SWE__SeismologyScenario_8hh.html">SWE_SeismologyScenario.hh</a></div></div>
+<div class="ttc" id="classSWE__Block_html_a3f139630d12423eb4bd7df3e45c7f5da"><div class="ttname"><a href="classSWE__Block.html#a3f139630d12423eb4bd7df3e45c7f5da">SWE_Block::ny</a></div><div class="ttdeci">int ny</div><div class="ttdoc">size of Cartesian arrays in y-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:245</div></div>
+<div class="ttc" id="classSWE__Block_html_a74da1eb712e639e47b5b848081b2afad"><div class="ttname"><a href="classSWE__Block.html#a74da1eb712e639e47b5b848081b2afad">SWE_Block::getMaxTimestep</a></div><div class="ttdeci">float getMaxTimestep()</div><div class="ttdoc">return maximum size of the time step to ensure stability of the method </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:169</div></div>
+<div class="ttc" id="classFloat1D_html"><div class="ttname"><a href="classFloat1D.html">Float1D</a></div><div class="ttdef"><b>Definition:</b> help.hh:71</div></div>
+<div class="ttc" id="classSWE__Block_html_a05cbc9b40e0483bf73dbc2bdeae7dee3"><div class="ttname"><a href="classSWE__Block.html#a05cbc9b40e0483bf73dbc2bdeae7dee3">SWE_Block::maxTimestep</a></div><div class="ttdeci">float maxTimestep</div><div class="ttdoc">maximum time step allowed to ensure stability of the method </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:268</div></div>
 <div class="ttc" id="SWE__Scenario_8hh_html"><div class="ttname"><a href="SWE__Scenario_8hh.html">SWE_Scenario.hh</a></div></div>
 <div class="ttc" id="help_8hh_html"><div class="ttname"><a href="help_8hh.html">help.hh</a></div></div>
-<div class="ttc" id="classSWE__Block_html_af7487209129f40b26ea171762754a261"><div class="ttname"><a href="classSWE__Block.html#af7487209129f40b26ea171762754a261">SWE_Block::b</a></div><div class="ttdeci">Float2D b</div><div class="ttdoc">array that holds the bathymetry data (sea floor elevation) for each element </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:237</div></div>
-<div class="ttc" id="structSWE__Block1D_html"><div class="ttname"><a href="structSWE__Block1D.html">SWE_Block1D</a></div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:263</div></div>
-<div class="ttc" id="classSWE__Block_html_a46ec0dc1157997bd255fb39924f1e2bb"><div class="ttname"><a href="classSWE__Block.html#a46ec0dc1157997bd255fb39924f1e2bb">SWE_Block::nx</a></div><div class="ttdeci">int nx</div><div class="ttdoc">size of Cartesian arrays in x-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:225</div></div>
+<div class="ttc" id="classSWE__Block_html_af7487209129f40b26ea171762754a261"><div class="ttname"><a href="classSWE__Block.html#af7487209129f40b26ea171762754a261">SWE_Block::b</a></div><div class="ttdeci">Float2D b</div><div class="ttdoc">array that holds the bathymetry data (sea floor elevation) for each element </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:256</div></div>
+<div class="ttc" id="structSWE__Block1D_html"><div class="ttname"><a href="structSWE__Block1D.html">SWE_Block1D</a></div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:282</div></div>
+<div class="ttc" id="classSWE__Block_html_a46ec0dc1157997bd255fb39924f1e2bb"><div class="ttname"><a href="classSWE__Block.html#a46ec0dc1157997bd255fb39924f1e2bb">SWE_Block::nx</a></div><div class="ttdeci">int nx</div><div class="ttdoc">size of Cartesian arrays in x-direction </div><div class="ttdef"><b>Definition:</b> SWE_Block.hh:244</div></div>
 <div class="ttc" id="SWE__Scenario_8hh_html_aa5e01e3f7df312f7b9b0d02521141fcc"><div class="ttname"><a href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a></div><div class="ttdeci">BoundaryEdge</div><div class="ttdef"><b>Definition:</b> SWE_Scenario.hh:40</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 19 2015 17:00:08 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

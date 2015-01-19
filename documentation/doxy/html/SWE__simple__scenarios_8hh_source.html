@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>SWE: /home/sascha/Dokumente/Projects/TsunSim/SWE/src/scenarios/SWE_simple_scenarios.hh Source File</title>
+<title>SWE: src/scenarios/SWE_simple_scenarios.hh Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -152,23 +152,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    };</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classSWE__ArtificialTsunamiScenario.html">  115</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSWE__ArtificialTsunamiScenario.html">SWE_ArtificialTsunamiScenario</a> : <span class="keyword">public</span> <a class="code" href="classSWE__Scenario.html">SWE_Scenario</a> {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">class </span><a class="code" href="classSWE__ArtificialTsunamiScenario.html">SWE_ArtificialTsunamiScenario</a> : <span class="keyword">public</span> <a class="code" href="classSWE__Scenario.html">SWE_Scenario</a> {</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">float</span> getBathymetry(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__ArtificialTsunamiScenario.html#acbc4c3127f531862d01c4661da144836">getBathymetry</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) {</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">if</span>(x &lt; -500 || x &gt; 500 || y &lt; -500 || y &gt; 500) <span class="keywordflow">return</span> -100;       </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordtype">float</span> result = -100-5*sin((x/500 +1)*M_PI)*(y*y/250000 +1);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordtype">float</span> result = -100+5*sin((x/500 +1)*M_PI)*(y*y/250000 +1);</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordflow">if</span>(result &lt; 20 &amp;&amp; result &gt;= 0) result = 20;</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">if</span>(result &gt; -20 &amp;&amp; result &lt;= 0) result = -20;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    };</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">float</span> getWaterHeight(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) { </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classSWE__ArtificialTsunamiScenario.html#aef1c04137080ab89e437d5a912b85dcb">getWaterHeight</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y) { </div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;       <span class="keywordflow">return</span> 100;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    };</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> endSimulation() { <span class="keywordflow">return</span> (<span class="keywordtype">float</span>) 30; };</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">float</span> <a class="code" href="classSWE__ArtificialTsunamiScenario.html#ac402138d10edcbe7faec4a683de0ebdb">endSimulation</a>() { <span class="keywordflow">return</span> (<span class="keywordtype">float</span>) 30; };</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> getBoundaryType(<a class="code" href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a> edge) { <span class="keywordflow">return</span> OUTFLOW; };</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
@@ -282,24 +282,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classSWE__SeaAtRestScenario_html"><div class="ttname"><a href="classSWE__SeaAtRestScenario.html">SWE_SeaAtRestScenario</a></div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:204</div></div>
 <div class="ttc" id="classSWE__SplashingPoolScenario_html_af9ca3bce236a98e2a7ee5165088c8ed6"><div class="ttname"><a href="classSWE__SplashingPoolScenario.html#af9ca3bce236a98e2a7ee5165088c8ed6">SWE_SplashingPoolScenario::getBoundaryPos</a></div><div class="ttdeci">float getBoundaryPos(BoundaryEdge i_edge)</div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:240</div></div>
 <div class="ttc" id="classSWE__BathymetryDamBreakScenario_html"><div class="ttname"><a href="classSWE__BathymetryDamBreakScenario.html">SWE_BathymetryDamBreakScenario</a></div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:157</div></div>
-<div class="ttc" id="classSWE__ArtificialTsunamiScenario_html"><div class="ttname"><a href="classSWE__ArtificialTsunamiScenario.html">SWE_ArtificialTsunamiScenario</a></div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:115</div></div>
+<div class="ttc" id="classSWE__ArtificialTsunamiScenario_html"><div class="ttname"><a href="classSWE__ArtificialTsunamiScenario.html">SWE_ArtificialTsunamiScenario</a></div><div class="ttdef"><b>Definition:</b> SWE_ArtificialTsunamiScenario.hh:40</div></div>
 <div class="ttc" id="classSWE__RadialDamBreakScenario_html"><div class="ttname"><a href="classSWE__RadialDamBreakScenario.html">SWE_RadialDamBreakScenario</a></div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:40</div></div>
+<div class="ttc" id="classSWE__ArtificialTsunamiScenario_html_ac402138d10edcbe7faec4a683de0ebdb"><div class="ttname"><a href="classSWE__ArtificialTsunamiScenario.html#ac402138d10edcbe7faec4a683de0ebdb">SWE_ArtificialTsunamiScenario::endSimulation</a></div><div class="ttdeci">virtual float endSimulation()</div><div class="ttdef"><b>Definition:</b> SWE_ArtificialTsunamiScenario.hh:75</div></div>
 <div class="ttc" id="SWE__Scenario_8hh_html_af75d5dd7322fa39ed0af4e7839e600f8"><div class="ttname"><a href="SWE__Scenario_8hh.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a></div><div class="ttdeci">BoundaryType</div><div class="ttdef"><b>Definition:</b> SWE_Scenario.hh:33</div></div>
 <div class="ttc" id="classSWE__Scenario_html"><div class="ttname"><a href="classSWE__Scenario.html">SWE_Scenario</a></div><div class="ttdef"><b>Definition:</b> SWE_Scenario.hh:53</div></div>
 <div class="ttc" id="classSWE__SplashingPoolScenario_html"><div class="ttname"><a href="classSWE__SplashingPoolScenario.html">SWE_SplashingPoolScenario</a></div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:221</div></div>
 <div class="ttc" id="classSWE__ArtificialTsunamiScenario_html_ab61b4cb9598a368ef14c2f2a165fe56c"><div class="ttname"><a href="classSWE__ArtificialTsunamiScenario.html#ab61b4cb9598a368ef14c2f2a165fe56c">SWE_ArtificialTsunamiScenario::getBoundaryPos</a></div><div class="ttdeci">float getBoundaryPos(BoundaryEdge i_edge)</div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:140</div></div>
 <div class="ttc" id="classSWE__SplashingConeScenario_html"><div class="ttname"><a href="classSWE__SplashingConeScenario.html">SWE_SplashingConeScenario</a></div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:259</div></div>
 <div class="ttc" id="classSWE__ObstacleDamBreakScenario_html_abb88b0a76f240ec32e26cac962ba403d"><div class="ttname"><a href="classSWE__ObstacleDamBreakScenario.html#abb88b0a76f240ec32e26cac962ba403d">SWE_ObstacleDamBreakScenario::getBoundaryPos</a></div><div class="ttdeci">float getBoundaryPos(BoundaryEdge i_edge)</div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:99</div></div>
+<div class="ttc" id="classSWE__ArtificialTsunamiScenario_html_acbc4c3127f531862d01c4661da144836"><div class="ttname"><a href="classSWE__ArtificialTsunamiScenario.html#acbc4c3127f531862d01c4661da144836">SWE_ArtificialTsunamiScenario::getBathymetry</a></div><div class="ttdeci">float getBathymetry(float x, float y)</div><div class="ttdef"><b>Definition:</b> SWE_ArtificialTsunamiScenario.hh:57</div></div>
 <div class="ttc" id="classSWE__BathymetryDamBreakScenario_html_aa861ba2d4d7e71509f78e1d4d4cb82c7"><div class="ttname"><a href="classSWE__BathymetryDamBreakScenario.html#aa861ba2d4d7e71509f78e1d4d4cb82c7">SWE_BathymetryDamBreakScenario::getBoundaryPos</a></div><div class="ttdeci">float getBoundaryPos(BoundaryEdge i_edge)</div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:174</div></div>
 <div class="ttc" id="SWE__Scenario_8hh_html"><div class="ttname"><a href="SWE__Scenario_8hh.html">SWE_Scenario.hh</a></div></div>
 <div class="ttc" id="classSWE__ObstacleDamBreakScenario_html"><div class="ttname"><a href="classSWE__ObstacleDamBreakScenario.html">SWE_ObstacleDamBreakScenario</a></div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:78</div></div>
+<div class="ttc" id="classSWE__ArtificialTsunamiScenario_html_aef1c04137080ab89e437d5a912b85dcb"><div class="ttname"><a href="classSWE__ArtificialTsunamiScenario.html#aef1c04137080ab89e437d5a912b85dcb">SWE_ArtificialTsunamiScenario::getWaterHeight</a></div><div class="ttdeci">float getWaterHeight(float x, float y)</div><div class="ttdef"><b>Definition:</b> SWE_ArtificialTsunamiScenario.hh:68</div></div>
 <div class="ttc" id="classSWE__RadialDamBreakScenario_html_ac5392df630c8164560df5cb902df385a"><div class="ttname"><a href="classSWE__RadialDamBreakScenario.html#ac5392df630c8164560df5cb902df385a">SWE_RadialDamBreakScenario::getBoundaryPos</a></div><div class="ttdeci">float getBoundaryPos(BoundaryEdge i_edge)</div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:61</div></div>
 <div class="ttc" id="classSWE__BathymetryDamBreakScenario_html_aa903538480526b092fff75160d7e225c"><div class="ttname"><a href="classSWE__BathymetryDamBreakScenario.html#aa903538480526b092fff75160d7e225c">SWE_BathymetryDamBreakScenario::getWaterHeight</a></div><div class="ttdeci">float getWaterHeight(float i_positionX, float i_positionY)</div><div class="ttdef"><b>Definition:</b> SWE_simple_scenarios.hh:192</div></div>
 <div class="ttc" id="SWE__Scenario_8hh_html_aa5e01e3f7df312f7b9b0d02521141fcc"><div class="ttname"><a href="SWE__Scenario_8hh.html#aa5e01e3f7df312f7b9b0d02521141fcc">BoundaryEdge</a></div><div class="ttdeci">BoundaryEdge</div><div class="ttdef"><b>Definition:</b> SWE_Scenario.hh:40</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 24 2014 02:23:03 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 19 2015 17:00:08 for SWE by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

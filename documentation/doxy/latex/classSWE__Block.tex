@@ -24,6 +24,10 @@ void \hyperlink{classSWE__Block_af2ab34b138a14f2c295849f3b2acc5f3}{set\-Bathymet
 \begin{DoxyCompactList}\small\item\em set the bathymetry to a uniform value \end{DoxyCompactList}\item 
 void \hyperlink{classSWE__Block_ad4214fcfd102a4c167d274ad87d9dd90}{set\-Bathymetry} (float($\ast$\-\_\-b)(float, float))
 \begin{DoxyCompactList}\small\item\em set the bathymetry according to a given function \end{DoxyCompactList}\item 
+void \hyperlink{classSWE__Block_ab2e750bb5e8a952cd9f771054cb4e7b0}{set\-Bathymetry} (float $\ast$\-\_\-b)
+\begin{DoxyCompactList}\small\item\em set the whole bathymetry matrix \end{DoxyCompactList}\item 
+void \hyperlink{classSWE__Block_a54d2adb939d59e064edd7316faae445f}{set\-Bathymetry} (int i\-\_\-x, int i\-\_\-y, float i\-\_\-b)
+\begin{DoxyCompactList}\small\item\em set one single cell's bathymetry value \end{DoxyCompactList}\item 
 const \hyperlink{classFloat2D}{Float2\-D} \& \hyperlink{classSWE__Block_ab1aea4294403c194180c3dc107339fd7}{get\-Water\-Height} ()
 \begin{DoxyCompactList}\small\item\em provides read access to the water height array \end{DoxyCompactList}\item 
 const \hyperlink{classFloat2D}{Float2\-D} \& \hyperlink{classSWE__Block_ae5e766626a1e3fee89625610e2c67f1f}{get\-Discharge\-\_\-hu} ()
@@ -57,7 +61,19 @@ virtual void \hyperlink{classSWE__Block_ab2b4b659f23d5d45413dece8d2da3298}{updat
 \begin{DoxyCompactList}\small\item\em returns \hyperlink{classSWE__Block_a46ec0dc1157997bd255fb39924f1e2bb}{nx}, i.\-e. the grid size in x-\/direction \end{DoxyCompactList}\item 
 \hypertarget{classSWE__Block_a4b65557b6f73ffb6454dad3dbf86e9ad}{int \hyperlink{classSWE__Block_a4b65557b6f73ffb6454dad3dbf86e9ad}{get\-Ny} ()}\label{classSWE__Block_a4b65557b6f73ffb6454dad3dbf86e9ad}
 
-\begin{DoxyCompactList}\small\item\em returns \hyperlink{classSWE__Block_a3f139630d12423eb4bd7df3e45c7f5da}{ny}, i.\-e. the grid size in y-\/direction \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em returns \hyperlink{classSWE__Block_a3f139630d12423eb4bd7df3e45c7f5da}{ny}, i.\-e. the grid size in y-\/direction \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_a2d4b3b3a932f3895c4f013cd4bb319d3}{float \hyperlink{classSWE__Block_a2d4b3b3a932f3895c4f013cd4bb319d3}{get\-Dx} ()}\label{classSWE__Block_a2d4b3b3a932f3895c4f013cd4bb319d3}
+
+\begin{DoxyCompactList}\small\item\em returns \hyperlink{classSWE__Block_af2262b1cce6834d939c5a2315dae49b1}{dx}, i.\-e. the cell size in x-\/direction \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_add4edc5f146a02c00187a81d93f00fb7}{float \hyperlink{classSWE__Block_add4edc5f146a02c00187a81d93f00fb7}{get\-Dy} ()}\label{classSWE__Block_add4edc5f146a02c00187a81d93f00fb7}
+
+\begin{DoxyCompactList}\small\item\em returns \hyperlink{classSWE__Block_a9feb988748d792bca0ca0508e43bd87f}{dy}, i.\-e. the cell size in y-\/direction \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_a5f279d69697c335d5e9c9c4d3c54e3b8}{float \hyperlink{classSWE__Block_a5f279d69697c335d5e9c9c4d3c54e3b8}{get\-Offx} ()}\label{classSWE__Block_a5f279d69697c335d5e9c9c4d3c54e3b8}
+
+\begin{DoxyCompactList}\small\item\em return \hyperlink{classSWE__Block_aa9e9b1fa797c133c4989e4c54f09b542}{offset\-X}, i.\-e. the x-\/origin of the coordinate system \end{DoxyCompactList}\item 
+\hypertarget{classSWE__Block_a22364064412b824204dc8a79bf572893}{float \hyperlink{classSWE__Block_a22364064412b824204dc8a79bf572893}{get\-Offy} ()}\label{classSWE__Block_a22364064412b824204dc8a79bf572893}
+
+\begin{DoxyCompactList}\small\item\em return \hyperlink{classSWE__Block_aa05241101a66f0f0548eba6dbbaa1bbb}{offset\-Y}, i.\-e. the y-\/origin of the coordinate system \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -295,12 +311,7 @@ current value of the member variable \hyperlink{classSWE__Block_a05cbc9b40e0483b
 
 provides read access to the water height array 
 
-Restores values for h, v, and u from file data 
-\begin{DoxyParams}{Parameters}
-{\em \-\_\-b} & array holding b-\/values in sequence return reference to water height unknown h \\
-\hline
-\end{DoxyParams}
-\hypertarget{classSWE__Block_a9a96c59444645e237d098803009158a3}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!grab\-Ghost\-Layer@{grab\-Ghost\-Layer}}
+return reference to water height unknown h \hypertarget{classSWE__Block_a9a96c59444645e237d098803009158a3}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!grab\-Ghost\-Layer@{grab\-Ghost\-Layer}}
 \index{grab\-Ghost\-Layer@{grab\-Ghost\-Layer}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
 \subsubsection[{grab\-Ghost\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf S\-W\-E\-\_\-\-Block1\-D} $\ast$ S\-W\-E\-\_\-\-Block\-::grab\-Ghost\-Layer (
 \begin{DoxyParamCaption}
@@ -388,7 +399,47 @@ set Bathymetry b in all grid cells (incl. ghost/boundary layers) to a uniform va
 
 set the bathymetry according to a given function 
 
-set Bathymetry b in all grid cells (incl. ghost/boundary layers) using the specified bathymetry function; bathymetry source terms are re-\/computed \hypertarget{classSWE__Block_a6beb68dacde9c8479647c25c6a5cbcf5}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Boundary\-Bathymetry@{set\-Boundary\-Bathymetry}}
+set Bathymetry b in all grid cells (incl. ghost/boundary layers) using the specified bathymetry function; bathymetry source terms are re-\/computed \hypertarget{classSWE__Block_ab2e750bb5e8a952cd9f771054cb4e7b0}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Bathymetry@{set\-Bathymetry}}
+\index{set\-Bathymetry@{set\-Bathymetry}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{set\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Bathymetry (
+\begin{DoxyParamCaption}
+\item[{float $\ast$}]{\-\_\-b}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_ab2e750bb5e8a952cd9f771054cb4e7b0}
+
+
+set the whole bathymetry matrix 
+
+Restores values for h, v, and u from file data 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-b} & array holding b-\/values in sequence \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__Block_a54d2adb939d59e064edd7316faae445f}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Bathymetry@{set\-Bathymetry}}
+\index{set\-Bathymetry@{set\-Bathymetry}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
+\subsubsection[{set\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Bathymetry (
+\begin{DoxyParamCaption}
+\item[{int}]{i\-\_\-x, }
+\item[{int}]{i\-\_\-y, }
+\item[{float}]{i\-\_\-b}
+\end{DoxyParamCaption}
+)}}\label{classSWE__Block_a54d2adb939d59e064edd7316faae445f}
+
+
+set one single cell's bathymetry value 
+
+Sets the bathymetry value at one single cell
+
+Assumption\-: User has no knowledge of ghost layer. if nx and ny were both zero, the only valid input for (i\-\_\-x, i\-\_\-y) would be (0, 0) 
+\begin{DoxyParams}{Parameters}
+{\em i\-\_\-b} & new bathymetry value \\
+\hline
+{\em i\-\_\-x} & x-\/coordinate of the cell \\
+\hline
+{\em i\-\_\-y} & y-\/coordinate of the cell \\
+\hline
+\end{DoxyParams}
+\hypertarget{classSWE__Block_a6beb68dacde9c8479647c25c6a5cbcf5}{\index{S\-W\-E\-\_\-\-Block@{S\-W\-E\-\_\-\-Block}!set\-Boundary\-Bathymetry@{set\-Boundary\-Bathymetry}}
 \index{set\-Boundary\-Bathymetry@{set\-Boundary\-Bathymetry}!SWE_Block@{S\-W\-E\-\_\-\-Block}}
 \subsubsection[{set\-Boundary\-Bathymetry}]{\setlength{\rightskip}{0pt plus 5cm}void S\-W\-E\-\_\-\-Block\-::set\-Boundary\-Bathymetry (
 \begin{DoxyParamCaption}
@@ -666,5 +717,5 @@ max\-Timestep can be updated as part of the methods compute\-Numerical\-Fluxes a
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/\hyperlink{SWE__Block_8hh}{S\-W\-E\-\_\-\-Block.\-hh}\item 
-/home/sascha/\-Dokumente/\-Projects/\-Tsun\-Sim/\-S\-W\-E/src/blocks/\hyperlink{SWE__Block_8cpp}{S\-W\-E\-\_\-\-Block.\-cpp}\end{DoxyCompactItemize}
+src/blocks/\hyperlink{SWE__Block_8hh}{S\-W\-E\-\_\-\-Block.\-hh}\item 
+src/blocks/\hyperlink{SWE__Block_8cpp}{S\-W\-E\-\_\-\-Block.\-cpp}\end{DoxyCompactItemize}
