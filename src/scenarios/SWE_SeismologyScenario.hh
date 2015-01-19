@@ -22,7 +22,7 @@
  *
  * @section DESCRIPTION
  *
- * loads NetCDF-Defined Scenario
+ * loads NetCDF-Defined Scenario with dynamic displacement
  */
 #ifndef __SWE_SEIS_SCENARIO_H
 #define __SWE_SEIS_SCENARIO_H
@@ -150,9 +150,15 @@ private:
 public:
 
   /**
-   * Creates a new instance of the SeismologyScenario Class
+   * Creates a new instance of the SeismologyScenario Class (clipping does not work at the current state)
    * @param cellsX Cells in x dimension
    * @param cellsY Cells in y dimension
+     @param minX clipping minimum in x direction
+     @param maxX clipping maximum in x direction
+     @param minY clipping minimum in y direction
+     @param maxY clipping maximum in y direction
+     @param bathymetryFile file with the initial bathymetry values
+     @param seismologyFile file with the displacement values
    */
   SWE_SeismologyScenario(int cellsX, int cellsY, float minX = NAN, float maxX = NAN, float minY = NAN, float maxY = NAN, const char *bathymetryFile = "NetCDF_Input/initBathymetry.nc", const char *seismologyFile = "NetCDF_Input/seis.nc") : SWE_Scenario(cellsX, cellsY, OUTFLOW),
     m_bx(NULL, 0), m_by(NULL, 0), m_dx(NULL, 0), m_dy(NULL, 0), m_dt(NULL, 0)  {
@@ -356,6 +362,12 @@ public:
     array = new Float1D(arr, maxi - mini + 1);
   }
 
+public:
+
+  /** Provides information about the maximum timestep allowed with the current displacement and also the time for which the earthquake affects the simulation and bathymetry must be updated
+    @param maxTime the last timestep will be stored here
+    @param maxTimestep the maximum timestep will be stored here
+  */
   float getTimestepInformation(float *maxTime, float *maxTimestep) {
     *maxTime = m_dt[m_dt.getSize() - 1];
     *maxTimestep = *maxTime;
