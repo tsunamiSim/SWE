@@ -1,0 +1,4 @@
+Use the "compile csv_converter.sh" file from the SWE folder to compile the converter.
+You have change the directory of your netcdf.h installation directory here, unless it is not installed in "/usr/local/".
+The 80 Files with the displacement have to be in a folder sea_floor_disp_tohoku and should be named like "SNAP_dis_floor_1.csv".
+You get this convention by unpacking the data from Percy Galvez. 

@@ -46,7 +46,9 @@
 #endif
 
 #include "writer/Writer.hh"
+#ifndef EXCLUDE_SCENARIO
 #include "scenarios/SWE_Scenario.hh"
+#endif
 
 namespace io {
   class NetCdfWriter;
@@ -86,6 +88,17 @@ private:
 					size_t contTimestep = 0,
 					unsigned int compression = 1);
 
+#ifdef EXCLUDE_SCENARIO
+ 	NetCdfWriter( const std::string &i_baseName,
+		const Float2D &i_b,
+		int i_nX, int i_nY,
+		float i_dx, float i_dY,
+		float i_originX, float i_originY);
+	
+	// writes i_b timedependent to ncfile
+	void writeBathymetry( const Float2D &i_b,
+					float i_time);
+#else
 	NetCdfWriter(const std::string &i_fileName,
 					const Float2D &i_b,
 					const BoundarySize &i_boundarySize,
@@ -101,6 +114,7 @@ private:
 					bool useCheckpoints = false,
 					unsigned int compression = 1);
     virtual ~NetCdfWriter();
+#endif
 
     // writes the unknowns at a given time step to the netCDF-file.
     void writeTimeStep( const Float2D &i_h,
