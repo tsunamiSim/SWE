@@ -26,6 +26,7 @@
 #define ARG_TOP "top"
 #define ARG_SEISMOLOGYPATH "seismological_data"
 #define ARG_CONSTBATHYMETRY "constant_bathymetry"
+#define ARG_FIXDISPLACEMENTTIME "fix-disp-time"
 
 /**
 * Main program for the simulation using dimensional splitting
@@ -48,6 +49,7 @@ int main(int argc, char** argv){
   args.addOption(ARG_TOP, 0, "Sets the maximum coordinate value in y direction. If one boundary is set, all others must be set too!", tools::Args::Required, false);
   args.addOption(ARG_SEISMOLOGYPATH, 's', "Path to the seismological data", tools::Args::Required, false);
   args.addOption(ARG_CONSTBATHYMETRY, 0, "Setting the bathymetry to the negative of the given value", tools::Args::Required, false);
+  args.addOption(ARG_FIXDISPLACEMENTTIME, 0, "Setting the bathymetry to the value it would be at the given time in seconds", tools::Args::Required, false);
 
 	// Parse them
 	tools::Args::Result parseResult = args.parse(argc, argv);
@@ -87,6 +89,13 @@ int main(int argc, char** argv){
       + ", top="
       + toString(l_top));
   } // if(test_left)
+
+  float l_fixDisplacementTime;
+  bool test_fixDspTime = false;
+  if(test_seis && args.isSet(ARG_FIXDISPLACEMENTTIME)) {
+    test_fixDspTime = true;
+    l_fixDisplacementTime = args.getArgument<float>(ARG_FIXDISPLACEMENTTIME);
+  }
 
 	// If parsing failed, break the program (if help was asked for and granted, execution did not fail though)
 	if(parseResult != tools::Args::Success)	{
@@ -154,6 +163,14 @@ int main(int argc, char** argv){
       + toString(", ")
       + toString(l_ny));	
 	} // else
+
+
+#ifdef WRITENETCDF
+  if(test_seis && test_fixDspTime) {
+    tools::Logger::logger.printString(toString("Setting bathymetry to value at ") + toString(l_fixDisplacementTime));
+    ((SWE_SeismologyScenario*)l_scenario)->fixTime(l_fixDisplacementTime);
+  }
+#endif
    
 	BoundaryType boundTypes[2];
 	boundTypes[0] = WALL;
@@ -379,17 +396,17 @@ int main(int argc, char** argv){
     else
       l_time+=actTimestep;
 
-		// write timestep
+    //Write timestep
 		l_writer.writeTimeStep( l_dimensionalSplitting.getWaterHeight(),
     	l_dimensionalSplitting.getDischarge_hu(),
       l_dimensionalSplitting.getDischarge_hv(),
       l_dimensionalSplitting.getBathymetry(),
       l_time);
 		
- 		//std::ostringstream buff;
-    //		buff << l_time;
-		// write time to console
-    //tools::Logger::logger.printString(time + buff.str());        
+// 		std::ostringstream buff;
+//    		buff << l_time;
+//		// write time to console
+//    tools::Logger::logger.printString(time + buff.str());        
 
 		progress = l_time / l_endOfSimulation;
 		if(progress > percStep * loggedAmount) {

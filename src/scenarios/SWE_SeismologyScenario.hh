@@ -44,6 +44,7 @@ class SWE_SeismologyScenario : public SWE_Scenario {
 
 private:
 
+  float m_fixTime;
   std::vector<vector<float> > m_bz;
   std::vector<vector<vector<float> > > m_dz;
   Float1D m_bx, m_by, m_dx, m_dy, m_dt;
@@ -149,6 +150,11 @@ private:
 
 public:
 
+  void fixTime(float time)
+  {
+    m_fixTime = time;
+  }
+
   /**
    * Creates a new instance of the SeismologyScenario Class (clipping does not work at the current state)
    * @param cellsX Cells in x dimension
@@ -160,7 +166,7 @@ public:
      @param bathymetryFile file with the initial bathymetry values
      @param seismologyFile file with the displacement values
    */
-  SWE_SeismologyScenario(int cellsX, int cellsY, float minX = NAN, float maxX = NAN, float minY = NAN, float maxY = NAN, const char *bathymetryFile = "NetCDF_Input/initBathymetry.nc", const char *seismologyFile = "NetCDF_Input/seis.nc") : SWE_Scenario(cellsX, cellsY, OUTFLOW),
+  SWE_SeismologyScenario(int cellsX, int cellsY, float minX = NAN, float maxX = NAN, float minY = NAN, float maxY = NAN, const char *bathymetryFile = "NetCDF_Input/initBathymetry.nc", const char *seismologyFile = "NetCDF_Input/seis.nc") : SWE_Scenario(cellsX, cellsY, OUTFLOW), m_fixTime(-1.f),
     m_bx(NULL, 0), m_by(NULL, 0), m_dx(NULL, 0), m_dy(NULL, 0), m_dt(NULL, 0)  {
     tools::Logger::logger.printString("Running with seismological data");
 
@@ -183,7 +189,7 @@ public:
   }
 
   /** Dummy constructor for cxx tests only */
-  SWE_SeismologyScenario() : SWE_Scenario(0, 0, OUTFLOW), m_bx(NULL, 0), m_by(NULL, 0), m_dx(NULL, 0), m_dy(NULL, 0), m_dt(NULL, 0)  { }
+  SWE_SeismologyScenario() : SWE_Scenario(0, 0, OUTFLOW), m_fixTime(-1.f), m_bx(NULL, 0), m_by(NULL, 0), m_dx(NULL, 0), m_dy(NULL, 0), m_dt(NULL, 0)  { }
 
 
   /**
@@ -202,6 +208,8 @@ public:
    * @param y The y-Value of the location
    */
   float getBathymetry(float i_time, float x, float y) {
+    if(m_fixTime > 0)
+      i_time = m_fixTime;
 	  int bestXBath, bestYBath;
 	  float result;
 	  Array::lookUp(y, m_by.getSize(), m_by.elemVector(), &bestYBath);
@@ -368,11 +376,13 @@ public:
     @param maxTime the last timestep will be stored here
     @param maxTimestep the maximum timestep will be stored here
   */
-  float getTimestepInformation(float *maxTime, float *maxTimestep) {
+  void getTimestepInformation(float *maxTime, float *maxTimestep) {
     *maxTime = m_dt[m_dt.getSize() - 1];
     *maxTimestep = *maxTime;
     for(int i = m_dt.getSize() - 1; i > 0; i--)
       *maxTimestep = min(*maxTimestep, m_dt[i] - m_dt[i - 1]);
+    if(m_fixTime > 0)
+      *maxTime = 0;
   }
 };
 
